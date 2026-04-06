@@ -3,188 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karaman Aber Sanat Gücü | Resmi Web Sitesi</title>
+    <title>Karaman Aber Sanat Gücü</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;900&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@300;400;600;800&display=swap');
-        
-        :root {
-            --brand-red: #E30613;
-            --brand-black: #0F0F0F;
-        }
-
         body { 
+            background-color: #030303; 
+            color: white; 
             font-family: 'Inter', sans-serif; 
-            background-color: var(--brand-black); 
-            color: white;
-            margin: 0;
+            margin: 0; 
             overflow-x: hidden;
         }
-
-        h1, h2, h3, .nav-item, .oswald { 
-            font-family: 'Oswald', sans-serif; 
-            text-transform: uppercase; 
-        }
-
-        /* Hero Bölümü Arka Plan Efekti */
-        .hero-section {
-            background: linear-gradient(rgba(15, 15, 15, 0.6), rgba(15, 15, 15, 0.95)), 
-                        url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
-            height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .accent-red { color: var(--brand-red); }
-        .bg-brand-red { background-color: var(--brand-red); }
-        .border-brand-red { border-color: var(--brand-red); }
-
-        /* Hover Efektleri */
-        .nav-link {
-            transition: all 0.3s ease;
-            letter-spacing: 0.1em;
-        }
-        .nav-link:hover {
-            color: var(--brand-red);
-        }
-
-        .btn-primary {
-            background-color: var(--brand-red);
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-        .btn-primary:hover {
-            background-color: #b3050f;
-            transform: translateY(-3px);
-        }
-
-        /* Kartlar ve Cam Efekti */
-        .news-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            transition: all 0.4s ease;
-        }
-        .news-card:hover {
-            border-color: var(--brand-red);
-            background: rgba(255, 255, 255, 0.05);
+        .oswald { font-family: 'Oswald', sans-serif; }
+        .red-gradient { background: linear-gradient(90deg, #E30613 0%, #90040C 100%); }
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.95)), 
+                              url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=2000');
+            background-size: cover;
+            background-position: center;
         }
     </style>
 </head>
 <body>
-
-    <header class="border-b border-white/10 py-6 sticky top-0 bg-[#0F0F0F]/95 z-50 backdrop-blur-md">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 border-2 border-brand-red flex items-center justify-center font-bold text-white tracking-tighter italic">
-                    ABER
-                </div>
-                <div class="leading-none">
-                    <span class="text-xl font-extrabold tracking-tight">KARAMAN ABER</span><br>
-                    <span class="text-[10px] font-light text-gray-400 tracking-[0.3em]">SANAT GÜCÜ</span>
-                </div>
-            </div>
-
-            <nav class="hidden lg:flex gap-10 text-xs font-bold tracking-widest">
-                <a href="#" class="nav-link text-red-600">ANA SAYFA</a>
-                <a href="#" class="nav-link">KULÜP</a>
-                <a href="#" class="nav-link">TAKIM</a>
-                <a href="#" class="nav-link">HABERLER</a>
-                <a href="#" class="nav-link">İLETİŞİM</a>
-            </nav>
-
-            <div class="hidden md:block">
-                <a href="#" class="border border-brand-red px-6 py-2 text-xs font-bold hover:bg-brand-red transition-all duration-300">ÜYE OL</a>
-            </div>
+    <nav class="p-6 flex justify-between items-center border-b border-white/5 sticky top-0 bg-black/90 backdrop-blur-xl z-50">
+        <div class="flex items-center gap-3">
+            <img src="logo.png" alt="A" class="w-10 h-10 object-contain rounded-full bg-red-600 p-1">
+            <span class="oswald uppercase text-2xl tracking-tighter">Aber <span class="text-red-600">Sanat Gücü</span></span>
         </div>
+        <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-[0.2em] items-center">
+            <a href="#kulup" class="hover:text-red-600 transition">Kulüp</a>
+            <a href="#haberler" class="hover:text-red-600 transition">Haberler</a>
+            <a href="#takim" class="hover:text-red-600 transition">Takım</a>
+            <a href="#iletisim" class="red-gradient px-4 py-2 hover:scale-105 transition tracking-normal">BİZE KATIL</a>
+        </div>
+    </nav>
+
+    <header class="h-[90vh] flex flex-col items-center justify-center text-center px-4 relative overflow-hidden hero-bg">
+        
+        <div class="absolute w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[150px] opacity-60"></div>
+        
+        <div class="relative z-10 mb-12 transform hover:scale-105 transition duration-700 ease-out">
+            <img src="logo.png" alt="Aber Sanat SK Devasa Logo" 
+                 class="w-80 h-80 md:w-[450px] md:h-[450px] object-contain relative z-10 animate-pulse-slow">
+        </div>
+
+        <h2 class="relative z-10 text-red-600 font-bold tracking-[0.6em] mb-4 text-xs uppercase animate-pulse">Karaman'ın Yükselen Gücü</h2>
+        <h1 class="relative z-10 text-7xl md:text-9xl font-black italic oswald uppercase leading-none mb-10 tracking-tighter">
+            İNANÇ <br><span class="text-red-600">KANATLANDIRIR</span>
+        </h1>
     </header>
 
-    <section class="hero-section text-center">
-        <div class="max-w-5xl px-6">
-            <h2 class="text-xl md:text-2xl font-light mb-4 tracking-[0.5em] text-gray-300">BİZ BİR AİLEYİZ</h2>
-            <h1 class="text-5xl md:text-9xl font-black mb-8 italic leading-tight">
-                İNANÇ <span class="accent-red italic underline decoration-white/10">KANATLANDIRIR</span>
-            </h1>
-            <p class="text-gray-400 max-w-2xl mx-auto mb-10 text-sm md:text-base leading-relaxed tracking-wide">
-                Karaman'ın ruhunu sanatla ve sporla birleştiriyoruz. Sahada güç, yönetimde inanç, kalpte sanat var.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-6">
-                <button class="btn-primary text-white px-10 py-4 font-bold tracking-[0.2em] text-sm">MAÇ MERKEZİ</button>
-                <button class="border border-white/20 hover:border-brand-red px-10 py-4 font-bold tracking-[0.2em] text-sm transition-all">KULÜP TARİHÇESİ</button>
-            </div>
+    <section id="haberler" class="container mx-auto px-6 py-24">
+        <div class="flex justify-between items-end mb-16 border-b border-white/5 pb-6">
+            <h3 class="oswald text-5xl uppercase italic tracking-tighter">Son <span class="text-red-600">Haberler</span></h3>
+            <span class="text-[11px] text-gray-500 tracking-[0.4em] uppercase hover:text-red-600 cursor-pointer">Tüm Arşivi Gör</span>
         </div>
-        
-        <div class="absolute bottom-10 opacity-5 text-[15vw] font-black pointer-events-none select-none tracking-tighter">
-            KARAMAN ABER
-        </div>
-    </section>
-
-    <section class="container mx-auto px-6 -mt-20 relative z-20 pb-20">
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="bg-black border-t-4 border-brand-red p-8 shadow-2xl">
-                <div class="flex justify-between items-center mb-6">
-                    <span class="text-[10px] font-bold tracking-widest text-gray-500 uppercase">SIRADAKİ MAÇ</span>
-                    <span class="text-[10px] font-bold text-brand-red animate-pulse italic text-xs">CANLI SKOR</span>
-                </div>
-                <div class="flex justify-around items-center gap-4">
-                    <div class="text-center">
-                        <div class="w-12 h-12 bg-white/5 rounded-full mb-2 mx-auto"></div>
-                        <p class="text-xs font-bold uppercase">ABER SG</p>
-                    </div>
-                    <div class="text-3xl font-black oswald italic">2 - 1</div>
-                    <div class="text-center">
-                        <div class="w-12 h-12 bg-white/5 rounded-full mb-2 mx-auto"></div>
-                        <p class="text-xs font-bold uppercase">RAKİP</p>
-                    </div>
-                </div>
-                <div class="mt-8 text-center border-t border-white/5 pt-4">
-                    <p class="text-[10px] tracking-widest text-gray-400">12 NİSAN 2026 | KARAMAN ŞEHİR STADI</p>
-                </div>
-            </div>
-
-            <div class="news-card p-8 group cursor-pointer">
-                <div class="overflow-hidden mb-4">
-                    <h3 class="text-xl font-bold mb-2 group-hover:text-brand-red transition-colors italic">YENİ DÖNEM BAŞLIYOR</h3>
-                </div>
-                <p class="text-sm text-gray-400 mb-6 font-light">Kulübümüzün vizyonu doğrultusunda planlanan yeni tesisleşme hamlesi için ilk adımlar atıldı...</p>
-                <a href="#" class="text-[10px] font-bold tracking-widest border-b border-brand-red pb-1 hover:text-brand-red transition-all italic">HABERİ GÖRÜNTÜLE</a>
-            </div>
-
-            <div class="news-card p-8 group cursor-pointer border-brand-red/20">
-                <div class="overflow-hidden mb-4">
-                    <h3 class="text-xl font-bold mb-2 group-hover:text-brand-red transition-colors italic">ALTYAPI SEÇMELERİ</h3>
-                </div>
-                <p class="text-sm text-gray-400 mb-6 font-light">Genç yeteneklerin keşfedileceği büyük Karaman Aber seçmeleri için kayıtlar devam ediyor.</p>
-                <a href="#" class="text-[10px] font-bold tracking-widest border-b border-brand-red pb-1 hover:text-brand-red transition-all italic">KAYIT FORMU</a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-black border-t border-white/5 pt-20 pb-10">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
-                <div>
-                    <h4 class="text-3xl font-black tracking-tighter mb-1 uppercase italic">RIDVAN ARSLAN</h4>
-                    <p class="text-[10px] tracking-[0.3em] text-gray-500 font-medium uppercase leading-relaxed">
-                        Karaman Aber Mühendislik Enerji San. Tic. Ltd. Şti.
-                    </p>
-                </div>
-
-                <div class="flex flex-wrap gap-8 text-[10px] font-bold tracking-[0.2em] text-gray-400">
-                    <a href="#" class="hover:text-brand-red transition-colors">INSTAGRAM</a>
-                    <a href="#" class="hover:text-brand-red transition-colors">YOUTUBE</a>
-                    <a href="#" class="hover:text-brand-red transition-colors">LINKEDIN</a>
-                    <a href="#" class="hover:text-brand-red transition-colors">X / TWITTER</a>
-                </div>
-            </div>
-
-            <div class="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between gap-4 text-[9px] text-gray-600 tracking-[0.4em] font-semibold uppercase">
-                <span>© 2026 TÜM HAKLARI SAKLIDIR</span>
-                <span class="text-gray-400 italic">DESIGNED BY RIDVAN ARSLAN</span>
-            </div>
-        </div>
-    </footer>
-
-</body>
-</html>
+        <div class="grid md:grid-cols-3 gap-12">
+            <div class="group cursor-pointer bg-[#050505] border border-white/5 hover:border-red-600/30 transition duration-300">
+                <div class="h-64 bg-gray-900 mb-6 overflow-hidden relative">
+                    <img src="
