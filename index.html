@@ -1,134 +1,23 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABER SANAT GÜCÜ SK | Resmi Web Sitesi</title>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <style>
-        :root { --gold: #d4af37; --black: #0d0d0d; --grey: #1a1a1a; --white: #ffffff; --win: #28a745; --loss: #dc3545; --draw: #ffc107; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--black); color: white; scroll-behavior: smooth; }
-        
-        header { background: var(--black); padding: 40px 20px; text-align: center; border-bottom: 4px solid var(--gold); }
-        nav { background: var(--grey); display: flex; justify-content: center; gap: 20px; padding: 15px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-        nav a { color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 14px; transition: 0.3s; }
-        nav a:hover { color: var(--gold); }
-
-        .container { max-width: 1100px; margin: auto; padding: 20px; }
-        .section-title { border-left: 5px solid var(--gold); padding-left: 15px; margin: 40px 0 20px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
-        
-        /* Maç Kartları */
-        .match-grid { display: grid; gap: 15px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
-        .match-card { 
-            background: var(--grey); 
-            border-radius: 12px; 
-            padding: 20px; 
-            text-align: center; 
-            border: 1px solid #333;
-            transition: 0.3s;
-        }
-        .match-card:hover { border-color: var(--gold); transform: translateY(-3px); }
-        .status-tag { font-size: 10px; padding: 3px 8px; border-radius: 4px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; display: inline-block; }
-        .status-win { background: var(--win); color: white; }
-        .status-next { background: var(--gold); color: black; }
-        
-        .teams { display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 1rem; gap: 10px; }
-        .team { flex: 1; }
-        .score-box { background: #000; padding: 8px 15px; border-radius: 6px; color: var(--gold); font-size: 1.4rem; font-weight: 900; min-width: 50px; }
-        .match-meta { margin-top: 12px; font-size: 12px; color: #888; border-top: 1px solid #333; padding-top: 10px; }
-
-        footer { text-align: center; padding: 60px 20px; background: #000; margin-top: 80px; border-top: 1px solid #222; }
-        .copy-text { color: var(--gold); font-weight: bold; letter-spacing: 1px; }
-    </style>
-</head>
-<body>
-
-<header>
-    <h1 style="margin:0; font-size: 2.5rem; letter-spacing: 2px;">ABER SANAT GÜCÜ SK</h1>
-    <p style="color: var(--gold); text-transform: uppercase; font-size: 0.8rem; margin-top: 10px;">Süper Amatör Lig Mücadelesi</p>
-</header>
-
-<nav>
-    <a href="/">ANASAYFA</a>
-    <a href="#sonuclar">MAÇ SONUÇLARI</a>
-    <a href="#fikstur">GELECEK MAÇLAR</a>
-</nav>
-
-<div class="container">
-    
-    <h2 class="section-title" id="fikstur">Gelecek Maçlar</h2>
-    <div class="match-grid">
-        <div class="match-card">
-            <span class="status-tag status-next">SIRADAKİ MAÇ</span>
-            <div class="teams">
-                <div class="team">ABER SANATGÜCÜ</div>
-                <div class="score-box">VS</div>
-                <div class="team">AYRANCISPOR</div>
-            </div>
-            <div class="match-meta">📅 19.04.2026 | 🏆 Süper Amatör Lig</div>
+<div class="match-grid">
+    <div class="match-card">
+        <span class="status-tag status-next">SIRADAKİ MAÇ</span>
+        <div class="teams">
+            <div class="team">ABER SANATGÜCÜ</div>
+            <div class="score-box">VS</div>
+            <div class="team">AYRANCISPOR</div>
         </div>
-        <div class="match-card">
-            <span class="status-tag" style="background:#333;">LİG MAÇI</span>
-            <div class="teams">
-                <div class="team">KARAMAN G.BİRLİĞİ</div>
-                <div class="score-box">VS</div>
-                <div class="team">ABER SANATGÜCÜ</div>
-            </div>
-            <div class="match-meta">📅 26.04.2026 | 🏆 Süper Amatör Lig</div>
-        </div>
+        <div class="match-meta">📅 19.04.2026 | 🏆 Süper Amatör Lig</div>
     </div>
-
-    <h2 class="section-title" id="sonuclar">Son Maç Sonuçları</h2>
-    <div class="match-grid">
-        <div class="match-card">
-            <span class="status-tag status-win">GALİBİYET</span>
-            <div class="teams">
-                <div class="team">GÜNEYYURT GSK</div>
-                <div class="score-box">1 - 4</div>
-                <div class="team">ABER SANATGÜCÜ</div>
-            </div>
-            <div class="match-meta">📅 05.04.2026 | ✅ Deplasman Galibiyeti</div>
-        </div>
-        <div class="match-card">
-            <span class="status-tag status-win">GALİBİYET</span>
-            <div class="teams">
-                <div class="team">ABER SANATGÜCÜ</div>
-                <div class="score-box">3 - 2</div>
-                <div class="team">YUNUS EMRE GB</div>
-            </div>
-            <div class="match-meta">📅 29.03.2026 | ✅ İç Saha Galibiyeti</div>
-        </div>
-        <div class="match-card">
-            <span class="status-tag status-win">GALİBİYET</span>
-            <div class="teams">
-                <div class="team">ABER SANATGÜCÜ</div>
-                <div class="score-box">9 - 0</div>
-                <div class="team">1453 KARAMAN GSK</div>
-            </div>
-            <div class="match-meta">📅 08.02.2026 | 🔥 Farklı Galibiyet</div>
-        </div>
-    </div>
-
 </div>
 
-<footer>
-    <span class="copy-text">© Rıdvan ARSLAN</span>
-    <br><br>
-    <a href="/admin/" style="color:#444; font-size:10px; text-decoration:none;">Yönetici Paneli</a>
-</footer>
-
-<script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
-        });
-      }
-    });
-    window.netlifyIdentity.setLocatorUrl("https://abersanatsk.netlify.app");
-  }
-</script>
-
-</body>
-</html>
+<div class="match-grid">
+    <div class="match-card">
+        <span class="status-tag status-win">GALİBİYET</span>
+        <div class="teams">
+            <div class="team">GÜNEYYURT GSK</div>
+            <div class="score-box">1 - 4</div>
+            <div class="team">ABER SANATGÜCÜ</div>
+        </div>
+        <div class="match-meta">📅 05.04.2026 | ✅ Deplasman Galibiyeti</div>
+    </div>
+</div>
