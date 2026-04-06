@@ -1,18 +1,98 @@
-backend:
-  name: git-gateway
-  branch: main
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABER SANAT GÜCÜ SPOR KULÜBÜ | Resmi Web Sitesi</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <style>
+        :root { --gold: #d4af37; --black: #0d0d0d; --grey: #1a1a1a; --white: #ffffff; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: var(--black); color: var(--white); line-height: 1.6; }
+        
+        /* Header & Nav */
+        header { background: var(--black); padding: 40px 20px; text-align: center; border-bottom: 4px solid var(--gold); }
+        nav { background: var(--grey); display: flex; justify-content: center; gap: 25px; padding: 15px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        nav a { color: var(--white); text-decoration: none; font-weight: 600; text-transform: uppercase; font-size: 14px; transition: 0.3s; }
+        nav a:hover { color: var(--gold); }
 
-media_folder: "images"
-public_folder: "/images"
+        .container { max-width: 1100px; margin: auto; padding: 20px; }
+        
+        /* Fikstür Kartı Tasarımı */
+        .section-title { border-left: 5px solid var(--gold); padding-left: 15px; margin: 40px 0 20px; color: var(--gold); text-transform: uppercase; }
+        
+        .match-card { 
+            background: var(--grey); 
+            border-radius: 12px; 
+            padding: 25px; 
+            display: flex; 
+            justify-content: space-around; 
+            align-items: center; 
+            margin-bottom: 15px;
+            border: 1px solid #333;
+            transition: transform 0.3s;
+        }
+        .match-card:hover { transform: scale(1.02); border-color: var(--gold); }
+        .team-name { font-size: 1.2rem; font-weight: bold; width: 40%; text-align: center; }
+        .match-info { text-align: center; width: 20%; }
+        .score { font-size: 2rem; font-weight: 900; color: var(--gold); display: block; }
+        .match-date { font-size: 0.8rem; color: #888; }
 
-collections:
-  - name: "blog"
-    label: "Haberler & Blog"
-    folder: "blog"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - {label: "Başlık", name: "title", widget: "string"}
-      - {label: "Yayın Tarihi", name: "date", widget: "datetime"}
-      - {label: "Kapak Fotoğrafı", name: "image", widget: "image"}
-      - {label: "Haber İçeriği", name: "body", widget: "markdown"}
+        /* Footer */
+        footer { text-align: center; padding: 50px 20px; background: var(--black); margin-top: 100px; border-top: 1px solid #222; }
+        .copyright { color: var(--gold); font-weight: bold; letter-spacing: 1px; }
+        .admin-btn { display: inline-block; margin-top: 20px; color: #444; font-size: 10px; text-decoration: none; border: 1px solid #444; padding: 5px 10px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 style="margin:0; letter-spacing: 3px;">ABER SANAT GÜCÜ SK</h1>
+    <p style="color: var(--gold); text-transform: uppercase; font-size: 0.9rem; margin-top: 10px;">Karaman'ın Yükselen Gücü</p>
+</header>
+
+<nav>
+    <a href="/">ANASAYFA</a>
+    <a href="#haberler">HABERLER</a>
+    <a href="#fikstur">MAÇ TAKVİMİ</a>
+    <a href="#iletisim">İLETİŞİM</a>
+</nav>
+
+<div class="container">
+    
+    <h2 class="section-title" id="fikstur">Gelecek Maçlar & Sonuçlar</h2>
+    <div id="match-center">
+        <div class="match-card">
+            <div class="team-name">ABER SANAT GÜCÜ</div>
+            <div class="match-info">
+                <span class="score">VS</span>
+                <span class="match-date">Yükleniyor...</span>
+            </div>
+            <div class="team-name">RAKİP TAKIM</div>
+        </div>
+    </div>
+
+    <h2 class="section-title" id="haberler">Kulüpten Haberler</h2>
+    <div id="blog-posts">
+        <p style="color: #666;">Yönetici panelinden haber eklediğinizde burada görünecektir.</p>
+    </div>
+
+</div>
+
+<footer>
+    <p class="copyright">© Rıdvan ARSLAN</p>
+    <a href="/admin/" class="admin-btn">YÖNETİCİ GİRİŞİ</a>
+</footer>
+
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
+</body>
+</html>
