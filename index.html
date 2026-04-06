@@ -3,132 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABER SANAT GÜCÜ SK | Resmi Web Sitesi</title>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <title>Karaman Aber Sanat Gücü | Resmi Web Sitesi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root { --gold: #d4af37; --black: #0d0d0d; --grey: #1a1a1a; --white: #ffffff; --win: #28a745; --loss: #dc3545; --draw: #ffc107; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--black); color: white; scroll-behavior: smooth; }
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@300;400;600;800&display=swap');
         
-        header { background: var(--black); padding: 40px 20px; text-align: center; border-bottom: 4px solid var(--gold); }
-        nav { background: var(--grey); display: flex; justify-content: center; gap: 20px; padding: 15px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-        nav a { color: white; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 14px; transition: 0.3s; }
-        nav a:hover { color: var(--gold); }
-
-        .container { max-width: 1100px; margin: auto; padding: 20px; }
-        .section-title { border-left: 5px solid var(--gold); padding-left: 15px; margin: 40px 0 20px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
-        
-        /* Maç Kartları */
-        .match-grid { display: grid; gap: 15px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
-        .match-card { 
-            background: var(--grey); 
-            border-radius: 12px; 
-            padding: 20px; 
-            text-align: center; 
-            border: 1px solid #333;
-            transition: 0.3s;
+        :root {
+            --brand-red: #E30613;
+            --brand-black: #0F0F0F;
         }
-        .match-card:hover { border-color: var(--gold); transform: translateY(-3px); }
-        .status-tag { font-size: 10px; padding: 3px 8px; border-radius: 4px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; display: inline-block; }
-        .status-win { background: var(--win); color: white; }
-        .status-next { background: var(--gold); color: black; }
-        
-        .teams { display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 1rem; gap: 10px; }
-        .team { flex: 1; }
-        .score-box { background: #000; padding: 8px 15px; border-radius: 6px; color: var(--gold); font-size: 1.4rem; font-weight: 900; min-width: 50px; }
-        .match-meta { margin-top: 12px; font-size: 12px; color: #888; border-top: 1px solid #333; padding-top: 10px; }
 
-        footer { text-align: center; padding: 60px 20px; background: #000; margin-top: 80px; border-top: 1px solid #222; }
-        .copy-text { color: var(--gold); font-weight: bold; letter-spacing: 1px; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--brand-black); 
+            color: white;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .nav-item, .oswald { 
+            font-family: 'Oswald', sans-serif; 
+            text-transform: uppercase; 
+        }
+
+        /* Hero Bölümü Arka Plan Efekti */
+        .hero-section {
+            background: linear-gradient(rgba(15, 15, 15, 0.6), rgba(15, 15, 15, 0.95)), 
+                        url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .accent-red { color: var(--brand-red); }
+        .bg-brand-red { background-color: var(--brand-red); }
+        .border-brand-red { border-color: var(--brand-red); }
+
+        /* Hover Efektleri */
+        .nav-link {
+            transition: all 0.3s ease;
+            letter-spacing: 0.1em;
+        }
+        .nav-link:hover {
+            color: var(--brand-red);
+        }
+
+        .btn-primary {
+            background-color: var(--brand-red);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #b3050f;
+            transform: translateY(-3px);
+        }
+
+        /* Kartlar ve Cam Efekti */
+        .news-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+        .news-card:hover {
+            border-color: var(--brand-red);
+            background: rgba(255, 255, 255, 0.05);
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <h1 style="margin:0; font-size: 2.5rem; letter-spacing: 2px;">ABER SANAT GÜCÜ SK</h1>
-    <p style="color: var(--gold); text-transform: uppercase; font-size: 0.8rem; margin-top: 10px;">Süper Amatör Lig Mücadelesi</p>
-</header>
-
-<nav>
-    <a href="/">ANASAYFA</a>
-    <a href="#sonuclar">MAÇ SONUÇLARI</a>
-    <a href="#fikstur">GELECEK MAÇLAR</a>
-</nav>
-
-<div class="container">
-    
-    <h2 class="section-title" id="fikstur">Gelecek Maçlar</h2>
-    <div class="match-grid">
-        <div class="match-card">
-            <span class="status-tag status-next">SIRADAKİ MAÇ</span>
-            <div class="teams">
-                <div class="team">ABER SANATGÜCÜ</div>
-                <div class="score-box">VS</div>
-                <div class="team">AYRANCISPOR</div>
+    <header class="border-b border-white/10 py-6 sticky top-0 bg-[#0F0F0F]/95 z-50 backdrop-blur-md">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 border-2 border-brand-red flex items-center justify-center font-bold text-white tracking-tighter italic">
+                    ABER
+                </div>
+                <div class="leading-none">
+                    <span class="text-xl font-extrabold tracking-tight">KARAMAN ABER</span><br>
+                    <span class="text-[10px] font-light text-gray-400 tracking-[0.3em]">SANAT GÜCÜ</span>
+                </div>
             </div>
-            <div class="match-meta">📅 19.04.2026 | 🏆 Süper Amatör Lig</div>
-        </div>
-        <div class="match-card">
-            <span class="status-tag" style="background:#333;">LİG MAÇI</span>
-            <div class="teams">
-                <div class="team">KARAMAN G.BİRLİĞİ</div>
-                <div class="score-box">VS</div>
-                <div class="team">ABER SANATGÜCÜ</div>
-            </div>
-            <div class="match-meta">📅 26.04.2026 | 🏆 Süper Amatör Lig</div>
-        </div>
-    </div>
 
-    <h2 class="section-title" id="sonuclar">Son Maç Sonuçları</h2>
-    <div class="match-grid">
-        <div class="match-card">
-            <span class="status-tag status-win">GALİBİYET</span>
-            <div class="teams">
-                <div class="team">GÜNEYYURT GSK</div>
-                <div class="score-box">1 - 4</div>
-                <div class="team">ABER SANATGÜCÜ</div>
-            </div>
-            <div class="match-meta">📅 05.04.2026 | ✅ Deplasman Galibiyeti</div>
-        </div>
-        <div class="match-card">
-            <span class="status-tag status-win">GALİBİYET</span>
-            <div class="teams">
-                <div class="team">ABER SANATGÜCÜ</div>
-                <div class="score-box">3 - 2</div>
-                <div class="team">YUNUS EMRE GB</div>
-            </div>
-            <div class="match-meta">📅 29.03.2026 | ✅ İç Saha Galibiyeti</div>
-        </div>
-        <div class="match-card">
-            <span class="status-tag status-win">GALİBİYET</span>
-            <div class="teams">
-                <div class="team">ABER SANATGÜCÜ</div>
-                <div class="score-box">9 - 0</div>
-                <div class="team">1453 KARAMAN GSK</div>
-            </div>
-            <div class="match-meta">📅 08.02.2026 | 🔥 Farklı Galibiyet</div>
-        </div>
-    </div>
+            <nav class="hidden lg:flex gap-10 text-xs font-bold tracking-widest">
+                <a href="#" class="nav-link text-red-600">ANA SAYFA</a>
+                <a href="#" class="nav-link">KULÜP</a>
+                <a href="#" class="nav-link">TAKIM</a>
+                <a href="#" class="nav-link">HABERLER</a>
+                <a href="#" class="nav-link">İLETİŞİM</a>
+            </nav>
 
-</div>
+            <div class="hidden md:block">
+                <a href="#" class="border border-brand-red px-6 py-2 text-xs font-bold hover:bg-brand-red transition-all duration-300">ÜYE OL</a>
+            </div>
+        </div>
+    </header>
 
-<footer>
-    <span class="copy-text">© Rıdvan ARSLAN</span>
-    <br><br>
-    <a href="/admin/" style="color:#444; font-size:10px; text-decoration:none;">Yönetici Paneli</a>
-</footer>
+    <section class="hero-section text-center">
+        <div class="max-w-5xl px-6">
+            <h2 class="text-xl md:text-2xl font-light mb-4 tracking-[0.5em] text-gray-300">BİZ BİR AİLEYİZ</h2>
+            <h1 class="text-5xl md:text-9xl font-black mb-8 italic leading-tight">
+                İNANÇ <span class="accent-red italic underline decoration-white/10">KANATLANDIRIR</span>
+            </h1>
+            <p class="text-gray-400 max-w-2xl mx-auto mb-10 text-sm md:text-base leading-relaxed tracking-wide">
+                Karaman'ın ruhunu sanatla ve sporla birleştiriyoruz. Sahada güç, yönetimde inanç, kalpte sanat var.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <button class="btn-primary text-white px-10 py-4 font-bold tracking-[0.2em] text-sm">MAÇ MERKEZİ</button>
+                <button class="border border-white/20 hover:border-brand-red px-10 py-4 font-bold tracking-[0.2em] text-sm transition-all">KULÜP TARİHÇESİ</button>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 opacity-5 text-[15vw] font-black pointer-events-none select-none tracking-tighter">
+            KARAMAN ABER
+        </div>
+    </section>
 
-<script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
-        });
-      }
-    });
-    window.netlifyIdentity.setLocatorUrl("https://abersanatsk.netlify.app");
-  }
-</script>
+    <section class="container mx-auto px-6 -mt-20 relative z-20 pb-20">
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-black border-t-4 border-brand-red p-8 shadow-2xl">
+                <div class="flex justify-between items-center mb-6">
+                    <span class="text-[10px] font-bold tracking-widest text-gray-500 uppercase">SIRADAKİ MAÇ</span>
+                    <span class="text-[10px] font-bold text-brand-red animate-pulse italic text-xs">CANLI SKOR</span>
+                </div>
+                <div class="flex justify-around items-center gap-4">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-white/5 rounded-full mb-2 mx-auto"></div>
+                        <p class="text-xs font-bold uppercase">ABER SG</p>
+                    </div>
+                    <div class="text-3xl font-black oswald italic">2 - 1</div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-white/5 rounded-full mb-2 mx-auto"></div>
+                        <p class="text-xs font-bold uppercase">RAKİP</p>
+                    </div>
+                </div>
+                <div class="mt-8 text-center border-t border-white/5 pt-4">
+                    <p class="text-[10px] tracking-widest text-gray-400">12 NİSAN 2026 | KARAMAN ŞEHİR STADI</p>
+                </div>
+            </div>
+
+            <div class="news-card p-8 group cursor-pointer">
+                <div class="overflow-hidden mb-4">
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-brand-red transition-colors italic">YENİ DÖNEM BAŞLIYOR</h3>
+                </div>
+                <p class="text-sm text-gray-400 mb-6 font-light">Kulübümüzün vizyonu doğrultusunda planlanan yeni tesisleşme hamlesi için ilk adımlar atıldı...</p>
+                <a href="#" class="text-[10px] font-bold tracking-widest border-b border-brand-red pb-1 hover:text-brand-red transition-all italic">HABERİ GÖRÜNTÜLE</a>
+            </div>
+
+            <div class="news-card p-8 group cursor-pointer border-brand-red/20">
+                <div class="overflow-hidden mb-4">
+                    <h3 class="text-xl font-bold mb-2 group-hover:text-brand-red transition-colors italic">ALTYAPI SEÇMELERİ</h3>
+                </div>
+                <p class="text-sm text-gray-400 mb-6 font-light">Genç yeteneklerin keşfedileceği büyük Karaman Aber seçmeleri için kayıtlar devam ediyor.</p>
+                <a href="#" class="text-[10px] font-bold tracking-widest border-b border-brand-red pb-1 hover:text-brand-red transition-all italic">KAYIT FORMU</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black border-t border-white/5 pt-20 pb-10">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
+                <div>
+                    <h4 class="text-3xl font-black tracking-tighter mb-1 uppercase italic">RIDVAN ARSLAN</h4>
+                    <p class="text-[10px] tracking-[0.3em] text-gray-500 font-medium uppercase leading-relaxed">
+                        Karaman Aber Mühendislik Enerji San. Tic. Ltd. Şti.
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap gap-8 text-[10px] font-bold tracking-[0.2em] text-gray-400">
+                    <a href="#" class="hover:text-brand-red transition-colors">INSTAGRAM</a>
+                    <a href="#" class="hover:text-brand-red transition-colors">YOUTUBE</a>
+                    <a href="#" class="hover:text-brand-red transition-colors">LINKEDIN</a>
+                    <a href="#" class="hover:text-brand-red transition-colors">X / TWITTER</a>
+                </div>
+            </div>
+
+            <div class="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between gap-4 text-[9px] text-gray-600 tracking-[0.4em] font-semibold uppercase">
+                <span>© 2026 TÜM HAKLARI SAKLIDIR</span>
+                <span class="text-gray-400 italic">DESIGNED BY RIDVAN ARSLAN</span>
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>
