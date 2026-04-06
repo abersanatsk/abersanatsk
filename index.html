@@ -5,61 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karaman Aber Sanat Gücü</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
     <style>
         body { 
-            background-color: #030303; /* Tam siyah */
-            color: white; 
-            font-family: 'Inter', sans-serif; 
-            margin: 0; 
-            overflow-x: hidden;
+            background-color: #FFFFFF; /* Beyaz Zemin */
+            margin: 0;
+            overflow: hidden;
+            height: 100vh;
             display: flex;
-            flex-direction: column;
-            min-h: screen;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Oswald', sans-serif;
         }
-        .oswald { font-family: 'Oswald', sans-serif; }
-        .red-gradient { background: linear-gradient(90deg, #E30613 0%, #90040C 100%); }
-        
-        /* Logo ve Parlama Efektleri (Pulsing Glow) */
-        .logo-glow {
-            filter: drop-shadow(0 0 45px rgba(227, 6, 19, 0.45)); /* Logonun arkasındaki parıltı */
-            animation: pulse-logo 4s infinite ease-in-out;
+        .main-title {
+            color: #000000; /* Siyah Yazı */
+            line-height: 0.9;
         }
-
-        @keyframes pulse-logo {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.04); opacity: 0.96; }
+        .sub-title {
+            color: #E30613; /* Kırmızı Yazı */
+            letter-spacing: 0.2em;
         }
     </style>
 </head>
-<body class="h-screen w-screen relative overflow-hidden flex flex-col items-center justify-center p-6 text-center">
-    
-    <img src="logo.png" alt="" class="absolute inset-0 w-full h-full object-contain opacity-[0.03] scale-150 z-0 pointer-events-none grayscale">
+<body>
 
-    <div class="relative z-10 flex flex-col items-center justify-center text-center">
-        
-        <div class="absolute w-[600px] h-[600px] bg-red-600/10 rounded-full blur-[180px] -z-10 opacity-70"></div>
-        
-        <div class="relative z-10 mb-10 transform hover:scale-105 transition duration-700 ease-out">
-            <img src="logo.png" alt="Aber Sanat Gücü Devasa Logo" 
-                 class="w-[280px] h-[280px] md:w-[500px] md:h-[500px] object-contain relative z-10 logo-glow">
-        </div>
+    <div class="text-center p-4">
+        <h1 class="main-title text-5xl md:text-8xl font-black uppercase italic mb-4">
+            KARAMAN <br> ABER SANAT GÜCÜ
+        </h1>
 
-        <div class="relative z-10 mt-6">
-            <p class="text-red-600 font-bold tracking-[0.5em] mb-4 text-[11px] uppercase opacity-70">Karaman Aber Sanat Gücü</p>
-            <h1 class="text-6xl md:text-9xl font-black italic oswald uppercase leading-[0.85] tracking-tighter mb-12">
-                İNANÇ <br><span class="text-red-600">KANATLANDIRIR</span>
-            </h1>
-            
-            <button class="red-gradient px-12 py-5 font-black uppercase italic tracking-widest hover:scale-105 transition-transform shadow-2xl shadow-red-900/40 text-[11px] font-bold">BİZE KATIL</button>
+        <h2 class="sub-title text-2xl md:text-4xl font-bold uppercase italic mt-6">
+            İNANÇ KANATLANDIRIR
+        </h2>
+
+        <div class="mt-20 opacity-20 text-[10px] text-black font-bold tracking-[0.5em] uppercase">
+            RIDVAN ARSLAN
         </div>
     </div>
-
-    <footer class="absolute bottom-10 left-0 w-full text-center z-20">
-        <h2 class="text-4xl md:text-5xl font-black italic oswald uppercase mb-2 tracking-tighter text-white/90">RIDVAN ARSLAN</h2>
-        <p class="text-[10px] tracking-[0.5em] text-gray-700 uppercase font-bold">© 2026 TÜM HAKLARI SAKLIDIR</p>
-        <p class="text-[9px] text-gray-800 tracking-[0.2em] italic uppercase font-medium mt-3 opacity-60">Designed by Rıdvan Arslan</p>
-    </footer>
 
 </body>
 </html>
