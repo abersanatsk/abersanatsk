@@ -3,50 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABER SANAT GÜCÜ SPOR KULÜBÜ | Resmi Web Sitesi</title>
+    <title>ABER SANAT GÜCÜ SK | Resmi Web Sitesi</title>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <style>
         :root { --gold: #d4af37; --black: #0d0d0d; --grey: #1a1a1a; --white: #ffffff; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--black); color: white; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--black); color: white; scroll-behavior: smooth; }
         
         header { background: var(--black); padding: 40px 20px; text-align: center; border-bottom: 4px solid var(--gold); }
-        nav { background: var(--grey); display: flex; justify-content: center; gap: 20px; padding: 15px; position: sticky; top: 0; z-index: 1000; }
-        nav a { color: white; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        nav { background: var(--grey); display: flex; justify-content: center; gap: 20px; padding: 15px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        nav a { color: white; text-decoration: none; font-weight: bold; transition: 0.3s; text-transform: uppercase; font-size: 14px; }
         nav a:hover { color: var(--gold); }
 
         .container { max-width: 1100px; margin: auto; padding: 20px; }
-        .section-title { border-left: 5px solid var(--gold); padding-left: 15px; margin: 40px 0 20px; color: var(--gold); text-transform: uppercase; }
+        .section-title { border-left: 5px solid var(--gold); padding-left: 15px; margin: 40px 0 20px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
         
         /* Maç Merkezi Tasarımı */
-        .match-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .match-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
         .match-card { 
             background: var(--grey); 
             border-radius: 15px; 
-            padding: 20px; 
+            padding: 25px; 
             text-align: center; 
             border: 1px solid #333;
             transition: 0.3s;
+            position: relative;
         }
-        .match-card:hover { border-color: var(--gold); transform: translateY(-5px); }
-        .match-status { font-size: 12px; color: var(--gold); font-weight: bold; margin-bottom: 10px; display: block; }
-        .teams { display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 1.1rem; }
-        .score-box { background: #000; padding: 10px 15px; border-radius: 8px; color: var(--gold); font-size: 1.5rem; }
-        .match-meta { margin-top: 15px; font-size: 13px; color: #888; border-top: 1px solid #333; padding-top: 10px; }
+        .match-card:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.1); }
+        .match-status { font-size: 11px; color: var(--gold); font-weight: bold; margin-bottom: 15px; display: block; letter-spacing: 1px; }
+        .teams { display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 1.1rem; gap: 10px; }
+        .team { flex: 1; }
+        .score-box { background: #000; padding: 10px 20px; border-radius: 8px; color: var(--gold); font-size: 1.6rem; font-weight: 900; min-width: 60px; }
+        .match-meta { margin-top: 15px; font-size: 13px; color: #aaa; border-top: 1px solid #333; padding-top: 15px; line-height: 1.5; }
 
-        footer { text-align: center; padding: 40px; background: #000; margin-top: 60px; border-top: 1px solid #222; }
+        /* Haberler Alanı */
+        #blog-posts { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .empty-msg { color: #666; font-style: italic; }
+
+        footer { text-align: center; padding: 60px 20px; background: #000; margin-top: 80px; border-top: 1px solid #222; }
+        .copy-text { color: var(--gold); font-weight: bold; letter-spacing: 1px; margin-bottom: 10px; display: block; }
+        .admin-link { color: #444; font-size: 11px; text-decoration: none; border: 1px solid #333; padding: 4px 8px; border-radius: 4px; transition: 0.3s; }
+        .admin-link:hover { color: #888; border-color: #555; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1 style="margin:0; font-size: 2.5rem; letter-spacing: 2px;">ABER SANAT GÜCÜ SK</h1>
-    <p style="color: var(--gold); margin-top: 5px;">Karaman'ın Kültür ve Spor Elçisi</p>
+    <h1 style="margin:0; font-size: 2.8rem; letter-spacing: 3px;">ABER SANAT GÜCÜ SK</h1>
+    <p style="color: var(--gold); margin-top: 8px; font-weight: 500; text-transform: uppercase; font-size: 0.9rem;">Karaman'ın Kültür ve Spor Elçisi</p>
 </header>
 
 <nav>
     <a href="/">ANASAYFA</a>
     <a href="#fikstur">MAÇ MERKEZİ</a>
     <a href="#haberler">HABERLER</a>
+    <a href="#iletisim">İLETİŞİM</a>
 </nav>
 
 <div class="container">
@@ -56,38 +66,56 @@
         <div class="match-card">
             <span class="match-status">GELECEK MAÇ</span>
             <div class="teams">
-                <span>ABER SANAT</span>
+                <div class="team">ABER SANAT</div>
                 <div class="score-box">VS</div>
-                <span>RAKİP TAKIM</span>
+                <div class="team">RAKİP TAKIM</div>
             </div>
             <div class="match-meta">
-                📅 12 Nisan 2026 | 🕒 16:00 <br> 📍 Karaman Şehir Stadı
+                📅 12 Nisan 2026 | 🕒 16:00 <br> 
+                📍 Karaman Şehir Stadı
             </div>
         </div>
-        
+
         <div class="match-card">
-            <span class="match-status" style="color: #444;">SONUÇLANDI</span>
+            <span class="match-status" style="color: #555;">SONUÇLANDI</span>
             <div class="teams">
-                <span>ABER SANAT</span>
+                <div class="team">ABER SANAT</div>
                 <div class="score-box">3 - 1</div>
-                <span>ESKİ RAKİP</span>
+                <div class="team">GEÇMİŞ RAKİP</div>
             </div>
             <div class="match-meta">
-                📅 Geçen Hafta | 🏆 Lig Maçı
+                📅 05 Nisan 2026 | 🏆 Lig Mücadelesi
             </div>
         </div>
     </div>
 
     <h2 class="section-title" id="haberler">Kulüpten Haberler</h2>
     <div id="blog-posts">
-        <p style="color: #666;">Yönetici panelinden paylaştığınız haberler burada listelenecek.</p>
+        <p class="empty-msg">Haberler yükleniyor veya henüz içerik girilmedi...</p>
     </div>
 
 </div>
 
 <footer>
-    <p style="color: var(--gold); font-weight: bold; letter-spacing: 1px;">© Rıdvan ARSLAN</p>
+    <span class="copy-text">© Rıdvan ARSLAN</span>
+    <br>
+    <a href="/admin/" class="admin-link">YÖNETİCİ GİRİŞİ</a>
 </footer>
+
+<script>
+  // Netlify Identity Yapılandırması
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+    // Önemli: Hataları önlemek için Netlify URL'sini tanımlıyoruz
+    window.netlifyIdentity.setLocatorUrl("https://abersanatsk.netlify.app");
+  }
+</script>
 
 </body>
 </html>
