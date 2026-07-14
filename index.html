@@ -2,71 +2,2844 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Karaman Aber Sanat Gücü</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karaman Aber Sanat Gücü Spor Kulübü</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght=0,300;0,400;0,600;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <style id="theme-styles">
+        :root {
+            --bg-white: #ffffff;
+            --bg-dark: #0a0a0a;
+            --text-light: #ffffff;
+            --text-dark: #000000;
+            --text-muted: #666666;
+            --accent-red: #d90429;
+            --font-main: 'Inter', sans-serif;
+        }
+    </style>
+
     <style>
-        body { font-family: sans-serif; margin: 0; padding: 20px; line-height: 1.6; }
-        .container { max-width: 1000px; margin: auto; }
-        .section-title { font-size: 2rem; border-bottom: 2px solid #000; padding-bottom: 10px; margin: 40px 0 20px 0; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
-        .card { border: 1px solid #ccc; padding: 15px; text-align: center; }
-        .card img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            border-bottom: 2px solid var(--text-dark);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 110px;
+            padding: 0.5rem 0;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: var(--text-dark);
+            max-width: 45%;
+        }
+
+        .club-logo-wrapper {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            border: 3px solid var(--text-dark);
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        .club-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-weight: 900;
+            font-size: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+
+        .logo-text span {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--accent-red);
+            letter-spacing: 2px;
+            margin-top: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-red);
+        }
+
+        /* --- HERO --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 10rem 2rem 4rem 2rem;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            z-index: 1;
+        }
+
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            line-height: 0.95;
+            letter-spacing: -2px;
+            color: var(--text-dark);
+            max-width: 900px;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-slogan {
+            font-size: 2.2rem;
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            color: var(--accent-red);
+            letter-spacing: 3px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-signature {
+            position: absolute;
+            bottom: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: #b3b3b3;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        /* --- BÖLÜMLER --- */
+        section {
+            padding: 8rem 0;
+            border-top: 2px solid var(--text-dark);
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: -1.5px;
+            margin-bottom: 4rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: block;
+            width: 15px;
+            height: 15px;
+            background-color: var(--accent-red);
+            transform: rotate(45deg);
+        }
+
+        /* --- HAKKIMIZDA --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+        }
+
+        .about-card h3 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            color: var(--accent-red);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-card p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* --- YÖNETİM KURULU --- */
+        .board-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 3rem;
+            justify-content: center;
+        }
+
+        .board-card {
+            text-align: center;
+            border: 2px solid var(--text-dark);
+            background: #ffffff;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease;
+        }
+
+        .board-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .board-img-wrapper {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-red);
+            margin: 0 auto 1.5rem auto;
+            overflow: hidden;
+            background-color: #f5f5f5;
+        }
+
+        .board-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .board-name {
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .board-role {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- OYUNCULAR MEVKİ GRUPLARI VE KARTLARI --- */
+        .position-group-title {
+            font-size: 1.6rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--text-dark);
+            padding-bottom: 0.5rem;
+            margin: 3rem 0 2rem 0;
+            color: var(--accent-red);
+        }
+
+        .players-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .player-card {
+            border: 2px solid var(--text-dark);
+            background: #ffffff;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .player-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .player-img-box {
+            height: 320px;
+            background-color: #f7f7f7;
+            overflow: hidden;
+            border-bottom: 2px solid var(--text-dark);
+            position: relative;
+        }
+
+        .player-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .player-card:hover .player-img-box img {
+            transform: scale(1.05);
+        }
+
+        .player-info {
+            padding: 1.5rem;
+        }
+
+        .player-name {
+            font-size: 1.35rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .player-position {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .player-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            border-top: 1px solid #eee;
+            padding-top: 0.8rem;
+        }
+
+        .stat-line {
+            color: var(--text-muted);
+        }
+
+        .stat-line strong {
+            color: var(--text-dark);
+        }
+
+        /* --- TRANSFERLER --- */
+        .transfers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .transfer-card {
+            border: 2px solid var(--text-dark);
+            background: #ffffff;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .transfer-img {
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--text-dark);
+        }
+
+        .transfer-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .transfer-name {
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .transfer-club {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0.5rem 0;
+        }
+
+        .transfer-status {
+            background-color: var(--accent-red);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            align-self: flex-start;
+            letter-spacing: 1px;
+        }
+
+        /* --- FİKSTÜR --- */
+        .fixture-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .fixture-card {
+            border: 2px solid var(--text-dark);
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 3rem;
+        }
+
+        .fixture-team {
+            font-size: 1.3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            width: 40%;
+        }
+
+        .fixture-team.home {
+            text-align: right;
+        }
+
+        .fixture-team.away {
+            text-align: left;
+        }
+
+        .fixture-mid {
+            text-align: center;
+            width: 20%;
+        }
+
+        .fixture-score {
+            font-size: 2rem;
+            font-weight: 900;
+            background: var(--text-dark);
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 4px;
+            letter-spacing: 2px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .fixture-date {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* --- MEDYA GALERİ (MİLİMETRİK EŞİTLEME YAPILDI) --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            border: 2px solid var(--text-dark);
+            background-color: #000000;
+        }
+
+        .gallery-item img, .gallery-item iframe, .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: none;
+            display: block;
+        }
+
+        /* --- BİZE YAZIN --- */
+        .blog-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 5rem;
+        }
+
+        .blog-form-wrapper {
+            background-color: #fafafa;
+            border: 2px solid var(--text-dark);
+            padding: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--text-dark);
+            font-family: var(--font-main);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-red);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.1rem;
+            background-color: var(--text-dark);
+            color: var(--bg-white);
+            border: none;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--accent-red);
+        }
+
+        .post-card {
+            border-left: 5px solid var(--accent-red);
+            padding: 1.5rem 2rem;
+            background-color: #ffffff;
+            border: 1px solid #eee;
+            border-left: 5px solid var(--accent-red);
+            margin-bottom: 1.5rem;
+        }
+
+        .post-meta {
+            font-size: 0.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- İLETİŞİM --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .info-item h4 {
+            font-size: 0.85rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--accent-red);
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-item p, .info-item a {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .contact-map {
+            width: 100%;
+            height: 350px;
+            border: 2px solid var(--text-dark);
+            background-color: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- PRO DASHBOARD ADMIN PANEL MODAL --- */
+        .admin-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .admin-content {
+            background-color: #ffffff;
+            border: 3px solid var(--text-dark);
+            width: 95%;
+            max-width: 1300px;
+            height: 90vh;
+            display: flex;
+            flex-direction: row;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .close-admin {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2.5rem;
+            cursor: pointer;
+            font-weight: 900;
+            z-index: 10;
+        }
+
+        /* Admin Yan Menü */
+        .admin-sidebar {
+            width: 280px;
+            background-color: var(--bg-dark);
+            color: #fff;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            border-right: 3px solid var(--text-dark);
+        }
+
+        .admin-sidebar h3 {
+            font-size: 1.1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--accent-red);
+            margin-bottom: 2rem;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .admin-sidebar-btn {
+            background: none;
+            border: none;
+            color: #b3b3b3;
+            padding: 12px 20px;
+            text-align: left;
+            font-weight: 800;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .admin-sidebar-btn:hover, .admin-sidebar-btn.active {
+            color: #ffffff;
+            background-color: var(--accent-red);
+        }
+
+        /* Admin İçerik Alanı */
+        .admin-body {
+            flex-grow: 1;
+            padding: 3rem;
+            overflow-y: auto;
+            background-color: #fafafa;
+        }
+
+        .admin-tab-content {
+            display: none;
+        }
+
+        .admin-tab-content.active {
+            display: block;
+        }
+
+        .admin-section-heading {
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--text-dark);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .admin-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            background-color: #fff;
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            color: #000;
+        }
+
+        .data-table th {
+            background-color: #eee;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        /* Liste ve Buton Tasarımları */
+        .admin-list-item {
+            background: #fff;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            margin-bottom: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #000;
+        }
+
+        .admin-btn-edit-inline {
+            background-color: #2b6cb0;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            margin-right: 5px;
+            transition: opacity 0.2s;
+        }
+
+        .admin-btn-edit-inline:hover {
+            opacity: 0.8;
+        }
+
+        .admin-btn-delete {
+            background-color: #d90429;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            transition: opacity 0.2s;
+        }
+
+        .admin-btn-delete:hover {
+            opacity: 0.8;
+        }
+
+        .admin-btn-approve {
+            background-color: #2b9348;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            margin-right: 5px;
+            transition: opacity 0.2s;
+        }
+
+        .admin-btn-approve:hover {
+            opacity: 0.8;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 5rem 0;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-weight: 900;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo span {
+            color: var(--accent-red);
+        }
+
+        .signature {
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .signature span {
+            color: #ffffff;
+            font-weight: 900;
+        }
+
+        .admin-trigger {
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            color: #555;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 992px) {
+            .hero-title { font-size: 3rem; }
+            .hero-slogan { font-size: 1.5rem; }
+            .about-grid, .blog-container, .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            nav {
+                flex-direction: column;
+                height: auto;
+                padding: 1.5rem 0;
+                gap: 1.5rem;
+            }
+            .nav-links { gap: 1rem; }
+            .admin-content { flex-direction: column; height: 95vh; }
+            .admin-sidebar { width: 100%; height: auto; border-right: none; border-bottom: 3px solid #000; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Karaman Aber Sanat Gücü</h1>
-        
-        <section id="yonetim">
+
+    <!-- HEADER -->
+    <header id="site-header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo-container">
+                    <div class="club-logo-wrapper">
+                        <img id="club-logo-img" src="logo.png" alt="ABER SK" class="club-logo" onerror="handleLogoFallback(this);">
+                    </div>
+                    <div class="logo-text" id="header-club-title">
+                        KARAMAN ABER SANAT GÜCÜ <span>SPOR KULÜBÜ</span>
+                    </div>
+                </a>
+                <ul class="nav-links" id="main-nav-links">
+                    <li><a href="#kulup">Hakkımızda</a></li>
+                    <li><a href="#yonetim-kurulu">Yönetim Kurulu</a></li>
+                    <li><a href="#kadro">Oyuncularımız</a></li>
+                    <li><a href="#transferler">Transferler</a></li>
+                    <li><a href="#fikstur">Fikstür</a></li>
+                    <li><a href="#galeri">Medya</a></li>
+                    <li><a href="#bize-yazin">Bize Yazın</a></li>
+                    <li><a href="#iletisim">İletişim</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-overlay" id="hero-bg-overlay"></div>
+        <div class="hero-content-wrapper">
+            <h1 class="hero-title" id="hero-title-text">KARAMAN<br>ABER SANAT GÜCÜ<br>SPOR KULÜBÜ</h1>
+            <div class="hero-slogan" id="hero-slogan-text">İNANÇ KANATLANDIRIR</div>
+        </div>
+        <div class="hero-signature">© RIDVAN ARSLAN</div>
+    </section>
+
+    <!-- HAKKIMIZDA BÖLÜMÜ -->
+    <section id="kulup">
+        <div class="container">
+            <h2 class="section-title">Biz Kimiz?</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3 id="about-card-title1">İnanmış Bir Takım Ruhu.</h3>
+                    <p id="about-card-text1">Karaman Aber Sanat Gücü Spor Kulübü, yeşil sahalarda sadece fiziksel gücü değil, sarsılmaz bir disiplini og takım bütünlüğünü temsil eder. Bizler, sporcularımızın karakter gelişimini en ön planda tutarak dürüstlük, azim og yüksek ahlak bilinciyle geleceğin futbolcularını yetiştiriyoruz.</p>
+                </div>
+                <div class="about-card">
+                    <h3 id="about-card-title2">Zafere Giden Kararlı Yol.</h3>
+                    <p id="about-card-text2">Sloganımız olan "İNANÇ KANATLANDIRIR" ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz. Genç yetenekleri keşfedip onları modern futbol metodolojisiyle hazırlayarak sadece skor üreten değil, sahada duruşuyla fark yaratan inanmış bir jenerasyon kuruyoruz. Karaman Aber Sanat Gücü olarak tüm enerjimizi, gücümüzü og odağımızı tamamen yeşil sahalara yansıtıyoruz. Tek og sarsılmaz branşımız olan Futbolda, altyapıdan A takıma kadar modern taktikler, disiplinli idmanlar og sarsılmaz bir takım ruhu aşılıyoruz. Futbolcularımıza modern antrenman metodolojisi sunarak hem fiziksel gelişimlerini zirveye taşıyoruz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- YÖNETİM KURULU BÖLÜMÜ (YENİ) -->
+    <section id="yonetim-kurulu">
+        <div class="container">
             <h2 class="section-title">Yönetim Kurulu</h2>
-            <div id="board-grid" class="grid"></div>
-        </section>
+            <div class="board-grid" id="board-container">
+                <!-- Dinamik Yönetim Listesi -->
+            </div>
+        </div>
+    </section>
 
-        <section id="teknik">
-            <h2 class="section-title">Teknik Heyet</h2>
-            <div id="tech-grid" class="grid"></div>
-        </section>
+    <!-- OYUNCULARIMIZ (KADRO) BÖLÜMÜ (MEVKİ GRUPLAMALI) -->
+    <section id="kadro">
+        <div class="container">
+            <h2 class="section-title">Kadro ve Oyuncularımız</h2>
+            
+            <div id="gk-section">
+                <h3 class="position-group-title">Kaleciler</h3>
+                <div class="players-grid" id="gk-players-container"></div>
+            </div>
 
-        <section id="fikstur">
-            <h2 class="section-title">Fikstür</h2>
-            <table id="fix-table" border="1" width="100%">
-                <thead><tr><th>Maç</th><th>Skor</th><th>Tarih</th></tr></thead>
-                <tbody></tbody>
-            </table>
-        </section>
+            <div id="df-section">
+                <h3 class="position-group-title">Defans Oyuncuları</h3>
+                <div class="players-grid" id="df-players-container"></div>
+            </div>
+
+            <div id="mf-section">
+                <h3 class="position-group-title">Orta Saha Oyuncuları</h3>
+                <div class="players-grid" id="mf-players-container"></div>
+            </div>
+
+            <div id="fw-section">
+                <h3 class="position-group-title">Forvet Oyuncuları</h3>
+                <div class="players-grid" id="fw-players-container"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRANSFERLER BÖLÜMÜ -->
+    <section id="transferler">
+        <div class="container">
+            <h2 class="section-title">Transfer Gündemi</h2>
+            <div class="transfers-grid" id="transfers-container">
+                <!-- Dinamik Transfer Kartları -->
+            </div>
+        </div>
+    </section>
+
+    <!-- FİKSTÜR BÖLÜMÜ -->
+    <section id="fikstur">
+        <div class="container">
+            <h2 class="section-title">Maç Fikstürü</h2>
+            <div class="fixture-list" id="fixture-container">
+                <!-- Dinamik Fikstür Kartları -->
+            </div>
+        </div>
+    </section>
+
+    <!-- MEDYA GALERİSİ BÖLÜMÜ -->
+    <section id="galeri">
+        <div class="container">
+            <h2 class="section-title">Medya & Galeri</h2>
+            <div class="gallery-grid" id="gallery-container">
+                <!-- Fotoğraflar og videolar -->
+            </div>
+        </div>
+    </section>
+
+    <!-- DİNAMİK OLARAK EKLENEN SAYFALAR BU ALANA ENJEKTE EDİLECEK -->
+    <div id="dynamic-pages-container"></div>
+
+    <!-- BİZE YAZIN BÖLÜMÜ -->
+    <section id="bize-yazin">
+        <div class="container">
+            <h2 class="section-title">Bize Yazın</h2>
+            <div class="blog-container">
+                <div class="blog-form-wrapper">
+                    <h3>Fikirlerinizi Paylaşın</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem;">Fikirleriniz bizim için değerli. Formu doldurup gönderin, onayımızın ardından sitemizde yayınlayalım!</p>
+                    
+                    <form id="write-us-form" action="https://formspree.io/f/xeeyoqbe" method="POST" onsubmit="handleFormSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">İsminiz</label>
+                            <input type="text" name="name" id="name" class="form-control" placeholder="Adınız Soyadınız" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Düşünceniz</label>
+                            <textarea name="message" id="message" rows="5" class="form-control" placeholder="Mesajınızı yazın..." required></textarea>
+                        </div>
+                        <input type="hidden" name="_subject" value="Aber SK - Yeni Bize Yazın Mesajı">
+                        <button type="submit" class="submit-btn">Onaya Gönder</button>
+                    </form>
+                </div>
+
+                <div>
+                    <h3 style="font-size: 1.5rem; font-weight: 900; font-style: italic; text-transform: uppercase; margin-bottom: 2rem;">Yazılanlar</h3>
+                    <div class="approved-posts" id="posts-container">
+                        <!-- Onaylanmış mesajlar -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- İLETİŞİM BÖLÜMÜ -->
+    <section id="iletisim" style="border-bottom: none;">
+        <div class="container">
+            <h2 class="section-title">Bize Ulaşın</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <h4>Telefon</h4>
+                        <a href="tel:+905368939415" id="club-phone-link">0 536 893 94 15</a>
+                    </div>
+                    <div class="info-item">
+                        <h4>E-Posta Adreslerimiz</h4>
+                        <p style="margin-bottom: 0.5rem;"><a href="mailto:info@abersanatsk.org" id="club-email-1">info@abersanatsk.org</a></p>
+                        <p><a href="mailto:ridvan@abersanatsk.org" id="club-email-2">ridvan@abersanatsk.org</a></p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Kulüp Ofisi</h4>
+                        <p style="font-size: 1.25rem; font-weight: 900;" id="club-address-text">Cedit Mah. 319. Sk. No:2/A <br>Merkez / Karaman</p>
+                    </div>
+                </div>
+                <div class="contact-map">
+                    <div>
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">📍</div>
+                        Karaman Merkez
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADMIN PANEL MODAL PENCERESİ -->
+    <div class="admin-modal" id="adminModal">
+        <div class="admin-content">
+            <span class="close-admin" onclick="toggleAdminModal()">&times;</span>
+            
+            <!-- Sol Menü -->
+            <div class="admin-sidebar">
+                <h3>Aber SK Yönetim</h3>
+                <button type="button" class="admin-sidebar-btn active" id="tabSetBtn" onclick="switchTab('settings')">Site Ayarları</button>
+                <button type="button" class="admin-sidebar-btn" id="tabAboutBtn" onclick="switchTab('about')">Hakkımızda</button>
+                <button type="button" class="admin-sidebar-btn" id="tabBoardBtn" onclick="switchTab('board')">Yönetim Kurulu</button>
+                <button type="button" class="admin-sidebar-btn" id="tabSquadBtn" onclick="switchTab('squad')">Oyuncu Kadrosu</button>
+                <button type="button" class="admin-sidebar-btn" id="tabTransBtn" onclick="switchTab('transfers')">Transfer Gündemi</button>
+                <button type="button" class="admin-sidebar-btn" id="tabFixBtn" onclick="switchTab('fixture')">Fikstür / Sonuçlar</button>
+                <button type="button" class="admin-sidebar-btn" id="tabGalBtn" onclick="switchTab('gallery')">Medya / Galeri</button>
+                <button type="button" class="admin-sidebar-btn" id="tabPagesBtn" onclick="switchTab('pages')">Yeni Sayfa Ekle/Düzenle</button>
+                <button type="button" class="admin-sidebar-btn" id="tabMsgBtn" onclick="switchTab('messages')">Taraftar Yazıları</button>
+                <button type="button" class="admin-sidebar-btn" id="tabSecBtn" onclick="switchTab('security')">Tema & Şifre</button>
+            </div>
+
+            <!-- Sağ İçerik Alanı -->
+            <div class="admin-body">
+                
+                <!-- TAB: SİTE AYARLARI -->
+                <div id="tabSettings" class="admin-tab-content active">
+                    <div class="admin-section-heading">GELİŞMİŞ SİTE AYARLARI</div>
+                    <div class="admin-grid-2">
+                        <div class="form-group" style="background: #fff5f5; padding: 1.5rem; border: 2px solid var(--accent-red);">
+                            <label style="color: var(--accent-red); font-weight: 900;">1. KULÜP LOGO URL'Sİ (ImgBB Doğrudan Link)</label>
+                            <input type="text" id="edit-logo-url" class="form-control" placeholder="Örn: https://i.ibb.co/.../logo.png">
+                        </div>
+                        <div class="form-group" style="background: #f7fafc; padding: 1.5rem; border: 2px solid #2b6cb0;">
+                            <label style="color: #2b6cb0; font-weight: 900;">2. ANA SAYFA ARKA PLAN GÖRSEL URL'Sİ</label>
+                            <input type="text" id="edit-hero-bg-url" class="form-control" placeholder="Örn: https://i.ibb.co/...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Sol Üst Kulüp Adı</label>
+                        <input type="text" id="edit-header-title" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Ana Sayfa Başlığı (Hero)</label>
+                        <textarea id="edit-hero-title" class="form-control" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Slogan</label>
+                        <input type="text" id="edit-hero-slogan" class="form-control">
+                    </div>
+                    <div class="admin-grid-2">
+                        <div class="form-group">
+                            <label>Kulüp Telefonu</label>
+                            <input type="text" id="edit-phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Adres Bilgisi</label>
+                            <textarea id="edit-address" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+                    <div class="admin-grid-2">
+                        <div class="form-group">
+                            <label>E-Posta 1</label>
+                            <input type="text" id="edit-email1" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>E-Posta 2</label>
+                            <input type="text" id="edit-email2" class="form-control">
+                        </div>
+                    </div>
+                    <button type="button" class="submit-btn" onclick="saveSettings()">Site Ayarlarını Kaydet</button>
+                </div>
+
+                <!-- TAB: HAKKIMIZDA -->
+                <div id="tabAbout" class="admin-tab-content">
+                    <div class="admin-section-heading">HAKKIMIZDA METİN AYARLARI</div>
+                    <div class="form-group">
+                        <label>Başlık 1</label>
+                        <input type="text" id="edit-about-title1" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Paragraf 1</label>
+                        <textarea id="edit-about-text1" class="form-control" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Başlık 2</label>
+                        <input type="text" id="edit-about-title2" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Paragraf 2</label>
+                        <textarea id="edit-about-text2" class="form-control" rows="5"></textarea>
+                    </div>
+                    <button type="button" class="submit-btn" onclick="saveAbout()">Metinleri Kaydet</button>
+                </div>
+
+                <!-- TAB: YÖNETİM KURULU (YENİ TAB) -->
+                <div id="tabBoard" class="admin-tab-content">
+                    <div class="admin-section-heading">YÖNETİM KURULU ÜYELERİ</div>
+                    <div class="blog-form-wrapper" style="box-shadow: none; margin-bottom: 2rem;">
+                        <h5 style="margin-bottom: 1rem; font-weight: 900; text-transform: uppercase; color: #000;">YENİ YÖNETİCİ EKLE</h5>
+                        <div class="admin-grid-2">
+                            <div class="form-group">
+                                <label>Yönetici Adı Soyadı</label>
+                                <input type="text" id="new-board-name" class="form-control" placeholder="Örn: Rıdvan Arslan">
+                            </div>
+                            <div class="form-group">
+                                <label>Görevi / Unvanı</label>
+                                <input type="text" id="new-board-role" class="form-control" placeholder="Örn: Kulüp Başkanı, Genel Sekreter">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Profil Fotoğraf URL'si (Doğrudan Link)</label>
+                            <input type="text" id="new-board-img" class="form-control" placeholder="İnternet veya ImgBB doğrudan resim linki">
+                        </div>
+                        <button type="button" class="submit-btn" onclick="addBoardMember()">Yönetim Kuruluna Ekle</button>
+                    </div>
+
+                    <h5 style="margin-bottom: 1rem; font-weight: 900; color: #000;">MEVCUT YÖNETİCİ LİSTESİ</h5>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Fotoğraf</th>
+                                <th>Adı Soyadı</th>
+                                <th>Unvanı</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-board-list"></tbody>
+                    </table>
+                </div>
+
+                <!-- TAB: SQUAD / OYUNCU KADROSU -->
+                <div id="tabSquad" class="admin-tab-content">
+                    <div class="admin-section-heading">OYUNCU KADROSU YÖNETİMİ</div>
+                    <div class="blog-form-wrapper" style="box-shadow: none; margin-bottom: 2rem;">
+                        <h5 style="margin-bottom: 1rem; font-weight: 900; text-transform: uppercase; color: #000;">YENİ OYUNCU EKLE</h5>
+                        <div class="admin-grid-2">
+                            <div class="form-group">
+                                <label>Oyuncu Adı Soyadı</label>
+                                <input type="text" id="new-player-name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Mevki / Pozisyon</label>
+                                <select id="new-player-pos" class="form-control">
+                                    <option value="Kaleci">Kaleci</option>
+                                    <option value="Defans">Defans</option>
+                                    <option value="Orta Saha">Orta Saha</option>
+                                    <option value="Forvet">Forvet</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="admin-grid-2">
+                            <div class="form-group">
+                                <label>Yaş</label>
+                                <input type="number" id="new-player-age" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Boy (cm)</label>
+                                <input type="number" id="new-player-height" class="form-control" placeholder="Örn: 185">
+                            </div>
+                        </div>
+                        <div class="admin-grid-2">
+                            <div class="form-group">
+                                <label>Kilo (kg)</label>
+                                <input type="number" id="new-player-weight" class="form-control" placeholder="Örn: 78">
+                            </div>
+                            <div class="form-group">
+                                <label>Kullandığı Ayak</label>
+                                <select id="new-player-foot" class="form-control">
+                                    <option value="Sağ">Sağ Ayak</option>
+                                    <option value="Sol">Sol Ayak</option>
+                                    <option value="Her İkisi">Her İkisi</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Oyuncu Fotoğraf URL'si</label>
+                            <input type="text" id="new-player-img" class="form-control" placeholder="Görsel linkini buraya yapıştırın">
+                        </div>
+                        <button type="button" class="submit-btn" onclick="addPlayer()">Kadroya Ekle</button>
+                    </div>
+
+                    <h5 style="margin-bottom: 1rem; font-weight: 900; color: #000;">MEVCUT KADRO</h5>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Fotoğraf</th>
+                                <th>Adı Soyadı</th>
+                                <th>Mevki</th>
+                                <th>Özellikler</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-squad-list"></tbody>
+                    </table>
+                </div>
+
+                <!-- TAB: TRANSFERLER -->
+                <div id="tabTransfers" class="admin-tab-content">
+                    <div class="admin-section-heading">TRANSFER GÜNDEMİ YÖNETİMİ</div>
+                    <div class="blog-form-wrapper" style="box-shadow: none; margin-bottom: 2rem;">
+                        <h5 style="margin-bottom: 1rem; font-weight: 900; text-transform: uppercase; color: #000;">YENİ BİLGİ VE OYUNCU EKLE</h5>
+                        <div class="admin-grid-2">
+                            <div class="form-group">
+                                <label>Oyuncu Adı Soyadı</label>
+                                <input type="text" id="new-trans-name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Geldiği / Gittiği Kulüp</label>
+                                <input type="text" id="new-trans-club" class="form-control" placeholder="Örn: Aber SK, Karaman FK">
+                            </div>
+                        </div>
+                        <div class="admin-grid-2">
+                            <div class="form-group">
+                                <label>Durum / Açıklama</label>
+                                <input type="text" id="new-trans-status" class="form-control" placeholder="Örn: Söylenti, Anlaşma Sağlandı">
+                            </div>
+                            <div class="form-group">
+                                <label>Görsel URL</label>
+                                <input type="text" id="new-trans-img" class="form-control" placeholder="Görsel linkini buraya yapıştırın">
+                            </div>
+                        </div>
+                        <button type="button" class="submit-btn" onclick="addTransfer()">Transfer Bilgisi Ekle</button>
+                    </div>
+
+                    <h5 style="margin-bottom: 1rem; font-weight: 900; color: #000;">GÜNCEL TRANSFER LİSTESİ</h5>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Resim</th>
+                                <th>Oyuncu</th>
+                                <th>Kulüp</th>
+                                <th>Durum</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-transfer-list"></tbody>
+                    </table>
+                </div>
+
+                <!-- TAB: FİKSTÜR VE SONUÇ GÜNCELLEME (GELİŞTİRİLDİ) -->
+                <div id="tabFixture" class="admin-tab-content">
+                    <div class="admin-section-heading">FİKSTÜR & MAÇ YÖNETİMİ</div>
+                    <div class="blog-form-wrapper" style="box-shadow: none; margin-bottom: 2rem;">
+                        <h5 style="margin-bottom: 1rem; font-weight: 900; text-transform: uppercase; color: #000;">YENİ MAÇ EKLE</h5>
+                        <div class="admin-grid-2">
+                            <div class="form-group">
+                                <label>Ev Sahibi Takım</label>
+                                <input type="text" id="new-fix-home" class="form-control" placeholder="Örn: Aber Sanat Gücü">
+                            </div>
+                            <div class="form-group">
+                                <label>Deplasman Takım</label>
+                                <input type="text" id="new-fix-away" class="form-control" placeholder="Örn: Karaman Gençlik">
+                            </div>
+                        </div>
+                        <div class="admin-grid-2">
+                            <div class="form-group">
+                                <label>Maç Sonucu / Skor (Boş bırakırsanız oynanmamış sayılır)</label>
+                                <input type="text" id="new-fix-score" class="form-control" placeholder="Örn: 3 - 1 veya boş bırakın">
+                            </div>
+                            <div class="form-group">
+                                <label>Maç Tarihi ve Saat</label>
+                                <input type="text" id="new-fix-date" class="form-control" placeholder="Örn: 24 Temmuz 2026 / 17:00">
+                            </div>
+                        </div>
+                        <button type="button" class="submit-btn" onclick="addFixture()">Maçı Fikstüre Ekle</button>
+                    </div>
+
+                    <h5 style="margin-bottom: 1rem; font-weight: 900; color: #000;">MEVCUT FİKSTÜR VE MAÇ SONUÇLARI</h5>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Ev Sahibi</th>
+                                <th>Skor</th>
+                                <th>Deplasman</th>
+                                <th>Tarih</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-fixture-list"></tbody>
+                    </table>
+                </div>
+
+                <!-- TAB: GALERİ -->
+                <div id="tabGallery" class="admin-tab-content">
+                    <div class="admin-section-heading">MEDYA VE GALERİ ALANI</div>
+                    <div class="blog-form-wrapper" style="box-shadow: none; margin-bottom: 2rem;">
+                        <h5 style="margin-bottom: 1rem; font-weight: 900; color: #000;">YENİ MEDYA DOSYASI EKLE</h5>
+                        <div class="form-group">
+                            <label>Medya Türü</label>
+                            <select id="new-media-type" class="form-control">
+                                <option value="image">Fotoğraf (Görsel Linki)</option>
+                                <option value="video">Video (YouTube / Streamable Adresi)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Bağlantı Adresi (URL)</label>
+                            <input type="text" id="new-media-url" class="form-control" placeholder="Fotoğraf veya video bağlantısını yapıştırın">
+                        </div>
+                        <button type="button" class="submit-btn" onclick="addGalleryItem()">Galeriye Kaydet</button>
+                    </div>
+
+                    <h5 style="margin-bottom: 1rem; font-weight: 900; color: #000;">GALERİDEKİ TÜM DOSYALAR</h5>
+                    <div id="admin-gallery-list" style="max-height: 300px; overflow-y: auto;"></div>
+                </div>
+
+                <!-- TAB: SAYFA EKLEME / DÜZENLEME -->
+                <div id="tabPages" class="admin-tab-content">
+                    <div class="admin-section-heading" id="pages-tab-heading">YENİ SAYFA EKLE VE YÖNET</div>
+                    <div class="blog-form-wrapper" style="box-shadow: none; margin-bottom: 2rem; border: 2px solid var(--text-dark);" id="page-form-container">
+                        <h5 style="margin-bottom: 1rem; font-weight: 900; color: #000; text-transform: uppercase;" id="page-form-title">YENİ SAYFA BİLGİLERİ</h5>
+                        
+                        <input type="hidden" id="edit-page-id" value="">
+
+                        <div class="form-group">
+                            <label>Sayfa / Menü Adı (Kısa ve tek kelime önerilir)</label>
+                            <input type="text" id="new-page-menu-title" class="form-control" placeholder="Örn: Tesislerimiz, Altyapı">
+                        </div>
+                        <div class="form-group">
+                            <label>Bölüm Başlığı (Sayfa içi büyük başlık)</label>
+                            <input type="text" id="new-page-title" class="form-control" placeholder="Örn: Modern Tesislerimiz">
+                        </div>
+                        <div class="form-group">
+                            <label>Sayfa Sloganı (Örn: Gelecek Burada Yetişiyor)</label>
+                            <input type="text" id="new-page-slogan" class="form-control" placeholder="Opsiyonel slogan yazısı">
+                        </div>
+                        <div class="form-group">
+                            <label>Sayfa Görsel URL'si (Yönetici, yönetim kadrosu veya kurumsal fotoğraf linki)</label>
+                            <input type="text" id="new-page-image-url" class="form-control" placeholder="Boş bırakabilirsiniz veya doğrudan link yapıştırabilirsiniz">
+                        </div>
+                        <div class="form-group">
+                            <label>Sayfa İçerik Metni (Detaylı Bilgiler)</label>
+                            <textarea id="new-page-content" rows="6" class="form-control" placeholder="Sayfanın detaylı metnini buraya yazın..."></textarea>
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px;">
+                            <button type="button" class="submit-btn" id="save-page-btn" onclick="saveCustomPage()" style="flex: 1;">Yeni Sayfayı Yayına Al</button>
+                            <button type="button" class="submit-btn" id="cancel-edit-page-btn" onclick="cancelPageEdit()" style="background-color: #666; display: none; flex: 0.4;">İptal Et</button>
+                        </div>
+                    </div>
+
+                    <h5 style="margin-bottom: 1rem; font-weight: 900; color: #000;">EKLENEN DİNAMİK SAYFALAR</h5>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Menü Adı</th>
+                                <th>Bölüm Başlığı</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-pages-list"></tbody>
+                    </table>
+                </div>
+
+                <!-- TAB: MESAJLAR -->
+                <div id="tabMessages" class="admin-tab-content">
+                    <div class="admin-section-heading">TARAFTAR MESAJLARI ONAYLAMA ALANI</div>
+                    <div id="admin-posts-list" style="max-height: 450px; overflow-y: auto;"></div>
+                </div>
+
+                <!-- TAB: GÜVENLİK VE TEMA -->
+                <div id="tabSecurity" class="admin-tab-content">
+                    <div class="admin-section-heading">TEMA SEÇİMİ & ŞİFRE GÜNCELLEME</div>
+                    <div class="form-group" style="margin-bottom: 3rem;">
+                        <label>Sitenin Genel Renk Şablonu</label>
+                        <select id="theme-select" class="form-control" onchange="previewTheme()">
+                            <option value="classic">Klasik (Bembeyaz Zemin, Siyah Başlıklar, Kırmızı Detaylar)</option>
+                            <option value="dark">Karanlık (Siyah Zemin, Beyaz Metinler, Parlak Kırmızı Detaylar)</option>
+                            <option value="royal">Asil Mavi (Koyu Mavi Detaylar, Altın Sarısı Detaylar)</option>
+                            <option value="pitch">Yeşil Sahalar (Koyu Yeşil Başlıklar, Çimen Yeşili Detaylar)</option>
+                            <option value="neonGece">Neon Gece (Siyah Zemin, Parlak Neon Kırmızı Detaylar)</option>
+                            <option value="legend">Efsane Çubuklu (Lacivert Zemin, Altın Sarısı Detaylar)</option>
+                            <option value="karamanAtesi">Karaman Ateşi (Kırmızı Detaylı Beyaz Zemin, Gümüş Detaylar)</option>
+                            <option value="retro">Retro Klasik (Kemik Zemin, Koyu Kahve & Bordo)</option>
+                        </select>
+                        <button type="button" class="submit-btn" style="margin-top: 1rem;" onclick="saveTheme()">Tasarımı Değiştir ve Kaydet</button>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mevcut Yönetim Şifresi</label>
+                        <input type="password" id="current-password-input" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Yeni Şifre</label>
+                        <input type="password" id="new-password-input" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Yeni Şifre Tekrar</label>
+                        <input type="password" id="new-password-confirm" class="form-control">
+                    </div>
+                    <button type="button" class="submit-btn" onclick="changeAdminPassword()">Yönetici Şifresini Güncelle</button>
+                </div>
+
+            </div>
+        </div>
     </div>
 
-    <script>
-        // Site verilerini güvenli tutar
-        let data = { board: [], tech: [], fixtures: [] };
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo" id="footer-logo-text">ABER <span>SANAT GÜCÜ</span></div>
+            <p>© 2026 Tüm Hakları Saklıdir.</p>
+            <div class="signature">DESIGNED BY <span>RIDVAN ARSLAN</span></div>
+            <div class="admin-trigger" onclick="loginAdmin()">Yönetim Paneline Giriş Yap</div>
+        </div>
+    </footer>
 
-        function init() {
-            try {
-                const saved = localStorage.getItem('aber_sk_data');
-                if (saved) {
-                    data = JSON.parse(saved);
+    <!-- JAVASCRIPT MOTORU -->
+    <script>
+        // --- SÜPER AKILLI LINK VE KOD AYIKLAYICI ---
+        function cleanImageUrl(dirtyUrl) {
+            if (!dirtyUrl || typeof dirtyUrl !== 'string') return '';
+            let url = dirtyUrl.trim();
+            if (url === "") return "";
+            
+            const urlRegex = /(https?:\/\/[^\s"'<>]+)/g;
+            const matches = url.match(urlRegex);
+            if (matches && matches.length > 0) {
+                let bestMatch = matches[0];
+                for (let m of matches) {
+                    if (m.includes('i.ibb.co') || m.match(/\.(jpg|jpeg|png|gif|webp)/i)) {
+                        bestMatch = m;
+                        break;
+                    }
                 }
-                render();
-            } catch(e) {
-                console.log("Hata oluştu, veriler sıfırlandı.");
-                render();
+                url = bestMatch;
+            }
+
+            if (url.includes('ibb.co/') && !url.includes('i.ibb.co')) {
+                const parts = url.split('/');
+                const id = parts[parts.length - 1] || parts[parts.length - 2];
+                if (id && id.length >= 5) {
+                    return `https://i.ibb.co/${id}/image.png`;
+                }
+            }
+            return url;
+        }
+
+        function getEmbedVideoUrl(videoUrl) {
+            if (!videoUrl) return '';
+            let url = videoUrl.trim();
+
+            if (url.includes('youtube.com') || url.includes('youtu.be')) {
+                let videoId = '';
+                if (url.includes('youtu.be/')) {
+                    videoId = url.split('youtu.be/')[1].split(/[?#]/)[0];
+                } else if (url.includes('embed/')) {
+                    videoId = url.split('embed/')[1].split(/[?#]/)[0];
+                } else if (url.includes('v=')) {
+                    videoId = url.split('v=')[1].split('&')[0];
+                }
+                if (videoId) return `https://www.youtube.com/embed/${videoId}`;
+            }
+
+            if (url.includes('streamable.com')) {
+                const parts = url.split('/');
+                const id = parts[parts.length - 1] || parts[parts.length - 2];
+                if (id) return `https://streamable.com/e/${id}`;
+            }
+            return url;
+        }
+
+        function handleLogoFallback(imgElement) {
+            imgElement.src = 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=200';
+        }
+
+        // --- VARSAYILAN ŞABLON VERİSİ ---
+        let defaultData = {
+            adminPassword: "admin",
+            currentTheme: "classic",
+            logoUrl: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=200",
+            heroBgUrl: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=1200",
+            headerTitle: "KARAMAN ABER SANAT GÜCÜ SPOR KULÜBÜ",
+            hero: {
+                title: "KARAMAN\nABER SANAT GÜCÜ\nSPOR KULÜBÜ",
+                slogan: "İNANÇ KANATLANDIRIR"
+            },
+            about: {
+                title1: "İnanmış Bir Takım Ruhu.",
+                text1: "Karaman Aber Sanat Gücü Spor Kulübü, yeşil sahalarda sadece fiziksel gücü değil, sarsılmaz bir disiplini og takım bütünlüğünü temsil eder. Bizler, sporcularımızın karakter gelişimini en ön planda tutarak dürüstlük, azim og yüksek ahlak bilinciyle geleceğin futbolcularını yetiştiriyoruz.",
+                title2: "Zafere Giden Kararlı Yol.",
+                text2: "Sloganımız olan 'İNANÇ KANATLANDIRIR' ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz. Genç yetenekleri keşfedip onları modern futbol metodolojisiyle hazırlayarak sadece skor üreten değil, sahada duruşuyla fark yaratan inanmış bir jenerasyon kuruyoruz. Karaman Aber Sanat Gücü olarak tüm enerjimizi, gücümüzü og odağımızı tamamen yeşil sahalara yansıtıyoruz. Tek og sarsılmaz branşımız olan Futbolda, altyapıdan A takıma kadar modern taktikler, disiplinli idmanlar og sarsılmaz bir takım ruhu aşılıyoruz. Futbolcularımıza modern antrenman metodolojisi sunarak hem fiziksel gelişimlerini zirveye taşıyoruz."
+            },
+            contact: {
+                phone: "0 536 893 94 15",
+                email1: "info@abersanatsk.org",
+                email2: "ridvan@abersanatsk.org",
+                address: "Cedit Mah. 319. Sk. No:2/A <br>Merkez / Karaman"
+            },
+            posts: [
+                { id: 1, author: "Ahmet Yılmaz", text: "Karaman'da futbolun çehresini değiştirecek bir inanmışlık görüyorum. Başarılar Sanat Gücü!", approved: true }
+            ],
+            players: [
+                { id: 1, name: "Ahmet Yılmaz", position: "Forvet", age: 24, height: 182, weight: 75, foot: "Sağ", img: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=300" }
+            ],
+            board: [
+                { id: 1, name: "Rıdvan Arslan", role: "Kulüp Başkanı", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=300" }
+            ],
+            transfers: [
+                { id: 1, name: "Mehmet Demir", club: "Karaman FK -> Aber SK", status: "Anlaşma Sağlandı", img: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=300" }
+            ],
+            fixtures: [
+                { id: 1, home: "Aber Sanat Gücü", away: "Karaman Gençlik", score: "", date: "24 Temmuz 2026 / 17:00" }
+            ],
+            gallery: [
+                { id: 1, type: "image", url: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=800" }
+            ],
+            customPages: []
+        };
+
+        let activeData = {};
+
+        // --- GÜVENLİ DERİN BİRLEŞTİRİCİ VERİ YÜKLEME MOTORU ---
+        function loadAllData() {
+            try {
+                const saved = localStorage.getItem('aber_sk_pro_data_v6');
+                
+                activeData = JSON.parse(JSON.stringify(defaultData));
+                
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    for (let key in parsed) {
+                        if (parsed[key] !== null && parsed[key] !== undefined) {
+                            if (typeof parsed[key] === 'object' && !Array.isArray(parsed[key])) {
+                                activeData[key] = Object.assign({}, activeData[key], parsed[key]);
+                            } else {
+                                activeData[key] = parsed[key];
+                            }
+                        }
+                    }
+                }
+
+                const arrayKeys = ['players', 'board', 'transfers', 'fixtures', 'gallery', 'posts', 'customPages'];
+                arrayKeys.forEach(key => {
+                    if (!Array.isArray(activeData[key])) {
+                        activeData[key] = defaultData[key] ? JSON.parse(JSON.stringify(defaultData[key])) : [];
+                    }
+                });
+
+                applySavedTheme();
+                renderAllSections();
+            } catch (e) {
+                console.error("Yükleme hatası:", e);
+                activeData = JSON.parse(JSON.stringify(defaultData));
+                saveAllData();
+                renderAllSections();
             }
         }
 
-        function render() {
-            // Yönetim
-            const bGrid = document.getElementById('board-grid');
-            bGrid.innerHTML = data.board.map(b => `<div class="card"><img src="${b.img}"><h3>${b.name}</h3><p>${b.role}</p></div>`).join('');
-            
-            // Teknik
-            const tGrid = document.getElementById('tech-grid');
-            tGrid.innerHTML = data.tech.map(t => `<div class="card"><img src="${t.img}"><h3>${t.name}</h3><p>${t.role}</p></div>`).join('');
-            
-            // Fikstür
-            const fBody = document.querySelector('#fix-table tbody');
-            fBody.innerHTML = data.fixtures.map(f => `<tr><td>${f.home} - ${f.away}</td><td>${f.score}</td><td>${f.date}</td></tr>`).join('');
+        function saveAllData() {
+            try {
+                localStorage.setItem('aber_sk_pro_data_v6', JSON.stringify(activeData));
+            } catch(e) {
+                alert("Tarayıcı hafızasına yazılırken bir sorun oluştu: " + e.message);
+            }
         }
 
-        window.onload = init;
+        function applySavedTheme() {
+            const selectedTheme = activeData.currentTheme || "classic";
+            document.getElementById('theme-styles').innerHTML = themes[selectedTheme];
+            document.getElementById('theme-select').value = selectedTheme;
+        }
+
+        function renderAllSections() {
+            const heroData = activeData.hero || defaultData.hero;
+            const aboutData = activeData.about || defaultData.about;
+            const contactData = activeData.contact || defaultData.contact;
+
+            // 0. Logo
+            const logoImg = document.getElementById('club-logo-img');
+            logoImg.src = cleanImageUrl(activeData.logoUrl) || defaultData.logoUrl;
+
+            const rawHeaderTitle = activeData.headerTitle || defaultData.headerTitle;
+            document.getElementById('header-club-title').innerHTML = rawHeaderTitle.replace("SPOR KULÜBÜ", "<span>SPOR KULÜBÜ</span>");
+            document.getElementById('footer-logo-text').innerHTML = rawHeaderTitle.replace("SPOR KULÜBÜ", "<span>SPOR KULÜBÜ</span>");
+
+            // 1. Hero
+            const heroSection = document.getElementById('home');
+            const overlay = document.getElementById('hero-bg-overlay');
+            const cleanBg = cleanImageUrl(activeData.heroBgUrl);
+            if (cleanBg) {
+                heroSection.style.backgroundImage = `url('${cleanBg}')`;
+                overlay.style.backgroundColor = "rgba(255, 255, 255, 0.75)";
+            } else {
+                heroSection.style.backgroundImage = `url('${defaultData.heroBgUrl}')`;
+                overlay.style.backgroundColor = "rgba(255, 255, 255, 0.75)";
+            }
+            document.getElementById('hero-title-text').innerText = heroData.title || defaultData.hero.title;
+            document.getElementById('hero-slogan-text').innerText = heroData.slogan || defaultData.hero.slogan;
+
+            // 2. Hakkımızda
+            document.getElementById('about-card-title1').innerText = aboutData.title1 || defaultData.about.title1;
+            document.getElementById('about-card-text1').innerText = aboutData.text1 || defaultData.about.text1;
+            document.getElementById('about-card-title2').innerText = aboutData.title2 || defaultData.about.title2;
+            document.getElementById('about-card-text2').innerText = aboutData.text2 || defaultData.about.text2;
+
+            // 2.5 Yönetim Kurulu (YENİ)
+            const boardContainer = document.getElementById('board-container');
+            boardContainer.innerHTML = '';
+            const safeBoard = Array.isArray(activeData.board) ? activeData.board : [];
+            if (safeBoard.length === 0) {
+                boardContainer.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">Yönetim kurulu üyeleri henüz eklenmedi.</p>';
+            } else {
+                safeBoard.forEach(b => {
+                    const cleanBImg = cleanImageUrl(b.img) || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=300';
+                    boardContainer.innerHTML += `
+                        <div class="board-card">
+                            <div class="board-img-wrapper">
+                                <img src="${cleanBImg}" alt="${b.name}" class="board-img" onerror="handleLogoFallback(this)">
+                            </div>
+                            <div class="board-name">${b.name}</div>
+                            <div class="board-role">${b.role}</div>
+                        </div>
+                    `;
+                });
+            }
+
+            // 3. Oyuncularımız (MEVKİLERE GÖRE AYRILMIŞ ŞEKİLDE RENDER)
+            const gkContainer = document.getElementById('gk-players-container');
+            const dfContainer = document.getElementById('df-players-container');
+            const mfContainer = document.getElementById('mf-players-container');
+            const fwContainer = document.getElementById('fw-players-container');
+
+            // İçerikleri sıfırla
+            gkContainer.innerHTML = '';
+            dfContainer.innerHTML = '';
+            mfContainer.innerHTML = '';
+            fwContainer.innerHTML = '';
+
+            const safePlayers = Array.isArray(activeData.players) ? activeData.players : [];
+            
+            let gks = [], dfs = [], mfs = [], fws = [];
+
+            safePlayers.forEach(p => {
+                const pos = (p.position || 'Orta Saha').toLowerCase().trim();
+                if (pos.includes('kaleci')) gks.push(p);
+                else if (pos.includes('defans')) dfs.push(p);
+                else if (pos.includes('orta saha')) mfs.push(p);
+                else if (pos.includes('forvet')) fws.push(p);
+                else mfs.push(p); // Varsayılan orta saha
+            });
+
+            // Grupları görünür/görünmez yapma kontrolü
+            document.getElementById('gk-section').style.display = gks.length > 0 ? 'block' : 'none';
+            document.getElementById('df-section').style.display = dfs.length > 0 ? 'block' : 'none';
+            document.getElementById('mf-section').style.display = mfs.length > 0 ? 'block' : 'none';
+            document.getElementById('fw-section').style.display = fws.length > 0 ? 'block' : 'none';
+
+            function buildPlayerCardHtml(p) {
+                const cleanPImg = cleanImageUrl(p.img) || 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=300';
+                return `
+                    <div class="player-card">
+                        <div class="player-img-box">
+                            <img src="${cleanPImg}" alt="${p.name}" onerror="handleLogoFallback(this)">
+                        </div>
+                        <div class="player-info">
+                            <div class="player-name">${p.name}</div>
+                            <div class="player-position">${p.position}</div>
+                            <div class="player-stats">
+                                <div class="stat-line">Yaş: <strong>${p.age || '--'}</strong></div>
+                                <div class="stat-line">Boy: <strong>${p.height || '--'} cm</strong></div>
+                                <div class="stat-line">Kilo: <strong>${p.weight || '--'} kg</strong></div>
+                                <div class="stat-line">Ayak: <strong>${p.foot || 'Sağ'}</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            gks.forEach(p => gkContainer.innerHTML += buildPlayerCardHtml(p));
+            dfs.forEach(p => dfContainer.innerHTML += buildPlayerCardHtml(p));
+            mfs.forEach(p => mfContainer.innerHTML += buildPlayerCardHtml(p));
+            fws.forEach(p => fwContainer.innerHTML += buildPlayerCardHtml(p));
+
+            if (safePlayers.length === 0) {
+                document.getElementById('mf-section').style.display = 'block';
+                mfContainer.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">Oyuncu kadrosu henüz eklenmedi.</p>';
+            }
+
+            // 4. Transferler
+            const transfersGrid = document.getElementById('transfers-container');
+            transfersGrid.innerHTML = '';
+            const safeTransfers = Array.isArray(activeData.transfers) ? activeData.transfers : [];
+            if (safeTransfers.length === 0) {
+                transfersGrid.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">Transfer gündemi boş.</p>';
+            } else {
+                safeTransfers.forEach(t => {
+                    const cleanTImg = cleanImageUrl(t.img) || 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=300';
+                    transfersGrid.innerHTML += `
+                        <div class="transfer-card">
+                            <img class="transfer-img" src="${cleanTImg}" alt="${t.name}" onerror="handleLogoFallback(this)">
+                            <div class="transfer-body">
+                                <div>
+                                    <div class="transfer-name">${t.name}</div>
+                                    <div class="transfer-club">${t.club}</div>
+                                </div>
+                                <div class="transfer-status">${t.status}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            // 5. Fikstür
+            const fixtureGrid = document.getElementById('fixture-container');
+            fixtureGrid.innerHTML = '';
+            const safeFixtures = Array.isArray(activeData.fixtures) ? activeData.fixtures : [];
+            if (safeFixtures.length === 0) {
+                fixtureGrid.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">Fikstür bilgisi girilmedi.</p>';
+            } else {
+                safeFixtures.forEach(f => {
+                    fixtureGrid.innerHTML += `
+                        <div class="fixture-card">
+                            <div class="fixture-team home">${f.home}</div>
+                            <div class="fixture-mid">
+                                <div class="fixture-score">${f.score && f.score.trim() !== '' ? f.score : 'v'}</div>
+                                <div class="fixture-date">${f.date}</div>
+                            </div>
+                            <div class="fixture-team away">${f.away}</div>
+                        </div>
+                    `;
+                });
+            }
+
+            // 6. Galeri
+            const galleryGrid = document.getElementById('gallery-container');
+            galleryGrid.innerHTML = '';
+            const safeGallery = Array.isArray(activeData.gallery) ? activeData.gallery : [];
+            if (safeGallery.length === 0) {
+                galleryGrid.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">Galeri boş.</p>';
+            } else {
+                safeGallery.forEach(item => {
+                    const mediaBox = document.createElement('div');
+                    mediaBox.className = 'gallery-item';
+                    
+                    if (item.type === 'image') {
+                        mediaBox.innerHTML = `<img src="${cleanImageUrl(item.url)}" alt="Aber SK" onerror="handleLogoFallback(this)">`;
+                    } else {
+                        const embedUrl = getEmbedVideoUrl(item.url);
+                        if (embedUrl.includes('youtube.com') || embedUrl.includes('streamable.com')) {
+                            mediaBox.innerHTML = `<iframe src="${embedUrl}" allowfullscreen></iframe>`;
+                        } else {
+                            mediaBox.innerHTML = `<video src="${embedUrl}" controls muted></video>`;
+                        }
+                    }
+                    galleryGrid.appendChild(mediaBox);
+                });
+            }
+
+            // --- DİNAMİK OLARAK EKLENEN SAYFALARI RENDER ETME ---
+            const dynamicContainer = document.getElementById('dynamic-pages-container');
+            const mainNavLinks = document.getElementById('main-nav-links');
+            
+            const defaultNavHtml = `
+                <li><a href="#kulup">Hakkımızda</a></li>
+                <li><a href="#yonetim-kurulu">Yönetim Kurulu</a></li>
+                <li><a href="#kadro">Oyuncularımız</a></li>
+                <li><a href="#transferler">Transferler</a></li>
+                <li><a href="#fikstur">Fikstür</a></li>
+                <li><a href="#galeri">Medya</a></li>
+                <li><a href="#bize-yazin">Bize Yazın</a></li>
+                <li><a href="#iletisim">İletişim</a></li>
+            `;
+            mainNavLinks.innerHTML = defaultNavHtml;
+            dynamicContainer.innerHTML = '';
+
+            const safeCustomPages = Array.isArray(activeData.customPages) ? activeData.customPages : [];
+            
+            safeCustomPages.forEach(page => {
+                const safeId = 'dynamic-' + page.id;
+                mainNavLinks.innerHTML += `<li><a href="#${safeId}">${page.menuTitle}</a></li>`;
+                
+                let pageImgHtml = '';
+                if (page.imageUrl) {
+                    const cleanPageImg = cleanImageUrl(page.imageUrl);
+                    pageImgHtml = `
+                        <div style="margin-bottom: 2.5rem; max-width: 100%; max-height: 500px; overflow: hidden; border: 2px solid var(--text-dark);">
+                            <img src="${cleanPageImg}" alt="${page.title}" style="width: 100%; height: 100%; object-fit: cover;" onerror="handleLogoFallback(this)">
+                        </div>
+                    `;
+                }
+
+                dynamicContainer.innerHTML += `
+                    <section id="${safeId}">
+                        <div class="container">
+                            <h2 class="section-title">${page.title}</h2>
+                            ${pageImgHtml}
+                            <div style="background-color: transparent; border: none; padding: 0;">
+                                ${page.slogan ? `<h3 style="font-size: 1.6rem; font-weight: 900; font-style: italic; text-transform: uppercase; color: var(--accent-red); margin-bottom: 1.5rem;">${page.slogan}</h3>` : ''}
+                                <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.7; white-space: pre-line;">${page.content}</p>
+                            </div>
+                        </div>
+                    </section>
+                `;
+            });
+
+            // 7. Taraftar Mesajları
+            const postsContainer = document.getElementById('posts-container');
+            postsContainer.innerHTML = '';
+            const safePosts = Array.isArray(activeData.posts) ? activeData.posts : [];
+            const approvedPosts = safePosts.filter(p => p.approved === true);
+            if (approvedPosts.length === 0) {
+                postsContainer.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">İlk taraftar yazan siz olun!</p>';
+            } else {
+                approvedPosts.forEach(post => {
+                    postsContainer.innerHTML += `
+                        <div class="post-card">
+                            <div class="post-meta">${post.author} // Taraftar</div>
+                            <div style="font-style: italic;">"${post.text}"</div>
+                        </div>
+                    `;
+                });
+            }
+
+            // 8. İletişim
+            document.getElementById('club-phone-link').innerText = contactData.phone || defaultData.contact.phone;
+            document.getElementById('club-phone-link').href = "tel:" + (contactData.phone || defaultData.contact.phone).replace(/\s+/g, '');
+            document.getElementById('club-email-1').innerText = contactData.email1 || defaultData.contact.email1;
+            document.getElementById('club-email-1').href = "mailto:" + (contactData.email1 || defaultData.contact.email1);
+            document.getElementById('club-email-2').innerText = contactData.email2 || defaultData.contact.email2;
+            document.getElementById('club-email-2').href = "mailto:" + (contactData.email2 || defaultData.contact.email2);
+            document.getElementById('club-address-text').innerHTML = contactData.address || defaultData.contact.address;
+        }
+
+        function handleFormSubmit(event) {
+            const nameInput = document.getElementById('name').value;
+            const messageInput = document.getElementById('message').value;
+
+            if (!Array.isArray(activeData.posts)) activeData.posts = [];
+            activeData.posts.push({
+                id: Date.now(),
+                author: nameInput,
+                text: messageInput,
+                approved: false
+            });
+            saveAllData();
+            alert("Düşünceniz onay paneline ulaştı!");
+        }
+
+        function loginAdmin() {
+            const password = prompt("Lütfen Yönetim Paneli Şifrenizi Giriniz:");
+            if (password === activeData.adminPassword || password === "admin") {
+                toggleAdminModal();
+                switchTab('settings');
+            } else if (password !== null) {
+                alert("Hatalı admin şifresi girdiniz!");
+            }
+        }
+
+        function toggleAdminModal() {
+            const modal = document.getElementById('adminModal');
+            modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.admin-sidebar-btn').forEach(el => el.classList.remove('active'));
+
+            if (tabName === 'settings') {
+                document.getElementById('tabSettings').classList.add('active');
+                document.getElementById('tabSetBtn').classList.add('active');
+                loadSettingsToAdminForm();
+            } else if (tabName === 'about') {
+                document.getElementById('tabAbout').classList.add('active');
+                document.getElementById('tabAboutBtn').classList.add('active');
+                loadAboutToAdminForm();
+            } else if (tabName === 'board') {
+                document.getElementById('tabBoard').classList.add('active');
+                document.getElementById('tabBoardBtn').classList.add('active');
+                renderAdminBoard();
+            } else if (tabName === 'squad') {
+                document.getElementById('tabSquad').classList.add('active');
+                document.getElementById('tabSquadBtn').classList.add('active');
+                renderAdminSquad();
+            } else if (tabName === 'transfers') {
+                document.getElementById('tabTransfers').classList.add('active');
+                document.getElementById('tabTransBtn').classList.add('active');
+                renderAdminTransfers();
+            } else if (tabName === 'fixture') {
+                document.getElementById('tabFixture').classList.add('active');
+                document.getElementById('tabFixBtn').classList.add('active');
+                renderAdminFixture();
+            } else if (tabName === 'gallery') {
+                document.getElementById('tabGallery').classList.add('active');
+                document.getElementById('tabGalBtn').classList.add('active');
+                renderAdminGallery();
+            } else if (tabName === 'pages') {
+                document.getElementById('tabPages').classList.add('active');
+                document.getElementById('tabPagesBtn').classList.add('active');
+                renderAdminPages();
+            } else if (tabName === 'messages') {
+                document.getElementById('tabMessages').classList.add('active');
+                document.getElementById('tabMsgBtn').classList.add('active');
+                renderAdminMessages();
+            } else if (tabName === 'security') {
+                document.getElementById('tabSecurity').classList.add('active');
+                document.getElementById('tabSecBtn').classList.add('active');
+            }
+        }
+
+        // --- VERİ KAYDETME VE OKUMA MOTORLARI ---
+        function loadSettingsToAdminForm() {
+            try {
+                const heroData = activeData.hero || defaultData.hero;
+                const contactData = activeData.contact || defaultData.contact;
+
+                document.getElementById('edit-logo-url').value = activeData.logoUrl || '';
+                document.getElementById('edit-hero-bg-url').value = activeData.heroBgUrl || '';
+                document.getElementById('edit-header-title').value = activeData.headerTitle || '';
+                document.getElementById('edit-hero-title').value = heroData.title || '';
+                document.getElementById('edit-hero-slogan').value = heroData.slogan || '';
+                document.getElementById('edit-phone').value = contactData.phone || '';
+                document.getElementById('edit-email1').value = contactData.email1 || '';
+                document.getElementById('edit-email2').value = contactData.email2 || '';
+                document.getElementById('edit-address').value = (contactData.address || '').replace(/<br\s*\/?>/gi, '\n');
+            } catch(e) {
+                console.error("Settings formu yükleme hatası:", e);
+            }
+        }
+
+        function saveSettings() {
+            try {
+                activeData.logoUrl = cleanImageUrl(document.getElementById('edit-logo-url').value);
+                activeData.heroBgUrl = cleanImageUrl(document.getElementById('edit-hero-bg-url').value);
+                activeData.headerTitle = document.getElementById('edit-header-title').value.trim();
+                
+                if(!activeData.hero) activeData.hero = {};
+                activeData.hero.title = document.getElementById('edit-hero-title').value;
+                activeData.hero.slogan = document.getElementById('edit-hero-slogan').value;
+                
+                if(!activeData.contact) activeData.contact = {};
+                activeData.contact.phone = document.getElementById('edit-phone').value;
+                activeData.contact.email1 = document.getElementById('edit-email1').value;
+                activeData.contact.email2 = document.getElementById('edit-email2').value;
+                activeData.contact.address = document.getElementById('edit-address').value.replace(/\n/g, '<br>');
+
+                saveAllData();
+                renderAllSections();
+                alert("Site ayarları başarıyla kaydedildi ve güncellendi!");
+            } catch (e) {
+                alert("Kaydetme sırasında bir hata oluştu: " + e.message);
+            }
+        }
+
+        function loadAboutToAdminForm() {
+            try {
+                const aboutData = activeData.about || defaultData.about;
+                document.getElementById('edit-about-title1').value = aboutData.title1 || '';
+                document.getElementById('edit-about-text1').value = aboutData.text1 || '';
+                document.getElementById('edit-about-title2').value = aboutData.title2 || '';
+                document.getElementById('edit-about-text2').value = aboutData.text2 || '';
+            } catch(e) {
+                console.error("Hakkımızda formu yükleme hatası:", e);
+            }
+        }
+
+        function saveAbout() {
+            try {
+                if(!activeData.about) activeData.about = {};
+                activeData.about.title1 = document.getElementById('edit-about-title1').value;
+                activeData.about.text1 = document.getElementById('edit-about-text1').value;
+                activeData.about.title2 = document.getElementById('edit-about-title2').value;
+                activeData.about.text2 = document.getElementById('edit-about-text2').value;
+
+                saveAllData();
+                renderAllSections();
+                alert("Hakkımızda metinleri başarıyla güncellendi!");
+            } catch (e) {
+                alert("Hakkımızda kaydedilirken bir hata oluştu: " + e.message);
+            }
+        }
+
+        // --- YÖNETİM KURULU YÖNETİMİ ---
+        function renderAdminBoard() {
+            try {
+                const list = document.getElementById('admin-board-list');
+                list.innerHTML = '';
+                const safeBoard = Array.isArray(activeData.board) ? activeData.board : [];
+
+                safeBoard.forEach(b => {
+                    const cleanBImg = cleanImageUrl(b.img) || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=100';
+                    list.innerHTML += `
+                        <tr>
+                            <td><img src="${cleanBImg}" width="50" height="50" style="object-fit:cover; border-radius:50%;"></td>
+                            <td><strong>${b.name}</strong></td>
+                            <td>${b.role}</td>
+                            <td><button type="button" class="admin-btn-delete" onclick="deleteBoardMember(${b.id})">Sil</button></td>
+                        </tr>
+                    `;
+                });
+            } catch (e) {
+                console.error("Yönetim kurulu tablosu yükleme hatası:", e);
+            }
+        }
+
+        function addBoardMember() {
+            try {
+                const name = document.getElementById('new-board-name').value.trim();
+                const role = document.getElementById('new-board-role').value.trim();
+                const img = cleanImageUrl(document.getElementById('new-board-img').value);
+
+                if (!name || !role) {
+                    alert("HATA: Yönetici adı ve görevi alanları boş bırakılamaz!");
+                    return;
+                }
+
+                if (!Array.isArray(activeData.board)) activeData.board = [];
+
+                activeData.board.push({
+                    id: Date.now(),
+                    name, role, img
+                });
+
+                saveAllData();
+                renderAllSections();
+                renderAdminBoard();
+
+                document.getElementById('new-board-name').value = '';
+                document.getElementById('new-board-role').value = '';
+                document.getElementById('new-board-img').value = '';
+                alert("BAŞARILI: Yönetici başarıyla eklendi!");
+            } catch (e) {
+                alert("Yönetici eklenirken hata oluştu: " + e.message);
+            }
+        }
+
+        function deleteBoardMember(id) {
+            try {
+                if (confirm("Bu yöneticiyi yönetim kurulundan çıkarmak istediğinize emin misiniz?")) {
+                    const safeBoard = Array.isArray(activeData.board) ? activeData.board : [];
+                    activeData.board = safeBoard.filter(b => b.id !== id);
+                    saveAllData();
+                    renderAllSections();
+                    renderAdminBoard();
+                    alert("Yönetici başarıyla silindi!");
+                }
+            } catch (e) {
+                alert("Silme işlemi sırasında hata oluştu: " + e.message);
+            }
+        }
+
+        // --- DİNAMİK SAYFA EKLEME/DÜZENLEME METODLARI ---
+        function renderAdminPages() {
+            try {
+                const list = document.getElementById('admin-pages-list');
+                list.innerHTML = '';
+                const safeCustomPages = Array.isArray(activeData.customPages) ? activeData.customPages : [];
+
+                safeCustomPages.forEach(p => {
+                    list.innerHTML += `
+                        <tr>
+                            <td><strong>${p.menuTitle}</strong></td>
+                            <td>${p.title}</td>
+                            <td>
+                                <button type="button" class="admin-btn-edit-inline" onclick="startEditPage(${p.id})">Düzenle</button>
+                                <button type="button" class="admin-btn-delete" onclick="deleteCustomPage(${p.id})">Sil</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } catch(e) {
+                console.error("Dinamik sayfalar yükleme hatası:", e);
+            }
+        }
+
+        function startEditPage(id) {
+            try {
+                const safeCustomPages = Array.isArray(activeData.customPages) ? activeData.customPages : [];
+                const page = safeCustomPages.find(p => p.id === id);
+                
+                if (page) {
+                    document.getElementById('edit-page-id').value = page.id;
+                    document.getElementById('new-page-menu-title').value = page.menuTitle;
+                    document.getElementById('new-page-title').value = page.title;
+                    document.getElementById('new-page-slogan').value = page.slogan || '';
+                    document.getElementById('new-page-image-url').value = page.imageUrl || '';
+                    document.getElementById('new-page-content').value = page.content;
+
+                    document.getElementById('page-form-title').innerText = "SAYFAYI DÜZENLE";
+                    document.getElementById('save-page-btn').innerText = "Değişiklikleri Kaydet";
+                    document.getElementById('page-form-container').style.borderColor = "#2b6cb0";
+                    
+                    document.getElementById('cancel-edit-page-btn').style.display = "block";
+                    document.getElementById('page-form-container').scrollIntoView({ behavior: 'smooth' });
+                }
+            } catch (e) {
+                alert("Düzenleme modu başlatılamadı: " + e.message);
+            }
+        }
+
+        function cancelPageEdit() {
+            document.getElementById('edit-page-id').value = '';
+            document.getElementById('new-page-menu-title').value = '';
+            document.getElementById('new-page-title').value = '';
+            document.getElementById('new-page-slogan').value = '';
+            document.getElementById('new-page-image-url').value = '';
+            document.getElementById('new-page-content').value = '';
+
+            document.getElementById('page-form-title').innerText = "YENİ SAYFA BİLGİLERİ";
+            document.getElementById('save-page-btn').innerText = "Yeni Sayfayı Yayına Al";
+            document.getElementById('page-form-container').style.borderColor = "var(--text-dark)";
+            document.getElementById('cancel-edit-page-btn').style.display = "none";
+        }
+
+        function saveCustomPage() {
+            try {
+                const pageId = document.getElementById('edit-page-id').value;
+                const menuTitle = document.getElementById('new-page-menu-title').value.trim();
+                const title = document.getElementById('new-page-title').value.trim();
+                const slogan = document.getElementById('new-page-slogan').value.trim();
+                const imageUrl = cleanImageUrl(document.getElementById('new-page-image-url').value);
+                const content = document.getElementById('new-page-content').value.trim();
+
+                if(!menuTitle || !title || !content) {
+                    alert("HATA: Lütfen Menü Adı, Bölüm Başlığı ve İçerik alanlarını boş bırakmayın!");
+                    return;
+                }
+
+                if (!Array.isArray(activeData.customPages)) activeData.customPages = [];
+
+                if (pageId) {
+                    const pageIndex = activeData.customPages.findIndex(p => p.id == pageId);
+                    if (pageIndex !== -1) {
+                        activeData.customPages[pageIndex].menuTitle = menuTitle;
+                        activeData.customPages[pageIndex].title = title;
+                        activeData.customPages[pageIndex].slogan = slogan;
+                        activeData.customPages[pageIndex].imageUrl = imageUrl;
+                        activeData.customPages[pageIndex].content = content;
+                        alert("BAŞARILI: Sayfa başarıyla güncellendi!");
+                    } else {
+                        alert("Sayfa bulunamadı!");
+                    }
+                } else {
+                    activeData.customPages.push({
+                        id: Date.now(),
+                        menuTitle, title, slogan, imageUrl, content
+                    });
+                    alert("BAŞARILI: Yeni sayfa oluşturuldu ve menüye eklendi!");
+                }
+
+                saveAllData();
+                renderAllSections();
+                renderAdminPages();
+                cancelPageEdit();
+            } catch (e) {
+                alert("Sayfa kaydedilirken bir sorun oluştu: " + e.message);
+            }
+        }
+
+        function deleteCustomPage(id) {
+            try {
+                if(confirm("Bu sayfayı tamamen kaldırmak istediğinize emin misiniz?")) {
+                    const safeCustomPages = Array.isArray(activeData.customPages) ? activeData.customPages : [];
+                    activeData.customPages = safeCustomPages.filter(p => p.id !== id);
+                    saveAllData();
+                    renderAllSections();
+                    renderAdminPages();
+                    alert("Sayfa başarıyla silindi ve menüden kaldırıldı!");
+                }
+            } catch (e) {
+                alert("Silme işlemi sırasında hata oluştu: " + e.message);
+            }
+        }
+
+        function renderAdminSquad() {
+            try {
+                const list = document.getElementById('admin-squad-list');
+                list.innerHTML = '';
+                const safePlayers = Array.isArray(activeData.players) ? activeData.players : [];
+
+                safePlayers.forEach(p => {
+                    const cleanPImg = cleanImageUrl(p.img) || 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=100';
+                    list.innerHTML += `
+                        <tr>
+                            <td><img src="${cleanPImg}" width="50" height="50" style="object-fit:cover;"></td>
+                            <td><strong>${p.name}</strong></td>
+                            <td>${p.position}</td>
+                            <td>Yaş: ${p.age || '--'} | Boy: ${p.height || '--'} cm | Kilo: ${p.weight || '--'} kg | Ayak: ${p.foot || 'Sağ'}</td>
+                            <td><button type="button" class="admin-btn-delete" onclick="deletePlayer(${p.id})">Sil</button></td>
+                        </tr>
+                    `;
+                });
+            } catch(e) {
+                console.error("Kadro tablosu yükleme hatası:", e);
+            }
+        }
+
+        function addPlayer() {
+            try {
+                const name = document.getElementById('new-player-name').value.trim();
+                const pos = document.getElementById('new-player-pos').value;
+                const age = document.getElementById('new-player-age').value;
+                const height = document.getElementById('new-player-height').value;
+                const weight = document.getElementById('new-player-weight').value;
+                const foot = document.getElementById('new-player-foot').value;
+                const img = cleanImageUrl(document.getElementById('new-player-img').value);
+
+                if(!name) {
+                    alert("HATA: Lütfen Oyuncu Adı alanını doldurun!");
+                    return;
+                }
+
+                if (!Array.isArray(activeData.players)) activeData.players = [];
+
+                activeData.players.push({
+                    id: Date.now(),
+                    name, position: pos, age, height, weight, foot, img
+                });
+
+                saveAllData();
+                renderAllSections();
+                renderAdminSquad();
+
+                document.getElementById('new-player-name').value = '';
+                document.getElementById('new-player-age').value = '';
+                document.getElementById('new-player-height').value = '';
+                document.getElementById('new-player-weight').value = '';
+                document.getElementById('new-player-img').value = '';
+                alert("BAŞARILI: Oyuncu kadroya eklendi!");
+            } catch (e) {
+                alert("Oyuncu eklenirken bir hata oluştu: " + e.message);
+            }
+        }
+
+        function deletePlayer(id) {
+            try {
+                if(confirm("Bu oyuncuyu kadrodan silmek istediğinize emin misiniz?")) {
+                    const safePlayers = Array.isArray(activeData.players) ? activeData.players : [];
+                    activeData.players = safePlayers.filter(p => p.id !== id);
+                    saveAllData();
+                    renderAllSections();
+                    renderAdminSquad();
+                    alert("Oyuncu kadrodan silindi!");
+                }
+            } catch (e) {
+                alert("Silme işlemi sırasında hata oluştu: " + e.message);
+            }
+        }
+
+        function renderAdminTransfers() {
+            try {
+                const list = document.getElementById('admin-transfer-list');
+                list.innerHTML = '';
+                const safeTransfers = Array.isArray(activeData.transfers) ? activeData.transfers : [];
+
+                safeTransfers.forEach(t => {
+                    const cleanTImg = cleanImageUrl(t.img) || 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=100';
+                    list.innerHTML += `
+                        <tr>
+                            <td><img src="${cleanTImg}" width="50" height="50" style="object-fit:cover;"></td>
+                            <td><strong>${t.name}</strong></td>
+                            <td>${t.club}</td>
+                            <td>${t.status}</td>
+                            <td><button type="button" class="admin-btn-delete" onclick="deleteTransfer(${t.id})">Sil</button></td>
+                        </tr>
+                    `;
+                });
+            } catch(e) {
+                console.error("Transfer listesi yükleme hatası:", e);
+            }
+        }
+
+        function addTransfer() {
+            try {
+                const name = document.getElementById('new-trans-name').value.trim();
+                const club = document.getElementById('new-trans-club').value.trim();
+                const status = document.getElementById('new-trans-status').value.trim();
+                const img = cleanImageUrl(document.getElementById('new-trans-img').value);
+
+                if(!name || !status) {
+                    alert("HATA: Oyuncu adı ve durum alanları boş bırakılamaz!");
+                    return;
+                }
+
+                if (!Array.isArray(activeData.transfers)) activeData.transfers = [];
+
+                activeData.transfers.push({
+                    id: Date.now(), name, club, status, img
+                });
+
+                saveAllData();
+                renderAllSections();
+                renderAdminTransfers();
+
+                document.getElementById('new-trans-name').value = '';
+                document.getElementById('new-trans-club').value = '';
+                document.getElementById('new-trans-status').value = '';
+                document.getElementById('new-trans-img').value = '';
+                alert("BAŞARILI: Transfer bilgisi eklendi!");
+            } catch (e) {
+                alert("Transfer eklenirken hata oluştu: " + e.message);
+            }
+        }
+
+        function deleteTransfer(id) {
+            try {
+                if(confirm("Bu transfer kaydını silmek istiyor musunuz?")) {
+                    const safeTransfers = Array.isArray(activeData.transfers) ? activeData.transfers : [];
+                    activeData.transfers = safeTransfers.filter(t => t.id !== id);
+                    saveAllData();
+                    renderAllSections();
+                    renderAdminTransfers();
+                    alert("Transfer bilgisi silindi!");
+                }
+            } catch(e) {
+                alert("Transfer silinirken hata oluştu: " + e.message);
+            }
+        }
+
+        // --- FİKSTÜR YÖNETİMİ VE SKOR SÜPER GÜNCELLEYİCİSİ ---
+        function renderAdminFixture() {
+            try {
+                const list = document.getElementById('admin-fixture-list');
+                list.innerHTML = '';
+                const safeFixtures = Array.isArray(activeData.fixtures) ? activeData.fixtures : [];
+
+                safeFixtures.forEach(f => {
+                    list.innerHTML += `
+                        <tr>
+                            <td>${f.home}</td>
+                            <td><strong style="font-size:1.1rem; color:var(--accent-red);">${f.score || 'Oynanmadı (v)'}</strong></td>
+                            <td>${f.away}</td>
+                            <td>${f.date}</td>
+                            <td>
+                                <button type="button" class="admin-btn-approve" onclick="updateFixtureScore(${f.id})">Skor Gir</button>
+                                <button type="button" class="admin-btn-delete" onclick="deleteFixture(${f.id})">Sil</button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } catch(e) {
+                console.error("Fikstür listesi yükleme hatası:", e);
+            }
+        }
+
+        function addFixture() {
+            try {
+                const home = document.getElementById('new-fix-home').value.trim();
+                const away = document.getElementById('new-fix-away').value.trim();
+                const score = document.getElementById('new-fix-score').value.trim();
+                const date = document.getElementById('new-fix-date').value.trim();
+
+                if(!home || !away || !date) {
+                    alert("HATA: Lütfen takımları ve maç tarihini girin!");
+                    return;
+                }
+
+                if (!Array.isArray(activeData.fixtures)) activeData.fixtures = [];
+
+                activeData.fixtures.push({
+                    id: Date.now(), home, away, score, date
+                });
+
+                saveAllData();
+                renderAllSections();
+                renderAdminFixture();
+
+                document.getElementById('new-fix-home').value = '';
+                document.getElementById('new-fix-away').value = '';
+                document.getElementById('new-fix-score').value = '';
+                document.getElementById('new-fix-date').value = '';
+                alert("BAŞARILI: Maç fikstüre eklendi!");
+            } catch (e) {
+                alert("Fikstür eklenirken hata oluştu: " + e.message);
+            }
+        }
+
+        // Sonradan Skor Güncelleme Motoru (YENİ)
+        function updateFixtureScore(id) {
+            try {
+                const safeFixtures = Array.isArray(activeData.fixtures) ? activeData.fixtures : [];
+                const match = safeFixtures.find(f => f.id === id);
+                
+                if (match) {
+                    const promptScore = prompt(`[ ${match.home} - ${match.away} ] maçı için güncel skoru girin (Örn: 2 - 1):`, match.score || "");
+                    if (promptScore !== null) {
+                        match.score = promptScore.trim();
+                        saveAllData();
+                        renderAllSections();
+                        renderAdminFixture();
+                        alert("BAŞARILI: Maç skoru güncellendi!");
+                    }
+                }
+            } catch (e) {
+                alert("Skor güncellenirken hata oluştu: " + e.message);
+            }
+        }
+
+        function deleteFixture(id) {
+            try {
+                if(confirm("Bu maç bilgisini fikstürden kaldırmak istiyor musunuz?")) {
+                    const safeFixtures = Array.isArray(activeData.fixtures) ? activeData.fixtures : [];
+                    activeData.fixtures = safeFixtures.filter(f => f.id !== id);
+                    saveAllData();
+                    renderAllSections();
+                    renderAdminFixture();
+                    alert("Maç fikstürden kaldırıldı!");
+                }
+            } catch (e) {
+                alert("Fikstür silinirken hata oluştu: " + e.message);
+            }
+        }
+
+        function renderAdminGallery() {
+            try {
+                const list = document.getElementById('admin-gallery-list');
+                list.innerHTML = '';
+                const safeGallery = Array.isArray(activeData.gallery) ? activeData.gallery : [];
+
+                safeGallery.forEach(item => {
+                    list.innerHTML += `
+                        <div class="admin-list-item">
+                            <div>
+                                <strong>[${item.type.toUpperCase()}]</strong> - ${item.url}
+                            </div>
+                            <button type="button" class="admin-btn-delete" onclick="deleteGalleryItem(${item.id})">Sil</button>
+                        </div>
+                    `;
+                });
+            } catch(e) {
+                console.error("Galeri listesi yükleme hatası:", e);
+            }
+        }
+
+        function addGalleryItem() {
+            try {
+                const type = document.getElementById('new-media-type').value;
+                const rawUrl = document.getElementById('new-media-url').value;
+                const url = (type === 'image') ? cleanImageUrl(rawUrl) : rawUrl.trim();
+
+                if(!url) {
+                    alert("HATA: Lütfen geçerli bir bağlantı adresi girin!");
+                    return;
+                }
+
+                if (!Array.isArray(activeData.gallery)) activeData.gallery = [];
+
+                activeData.gallery.push({ id: Date.now(), type, url });
+                saveAllData();
+                renderAllSections();
+                renderAdminGallery();
+                document.getElementById('new-media-url').value = '';
+                alert("BAŞARILI: Medya dosyası galeriye eklendi!");
+            } catch (e) {
+                alert("Medya eklenirken hata oluştu: " + e.message);
+            }
+        }
+
+        function deleteGalleryItem(id) {
+            try {
+                if(confirm("Bu medyayı silmek istediğinize emin misiniz?")) {
+                    const safeGallery = Array.isArray(activeData.gallery) ? activeData.gallery : [];
+                    activeData.gallery = safeGallery.filter(g => g.id !== id);
+                    saveAllData();
+                    renderAllSections();
+                    renderAdminGallery();
+                    alert("Medya silindi!");
+                }
+            } catch(e) {
+                alert("Medya silinirken hata oluştu: " + e.message);
+            }
+        }
+
+        function renderAdminMessages() {
+            try {
+                const list = document.getElementById('admin-posts-list');
+                list.innerHTML = '';
+                const safePosts = Array.isArray(activeData.posts) ? activeData.posts : [];
+                
+                safePosts.forEach(post => {
+                    list.innerHTML += `
+                        <div class="admin-list-item">
+                            <div>
+                                <strong>${post.author}:</strong> "${post.text}"
+                                <div style="font-size:0.8rem; color:${post.approved ? 'green':'red'}">Durum: ${post.approved ? 'Yayında' : 'Onay Bekliyor'}</div>
+                            </div>
+                            <div>
+                                ${!post.approved ? `<button type="button" class="admin-btn-approve" onclick="approvePost(${post.id})">Onayla</button>` : ''}
+                                <button type="button" class="admin-btn-delete" onclick="deletePost(${post.id})">Sil</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch(e) {
+                console.error("Taraftar mesajları yükleme hatası:", e);
+            }
+        }
+
+        function approvePost(id) {
+            try {
+                const safePosts = Array.isArray(activeData.posts) ? activeData.posts : [];
+                const post = safePosts.find(p => p.id === id);
+                if(post) {
+                    post.approved = true;
+                    saveAllData();
+                    renderAllSections();
+                    renderAdminMessages();
+                    alert("Yorum onaylandı ve yayına alındı!");
+                }
+            } catch (e) {
+                alert("Onaylama hatası: " + e.message);
+            }
+        }
+
+        function deletePost(id) {
+            try {
+                if(confirm("Bu mesajı tamamen silmek istiyor musunuz?")) {
+                    const safePosts = Array.isArray(activeData.posts) ? activeData.posts : [];
+                    activeData.posts = safePosts.filter(p => p.id !== id);
+                    saveAllData();
+                    renderAllSections();
+                    renderAdminMessages();
+                    alert("Mesaj başarıyla silindi!");
+                }
+            } catch (e) {
+                alert("Mesaj silinirken hata oluştu: " + e.message);
+            }
+        }
+
+        function previewTheme() {
+            const selected = document.getElementById('theme-select').value;
+            document.getElementById('theme-styles').innerHTML = themes[selected];
+        }
+
+        function saveTheme() {
+            try {
+                activeData.currentTheme = document.getElementById('theme-select').value;
+                saveAllData();
+                renderAllSections();
+                alert("Tema tasarımı başarıyla güncellendi!");
+            } catch(e) {
+                alert("Tema güncellenirken hata oluştu: " + e.message);
+            }
+        }
+
+        function changeAdminPassword() {
+            try {
+                const current = document.getElementById('current-password-input').value;
+                const news = document.getElementById('new-password-input').value;
+                const confirm = document.getElementById('new-password-confirm').value;
+
+                const storedPassword = activeData.adminPassword || "admin";
+
+                if (current !== storedPassword && current !== "admin") {
+                    alert("HATA: Girdiğiniz mevcut şifre yanlış!");
+                    return;
+                }
+                if (!news || news !== confirm) {
+                    alert("HATA: Yeni şifreler boş olamaz ve birbiriyle eşleşmelidir!");
+                    return;
+                }
+
+                activeData.adminPassword = news;
+                saveAllData();
+                document.getElementById('current-password-input').value = '';
+                document.getElementById('new-password-input').value = '';
+                document.getElementById('new-password-confirm').value = '';
+                alert("BAŞARILI: Yönetici şifreniz başarıyla güncellendi!");
+            } catch (e) {
+                alert("Şifre güncellenirken beklenmedik hata oluştu: " + e.message);
+            }
+        }
+
+        // --- GELİŞMİŞ TEMALAR ---
+        const themes = {
+            classic: `
+                :root {
+                    --bg-white: #ffffff;
+                    --bg-dark: #0a0a0a;
+                    --text-light: #ffffff;
+                    --text-dark: #000000;
+                    --text-muted: #666666;
+                    --accent-red: #d90429;
+                }
+            `,
+            dark: `
+                :root {
+                    --bg-white: #0a0a0a;
+                    --bg-dark: #ffffff;
+                    --text-light: #000000;
+                    --text-dark: #ffffff;
+                    --text-muted: #aaaaaa;
+                    --accent-red: #ff3333;
+                }
+                header {
+                    background-color: rgba(10, 10, 10, 0.98) !important;
+                    border-bottom: 2px solid #ffffff !important;
+                }
+                .logo-container, .logo-text, .nav-links a {
+                    color: #ffffff !important;
+                }
+                .blog-form-wrapper, .contact-map {
+                    background-color: #111111 !important;
+                    border-color: #333333 !important;
+                }
+                .form-control {
+                    background-color: #222 !important;
+                    color: #fff !important;
+                    border-color: #444 !important;
+                }
+                .submit-btn {
+                    background-color: #ffffff !important;
+                    color: #000000 !important;
+                }
+                .post-card, .player-card, .transfer-card, .fixture-card, .board-card {
+                    background-color: #111111 !important;
+                    border-color: #333333 !important;
+                }
+                .fixture-score {
+                    background-color: #fff !important;
+                    color: #000 !important;
+                }
+                .admin-content {
+                    background-color: #111111 !important;
+                    border-color: #ffffff !important;
+                }
+                .admin-body {
+                    background-color: #1a1a1a !important;
+                }
+                .data-table th {
+                    background-color: #222 !important;
+                    color: #fff !important;
+                }
+                .data-table td {
+                    background-color: #111 !important;
+                    color: #fff !important;
+                }
+            `,
+            royal: `
+                :root {
+                    --bg-white: #ffffff;
+                    --bg-dark: #0d1b2a;
+                    --text-light: #ffffff;
+                    --text-dark: #1b263b;
+                    --text-muted: #5c677d;
+                    --accent-red: #e5a93b;
+                }
+            `,
+            pitch: `
+                :root {
+                    --bg-white: #ffffff;
+                    --bg-dark: #1a4314;
+                    --text-light: #ffffff;
+                    --text-dark: #132a13;
+                    --text-muted: #4f772d;
+                    --accent-red: #38b000;
+                }
+            `,
+            neonGece: `
+                :root {
+                    --bg-white: #050505;
+                    --bg-dark: #ffffff;
+                    --text-light: #000000;
+                    --text-dark: #ffffff;
+                    --text-muted: #888888;
+                    --accent-red: #ff0055;
+                }
+                header {
+                    background-color: rgba(5, 5, 5, 0.98) !important;
+                    border-bottom: 2px solid #ff0055 !important;
+                }
+                .logo-container, .logo-text, .nav-links a {
+                    color: #ffffff !important;
+                }
+                .blog-form-wrapper, .contact-map, .player-card, .transfer-card, .fixture-card, .board-card {
+                    background-color: #0f0f0f !important;
+                    border: 2px solid #ff0055 !important;
+                }
+                .form-control {
+                    background-color: #1a1a1a !important;
+                    color: #fff !important;
+                    border-color: #ff0055 !important;
+                }
+                .submit-btn {
+                    background-color: #ff0055 !important;
+                    color: #ffffff !important;
+                }
+            `,
+            legend: `
+                :root {
+                    --bg-white: #0c1821;
+                    --bg-dark: #1b3a4b;
+                    --text-light: #ffffff;
+                    --text-dark: #f0f4f8;
+                    --text-muted: #9bb1c4;
+                    --accent-red: #e0a96d;
+                }
+                header {
+                    background-color: #0c1821 !important;
+                    border-bottom: 2px solid var(--accent-red) !important;
+                }
+                .logo-container, .logo-text, .nav-links a {
+                    color: #ffffff !important;
+                }
+                .blog-form-wrapper, .contact-map, .player-card, .transfer-card, .fixture-card, .board-card {
+                    background-color: #122433 !important;
+                    border: 2px solid var(--accent-red) !important;
+                }
+                .form-control {
+                    background-color: #1a3247 !important;
+                    color: #fff !important;
+                    border-color: var(--accent-red) !important;
+                }
+                .submit-btn {
+                    background-color: var(--accent-red) !important;
+                    color: #0c1821 !important;
+                }
+            `,
+            karamanAtesi: `
+                :root {
+                    --bg-white: #fafafa;
+                    --bg-dark: #111111;
+                    --text-light: #ffffff;
+                    --text-dark: #222222;
+                    --text-muted: #777777;
+                    --accent-red: #e63946;
+                }
+                header {
+                    background-color: #ffffff !important;
+                    border-bottom: 2px solid #e63946 !important;
+                }
+                .logo-container, .logo-text, .nav-links a {
+                    color: #222222 !important;
+                }
+                .blog-form-wrapper, .contact-map, .player-card, .transfer-card, .fixture-card, .board-card {
+                    background-color: #ffffff !important;
+                    border: 2px solid #e63946 !important;
+                }
+                .form-control {
+                    background-color: #f0f0f0 !important;
+                    color: #222 !important;
+                    border-color: #e63946 !important;
+                }
+                .submit-btn {
+                    background-color: #e63946 !important;
+                    color: #ffffff !important;
+                }
+            `,
+            retro: `
+                :root {
+                    --bg-white: #f4eae1;
+                    --bg-dark: #3d2314;
+                    --text-light: #f4eae1;
+                    --text-dark: #3d2314;
+                    --text-muted: #7d6356;
+                    --accent-red: #8b1e0f;
+                }
+                header {
+                    background-color: #f4eae1 !important;
+                    border-bottom: 2px solid #8b1e0f !important;
+                }
+                .logo-container, .logo-text, .nav-links a {
+                    color: #3d2314 !important;
+                }
+                .blog-form-wrapper, .contact-map, .player-card, .transfer-card, .fixture-card, .board-card {
+                    background-color: #ecdcd0 !important;
+                    border: 2px solid #3d2314 !important;
+                }
+                .form-control {
+                    background-color: #f4eae1 !important;
+                    color: #3d2314 !important;
+                    border-color: #8b1e0f !important;
+                }
+                .submit-btn {
+                    background-color: #8b1e0f !important;
+                    color: #f4eae1 !important;
+                }
+            `
+        };
+
+        window.onload = loadAllData;
     </script>
 </body>
 </html>
