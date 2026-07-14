@@ -1266,18 +1266,16 @@
 
     <!-- JAVASCRIPT MOTORU -->
     <script>
-        // --- SÜPER AKILLI LINK VE KOD AYIKLAYICI (GÜNCELLENDİ) ---
+        // --- SÜPER AKILLI LINK VE KOD AYIKLAYICI ---
         function cleanImageUrl(dirtyUrl) {
             if (!dirtyUrl || typeof dirtyUrl !== 'string') return '';
             let url = dirtyUrl.trim();
             if (url === "") return "";
             
-            // Eğer HTML, BBCode veya karmaşık kod girildiyse içindeki ilk http/https adresini cımbızla çeker
             const urlRegex = /(https?:\/\/[^\s"'<>]+)/g;
             const matches = url.match(urlRegex);
             if (matches && matches.length > 0) {
                 let bestMatch = matches[0];
-                // Eğer birden fazla link varsa, i.ibb.co içeren veya resim uzantılı olanı öncelikli seçer
                 for (let m of matches) {
                     if (m.includes('i.ibb.co') || m.match(/\.(jpg|jpeg|png|gif|webp)/i)) {
                         bestMatch = m;
@@ -1287,7 +1285,6 @@
                 url = bestMatch;
             }
 
-            // Standart ImgBB sayfa linklerini doğrudan resim linkine çevirme koruması
             if (url.includes('ibb.co/') && !url.includes('i.ibb.co')) {
                 const parts = url.split('/');
                 const id = parts[parts.length - 1] || parts[parts.length - 2];
@@ -1368,27 +1365,26 @@
 
         let activeData = {};
 
-        // Verileri Yükleme ve Eksikleri Doldurma (Çökme Önleyici Yapı)
+        // --- GÜVENLİ DERİN BİRLEŞTİRİCİ VERİ YÜKLEME MOTORU ---
         function loadAllData() {
             try {
                 const saved = localStorage.getItem('aber_sk_pro_data_v6');
+                
+                // Başlangıçta tüm şablonu tertemiz kopyala (Asla undefined kalmaz!)
+                activeData = JSON.parse(JSON.stringify(defaultData));
+                
                 if (saved) {
-                    activeData = JSON.parse(saved);
-                    // Veritabanı yapısını senkronize et
-                    if (!activeData.hero) activeData.hero = {...defaultData.hero};
-                    if (!activeData.about) activeData.about = {...defaultData.about};
-                    if (!activeData.contact) activeData.contact = {...defaultData.contact};
-                    if (!activeData.posts) activeData.posts = [...defaultData.posts];
-                    if (!activeData.players) activeData.players = [...defaultData.players];
-                    if (!activeData.transfers) activeData.transfers = [...defaultData.transfers];
-                    if (!activeData.fixtures) activeData.fixtures = [...defaultData.fixtures];
-                    if (!activeData.gallery) activeData.gallery = [...defaultData.gallery];
-                    if (!activeData.adminPassword || activeData.adminPassword === "undefined") {
-                        activeData.adminPassword = "admin";
+                    const parsed = JSON.parse(saved);
+                    // Derin Birleştirme (Deep Merge): Eskiden olmayan alanları default'tan tamamlar
+                    for (let key in parsed) {
+                        if (parsed[key] !== null && parsed[key] !== undefined) {
+                            if (typeof parsed[key] === 'object' && !Array.isArray(parsed[key])) {
+                                activeData[key] = Object.assign({}, activeData[key], parsed[key]);
+                            } else {
+                                activeData[key] = parsed[key];
+                            }
+                        }
                     }
-                } else {
-                    activeData = JSON.parse(JSON.stringify(defaultData));
-                    saveAllData();
                 }
                 applySavedTheme();
                 renderAllSections();
@@ -1415,11 +1411,16 @@
         }
 
         function renderAllSections() {
+            // Güvenli Okuma Katmanı (Optional Chaining Koruması)
+            const heroData = activeData.hero || defaultData.hero;
+            const aboutData = activeData.about || defaultData.about;
+            const contactData = activeData.contact || defaultData.contact;
+
             // 0. Logo
             const logoImg = document.getElementById('club-logo-img');
             logoImg.src = cleanImageUrl(activeData.logoUrl) || defaultData.logoUrl;
 
-            const rawHeaderTitle = activeData.headerTitle || "KARAMAN ABER SANAT GÜCÜ SPOR KULÜBÜ";
+            const rawHeaderTitle = activeData.headerTitle || defaultData.headerTitle;
             document.getElementById('header-club-title').innerHTML = rawHeaderTitle.replace("SPOR KULÜBÜ", "<span>SPOR KULÜBÜ</span>");
             document.getElementById('footer-logo-text').innerHTML = rawHeaderTitle.replace("SPOR KULÜBÜ", "<span>SPOR KULÜBÜ</span>");
 
@@ -1434,14 +1435,14 @@
                 heroSection.style.backgroundImage = `url('${defaultData.heroBgUrl}')`;
                 overlay.style.backgroundColor = "rgba(255, 255, 255, 0.75)";
             }
-            document.getElementById('hero-title-text').innerText = activeData.hero.title;
-            document.getElementById('hero-slogan-text').innerText = activeData.hero.slogan;
+            document.getElementById('hero-title-text').innerText = heroData.title || defaultData.hero.title;
+            document.getElementById('hero-slogan-text').innerText = heroData.slogan || defaultData.hero.slogan;
 
             // 2. Hakkımızda
-            document.getElementById('about-card-title1').innerText = activeData.about.title1;
-            document.getElementById('about-card-text1').innerText = activeData.about.text1;
-            document.getElementById('about-card-title2').innerText = activeData.about.title2;
-            document.getElementById('about-card-text2').innerText = activeData.about.text2;
+            document.getElementById('about-card-title1').innerText = aboutData.title1 || defaultData.about.title1;
+            document.getElementById('about-card-text1').innerText = aboutData.text1 || defaultData.about.text1;
+            document.getElementById('about-card-title2').innerText = aboutData.title2 || defaultData.about.title2;
+            document.getElementById('about-card-text2').innerText = aboutData.text2 || defaultData.about.text2;
 
             // 3. Oyuncularımız
             const playersGrid = document.getElementById('players-container');
@@ -1556,13 +1557,13 @@
             }
 
             // 8. İletişim
-            document.getElementById('club-phone-link').innerText = activeData.contact.phone;
-            document.getElementById('club-phone-link').href = "tel:" + activeData.contact.phone.replace(/\s+/g, '');
-            document.getElementById('club-email-1').innerText = activeData.contact.email1;
-            document.getElementById('club-email-1').href = "mailto:" + activeData.contact.email1;
-            document.getElementById('club-email-2').innerText = activeData.contact.email2;
-            document.getElementById('club-email-2').href = "mailto:" + activeData.contact.email2;
-            document.getElementById('club-address-text').innerHTML = activeData.contact.address;
+            document.getElementById('club-phone-link').innerText = contactData.phone || defaultData.contact.phone;
+            document.getElementById('club-phone-link').href = "tel:" + (contactData.phone || defaultData.contact.phone).replace(/\s+/g, '');
+            document.getElementById('club-email-1').innerText = contactData.email1 || defaultData.contact.email1;
+            document.getElementById('club-email-1').href = "mailto:" + (contactData.email1 || defaultData.contact.email1);
+            document.getElementById('club-email-2').innerText = contactData.email2 || defaultData.contact.email2;
+            document.getElementById('club-email-2').href = "mailto:" + (contactData.email2 || defaultData.contact.email2);
+            document.getElementById('club-address-text').innerHTML = contactData.address || defaultData.contact.address;
         }
 
         function handleFormSubmit(event) {
@@ -1632,18 +1633,21 @@
             }
         }
 
-        // --- GÜVENLİ VERİ KAYDETME VE OKUMA MOTORLARI (TRY-CATCH KORUMALI) ---
+        // --- VERİ KAYDETME VE OKUMA MOTORLARI ---
         function loadSettingsToAdminForm() {
             try {
+                const heroData = activeData.hero || defaultData.hero;
+                const contactData = activeData.contact || defaultData.contact;
+
                 document.getElementById('edit-logo-url').value = activeData.logoUrl || '';
                 document.getElementById('edit-hero-bg-url').value = activeData.heroBgUrl || '';
                 document.getElementById('edit-header-title').value = activeData.headerTitle || '';
-                document.getElementById('edit-hero-title').value = activeData.hero.title || '';
-                document.getElementById('edit-hero-slogan').value = activeData.hero.slogan || '';
-                document.getElementById('edit-phone').value = activeData.contact.phone || '';
-                document.getElementById('edit-email1').value = activeData.contact.email1 || '';
-                document.getElementById('edit-email2').value = activeData.contact.email2 || '';
-                document.getElementById('edit-address').value = (activeData.contact.address || '').replace(/<br\s*\/?>/gi, '\n');
+                document.getElementById('edit-hero-title').value = heroData.title || '';
+                document.getElementById('edit-hero-slogan').value = heroData.slogan || '';
+                document.getElementById('edit-phone').value = contactData.phone || '';
+                document.getElementById('edit-email1').value = contactData.email1 || '';
+                document.getElementById('edit-email2').value = contactData.email2 || '';
+                document.getElementById('edit-address').value = (contactData.address || '').replace(/<br\s*\/?>/gi, '\n');
             } catch(e) {
                 console.error("Settings formu yükleme hatası:", e);
             }
@@ -1654,8 +1658,12 @@
                 activeData.logoUrl = cleanImageUrl(document.getElementById('edit-logo-url').value);
                 activeData.heroBgUrl = cleanImageUrl(document.getElementById('edit-hero-bg-url').value);
                 activeData.headerTitle = document.getElementById('edit-header-title').value.trim();
+                
+                if(!activeData.hero) activeData.hero = {};
                 activeData.hero.title = document.getElementById('edit-hero-title').value;
                 activeData.hero.slogan = document.getElementById('edit-hero-slogan').value;
+                
+                if(!activeData.contact) activeData.contact = {};
                 activeData.contact.phone = document.getElementById('edit-phone').value;
                 activeData.contact.email1 = document.getElementById('edit-email1').value;
                 activeData.contact.email2 = document.getElementById('edit-email2').value;
@@ -1671,10 +1679,11 @@
 
         function loadAboutToAdminForm() {
             try {
-                document.getElementById('edit-about-title1').value = activeData.about.title1 || '';
-                document.getElementById('edit-about-text1').value = activeData.about.text1 || '';
-                document.getElementById('edit-about-title2').value = activeData.about.title2 || '';
-                document.getElementById('edit-about-text2').value = activeData.about.text2 || '';
+                const aboutData = activeData.about || defaultData.about;
+                document.getElementById('edit-about-title1').value = aboutData.title1 || '';
+                document.getElementById('edit-about-text1').value = aboutData.text1 || '';
+                document.getElementById('edit-about-title2').value = aboutData.title2 || '';
+                document.getElementById('edit-about-text2').value = aboutData.text2 || '';
             } catch(e) {
                 console.error("Hakkımızda formu yükleme hatası:", e);
             }
@@ -1682,6 +1691,7 @@
 
         function saveAbout() {
             try {
+                if(!activeData.about) activeData.about = {};
                 activeData.about.title1 = document.getElementById('edit-about-title1').value;
                 activeData.about.text1 = document.getElementById('edit-about-text1').value;
                 activeData.about.title2 = document.getElementById('edit-about-title2').value;
