@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karaman Aber Sanat Gücü Spor Kulübü</title>
-    <!-- Google Fonts: Inter (Kalın ve İtalik için kusursuz modern font) -->
+    <!-- Google Fonts: Inter (Modern & Sert Karakterli) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,600;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
@@ -405,6 +405,84 @@
             letter-spacing: 2px;
         }
 
+        /* --- ADMIN PANELİ MODAL TASARIMI --- */
+        .admin-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .admin-content {
+            background-color: var(--bg-white);
+            border: 3px solid var(--text-dark);
+            padding: 3rem;
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+        }
+
+        .close-admin {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            font-weight: 900;
+        }
+
+        .admin-tab-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--text-dark);
+            background: none;
+            font-weight: 900;
+            cursor: pointer;
+            margin-right: 1rem;
+            text-transform: uppercase;
+        }
+
+        .admin-tab-btn.active {
+            background-color: var(--accent-red);
+            color: white;
+            border-color: var(--accent-red);
+        }
+
+        .admin-list-item {
+            border: 1px solid #ccc;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-btn-approve {
+            background-color: #2a9d8f;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .admin-btn-delete {
+            background-color: var(--accent-red);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-weight: 800;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
         /* --- FOOTER --- */
         footer {
             padding: 5rem 0;
@@ -435,6 +513,14 @@
         .signature span {
             color: #ffffff;
             font-weight: 900;
+        }
+
+        .admin-trigger {
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            color: #555;
+            cursor: pointer;
+            text-decoration: underline;
         }
 
         /* Responsive */
@@ -526,9 +612,9 @@
         <div class="container">
             <h2 class="section-title">Transfer Gündemi</h2>
             <div class="transfers-banner">
-                <h2>TRANSFERLER</h2>
-                <div class="badge">ÇOK YAKINDA</div>
-                <p style="color: var(--text-muted); margin-top: 1.5rem; font-weight: 800; text-transform: uppercase;">Kadromuzu güçlendirecek yeni kanatlarımız yolda. Takipte kalın.</p>
+                <h2 id="transfer-title-text">TRANSFERLER</h2>
+                <div class="badge" id="transfer-badge-text">ÇOK YAKINDA</div>
+                <p style="color: var(--text-muted); margin-top: 1.5rem; font-weight: 800; text-transform: uppercase;" id="transfer-desc-text">Kadromuzu güçlendirecek yeni kanatlarımız yolda. Takipte kalın.</p>
             </div>
         </div>
     </section>
@@ -543,7 +629,7 @@
                     <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem;">Fikirleriniz bizim için değerli. Formu doldurup gönderin, onayımızın ardından sitemizde yayınlayalım!</p>
                     
                     <!-- Formspree Kendi Hesabına Bağlı Link -->
-                    <form action="https://formspree.io/f/xeeyoqbe" method="POST">
+                    <form id="write-us-form" action="https://formspree.io/f/xeeyoqbe" method="POST" onsubmit="handleFormSubmit(event)">
                         <div class="form-group">
                             <label for="name">İsminiz</label>
                             <input type="text" name="name" id="name" class="form-control" placeholder="Adınız Soyadınız" required>
@@ -560,11 +646,7 @@
                 <div>
                     <h3 style="font-size: 1.5rem; font-weight: 900; font-style: italic; text-transform: uppercase; margin-bottom: 2rem;">Yazılanlar</h3>
                     <div class="approved-posts" id="posts-container">
-                        <div class="post-card">
-                            <div class="post-meta">Ahmet Yılmaz // Taraftar</div>
-                            <div class="post-text">"Karaman'da futbolun çehresini değiştirecek bir inanmışlık görüyorum. Başarılar Sanat Gücü!"</div>
-                        </div>
-                        <!-- ONAYLANAN YENİ POSTLAR BURAYA EKLENECEK -->
+                        <!-- Onaylanmış mesajlar dinamik olarak buraya yüklenecektir -->
                     </div>
                 </div>
             </div>
@@ -579,16 +661,16 @@
                 <div class="contact-info">
                     <div class="info-item">
                         <h4>Telefon</h4>
-                        <a href="tel:+905368939415">0 536 893 94 15</a>
+                        <a href="tel:+905368939415" id="club-phone-link">0 536 893 94 15</a>
                     </div>
                     <div class="info-item">
                         <h4>E-Posta Adreslerimiz</h4>
-                        <p style="margin-bottom: 0.5rem;"><a href="mailto:info@abersanatsk.org">info@abersanatsk.org</a></p>
-                        <p><a href="mailto:ridvan@abersanatsk.org">ridvan@abersanatsk.org</a></p>
+                        <p style="margin-bottom: 0.5rem;"><a href="mailto:info@abersanatsk.org" id="club-email-1">info@abersanatsk.org</a></p>
+                        <p><a href="mailto:ridvan@abersanatsk.org" id="club-email-2">ridvan@abersanatsk.org</a></p>
                     </div>
                     <div class="info-item">
                         <h4>Kulüp Ofisi</h4>
-                        <p style="font-size: 1.25rem; font-weight: 900;">Cedit Mah. 319. Sk. No:2/A <br>Merkez / Karaman</p>
+                        <p style="font-size: 1.25rem; font-weight: 900;" id="club-address-text">Cedit Mah. 319. Sk. No:2/A <br>Merkez / Karaman</p>
                     </div>
                 </div>
                 <div class="contact-map">
@@ -601,12 +683,68 @@
         </div>
     </section>
 
+    <!-- ADMIN PANELİ MODAL PENCERESİ -->
+    <div class="admin-modal" id="adminModal">
+        <div class="admin-content">
+            <span class="close-admin" onclick="toggleAdminModal()">&times;</span>
+            <h2 style="font-style: italic; font-weight: 900; margin-bottom: 2rem; border-bottom: 2px solid #000; padding-bottom: 0.5rem;">ABER SK YÖNETİM PANELİ</h2>
+            
+            <div style="margin-bottom: 2rem;">
+                <button class="admin-tab-btn active" id="tabMessagesBtn" onclick="switchTab('messages')">Gelen Mesajlar</button>
+                <button class="admin-tab-btn" id="tabSettingsBtn" onclick="switchTab('settings')">Site Bilgileri</button>
+            </div>
+
+            <!-- TAB 1: GELEN MESAJLAR -->
+            <div id="tabMessages">
+                <h4 style="margin-bottom: 1rem; font-weight: 800;">Onay Bekleyen veya Yayındaki Mesajlar</h4>
+                <div id="admin-posts-list">
+                    <!-- Mesaj listesi JS ile dolacak -->
+                </div>
+            </div>
+
+            <!-- TAB 2: SİTE BİLGİLERİ GÜNCELLEME -->
+            <div id="tabSettings" style="display: none;">
+                <h4 style="margin-bottom: 1.5rem; font-weight: 800;">Kulüp İletişim & Transfer Bilgileri</h4>
+                <div class="form-group">
+                    <label>Telefon Numarası</label>
+                    <input type="text" id="edit-phone" class="form-control" value="0 536 893 94 15">
+                </div>
+                <div class="form-group">
+                    <label>E-Posta 1</label>
+                    <input type="text" id="edit-email1" class="form-control" value="info@abersanatsk.org">
+                </div>
+                <div class="form-group">
+                    <label>E-Posta 2</label>
+                    <input type="text" id="edit-email2" class="form-control" value="ridvan@abersanatsk.org">
+                </div>
+                <div class="form-group">
+                    <label>Adres Bilgisi</label>
+                    <textarea id="edit-address" class="form-control" rows="2">Cedit Mah. 319. Sk. No:2/A Merkez / Karaman</textarea>
+                </div>
+                <div class="form-group" style="border-top: 1px dashed #ccc; padding-top: 1rem;">
+                    <label>Transfer Başlığı</label>
+                    <input type="text" id="edit-transfers-title" class="form-control" value="TRANSFERLER">
+                </div>
+                <div class="form-group">
+                    <label>Transfer Rozeti (Badge)</label>
+                    <input type="text" id="edit-transfers-badge" class="form-control" value="ÇOK YAKINDA">
+                </div>
+                <div class="form-group">
+                    <label>Transfer Detayı</label>
+                    <input type="text" id="edit-transfers-desc" class="form-control" value="Kadromuzu güçlendirecek yeni kanatlarımız yolda. Takipte kalın.">
+                </div>
+                <button class="submit-btn" onclick="saveSettings()">Değişiklikleri Kaydet</button>
+            </div>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <footer>
         <div class="container">
             <div class="footer-logo">ABER <span>SANAT GÜCÜ</span></div>
             <p>© 2026 Tüm Hakları Saklıdır.</p>
             <div class="signature">DESIGNED BY <span>RIDVAN ARSLAN</span></div>
+            <div class="admin-trigger" onclick="loginAdmin()">Yönetim Paneli Girişi</div>
         </div>
     </footer>
 
@@ -622,6 +760,219 @@
                 imgElement.style.display = 'none';
             }
         }
+
+        // --- DINAMIK VERITABANI (LOCALSTORAGE) ALT YAPISI ---
+        let siteData = {
+            posts: [
+                { id: 1, author: "Ahmet Yılmaz", text: "Karaman'da futbolun çehresini değiştirecek bir inanmışlık görüyorum. Başarılar Sanat Gücü!", approved: true }
+            ],
+            contact: {
+                phone: "0 536 893 94 15",
+                email1: "info@abersanatsk.org",
+                email2: "ridvan@abersanatsk.org",
+                address: "Cedit Mah. 319. Sk. No:2/A <br>Merkez / Karaman"
+            },
+            transfers: {
+                title: "TRANSFERLER",
+                badge: "ÇOK YAKINDA",
+                desc: "Kadromuzu güçlendirecek yeni kanatlarımız yolda. Takipte kalın."
+            }
+        };
+
+        // Verileri tarayıcı hafızasından yükleme
+        function loadData() {
+            const savedData = localStorage.getItem('aber_sk_data');
+            if (savedData) {
+                siteData = JSON.parse(savedData);
+            } else {
+                saveData(); // Varsayılan değerleri ilk açılışta kaydet
+            }
+            renderSite();
+        }
+
+        // Verileri tarayıcı hafızasına kaydetme
+        function saveData() {
+            localStorage.setItem('aber_sk_data', JSON.stringify(siteData));
+        }
+
+        // --- SİTEYİ YENİDEN YAZDIRMA (RENDER) ---
+        function renderSite() {
+            // 1. İletişim Bilgileri
+            document.getElementById('club-phone-link').innerText = siteData.contact.phone;
+            document.getElementById('club-phone-link').href = "tel:" + siteData.contact.phone.replace(/\s+/g, '');
+            document.getElementById('club-email-1').innerText = siteData.contact.email1;
+            document.getElementById('club-email-1').href = "mailto:" + siteData.contact.email1;
+            document.getElementById('club-email-2').innerText = siteData.contact.email2;
+            document.getElementById('club-email-2').href = "mailto:" + siteData.contact.email2;
+            document.getElementById('club-address-text').innerHTML = siteData.contact.address;
+
+            // 2. Transfer Bilgileri
+            document.getElementById('transfer-title-text').innerText = siteData.transfers.title;
+            document.getElementById('transfer-badge-text').innerText = siteData.transfers.badge;
+            document.getElementById('transfer-desc-text').innerText = siteData.transfers.desc;
+
+            // 3. Onaylanmış Mesajlar Listesi
+            const container = document.getElementById('posts-container');
+            container.innerHTML = '';
+            
+            const approvedPosts = siteData.posts.filter(p => p.approved === true);
+            if(approvedPosts.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">Henüz onaylanmış mesaj yok.</p>';
+            } else {
+                approvedPosts.forEach(post => {
+                    const card = document.createElement('div');
+                    card.className = 'post-card';
+                    card.innerHTML = `
+                        <div class="post-meta">${post.author} // Ziyaretçi</div>
+                        <div class="post-text">"${post.text}"</div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+        }
+
+        // --- ZİYARETÇİ FORM GÖNDERİMİ ---
+        function handleFormSubmit(event) {
+            // Tarayıcının formu direkt Formspree'ye göndermesine izin veriyoruz (mail gitmesi için)
+            // Ama aynı zamanda sayfa yenilenmeden veriyi yerel hafızaya onaysız olarak kaydediyoruz.
+            const nameInput = document.getElementById('name').value;
+            const messageInput = document.getElementById('message').value;
+
+            const newPost = {
+                id: Date.now(),
+                author: nameInput,
+                text: messageInput,
+                approved: false // Onaylanana kadar sitede gözükmez
+            };
+
+            siteData.posts.push(newPost);
+            saveData();
+            
+            // Kullanıcıya teşekkür mesajı
+            alert("Harika! Düşünceleriniz abersanat@gmail.com e-posta adresimize gönderildi ve admin onay sırasına eklendi. Onaylandıktan sonra yayına alınacaktır!");
+        }
+
+        // --- ADMIN PANELİ FONKSİYONLARI ---
+        function loginAdmin() {
+            const password = prompt("Admin Şifresini Giriniz:");
+            if (password === "admin123") { // Varsayılan Şifre: admin123
+                toggleAdminModal();
+                renderAdminPanel();
+            } else if (password !== null) {
+                alert("Hatalı şifre girdiniz!");
+            }
+        }
+
+        function toggleAdminModal() {
+            const modal = document.getElementById('adminModal');
+            modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function switchTab(tabName) {
+            const tabMessages = document.getElementById('tabMessages');
+            const tabSettings = document.getElementById('tabSettings');
+            const tabMessagesBtn = document.getElementById('tabMessagesBtn');
+            const tabSettingsBtn = document.getElementById('tabSettingsBtn');
+
+            if (tabName === 'messages') {
+                tabMessages.style.display = 'block';
+                tabSettings.style.display = 'none';
+                tabMessagesBtn.classList.add('active');
+                tabSettingsBtn.classList.remove('active');
+                renderAdminPanel();
+            } else {
+                tabMessages.style.display = 'none';
+                tabSettings.style.display = 'block';
+                tabMessagesBtn.classList.remove('active');
+                tabSettingsBtn.classList.add('active');
+                loadSettingsToForm();
+            }
+        }
+
+        // Admin Panelindeki Mesajları Listeleme
+        function renderAdminPanel() {
+            const listContainer = document.getElementById('admin-posts-list');
+            listContainer.innerHTML = '';
+
+            if (siteData.posts.length === 0) {
+                listContainer.innerHTML = '<p>Gelen mesaj bulunmuyor.</p>';
+                return;
+            }
+
+            siteData.posts.forEach(post => {
+                const item = document.createElement('div');
+                item.className = 'admin-list-item';
+                item.innerHTML = `
+                    <div>
+                        <strong>${post.author}:</strong> <span>"${post.text}"</span>
+                        <div style="font-size:0.8rem; margin-top:5px; color:${post.approved ? 'green':'red'}">
+                            Durum: ${post.approved ? 'Yayında' : 'Onay Bekliyor'}
+                        </div>
+                    </div>
+                    <div>
+                        ${!post.approved ? `<button class="admin-btn-approve" onclick="approvePost(${post.id})">Onayla</button>` : ''}
+                        <button class="admin-btn-delete" onclick="deletePost(${post.id})">Sil</button>
+                    </div>
+                `;
+                listContainer.appendChild(item);
+            });
+        }
+
+        // Mesaj Onaylama
+        function approvePost(id) {
+            const post = siteData.posts.find(p => p.id === id);
+            if (post) {
+                post.approved = true;
+                saveData();
+                renderSite();
+                renderAdminPanel();
+                alert("Mesaj başarıyla onaylandı ve sitede yayına alındı!");
+            }
+        }
+
+        // Mesaj Silme
+        function deletePost(id) {
+            if(confirm("Bu mesajı tamamen silmek istediğinize emin misiniz?")) {
+                siteData.posts = siteData.posts.filter(p => p.id !== id);
+                saveData();
+                renderSite();
+                renderAdminPanel();
+            }
+        }
+
+        // Site Ayarlarını Düzenleme Formuna Yükleme
+        function loadSettingsToForm() {
+            document.getElementById('edit-phone').value = siteData.contact.phone;
+            document.getElementById('edit-email1').value = siteData.contact.email1;
+            document.getElementById('edit-email2').value = siteData.contact.email2;
+            document.getElementById('edit-address').value = siteData.contact.address.replace('<br>', '\n');
+            
+            document.getElementById('edit-transfers-title').value = siteData.transfers.title;
+            document.getElementById('edit-transfers-badge').value = siteData.transfers.badge;
+            document.getElementById('edit-transfers-desc').value = siteData.transfers.desc;
+        }
+
+        // Site Ayarlarını Kaydetme
+        function saveSettings() {
+            siteData.contact.phone = document.getElementById('edit-phone').value;
+            siteData.contact.email1 = document.getElementById('edit-email1').value;
+            siteData.contact.email2 = document.getElementById('edit-email2').value;
+            siteData.contact.address = document.getElementById('edit-address').value.replace('\n', '<br>');
+
+            siteData.transfers.title = document.getElementById('edit-transfers-title').value;
+            siteData.transfers.badge = document.getElementById('edit-transfers-badge').value;
+            siteData.transfers.desc = document.getElementById('edit-transfers-desc').value;
+
+            saveData();
+            renderSite();
+            alert("Site bilgileri başarıyla güncellendi!");
+            toggleAdminModal();
+        }
+
+        // Sayfa ilk yüklendiğinde verileri çek
+        window.onload = function() {
+            loadData();
+        };
     </script>
 </body>
 </html>
