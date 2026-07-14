@@ -4,28 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karaman Aber Sanat Gücü Spor Kulübü</title>
-    <!-- Google Fonts: Inter & Rajdhani -->
+    <!-- Google Fonts: Syncopate (Avangart & Devasa) & Syne (Sanatsal & Modern) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Rajdhani:wght@600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Dinamik Renk ve Şablon Tarzı İçin Style Alanı -->
     <style id="theme-styles">
         :root {
-            --bg-white: #ffffff;
-            --bg-dark: #0f172a;
-            --text-light: #ffffff;
-            --text-dark: #111111;
-            --text-muted: #666666;
-            --accent-red: #e63946;
-            --premium-gray: #f9f9f9;
-            --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
-            --font-main: 'Inter', sans-serif;
-            --font-sport: 'Rajdhani', sans-serif;
+            --bg-white: #0a0e14; /* Gece Siyahı Arka Plan */
+            --bg-dark: #ffffff;
+            --text-light: #0a0e14;
+            --text-dark: #ffffff;
+            --text-muted: #8e9bb0;
+            --accent-color: #ff3344; /* Canlı Neon Kırmızı */
+            --premium-gray: #121824;
+            --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            --font-main: 'Syne', sans-serif;
+            --font-sport: 'Syncopate', sans-serif;
             /* Şablon Tarzı Değişkenleri */
-            --card-radius: 4px;
-            --border-style: 1px solid rgba(0, 0, 0, 0.08);
-            --card-align: center;
+            --card-radius: 16px;
+            --border-style: 1px solid rgba(255, 255, 255, 0.08);
+            --card-align: left;
         }
     </style>
 
@@ -44,59 +44,119 @@
             background-color: var(--bg-white);
             color: var(--text-dark);
             font-family: var(--font-main);
-            line-height: 1.6;
+            line-height: 1.5;
             overflow-x: hidden;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        /* --- SPLIT-SCREEN LAYOUT (HİÇ YAPILMAMIŞ SIRA DIŞI YAPI) --- */
+        .app-wrapper {
+            display: flex;
+            min-height: 100vh;
+            position: relative;
         }
 
-        /* --- GÖRSELDEKİ GİBİ SADE VE PREMİUM HEADER --- */
-        header {
+        /* Sol Taraf: Sabit Sanat ve Zirve Paneli */
+        .split-left {
+            width: 45%;
+            height: 100vh;
             position: fixed;
             top: 0;
             left: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: flex-end;
+            padding: 4rem;
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        .split-left::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            background-color: #ffffff;
-            z-index: 100;
-            border-bottom: 1px solid #eeeeee;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(10, 14, 20, 0.1) 0%, rgba(10, 14, 20, 0.85) 100%);
+            z-index: 1;
+        }
+
+        .left-panel-content {
+            position: relative;
+            z-index: 2;
+            max-width: 500px;
+        }
+
+        .left-badge {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 5px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .left-title {
+            font-family: var(--font-sport);
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        /* Sağ Taraf: Akışkan İçerik Bölümü */
+        .split-right {
+            width: 55%;
+            margin-left: 45%;
+            padding: 0 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            padding: 3rem 0;
         }
 
         nav {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            min-height: 100px;
-            padding: 0.5rem 0;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2rem;
         }
 
         .logo-container {
-            display: flex;
-            flex-direction: column;
             text-decoration: none;
-            color: #111111;
+            color: var(--text-dark);
         }
 
         .logo-text-top {
-            font-family: var(--font-main);
-            font-weight: 900;
-            font-size: 1.5rem;
+            font-family: var(--font-sport);
+            font-weight: 700;
+            font-size: 1.2rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: -1px;
             line-height: 1;
         }
 
         .logo-text-sub {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            letter-spacing: 3px;
+            font-size: 0.7rem;
+            color: var(--accent-color);
+            letter-spacing: 4px;
             text-transform: uppercase;
             margin-top: 5px;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .nav-links {
@@ -108,170 +168,129 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #333333;
-            font-weight: 500;
-            font-size: 0.85rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.2s ease;
-            padding: 5px 0;
-            position: relative;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+            opacity: 0.6;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #111111;
-            transition: width 0.2s ease;
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--accent-color);
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* --- GÖRSELDEKİ GİBİ MINIMALIST / HEYECAN VERİCİ HERO --- */
+        /* --- HERO SECTION --- */
         .hero {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 8rem 2rem 4rem 2rem;
+            padding-top: 12rem;
             position: relative;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.4); /* Arka planı hafif yumuşatmak için */
-            z-index: 1;
-        }
-
-        .hero-content-wrapper {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .hero-top-slogan {
-            font-size: 0.95rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            color: #111111;
-            margin-bottom: 1.5rem;
         }
 
         .hero-main-title {
-            font-family: var(--font-main);
-            font-size: 7.5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            line-height: 1;
-            letter-spacing: 12px;
-            color: #111111;
-            margin-bottom: 2rem;
-        }
-
-        .hero-sub-description {
-            font-size: 1.25rem;
-            font-weight: 400;
-            color: #222222;
-            line-height: 1.6;
-            max-width: 700px;
-            margin-bottom: 3rem;
-        }
-
-        .hero-cta-btn {
-            display: inline-block;
-            background-color: #111111;
-            color: #ffffff;
-            text-decoration: none;
-            padding: 1rem 3rem;
-            font-size: 0.85rem;
+            font-family: var(--font-sport);
+            font-size: 6.5rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            border: 2px solid #111111;
-            transition: all 0.3s ease;
+            line-height: 0.9;
+            letter-spacing: -6px;
+            color: var(--text-dark);
+            margin-bottom: 2.5rem;
+            position: relative;
         }
 
-        .hero-cta-btn:hover {
-            background-color: transparent;
-            color: #111111;
+        .hero-main-title span {
+            color: transparent;
+            -webkit-text-stroke: 1px var(--text-dark);
         }
 
-        /* --- SECTIONS --- */
+        /* Devasa Şeffaf Slogan Şeridi */
+        .hero-slogan-strip {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border-left: 3px solid var(--accent-color);
+            padding: 2.5rem;
+            border-radius: 0 var(--card-radius) var(--card-radius) 0;
+            margin-top: 1rem;
+            max-width: 650px;
+        }
+
+        .slogan-title {
+            font-family: var(--font-sport);
+            font-size: 1rem;
+            letter-spacing: 4px;
+            color: var(--accent-color);
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .slogan-text {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* --- MODERN SECTIONS --- */
         section {
-            padding: 8rem 0;
-            border-top: 1px solid #eeeeee;
+            padding: 10rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .section-title {
-            font-family: var(--font-main);
-            font-size: 2.5rem;
-            font-weight: 900;
+            font-family: var(--font-sport);
+            font-size: 2.2rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: -2px;
             margin-bottom: 5rem;
             position: relative;
-            text-align: center;
+            display: inline-block;
         }
 
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: -10px;
+            left: 0;
             width: 40px;
-            height: 3px;
-            background: #111111;
+            height: 2px;
+            background: var(--accent-color);
         }
 
-        /* --- PREMIUM GRID BOARDS (YÖNETİM & TEKNİK HEYET) --- */
+        /* --- ASİMETRİK GRID BOARDS --- */
         .board-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 2rem;
         }
 
         .board-card {
-            background: #ffffff;
+            background: var(--premium-gray);
             border-radius: var(--card-radius);
-            padding: 3rem 2rem;
-            text-align: var(--card-align);
-            box-shadow: var(--card-shadow);
+            padding: 2.5rem 2rem;
             border: var(--border-style);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: var(--card-align);
         }
 
         .board-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+            transform: translateY(-8px);
+            border-color: var(--accent-color);
         }
 
         .board-img-wrapper {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             margin: 0 auto 1.5rem auto;
             overflow: hidden;
-            border: 1px solid #eaeaea;
+            border: 2px solid rgba(255, 255, 255, 0.05);
         }
 
         .board-img {
@@ -281,54 +300,53 @@
         }
 
         .board-name {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.3rem;
         }
 
         .board-role {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            color: var(--text-muted);
+            color: var(--accent-color);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
         /* --- OYUNCU KARTLARI --- */
         .position-group-title {
-            font-family: var(--font-main);
-            font-size: 1.6rem;
-            font-weight: 800;
+            font-family: var(--font-sport);
+            font-size: 1.2rem;
+            font-weight: 700;
             text-transform: uppercase;
-            margin: 4.5rem 0 2.5rem 0;
-            color: var(--text-dark);
-            letter-spacing: 1px;
-            text-align: center;
+            margin: 5rem 0 2rem 0;
+            color: var(--accent-color);
+            letter-spacing: 2px;
         }
 
         .players-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 2rem;
         }
 
         .player-card {
-            background: #ffffff;
+            background: var(--premium-gray);
             border-radius: var(--card-radius);
             overflow: hidden;
-            box-shadow: var(--card-shadow);
             border: var(--border-style);
             transition: all 0.4s ease;
         }
 
         .player-card:hover {
             transform: translateY(-8px);
+            border-color: var(--accent-color);
         }
 
         .player-img-box {
-            height: 350px;
-            background-color: var(--premium-gray);
+            height: 320px;
+            background-color: #0d121d;
             overflow: hidden;
         }
 
@@ -340,23 +358,23 @@
         }
 
         .player-card:hover .player-img-box img {
-            transform: scale(1.04);
+            transform: scale(1.05);
         }
 
         .player-info {
-            padding: 2rem;
+            padding: 1.8rem;
             text-align: var(--card-align);
         }
 
         .player-name {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--text-dark);
             margin-bottom: 0.2rem;
         }
 
         .player-position {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
             color: var(--text-muted);
             text-transform: uppercase;
@@ -367,13 +385,9 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0.6rem;
-            font-size: 0.85rem;
-            border-top: 1px solid #eeeeee;
-            padding-top: 1.2rem;
-        }
-
-        .stat-line {
-            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 1rem;
         }
 
         .stat-line strong {
@@ -383,27 +397,27 @@
         /* --- FORMALARIMIZ --- */
         .kits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
         }
 
         .kit-card {
-            background: #ffffff;
+            background: var(--premium-gray);
             border-radius: var(--card-radius);
             overflow: hidden;
-            box-shadow: var(--card-shadow);
             border: var(--border-style);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         .kit-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            border-color: var(--accent-color);
         }
 
         .kit-img-box {
             width: 100%;
-            height: 540px;
-            background: var(--premium-gray);
+            height: 440px;
+            background: #0d121d;
             overflow: hidden;
         }
 
@@ -414,61 +428,60 @@
         }
 
         .kit-title {
-            padding: 2rem;
-            font-size: 1.3rem;
+            padding: 1.5rem;
+            font-size: 1.1rem;
             font-weight: 700;
             text-align: center;
-            background: #ffffff;
             color: var(--text-dark);
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* --- TRANSFERLER --- */
         .transfers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2rem;
         }
 
         .transfer-card {
-            background: #ffffff;
+            background: var(--premium-gray);
             border-radius: var(--card-radius);
             overflow: hidden;
-            box-shadow: var(--card-shadow);
             border: var(--border-style);
             transition: all 0.3s ease;
         }
 
         .transfer-img {
-            height: 250px;
+            height: 220px;
             width: 100%;
             object-fit: cover;
         }
 
         .transfer-body {
-            padding: 2rem;
+            padding: 1.5rem;
             text-align: var(--card-align);
         }
 
         .transfer-name {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--text-dark);
         }
 
         .transfer-club {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
-            margin: 0.5rem 0 1.5rem 0;
+            margin: 0.5rem 0 1.2rem 0;
         }
 
         .transfer-status {
-            background-color: var(--text-dark);
+            background-color: var(--accent-color);
             color: white;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 4px;
             display: inline-block;
         }
@@ -477,23 +490,22 @@
         .fixture-list {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.2rem;
         }
 
         .fixture-card {
-            background: #ffffff;
+            background: var(--premium-gray);
             border-radius: var(--card-radius);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 2rem 4rem;
-            box-shadow: var(--card-shadow);
+            padding: 1.5rem 2.5rem;
             border: var(--border-style);
             transition: all 0.3s ease;
         }
 
         .fixture-team {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 700;
             width: 40%;
             color: var(--text-dark);
@@ -508,18 +520,19 @@
         }
 
         .fixture-score {
-            font-size: 2rem;
-            font-weight: 900;
-            background: #111111;
+            font-family: var(--font-sport);
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: var(--accent-color);
             color: #fff;
-            padding: 4px 24px;
+            padding: 4px 18px;
             border-radius: 4px;
             display: inline-block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.3rem;
         }
 
         .fixture-date {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             color: var(--text-muted);
         }
@@ -527,8 +540,8 @@
         /* --- MEDYA GALERİ --- */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
 
         .gallery-item {
@@ -536,7 +549,6 @@
             aspect-ratio: 16 / 10;
             overflow: hidden;
             border-radius: var(--card-radius);
-            box-shadow: var(--card-shadow);
             border: var(--border-style);
             background: #000;
         }
@@ -551,15 +563,14 @@
         /* --- BİZE YAZIN --- */
         .blog-container {
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 4rem;
+            grid-template-columns: 1fr;
+            gap: 3rem;
         }
 
         .blog-form-wrapper {
             background-color: var(--premium-gray);
             border-radius: var(--card-radius);
             padding: 3rem;
-            box-shadow: var(--card-shadow);
             border: var(--border-style);
         }
 
@@ -569,70 +580,70 @@
 
         .form-group label {
             display: block;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
             margin-bottom: 0.5rem;
-            color: var(--text-dark);
+            color: var(--accent-color);
+            letter-spacing: 1px;
         }
 
         .form-control {
             width: 100%;
             padding: 1rem;
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 4px;
             font-family: var(--font-main);
             font-size: 1rem;
             outline: none;
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.02);
+            color: white;
             transition: all 0.3s ease;
         }
 
         .form-control:focus {
-            border-color: #111111;
+            border-color: var(--accent-color);
         }
 
         .submit-btn {
             width: 100%;
             padding: 1.2rem;
-            background-color: var(--text-dark);
+            background-color: var(--accent-color);
             color: #ffffff;
             border: none;
             border-radius: 4px;
             font-weight: 700;
             text-transform: uppercase;
             cursor: pointer;
+            letter-spacing: 2px;
             transition: all 0.3s;
         }
 
         .submit-btn:hover {
-            background-color: #333333;
+            opacity: 0.9;
         }
 
         .post-card {
             padding: 2rem;
-            background-color: #ffffff;
-            border-radius: 4px;
-            border-left: 4px solid #111111;
+            background-color: var(--premium-gray);
+            border-radius: var(--card-radius);
+            border: var(--border-style);
+            border-left: 4px solid var(--accent-color);
             margin-bottom: 1.5rem;
-            box-shadow: var(--card-shadow);
-            border-top: var(--border-style);
-            border-right: var(--border-style);
-            border-bottom: var(--border-style);
         }
 
         .post-meta {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
-            color: var(--text-muted);
+            color: var(--accent-color);
             margin-bottom: 0.5rem;
         }
 
         /* --- İLETİŞİM --- */
         .contact-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: 1fr;
+            gap: 3rem;
         }
 
         .contact-info {
@@ -642,11 +653,12 @@
         }
 
         .info-item h4 {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            color: var(--text-muted);
+            color: var(--accent-color);
             margin-bottom: 0.5rem;
+            letter-spacing: 1px;
         }
 
         .info-item p, .info-item a {
@@ -658,18 +670,17 @@
 
         .contact-map {
             width: 100%;
-            height: 380px;
+            height: 300px;
             border-radius: var(--card-radius);
             background-color: var(--premium-gray);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            box-shadow: var(--card-shadow);
             border: var(--border-style);
         }
 
-        /* --- ADMIN PANEL MODAL --- */
+        /* --- PREMIUM ADMIN MODERN MODAL --- */
         .admin-modal {
             display: none;
             position: fixed;
@@ -677,23 +688,23 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(8px);
+            background-color: rgba(10, 14, 20, 0.8);
+            backdrop-filter: blur(12px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
         }
 
         .admin-content {
-            background-color: #ffffff;
-            border-radius: 12px;
+            background-color: #0d121d;
+            border-radius: 20px;
             width: 95%;
             max-width: 1400px;
             height: 85vh;
             display: flex;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .close-admin {
@@ -703,50 +714,53 @@
             font-size: 2.5rem;
             cursor: pointer;
             z-index: 10;
+            color: white;
         }
 
         .admin-sidebar {
             width: 300px;
-            background-color: #111111;
+            background-color: #070a10;
             color: #fff;
             padding: 3rem 1.5rem;
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
             overflow-y: auto;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .admin-sidebar h3 {
-            font-size: 1.2rem;
-            color: #ffffff;
+            font-family: var(--font-sport);
+            font-size: 1.1rem;
+            color: var(--accent-color);
             margin-bottom: 2.5rem;
             text-align: center;
-            letter-spacing: 1px;
         }
 
         .admin-sidebar-btn {
             background: none;
             border: none;
-            color: #999999;
+            color: #72829c;
             padding: 14px 20px;
             text-align: left;
             font-weight: 600;
             font-size: 0.9rem;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 8px;
             transition: all 0.3s;
         }
 
         .admin-sidebar-btn:hover, .admin-sidebar-btn.active {
             color: #ffffff;
-            background-color: #333333;
+            background-color: var(--accent-color);
         }
 
         .admin-body {
             flex-grow: 1;
             padding: 3.5rem;
             overflow-y: auto;
-            background-color: #fbfbfb;
+            background-color: #0a0e14;
+            color: white;
             position: relative;
         }
 
@@ -757,12 +771,11 @@
         }
 
         .analytic-card {
-            background: #ffffff;
-            border: 1px solid #eeeeee;
+            background: #0d121d;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             padding: 1.5rem;
-            border-radius: 8px;
+            border-radius: 12px;
             flex: 1;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.01);
             display: flex;
             flex-direction: column;
             gap: 0.2rem;
@@ -778,16 +791,17 @@
 
         .analytic-card strong {
             font-size: 2rem;
-            color: var(--text-dark);
+            color: #ffffff;
+            font-family: var(--font-sport);
         }
 
         .admin-tab-content { display: none; }
         .admin-tab-content.active { display: block; }
 
         .admin-section-heading {
+            font-family: var(--font-sport);
             font-size: 1.4rem;
-            font-weight: 800;
-            border-bottom: 2px solid #111111;
+            border-bottom: 2px solid var(--accent-color);
             padding-bottom: 0.8rem;
             margin-bottom: 2.5rem;
         }
@@ -796,37 +810,37 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 2rem;
-            background: #fff;
-            border-radius: 8px;
+            background: #0d121d;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.01);
         }
 
         .data-table th, .data-table td {
             padding: 16px;
             text-align: left;
-            border-bottom: 1px solid #eeeeee;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: white;
         }
 
         .data-table th {
-            background-color: #f5f5f5;
+            background-color: #070a10;
             font-weight: 700;
-            color: var(--text-dark);
+            color: var(--accent-color);
         }
 
         .admin-list-item {
-            background: #fff;
+            background: #0d121d;
             padding: 1.2rem;
-            border-radius: 8px;
+            border-radius: 12px;
             margin-bottom: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.01);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .admin-btn-delete {
-            background-color: #ff4d4d;
+            background-color: #ff3344;
             color: white;
             border: none;
             border-radius: 4px;
@@ -836,7 +850,7 @@
         }
 
         .admin-btn-approve {
-            background-color: #2b9348;
+            background-color: #22c55e;
             color: white;
             border: none;
             border-radius: 4px;
@@ -849,26 +863,23 @@
         /* --- FOOTER --- */
         footer {
             padding: 6rem 0;
-            background-color: #111111;
+            background-color: #070a10;
             color: #ffffff;
             text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .footer-logo {
-            font-family: var(--font-main);
-            font-weight: 900;
-            font-size: 1.8rem;
+            font-family: var(--font-sport);
+            font-size: 1.6rem;
             margin-bottom: 1rem;
-            letter-spacing: 1px;
         }
-
-        .footer-logo span { color: #888888; }
 
         .signature {
             margin-top: 2.5rem;
             font-size: 0.75rem;
             letter-spacing: 3px;
-            color: #666666;
+            color: #52627a;
             text-transform: uppercase;
         }
 
@@ -877,21 +888,16 @@
         .admin-trigger {
             margin-top: 2rem;
             font-size: 0.8rem;
-            color: #444444;
+            color: #3b485c;
             cursor: pointer;
             text-decoration: underline;
         }
 
         @media (max-width: 992px) {
+            .app-wrapper { flex-direction: column; }
+            .split-left { width: 100%; height: 60vh; position: relative; padding: 2rem; }
+            .split-right { width: 100%; margin-left: 0; padding: 0 2rem; }
             .hero-main-title { font-size: 4rem; }
-            .blog-container, .contact-grid, .kits-grid {
-                grid-template-columns: 1fr;
-            }
-            nav {
-                flex-direction: column;
-                padding: 1.5rem 0;
-                gap: 1.5rem;
-            }
             .admin-content { flex-direction: column; height: 95vh; }
             .admin-sidebar { width: 100%; height: auto; }
         }
@@ -899,160 +905,159 @@
 </head>
 <body>
 
-    <!-- HEADER -->
-    <header id="site-header">
-        <div class="container">
-            <nav>
-                <a href="#" class="logo-container">
-                    <div class="logo-text-top" id="header-club-title">KARAMAN ABER SANAT GÜCÜ</div>
-                    <div class="logo-text-sub">SPOR KULÜBÜ</div>
-                </a>
-                <ul class="nav-links" id="main-nav-links">
-                    <li><a href="#yonetim-kurulu">Yönetim Kurulu</a></li>
-                    <li><a href="#teknik-heyet">Teknik Heyet</a></li>
-                    <li><a href="#kadro">Kadromuz</a></li>
-                    <li><a href="#formalar">Formalarımız</a></li>
-                    <li><a href="#transferler">Transferler</a></li>
-                    <li><a href="#fikstur">Fikstür</a></li>
-                    <li><a href="#galeri">Medya</a></li>
-                    <li><a href="#bize-yazin">Bize Yazın</a></li>
-                    <li><a href="#iletisim">İletişim</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- HERO SECTION (GÖRSELDEKİ MODELLEME) -->
-    <section class="hero" id="home">
-        <div class="hero-overlay" id="hero-bg-overlay"></div>
-        <div class="hero-content-wrapper">
-            <div class="hero-top-slogan">KARAMAN FUTBOLUNUN YENİ SOLUĞU</div>
-            <h1 class="hero-main-title" id="hero-title-text">İNANÇ</h1>
-            <div class="hero-sub-description" id="hero-slogan-text">
-                Sloganımız olan 'İNANÇ KANATLANDIRIR' ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz.
+    <div class="app-wrapper">
+        <!-- SOL TARAF: SABİT SANAT VE SPOR PANELİ (PREMIUM KONSEPT) -->
+        <div class="split-left" id="split-left-bg">
+            <div class="left-panel-content">
+                <div class="left-badge">EST. 2026</div>
+                <h2 class="left-title" id="left-panel-title">İNANÇ<br>KANATLANDIRIR</h2>
             </div>
-            <a href="#yonetim-kurulu" class="hero-cta-btn">Kulübü Keşfet</a>
         </div>
-    </section>
 
-    <!-- YÖNETİM KURULU BÖLÜMÜ -->
-    <section id="yonetim-kurulu" style="border-top:none;">
-        <div class="container">
-            <h2 class="section-title">Yönetim Kurulu</h2>
-            <div class="board-grid" id="board-container"></div>
-        </div>
-    </section>
+        <!-- SAĞ TARAF: AKIŞKAN İÇERİK PORTALI -->
+        <div class="split-right">
+            
+            <!-- HEADER -->
+            <header id="site-header">
+                <nav>
+                    <a href="#" class="logo-container">
+                        <div class="logo-text-top" id="header-club-title">KARAMAN ABER SANAT GÜCÜ</div>
+                        <div class="logo-text-sub">SPOR KULÜBÜ</div>
+                    </a>
+                    <ul class="nav-links" id="main-nav-links">
+                        <li><a href="#yonetim-kurulu">Yönetim Kurulu</a></li>
+                        <li><a href="#teknik-heyet">Teknik Heyet</a></li>
+                        <li><a href="#kadro">Kadromuz</a></li>
+                        <li><a href="#formalar">Formalarımız</a></li>
+                        <li><a href="#transferler">Transferler</a></li>
+                        <li><a href="#fikstur">Fikstür</a></li>
+                        <li><a href="#galeri">Medya</a></li>
+                        <li><a href="#bize-yazin">Bize Yazın</a></li>
+                        <li><a href="#iletisim">İletişim</a></li>
+                    </ul>
+                </nav>
+            </header>
 
-    <!-- TEKNİK HEYET BÖLÜMÜ -->
-    <section id="teknik-heyet">
-        <div class="container">
-            <h2 class="section-title">Teknik Heyet</h2>
-            <div class="board-grid" id="staff-container"></div>
-        </div>
-    </section>
-
-    <!-- KADROMUZ BÖLÜMÜ -->
-    <section id="kadro">
-        <div class="container">
-            <h2 class="section-title">Kadromuz</h2>
-            <div id="gk-section"><h3 class="position-group-title">Kaleciler</h3><div class="players-grid" id="gk-players-container"></div></div>
-            <div id="df-section"><h3 class="position-group-title">Defans Oyuncuları</h3><div class="players-grid" id="df-players-container"></div></div>
-            <div id="mf-section"><h3 class="position-group-title">Orta Saha Oyuncuları</h3><div class="players-grid" id="mf-players-container"></div></div>
-            <div id="fw-section"><h3 class="position-group-title">Forvet Oyuncuları</h3><div class="players-grid" id="fw-players-container"></div></div>
-        </div>
-    </section>
-
-    <!-- FORMALARIMIZ BÖLÜMÜ -->
-    <section id="formalar">
-        <div class="container">
-            <h2 class="section-title">Formalarımız</h2>
-            <div class="kits-grid" id="kits-container"></div>
-        </div>
-    </section>
-
-    <!-- TRANSFERLER BÖLÜMÜ -->
-    <section id="transferler">
-        <div class="container">
-            <h2 class="section-title">Transfer Gündemi</h2>
-            <div class="transfers-grid" id="transfers-container"></div>
-        </div>
-    </section>
-
-    <!-- FİKSTÜR BÖLÜMÜ -->
-    <section id="fikstur">
-        <div class="container">
-            <h2 class="section-title">Maç Fikstürü</h2>
-            <div class="fixture-list" id="fixture-container"></div>
-        </div>
-    </section>
-
-    <!-- MEDYA GALERİSİ BÖLÜMÜ -->
-    <section id="galeri">
-        <div class="container">
-            <h2 class="section-title">Medya & Galeri</h2>
-            <div class="gallery-grid" id="gallery-container"></div>
-        </div>
-    </section>
-
-    <div id="dynamic-pages-container"></div>
-
-    <!-- BİZE YAZIN BÖLÜMÜ -->
-    <section id="bize-yazin">
-        <div class="container">
-            <h2 class="section-title">Bize Yazın</h2>
-            <div class="blog-container">
-                <div class="blog-form-wrapper">
-                    <h3>Fikirlerinizi Paylaşın</h3>
-                    <form id="write-us-form" action="https://formspree.io/f/xeeyoqbe" method="POST" onsubmit="handleFormSubmit(event)">
-                        <div class="form-group">
-                            <label for="name">İsminiz</label>
-                            <input type="text" name="name" id="name" class="form-control" required>
+            <!-- HERO SECTION -->
+            <section class="hero" id="home">
+                <div class="hero-content-wrapper">
+                    <h1 class="hero-main-title" id="hero-title-text">İNANÇ<br><span>GÜCÜ</span></h1>
+                    <div class="hero-slogan-strip">
+                        <div class="slogan-title">MİSYONUMUZ</div>
+                        <div class="slogan-text" id="hero-slogan-text">
+                            Sloganımız olan 'İNANÇ KANATLANDIRIR' ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz.
                         </div>
-                        <div class="form-group">
-                            <label for="message">Düşünceniz</label>
-                            <textarea name="message" id="message" rows="5" class="form-control" required></textarea>
-                        </div>
-                        <input type="hidden" name="_subject" value="Aber SK - Yeni Bize Yazın Mesajı">
-                        <button type="submit" class="submit-btn">Onaya Gönder</button>
-                    </form>
+                    </div>
                 </div>
-                <div>
-                    <h3 style="font-size: 1.3rem; margin-bottom: 2rem; font-weight: 800; text-transform: uppercase;">Yazılanlar</h3>
-                    <div class="approved-posts" id="posts-container"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- İLETİŞİM BÖLÜMÜ -->
-    <section id="iletisim" style="border-bottom: none;">
-        <div class="container">
-            <h2 class="section-title">Bize Ulaşın</h2>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="info-item">
-                        <h4>Telefon</h4>
-                        <a href="tel:+905368939415" id="club-phone-link">0 536 893 94 15</a>
+            <!-- YÖNETİM KURULU BÖLÜMÜ -->
+            <section id="yonetim-kurulu">
+                <h2 class="section-title">Yönetim Kurulu</h2>
+                <div class="board-grid" id="board-container"></div>
+            </section>
+
+            <!-- TEKNİK HEYET BÖLÜMÜ -->
+            <section id="teknik-heyet">
+                <h2 class="section-title">Teknik Heyet</h2>
+                <div class="board-grid" id="staff-container"></div>
+            </section>
+
+            <!-- KADROMUZ BÖLÜMÜ -->
+            <section id="kadro">
+                <h2 class="section-title">Kadromuz</h2>
+                <div id="gk-section"><h3 class="position-group-title">Kaleciler</h3><div class="players-grid" id="gk-players-container"></div></div>
+                <div id="df-section"><h3 class="position-group-title">Defans Oyuncuları</h3><div class="players-grid" id="df-players-container"></div></div>
+                <div id="mf-section"><h3 class="position-group-title">Orta Saha Oyuncuları</h3><div class="players-grid" id="mf-players-container"></div></div>
+                <div id="fw-section"><h3 class="position-group-title">Forvet Oyuncuları</h3><div class="players-grid" id="fw-players-container"></div></div>
+            </section>
+
+            <!-- FORMALARIMIZ BÖLÜMÜ -->
+            <section id="formalar">
+                <h2 class="section-title">Formalarımız</h2>
+                <div class="kits-grid" id="kits-container"></div>
+            </section>
+
+            <!-- TRANSFERLER BÖLÜMÜ -->
+            <section id="transferler">
+                <h2 class="section-title">Transfer Gündemi</h2>
+                <div class="transfers-grid" id="transfers-container"></div>
+            </section>
+
+            <!-- FİKSTÜR BÖLÜMÜ -->
+            <section id="fikstur">
+                <h2 class="section-title">Maç Fikstürü</h2>
+                <div class="fixture-list" id="fixture-container"></div>
+            </section>
+
+            <!-- MEDYA GALERİSİ BÖLÜMÜ -->
+            <section id="galeri">
+                <h2 class="section-title">Medya & Galeri</h2>
+                <div class="gallery-grid" id="gallery-container"></div>
+            </section>
+
+            <div id="dynamic-pages-container"></div>
+
+            <!-- BİZE YAZIN BÖLÜMÜ -->
+            <section id="bize-yazin">
+                <h2 class="section-title">Bize Yazın</h2>
+                <div class="blog-container">
+                    <div class="blog-form-wrapper">
+                        <form id="write-us-form" action="https://formspree.io/f/xeeyoqbe" method="POST" onsubmit="handleFormSubmit(event)">
+                            <div class="form-group">
+                                <label for="name">İsminiz</label>
+                                <input type="text" name="name" id="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Düşünceniz</label>
+                                <textarea name="message" id="message" rows="5" class="form-control" required></textarea>
+                            </div>
+                            <input type="hidden" name="_subject" value="Aber SK - Yeni Bize Yazın Mesajı">
+                            <button type="submit" class="submit-btn">Yayınlanması İçin Gönder</button>
+                        </form>
                     </div>
-                    <div class="info-item">
-                        <h4>E-Posta Adreslerimiz</h4>
-                        <p style="margin-bottom: 0.5rem;"><a href="mailto:info@abersanatsk.org" id="club-email-1">info@abersanatsk.org</a></p>
-                        <p><a href="mailto:ridvan@abersanatsk.org" id="club-email-2">ridvan@abersanatsk.org</a></p>
-                    </div>
-                    <div class="info-item">
-                        <h4>Kulüp Ofisi</h4>
-                        <p id="club-address-text">Cedit Mah. 319. Sk. No:2/A <br>Merkez / Karaman</p>
+                    <div style="margin-top:3rem;">
+                        <h3 style="font-size: 1.1rem; margin-bottom: 2rem; font-family:var(--font-sport); text-transform:uppercase;">Yazılanlar</h3>
+                        <div class="approved-posts" id="posts-container"></div>
                     </div>
                 </div>
-                <div class="contact-map">
-                    <div>
-                        <div style="font-size: 3rem; margin-bottom: 1rem;">📍</div>
-                        Karaman Merkez
+            </section>
+
+            <!-- İLETİŞİM BÖLÜMÜ -->
+            <section id="iletisim" style="border-bottom: none;">
+                <h2 class="section-title">Bize Ulaşın</h2>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <h4>Telefon</h4>
+                            <a href="tel:+905368939415" id="club-phone-link">0 536 893 94 15</a>
+                        </div>
+                        <div class="info-item">
+                            <h4>E-Posta Adreslerimiz</h4>
+                            <p style="margin-bottom: 0.5rem;"><a href="mailto:info@abersanatsk.org" id="club-email-1">info@abersanatsk.org</a></p>
+                            <p><a href="mailto:ridvan@abersanatsk.org" id="club-email-2">ridvan@abersanatsk.org</a></p>
+                        </div>
+                        <div class="info-item">
+                            <h4>Kulüp Ofisi</h4>
+                            <p id="club-address-text">Cedit Mah. 319. Sk. No:2/A <br>Merkez / Karaman</p>
+                        </div>
+                    </div>
+                    <div class="contact-map">
+                        <div>📍 Karaman Merkez</div>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            <!-- FOOTER -->
+            <footer>
+                <div class="footer-logo" id="footer-logo-text">KARAMAN ABER SANAT GÜCÜ</div>
+                <p>© 2026 Tüm Hakları Saklıdır.</p>
+                <div class="signature">DESIGNED BY <span>RIDVAN ARSLAN</span></div>
+                <div class="admin-trigger" onclick="loginAdmin()">Yönetim Paneli Girişi</div>
+            </footer>
+
         </div>
-    </section>
+    </div>
 
     <!-- ADMIN PANEL MODAL -->
     <div class="admin-modal" id="adminModal">
@@ -1089,8 +1094,8 @@
                 <!-- TAB: AYARLAR -->
                 <div id="tabSettings" class="admin-tab-content active">
                     <div class="admin-section-heading">GENEL AYARLAR</div>
-                    <div class="form-group"><label>Logo URL</label><input type="text" id="edit-logo-url" class="form-control"></div>
-                    <div class="form-group"><label>Hero Arka Plan URL</label><input type="text" id="edit-hero-bg-url" class="form-control"></div>
+                    <div class="form-group"><label>Logo URL (Opsiyonel)</label><input type="text" id="edit-logo-url" class="form-control"></div>
+                    <div class="form-group"><label>Hero / Sol Panel Görsel URL</label><input type="text" id="edit-hero-bg-url" class="form-control"></div>
                     <div class="form-group"><label>Kulüp Başlığı</label><input type="text" id="edit-header-title" class="form-control"></div>
                     <div class="form-group"><label>Hero Başlığı</label><input type="text" id="edit-hero-title" class="form-control"></div>
                     <div class="form-group"><label>Slogan</label><input type="text" id="edit-hero-slogan" class="form-control"></div>
@@ -1217,24 +1222,23 @@
                     <div class="form-group" style="margin-bottom:2rem;">
                         <label>Sitenin Genel Renk Şablonu</label>
                         <select id="theme-select" class="form-control" onchange="previewTheme()">
-                            <option value="classic">Kırmızı & Beyaz (Modern Aydınlık)</option>
-                            <option value="dark">Kırmızı & Koyu Gri (Neon Gece)</option>
-                            <option value="karamanAtesi">Karaman Ateşi (Sıcak Canlı Kırmızı)</option>
+                            <option value="classic">Karanlık Spor Gece (Varsayılan Premium)</option>
+                            <option value="karamanAtesi">Karaman Ateşi (Sıcak Canlı Kırmızı & Siyah)</option>
                             <option value="retro">Bordo & Kemik (Retro Premium)</option>
                             <option value="royal">Asil Mavi & Altın (Saray Şıklığı)</option>
                             <option value="pitch">Çimen Yeşili & Koyu Orman</option>
                             <option value="legend">Lacivert & Altın (Efsane Çubuklu)</option>
-                            <option value="cyberpunk">Koyu Kömür & Parlak Turuncu (Gelecekçi)</option>
+                            <option value="cyberpunk">Koyu Kömür & Parlak Turuncu</option>
                         </select>
                     </div>
 
-                    <div class="form-group" style="margin-bottom:2.5rem; background: #fff; padding: 1.5rem; border-radius: 8px; border: 1px solid #eeeeee;">
-                        <label style="color: #111111; font-weight: 800; font-size: 0.9rem;">SİTE YERLEŞİM ŞABLONU</label>
-                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">Sitenizin kart yapılarını ve tasarım iskeletini anında değiştirebilirsiniz:</p>
+                    <div class="form-group" style="margin-bottom:2.5rem; background: #0d121d; padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.08);">
+                        <label style="color: var(--accent-color); font-weight: 800; font-size: 0.9rem;">SİTE YERLEŞİM ŞABLONU</label>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">Kartların ve asimetrinin keskinliğini ayarlayın:</p>
                         <select id="layout-select" class="form-control" onchange="previewTheme()">
                             <option value="asymmetric">Şablon 1: Modern Asimetrik Grid (Yumuşak Oval Kartlar)</option>
-                            <option value="minimalist">Şablon 2: Minimalist İtalyan Tarzı (Zarif Sınırlar)</option>
-                            <option value="aggressive">Şablon 3: Agresif Köşeli Spor Portalı (Dinamik Keskin Sınırlar)</option>
+                            <option value="minimalist">Şablon 2: Minimalist İtalyan Tarzı (Sonsuz Minimalizm)</option>
+                            <option value="aggressive">Şablon 3: Agresif Köşeli Spor Portalı (Sert Çizgiler)</option>
                         </select>
                     </div>
 
@@ -1248,16 +1252,6 @@
             </div>
         </div>
     </div>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="container">
-            <div class="footer-logo" id="footer-logo-text">KARAMAN ABER SANAT GÜCÜ</div>
-            <p>© 2026 Tüm Hakları Saklıdır.</p>
-            <div class="signature">DESIGNED BY <span>RIDVAN ARSLAN</span></div>
-            <div class="admin-trigger" onclick="loginAdmin()">Yönetim Paneli Girişi</div>
-        </div>
-    </footer>
 
     <script>
         // --- ZİYARETÇİ SAYACI ALTYAPISI ---
@@ -1281,11 +1275,10 @@
                 localStorage.setItem('aber_total_visits', totalVisits.toString());
                 localStorage.setItem('aber_daily_visits', dailyVisits.toString());
 
-                // Yönetim paneli elementleri
                 document.getElementById('daily-visits-counter').innerText = dailyVisits;
                 document.getElementById('total-visits-counter').innerText = totalVisits;
             } catch (e) {
-                console.error("Ziyaretçi istatistikleri yüklenirken hata oluştu:", e);
+                console.error(e);
             }
         }
 
@@ -1331,10 +1324,9 @@
             currentTheme: "classic",
             currentLayout: "asymmetric",
             logoUrl: "",
-            // Örnek görsele birebir benzeyen tırmanışçı/zirve default görseli
             heroBgUrl: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1400", 
             headerTitle: "KARAMAN ABER SANAT GÜCÜ",
-            hero: { title: "İNANÇ", slogan: "Sloganımız olan 'İNANÇ KANATLANDIRIR' ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz." },
+            hero: { title: "İNANÇ GÜCÜ", slogan: "Sloganımız olan 'İNANÇ KANATLANDIRIR' ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz." },
             contact: { phone: "0 536 893 94 15", email1: "info@abersanatsk.org", email2: "ridvan@abersanatsk.org", address: "Cedit Mah. 319. Sk. No:2/A <br>Merkez / Karaman" },
             posts: [],
             players: [],
@@ -1351,7 +1343,7 @@
 
         function loadAllData() {
             try {
-                const saved = localStorage.getItem('aber_sk_premium_data_v10');
+                const saved = localStorage.getItem('aber_sk_premium_data_v11');
                 activeData = JSON.parse(JSON.stringify(defaultData));
                 if (saved) {
                     const parsed = JSON.parse(saved);
@@ -1376,7 +1368,7 @@
         }
 
         function saveAllData() {
-            localStorage.setItem('aber_sk_premium_data_v10', JSON.stringify(activeData));
+            localStorage.setItem('aber_sk_premium_data_v11', JSON.stringify(activeData));
         }
 
         function applySavedTheme() {
@@ -1397,13 +1389,14 @@
             document.getElementById('header-club-title').innerText = rawHeaderTitle;
             document.getElementById('footer-logo-text').innerText = rawHeaderTitle;
 
-            const heroSection = document.getElementById('home');
+            const splitLeftBg = document.getElementById('split-left-bg');
             const cleanBg = cleanImageUrl(activeData.heroBgUrl);
-            heroSection.style.backgroundImage = `url('${cleanBg || defaultData.heroBgUrl}')`;
-            document.getElementById('hero-title-text').innerText = heroData.title || defaultData.hero.title;
+            splitLeftBg.style.backgroundImage = `url('${cleanBg || defaultData.heroBgUrl}')`;
+            
+            document.getElementById('hero-title-text').innerHTML = (heroData.title || defaultData.hero.title).replace('\n', '<br>');
             document.getElementById('hero-slogan-text').innerText = heroData.slogan || defaultData.hero.slogan;
 
-            // Yönetim Kurulu Render
+            // Yönetim Kurulu
             const boardContainer = document.getElementById('board-container');
             boardContainer.innerHTML = '';
             (activeData.board || []).forEach(b => {
@@ -1414,7 +1407,7 @@
                     </div>`;
             });
 
-            // Teknik Heyet Render
+            // Teknik Heyet
             const staffContainer = document.getElementById('staff-container');
             staffContainer.innerHTML = '';
             (activeData.staff || []).forEach(s => {
@@ -1425,16 +1418,14 @@
                     </div>`;
             });
 
-            // Oyuncular Kadrosu Render
+            // Oyuncular Kadrosu
             const gkContainer = document.getElementById('gk-players-container');
             const dfContainer = document.getElementById('df-players-container');
             const mfContainer = document.getElementById('mf-players-container');
             const fwContainer = document.getElementById('fw-players-container');
             gkContainer.innerHTML = ''; dfContainer.innerHTML = ''; mfContainer.innerHTML = ''; fwContainer.innerHTML = '';
 
-            let hasPlayers = false;
             (activeData.players || []).forEach(p => {
-                hasPlayers = true;
                 const cardHtml = `
                     <div class="player-card">
                         <div class="player-img-box"><img src="${cleanImageUrl(p.img) || defaultData.logoUrl}" onerror="handleLogoFallback(this)"></div>
@@ -1468,7 +1459,7 @@
                     </div>`;
             });
 
-            // Transfer Gündemi Render
+            // Transfer Gündemi
             const transfersGrid = document.getElementById('transfers-container');
             transfersGrid.innerHTML = '';
             (activeData.transfers || []).forEach(t => {
@@ -1482,7 +1473,7 @@
                     </div>`;
             });
 
-            // Fikstür Render
+            // Fikstür
             const fixtureGrid = document.getElementById('fixture-container');
             fixtureGrid.innerHTML = '';
             (activeData.fixtures || []).forEach(f => {
@@ -1494,7 +1485,7 @@
                     </div>`;
             });
 
-            // Galeri Render
+            // Galeri
             const galleryGrid = document.getElementById('gallery-container');
             galleryGrid.innerHTML = '';
             (activeData.gallery || []).forEach(g => {
@@ -1517,16 +1508,14 @@
                 mainNavLinks.innerHTML += `<li><a href="#${safeId}">${cp.menuTitle}</a></li>`;
                 dynamicContainer.innerHTML += `
                     <section id="${safeId}">
-                        <div class="container">
-                            <h2 class="section-title">${cp.title}</h2>
-                            ${cp.imageUrl ? `<div style="margin-bottom:2rem; width:100%;"><img src="${cleanImageUrl(cp.imageUrl)}" style="width:100%; border-radius:4px;" onerror="handleLogoFallback(this)"></div>` : ''}
-                            ${cp.slogan ? `<h3 style="color:#111111; font-size:1.4rem; margin-bottom:1rem; text-align:center;">${cp.slogan}</h3>` : ''}
-                            <p style="color:var(--text-muted); white-space:pre-line; text-align:center; max-width:800px; margin:0 auto;">${cp.content}</p>
-                        </div>
+                        <h2 class="section-title">${cp.title}</h2>
+                        ${cp.imageUrl ? `<div style="margin-bottom:2rem; width:100%;"><img src="${cleanImageUrl(cp.imageUrl)}" style="width:100%; border-radius:12px;" onerror="handleLogoFallback(this)"></div>` : ''}
+                        ${cp.slogan ? `<h3 style="color:var(--accent-color); font-size:1.3rem; margin-bottom:1rem;">${cp.slogan}</h3>` : ''}
+                        <p style="color:var(--text-muted); white-space:pre-line;">${cp.content}</p>
                     </section>`;
             });
 
-            // Mesajlar Render
+            // Mesajlar
             const postsContainer = document.getElementById('posts-container'); postsContainer.innerHTML = '';
             (activeData.posts || []).filter(p => p.approved).forEach(p => {
                 postsContainer.innerHTML += `<div class="post-card"><div class="post-meta">${p.author} // Taraftar</div><i>"${p.text}"</i></div>`;
@@ -1800,29 +1789,28 @@
 
         // --- RENK PALETLERİ ---
         const themes = {
-            classic: `:root { --bg-white: #ffffff; --bg-dark: #111111; --text-light: #ffffff; --text-dark: #111111; --text-muted: #666666; --accent-red: #111111; --premium-gray: #f9f9f9; --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.03); --font-main: 'Inter', sans-serif; --font-sport: 'Rajdhani', sans-serif; }`,
-            dark: `:root { --bg-white: #0a0e17; --bg-dark: #ffffff; --text-light: #000000; --text-dark: #f8fafc; --text-muted: #94a3b8; --accent-red: #ff4d5a; --premium-gray: #1e293b; --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); --font-main: 'Inter', sans-serif; --font-sport: 'Rajdhani', sans-serif; }`,
-            karamanAtesi: `:root { --bg-white: #fffdfd; --bg-dark: #200104; --text-light: #ffffff; --text-dark: #2b0206; --text-muted: #a63f4b; --accent-red: #c1121f; --premium-gray: #fff0f1; --card-shadow: 0 10px 30px rgba(193, 18, 31, 0.05); --font-main: 'Inter', sans-serif; --font-sport: 'Rajdhani', sans-serif; }`,
-            retro: `:root { --bg-white: #f5ebe0; --bg-dark: #3a1f13; --text-light: #f5ebe0; --text-dark: #3a1f13; --text-muted: #7f5539; --accent-red: #9e2a2b; --premium-gray: #e3d5ca; --card-shadow: 0 10px 30px rgba(58, 31, 19, 0.06); --font-main: 'Inter', sans-serif; --font-sport: 'Rajdhani', sans-serif; }`,
-            royal: `:root { --bg-white: #ffffff; --bg-dark: #0b1a30; --text-light: #ffffff; --text-dark: #0d1f3d; --text-muted: #617899; --accent-red: #b89047; --premium-gray: #f2f6fc; --card-shadow: 0 10px 30px rgba(13, 31, 61, 0.04); --font-main: 'Inter', sans-serif; --font-sport: 'Rajdhani', sans-serif; }`,
-            pitch: `:root { --bg-white: #ffffff; --bg-dark: #122913; --text-light: #ffffff; --text-dark: #173319; --text-muted: #537a56; --accent-red: #2d8a4e; --premium-gray: #f3f9f4; --card-shadow: 0 10px 30px rgba(23, 51, 25, 0.04); --font-main: 'Inter', sans-serif; --font-sport: 'Rajdhani', sans-serif; }`,
-            legend: `:root { --bg-white: #ffffff; --bg-dark: #111a2e; --text-light: #ffffff; --text-dark: #162447; --text-muted: #516280; --accent-red: #d4af37; --premium-gray: #f5f7fa; --card-shadow: 0 10px 30px rgba(22, 36, 71, 0.05); --font-main: 'Inter', sans-serif; --font-sport: 'Rajdhani', sans-serif; }`,
-            cyberpunk: `:root { --bg-white: #0c0f12; --bg-dark: #ffffff; --text-light: #000000; --text-dark: #e2e8f0; --text-muted: #94a3b8; --accent-red: #f97316; --premium-gray: #181f25; --card-shadow: 0 10px 35px rgba(0, 0, 0, 0.6); --font-main: 'Inter', sans-serif; --font-sport: 'Rajdhani', sans-serif; }`
+            classic: `:root { --bg-white: #0a0e14; --bg-dark: #ffffff; --text-light: #0a0e14; --text-dark: #ffffff; --text-muted: #8e9bb0; --accent-color: #ff3344; --premium-gray: #121824; --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); --font-main: 'Syne', sans-serif; --font-sport: 'Syncopate', sans-serif; }`,
+            karamanAtesi: `:root { --bg-white: #0d0203; --bg-dark: #ffffff; --text-light: #0d0203; --text-dark: #ffffff; --text-muted: #bda0a2; --accent-color: #c1121f; --premium-gray: #1a080a; --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.4); --font-main: 'Syne', sans-serif; --font-sport: 'Syncopate', sans-serif; }`,
+            retro: `:root { --bg-white: #f5ebe0; --bg-dark: #3a1f13; --text-light: #f5ebe0; --text-dark: #3a1f13; --text-muted: #7f5539; --accent-color: #9e2a2b; --premium-gray: #e3d5ca; --card-shadow: 0 20px 50px rgba(58, 31, 19, 0.1); --font-main: 'Syne', sans-serif; --font-sport: 'Syncopate', sans-serif; }`,
+            royal: `:root { --bg-white: #050d1a; --bg-dark: #ffffff; --text-light: #050d1a; --text-dark: #ffffff; --text-muted: #8198b8; --accent-color: #b89047; --premium-gray: #0b1526; --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); --font-main: 'Syne', sans-serif; --font-sport: 'Syncopate', sans-serif; }`,
+            pitch: `:root { --bg-white: #071408; --bg-dark: #ffffff; --text-light: #071408; --text-dark: #ffffff; --text-muted: #7fa882; --accent-color: #2d8a4e; --premium-gray: #0e2410; --card-shadow: 0 20px 50px rgba(0,0,0,0.3); --font-main: 'Syne', sans-serif; --font-sport: 'Syncopate', sans-serif; }`,
+            legend: `:root { --bg-white: #0a0f1d; --bg-dark: #ffffff; --text-light: #0a0f1d; --text-dark: #ffffff; --text-muted: #7d8ea6; --accent-color: #d4af37; --premium-gray: #12192e; --card-shadow: 0 20px 50px rgba(0,0,0,0.3); --font-main: 'Syne', sans-serif; --font-sport: 'Syncopate', sans-serif; }`,
+            cyberpunk: `:root { --bg-white: #080a0d; --bg-dark: #ffffff; --text-light: #080a0d; --text-dark: #ffffff; --text-muted: #8d9da6; --accent-color: #f97316; --premium-gray: #13171f; --card-shadow: 0 20px 50px rgba(0,0,0,0.4); --font-main: 'Syne', sans-serif; --font-sport: 'Syncopate', sans-serif; }`
         };
 
         // --- PREMİUM YERLEŞİM ŞABLONLARI ---
         const layouts = {
             asymmetric: `
                 :root {
-                    --card-radius: 4px;
-                    --border-style: 1px solid #eeeeee;
+                    --card-radius: 16px;
+                    --border-style: 1px solid rgba(255, 255, 255, 0.08);
                     --card-align: left;
                 }
             `,
             minimalist: `
                 :root {
                     --card-radius: 0px;
-                    --border-style: 1px solid rgba(0, 0, 0, 0.08);
+                    --border-style: none;
                     --card-align: center;
                 }
                 .board-card, .player-card, .transfer-card, .fixture-card, .gallery-item {
@@ -1836,11 +1824,11 @@
             aggressive: `
                 :root {
                     --card-radius: 0px;
-                    --border-style: 2px solid var(--text-dark);
+                    --border-style: 2px solid var(--accent-color);
                     --card-align: left;
                 }
                 .board-card, .player-card, .transfer-card, .fixture-card, .gallery-item {
-                    box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.1) !important;
+                    box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.5) !important;
                 }
             `
         };
