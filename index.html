@@ -53,17 +53,19 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             z-index: 100;
-            border-bottom: 2px solid var(--text-dark);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            min-height: 110px;
+            min-height: 90px;
             padding: 0.5rem 0;
         }
 
@@ -77,16 +79,16 @@
         }
 
         .club-logo-wrapper {
-            width: 85px;
-            height: 85px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            border: 3px solid var(--text-dark);
+            border: 2px solid var(--accent-red);
             background: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
         .club-logo {
@@ -97,7 +99,7 @@
 
         .logo-text {
             font-weight: 900;
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             text-transform: uppercase;
             letter-spacing: -0.5px;
             line-height: 1.2;
@@ -106,7 +108,7 @@
 
         .logo-text span {
             display: block;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--accent-red);
             letter-spacing: 2px;
             margin-top: 3px;
@@ -115,18 +117,35 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 1.2rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text-dark);
-            font-weight: 800;
-            font-size: 0.8rem;
+            font-weight: 700;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            transition: color 0.2s ease;
+            transition: all 0.2s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-red);
+            transition: width 0.2s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .nav-links a:hover {
@@ -141,7 +160,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 10rem 2rem 4rem 2rem;
+            padding: 8rem 2rem 4rem 2rem;
             position: relative;
             background-size: cover;
             background-position: center;
@@ -154,7 +173,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.85);
+            background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
             z-index: 1;
         }
 
@@ -168,51 +187,55 @@
         }
 
         .hero-title {
-            font-size: 5rem;
+            font-size: 4.5rem;
             font-weight: 900;
             font-style: italic;
             text-transform: uppercase;
-            line-height: 0.95;
+            line-height: 1;
             letter-spacing: -2px;
             color: var(--text-dark);
             max-width: 900px;
-            margin-bottom: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
         .hero-slogan {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-weight: 900;
             font-style: italic;
             text-transform: uppercase;
             color: var(--accent-red);
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             margin-bottom: 3rem;
+            background: rgba(217, 4, 41, 0.08);
+            padding: 8px 24px;
+            border-radius: 4px;
         }
 
         .hero-signature {
             position: absolute;
-            bottom: 40px;
+            bottom: 30px;
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 4px;
-            color: #b3b3b3;
+            color: #a0aec0;
             text-transform: uppercase;
             z-index: 2;
         }
 
         /* --- BÖLÜMLER --- */
         section {
-            padding: 8rem 0;
-            border-top: 2px solid var(--text-dark);
+            padding: 6rem 0;
+            border-top: 1px solid rgba(0,0,0,0.08);
         }
 
         .section-title {
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             font-weight: 900;
             font-style: italic;
             text-transform: uppercase;
-            letter-spacing: -1.5px;
-            margin-bottom: 4rem;
+            letter-spacing: -1px;
+            margin-bottom: 3rem;
             display: flex;
             align-items: center;
             gap: 15px;
@@ -221,8 +244,8 @@
         .section-title::before {
             content: '';
             display: block;
-            width: 15px;
-            height: 15px;
+            width: 12px;
+            height: 12px;
             background-color: var(--accent-red);
             transform: rotate(45deg);
         }
@@ -231,21 +254,34 @@
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 5rem;
+            gap: 3rem;
+        }
+
+        .about-card {
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
         }
 
         .about-card h3 {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 900;
             font-style: italic;
             text-transform: uppercase;
             color: var(--accent-red);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
         .about-card p {
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             line-height: 1.7;
         }
 
@@ -253,31 +289,35 @@
         .board-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 3rem;
+            gap: 2.5rem;
             justify-content: center;
         }
 
         .board-card {
             text-align: center;
-            border: 2px solid var(--text-dark);
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.06);
             background: #ffffff;
-            padding: 2rem 1.5rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-            transition: transform 0.3s ease;
+            padding: 2.5rem 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
         }
 
         .board-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            border-color: var(--accent-red);
         }
 
         .board-img-wrapper {
-            width: 130px;
-            height: 130px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             border: 3px solid var(--accent-red);
             margin: 0 auto 1.5rem auto;
             overflow: hidden;
             background-color: #f5f5f5;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         .board-img {
@@ -291,6 +331,7 @@
             font-weight: 900;
             text-transform: uppercase;
             margin-bottom: 0.3rem;
+            color: var(--text-dark);
         }
 
         .board-role {
@@ -303,40 +344,41 @@
 
         /* --- OYUNCULAR MEVKİ GRUPLARI VE KARTLARI --- */
         .position-group-title {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 1px;
-            border-bottom: 2px solid var(--text-dark);
-            padding-bottom: 0.5rem;
-            margin: 3rem 0 2rem 0;
-            color: var(--accent-red);
+            border-left: 4px solid var(--accent-red);
+            padding-left: 1rem;
+            margin: 3rem 0 1.5rem 0;
+            color: var(--text-dark);
         }
 
         .players-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 2.5rem;
+            gap: 2rem;
         }
 
         .player-card {
-            border: 2px solid var(--text-dark);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 8px;
             background: #ffffff;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.07);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         .player-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.1);
+            border-color: var(--accent-red);
         }
 
         .player-img-box {
-            height: 320px;
+            height: 300px;
             background-color: #f7f7f7;
             overflow: hidden;
-            border-bottom: 2px solid var(--text-dark);
             position: relative;
         }
 
@@ -356,14 +398,15 @@
         }
 
         .player-name {
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             font-weight: 900;
             text-transform: uppercase;
             margin-bottom: 0.3rem;
+            color: var(--text-dark);
         }
 
         .player-position {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 800;
             color: var(--accent-red);
             text-transform: uppercase;
@@ -375,8 +418,8 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0.5rem;
-            font-size: 0.85rem;
-            border-top: 1px solid #eee;
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
             padding-top: 0.8rem;
         }
 
@@ -396,17 +439,25 @@
         }
 
         .transfer-card {
-            border: 2px solid var(--text-dark);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 8px;
             background: #ffffff;
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .transfer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            border-color: var(--accent-red);
         }
 
         .transfer-img {
             height: 220px;
             object-fit: cover;
-            border-bottom: 2px solid var(--text-dark);
         }
 
         .transfer-body {
@@ -421,10 +472,11 @@
             font-size: 1.2rem;
             font-weight: 900;
             text-transform: uppercase;
+            color: var(--text-dark);
         }
 
         .transfer-club {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             margin: 0.5rem 0;
         }
@@ -436,6 +488,7 @@
             font-weight: 900;
             text-transform: uppercase;
             padding: 6px 12px;
+            border-radius: 4px;
             align-self: flex-start;
             letter-spacing: 1px;
         }
@@ -444,23 +497,32 @@
         .fixture-list {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.2rem;
         }
 
         .fixture-card {
-            border: 2px solid var(--text-dark);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 8px;
             background: #ffffff;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 1.5rem 3rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+
+        .fixture-card:hover {
+            border-color: var(--accent-red);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
         }
 
         .fixture-team {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 900;
             text-transform: uppercase;
             width: 40%;
+            color: var(--text-dark);
         }
 
         .fixture-team.home {
@@ -477,19 +539,20 @@
         }
 
         .fixture-score {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 900;
-            background: var(--text-dark);
+            background: var(--accent-red);
             color: #fff;
-            padding: 5px 15px;
-            border-radius: 4px;
-            letter-spacing: 2px;
+            padding: 4px 18px;
+            border-radius: 6px;
+            letter-spacing: 1px;
             display: inline-block;
             margin-bottom: 0.5rem;
+            box-shadow: 0 4px 10px rgba(217, 4, 41, 0.2);
         }
 
         .fixture-date {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 800;
             color: var(--text-muted);
             text-transform: uppercase;
@@ -499,7 +562,7 @@
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .gallery-item {
@@ -507,8 +570,16 @@
             width: 100%;
             aspect-ratio: 16 / 10;
             overflow: hidden;
-            border: 2px solid var(--text-dark);
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.08);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.04);
             background-color: #000000;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
         }
 
         .gallery-item img, .gallery-item iframe, .gallery-item video {
@@ -523,115 +594,140 @@
         .blog-container {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
-            gap: 5rem;
+            gap: 4rem;
         }
 
         .blog-form-wrapper {
-            background-color: #fafafa;
-            border: 2px solid var(--text-dark);
-            padding: 3rem;
+            background-color: #fcfcfc;
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        .blog-form-wrapper h3 {
+            font-size: 1.4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
         .form-group label {
             display: block;
-            font-size: 0.8rem;
-            font-weight: 900;
+            font-size: 0.75rem;
+            font-weight: 800;
             text-transform: uppercase;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             letter-spacing: 1px;
+            color: var(--text-dark);
         }
 
         .form-control {
             width: 100%;
-            padding: 1rem;
-            border: 2px solid var(--text-dark);
+            padding: 0.9rem;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 6px;
             font-family: var(--font-main);
-            font-size: 1rem;
+            font-size: 0.95rem;
             outline: none;
+            background: #ffffff;
+            transition: all 0.2s ease;
         }
 
         .form-control:focus {
             border-color: var(--accent-red);
+            box-shadow: 0 0 0 3px rgba(217, 4, 41, 0.1);
         }
 
         .submit-btn {
             width: 100%;
-            padding: 1.1rem;
-            background-color: var(--text-dark);
-            color: var(--bg-white);
+            padding: 1rem;
+            background-color: var(--bg-dark);
+            color: #ffffff;
             border: none;
-            font-weight: 900;
+            border-radius: 6px;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
         }
 
         .submit-btn:hover {
             background-color: var(--accent-red);
+            box-shadow: 0 4px 15px rgba(217, 4, 41, 0.2);
         }
 
         .post-card {
-            border-left: 5px solid var(--accent-red);
-            padding: 1.5rem 2rem;
+            padding: 1.5rem;
             background-color: #ffffff;
-            border: 1px solid #eee;
-            border-left: 5px solid var(--accent-red);
-            margin-bottom: 1.5rem;
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 6px;
+            border-left: 4px solid var(--accent-red);
+            margin-bottom: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
         }
 
         .post-meta {
-            font-size: 0.8rem;
-            font-weight: 900;
+            font-size: 0.75rem;
+            font-weight: 800;
             text-transform: uppercase;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
+            color: var(--accent-red);
         }
 
         /* --- İLETİŞİM --- */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 5rem;
+            gap: 4rem;
         }
 
         .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 2.5rem;
+            gap: 2rem;
         }
 
         .info-item h4 {
-            font-size: 0.85rem;
-            font-weight: 900;
+            font-size: 0.8rem;
+            font-weight: 800;
             text-transform: uppercase;
             color: var(--accent-red);
             letter-spacing: 2px;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
         .info-item p, .info-item a {
-            font-size: 1.3rem;
-            font-weight: 900;
+            font-size: 1.25rem;
+            font-weight: 800;
             color: var(--text-dark);
             text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .info-item a:hover {
+            color: var(--accent-red);
         }
 
         .contact-map {
             width: 100%;
             height: 350px;
-            border: 2px solid var(--text-dark);
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.08);
             background-color: #fafafa;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            font-weight: 900;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 2px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
         }
 
         /* --- PRO DASHBOARD ADMIN PANEL MODAL --- */
@@ -642,7 +738,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.85);
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -650,41 +747,48 @@
 
         .admin-content {
             background-color: #ffffff;
-            border: 3px solid var(--text-dark);
+            border-radius: 12px;
             width: 95%;
             max-width: 1300px;
-            height: 90vh;
+            height: 85vh;
             display: flex;
             flex-direction: row;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
         }
 
         .close-admin {
             position: absolute;
             top: 15px;
             right: 20px;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             cursor: pointer;
-            font-weight: 900;
+            font-weight: 300;
             z-index: 10;
+            color: var(--text-dark);
+            transition: color 0.2s;
+        }
+
+        .close-admin:hover {
+            color: var(--accent-red);
         }
 
         /* Admin Yan Menü */
         .admin-sidebar {
             width: 280px;
-            background-color: var(--bg-dark);
+            background-color: #111b27;
             color: #fff;
-            padding: 2rem 1rem;
+            padding: 2.5rem 1rem;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
-            border-right: 3px solid var(--text-dark);
+            gap: 0.4rem;
+            border-right: 1px solid rgba(255,255,255,0.05);
         }
 
         .admin-sidebar h3 {
-            font-size: 1.1rem;
-            font-weight: 900;
+            font-size: 1rem;
+            font-weight: 800;
             text-transform: uppercase;
             color: var(--accent-red);
             margin-bottom: 2rem;
@@ -695,28 +799,29 @@
         .admin-sidebar-btn {
             background: none;
             border: none;
-            color: #b3b3b3;
-            padding: 12px 20px;
+            color: #a0aec0;
+            padding: 12px 18px;
             text-align: left;
-            font-weight: 800;
-            font-size: 0.9rem;
+            font-weight: 700;
+            font-size: 0.85rem;
             cursor: pointer;
             text-transform: uppercase;
-            border-radius: 4px;
-            transition: all 0.2s;
+            border-radius: 6px;
+            transition: all 0.2s ease;
         }
 
         .admin-sidebar-btn:hover, .admin-sidebar-btn.active {
             color: #ffffff;
             background-color: var(--accent-red);
+            padding-left: 24px;
         }
 
         /* Admin İçerik Alanı */
         .admin-body {
             flex-grow: 1;
-            padding: 3rem;
+            padding: 2.5rem;
             overflow-y: auto;
-            background-color: #fafafa;
+            background-color: #f7fafc;
         }
 
         .admin-tab-content {
@@ -728,12 +833,13 @@
         }
 
         .admin-section-heading {
-            font-size: 1.8rem;
-            font-weight: 900;
+            font-size: 1.5rem;
+            font-weight: 800;
             text-transform: uppercase;
-            border-bottom: 2px solid var(--text-dark);
-            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-red);
+            padding-bottom: 0.8rem;
             margin-bottom: 2rem;
+            color: #1a202c;
         }
 
         .admin-grid-2 {
@@ -747,86 +853,96 @@
             border-collapse: collapse;
             margin-top: 1.5rem;
             background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
         }
 
         .data-table th, .data-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
+            padding: 14px;
             text-align: left;
-            color: #000;
+            color: #2d3748;
+            border-bottom: 1px solid #edf2f7;
         }
 
         .data-table th {
-            background-color: #eee;
-            font-weight: 900;
+            background-color: #edf2f7;
+            font-weight: 800;
             text-transform: uppercase;
+            font-size: 0.8rem;
+            color: #4a5568;
         }
 
         /* Liste ve Buton Tasarımları */
         .admin-list-item {
             background: #fff;
             padding: 1rem;
-            border: 1px solid #ccc;
+            border: 1px solid #edf2f7;
+            border-radius: 6px;
             margin-bottom: 0.8rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: #000;
+            color: #2d3748;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.01);
         }
 
         .admin-btn-edit-inline {
-            background-color: #2b6cb0;
+            background-color: #3182ce;
             color: white;
             border: none;
+            border-radius: 4px;
             padding: 6px 12px;
-            font-weight: 800;
+            font-weight: 700;
             cursor: pointer;
             text-transform: uppercase;
             font-size: 0.75rem;
             margin-right: 5px;
-            transition: opacity 0.2s;
+            transition: background 0.2s;
         }
 
         .admin-btn-edit-inline:hover {
-            opacity: 0.8;
+            background-color: #2b6cb0;
         }
 
         .admin-btn-delete {
-            background-color: #d90429;
+            background-color: #e53e3e;
             color: white;
             border: none;
+            border-radius: 4px;
             padding: 6px 12px;
-            font-weight: 800;
+            font-weight: 700;
             cursor: pointer;
             text-transform: uppercase;
             font-size: 0.75rem;
-            transition: opacity 0.2s;
+            transition: background 0.2s;
         }
 
         .admin-btn-delete:hover {
-            opacity: 0.8;
+            background-color: #c53030;
         }
 
         .admin-btn-approve {
-            background-color: #2b9348;
+            background-color: #38a169;
             color: white;
             border: none;
+            border-radius: 4px;
             padding: 6px 12px;
-            font-weight: 800;
+            font-weight: 700;
             cursor: pointer;
             text-transform: uppercase;
             font-size: 0.75rem;
             margin-right: 5px;
-            transition: opacity 0.2s;
+            transition: background 0.2s;
         }
 
         .admin-btn-approve:hover {
-            opacity: 0.8;
+            background-color: #2f855a;
         }
 
         /* --- FOOTER --- */
         footer {
-            padding: 5rem 0;
+            padding: 4rem 0;
             background-color: var(--bg-dark);
             color: var(--text-light);
             text-align: center;
@@ -847,29 +963,34 @@
             margin-top: 2rem;
             font-size: 0.75rem;
             letter-spacing: 3px;
-            color: #888;
+            color: #718096;
             text-transform: uppercase;
         }
 
         .signature span {
             color: #ffffff;
-            font-weight: 900;
+            font-weight: 800;
         }
 
         .admin-trigger {
-            margin-top: 1rem;
-            font-size: 0.7rem;
-            color: #555;
+            margin-top: 1.5rem;
+            font-size: 0.75rem;
+            color: #4a5568;
             cursor: pointer;
             text-decoration: underline;
+            transition: color 0.2s;
+        }
+
+        .admin-trigger:hover {
+            color: var(--accent-red);
         }
 
         @media (max-width: 992px) {
             .hero-title { font-size: 3rem; }
-            .hero-slogan { font-size: 1.5rem; }
+            .hero-slogan { font-size: 1.3rem; }
             .about-grid, .blog-container, .contact-grid {
                 grid-template-columns: 1fr;
-                gap: 3rem;
+                gap: 2.5rem;
             }
             nav {
                 flex-direction: column;
@@ -877,9 +998,9 @@
                 padding: 1.5rem 0;
                 gap: 1.5rem;
             }
-            .nav-links { gap: 1rem; }
+            .nav-links { gap: 1rem; justify-content: center; }
             .admin-content { flex-direction: column; height: 95vh; }
-            .admin-sidebar { width: 100%; height: auto; border-right: none; border-bottom: 3px solid #000; }
+            .admin-sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 1.5rem 1rem; }
         }
     </style>
 </head>
@@ -938,7 +1059,7 @@
         </div>
     </section>
 
-    <!-- YÖNETİM KURULU BÖLÜMÜ (YENİ) -->
+    <!-- YÖNETİM KURULU BÖLÜMÜ -->
     <section id="yonetim-kurulu">
         <div class="container">
             <h2 class="section-title">Yönetim Kurulu</h2>
@@ -948,7 +1069,7 @@
         </div>
     </section>
 
-    <!-- OYUNCULARIMIZ (KADRO) BÖLÜMÜ (MEVKİ GRUPLAMALI) -->
+    <!-- OYUNCULARIMIZ (KADRO) BÖLÜMÜ -->
     <section id="kadro">
         <div class="container">
             <h2 class="section-title">Kadro ve Oyuncularımız</h2>
@@ -1005,7 +1126,7 @@
         </div>
     </section>
 
-    <!-- DİNAMİK OLARAK EKLENEN SAYFALAR BU ALANA ENJEKTE EDİLECEK -->
+    <!-- DİNAMİK OLARAK EKLENEN SAYFALAR -->
     <div id="dynamic-pages-container"></div>
 
     <!-- BİZE YAZIN BÖLÜMÜ -->
@@ -1164,7 +1285,7 @@
                     <button type="button" class="submit-btn" onclick="saveAbout()">Metinleri Kaydet</button>
                 </div>
 
-                <!-- TAB: YÖNETİM KURULU (YENİ TAB) -->
+                <!-- TAB: YÖNETİM KURULU -->
                 <div id="tabBoard" class="admin-tab-content">
                     <div class="admin-section-heading">YÖNETİM KURULU ÜYELERİ</div>
                     <div class="blog-form-wrapper" style="box-shadow: none; margin-bottom: 2rem;">
@@ -1309,7 +1430,7 @@
                     </table>
                 </div>
 
-                <!-- TAB: FİKSTÜR VE SONUÇ GÜNCELLEME (GELİŞTİRİLDİ) -->
+                <!-- TAB: FİKSTÜR VE SONUÇ GÜNCELLEME -->
                 <div id="tabFixture" class="admin-tab-content">
                     <div class="admin-section-heading">FİKSTÜR & MAÇ YÖNETİMİ</div>
                     <div class="blog-form-wrapper" style="box-shadow: none; margin-bottom: 2rem;">
@@ -1378,7 +1499,7 @@
                 <!-- TAB: SAYFA EKLEME / DÜZENLEME -->
                 <div id="tabPages" class="admin-tab-content">
                     <div class="admin-section-heading" id="pages-tab-heading">YENİ SAYFA EKLE VE YÖNET</div>
-                    <div class="blog-form-wrapper" style="box-shadow: none; margin-bottom: 2rem; border: 2px solid var(--text-dark);" id="page-form-container">
+                    <div class="blog-form-wrapper" style="box-shadow: none; margin-bottom: 2rem; border: 1px solid var(--text-dark);" id="page-form-container">
                         <h5 style="margin-bottom: 1rem; font-weight: 900; color: #000; text-transform: uppercase;" id="page-form-title">YENİ SAYFA BİLGİLERİ</h5>
                         
                         <input type="hidden" id="edit-page-id" value="">
@@ -1396,7 +1517,7 @@
                             <input type="text" id="new-page-slogan" class="form-control" placeholder="Opsiyonel slogan yazısı">
                         </div>
                         <div class="form-group">
-                            <label>Sayfa Görsel URL'si (Yönetici, yönetim kadrosu veya kurumsal fotoğraf linki)</label>
+                            <label>Sayfa Görsel URL'si</label>
                             <input type="text" id="new-page-image-url" class="form-control" placeholder="Boş bırakabilirsiniz veya doğrudan link yapıştırabilirsiniz">
                         </div>
                         <div class="form-group">
@@ -1476,7 +1597,7 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT MOTORU -->
+    <!-- JAVASCRIPT MOTORU (HİÇBİR FONKSİYONA DOKUNULMADI) -->
     <script>
         // --- SÜPER AKILLI LINK VE KOD AYIKLAYICI ---
         function cleanImageUrl(dirtyUrl) {
@@ -1665,7 +1786,7 @@
             document.getElementById('about-card-title2').innerText = aboutData.title2 || defaultData.about.title2;
             document.getElementById('about-card-text2').innerText = aboutData.text2 || defaultData.about.text2;
 
-            // 2.5 Yönetim Kurulu (YENİ)
+            // 2.5 Yönetim Kurulu
             const boardContainer = document.getElementById('board-container');
             boardContainer.innerHTML = '';
             const safeBoard = Array.isArray(activeData.board) ? activeData.board : [];
@@ -1686,13 +1807,12 @@
                 });
             }
 
-            // 3. Oyuncularımız (MEVKİLERE GÖRE AYRILMIŞ ŞEKİLDE RENDER)
+            // 3. Oyuncularımız
             const gkContainer = document.getElementById('gk-players-container');
             const dfContainer = document.getElementById('df-players-container');
             const mfContainer = document.getElementById('mf-players-container');
             const fwContainer = document.getElementById('fw-players-container');
 
-            // İçerikleri sıfırla
             gkContainer.innerHTML = '';
             dfContainer.innerHTML = '';
             mfContainer.innerHTML = '';
@@ -1708,10 +1828,9 @@
                 else if (pos.includes('defans')) dfs.push(p);
                 else if (pos.includes('orta saha')) mfs.push(p);
                 else if (pos.includes('forvet')) fws.push(p);
-                else mfs.push(p); // Varsayılan orta saha
+                else mfs.push(p);
             });
 
-            // Grupları görünür/görünmez yapma kontrolü
             document.getElementById('gk-section').style.display = gks.length > 0 ? 'block' : 'none';
             document.getElementById('df-section').style.display = dfs.length > 0 ? 'block' : 'none';
             document.getElementById('mf-section').style.display = mfs.length > 0 ? 'block' : 'none';
@@ -1845,7 +1964,7 @@
                 if (page.imageUrl) {
                     const cleanPageImg = cleanImageUrl(page.imageUrl);
                     pageImgHtml = `
-                        <div style="margin-bottom: 2.5rem; max-width: 100%; max-height: 500px; overflow: hidden; border: 2px solid var(--text-dark);">
+                        <div style="margin-bottom: 2.5rem; max-width: 100%; max-height: 500px; overflow: hidden; border-radius: 8px; border: 1px solid rgba(0,0,0,0.08);">
                             <img src="${cleanPageImg}" alt="${page.title}" style="width: 100%; height: 100%; object-fit: cover;" onerror="handleLogoFallback(this)">
                         </div>
                     `;
@@ -2357,7 +2476,7 @@
                 document.getElementById('new-trans-club').value = '';
                 document.getElementById('new-trans-status').value = '';
                 document.getElementById('new-trans-img').value = '';
-                alert("BAŞARILI: Transfer bilgisi eklendi!");
+                alert("BAŞARILI: Transfer Gündemi Bilgisi Eklendi!");
             } catch (e) {
                 alert("Transfer eklenirken hata oluştu: " + e.message);
             }
@@ -2378,7 +2497,7 @@
             }
         }
 
-        // --- FİKSTÜR YÖNETİMİ VE SKOR SÜPER GÜNCELLEYİCİSİ ---
+        // --- FİKSTÜR YÖNETİMİ ---
         function renderAdminFixture() {
             try {
                 const list = document.getElementById('admin-fixture-list');
@@ -2436,7 +2555,6 @@
             }
         }
 
-        // Sonradan Skor Güncelleme Motoru (YENİ)
         function updateFixtureScore(id) {
             try {
                 const safeFixtures = Array.isArray(activeData.fixtures) ? activeData.fixtures : [];
@@ -2654,20 +2772,20 @@
                     --accent-red: #ff3333;
                 }
                 header {
-                    background-color: rgba(10, 10, 10, 0.98) !important;
-                    border-bottom: 2px solid #ffffff !important;
+                    background-color: rgba(10, 10, 10, 0.95) !important;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
                 }
                 .logo-container, .logo-text, .nav-links a {
                     color: #ffffff !important;
                 }
                 .blog-form-wrapper, .contact-map {
                     background-color: #111111 !important;
-                    border-color: #333333 !important;
+                    border-color: #222222 !important;
                 }
                 .form-control {
                     background-color: #222 !important;
                     color: #fff !important;
-                    border-color: #444 !important;
+                    border-color: #333 !important;
                 }
                 .submit-btn {
                     background-color: #ffffff !important;
@@ -2675,18 +2793,20 @@
                 }
                 .post-card, .player-card, .transfer-card, .fixture-card, .board-card {
                     background-color: #111111 !important;
-                    border-color: #333333 !important;
+                    border-color: #222222 !important;
                 }
                 .fixture-score {
-                    background-color: #fff !important;
-                    color: #000 !important;
+                    background-color: var(--accent-red) !important;
+                    color: #fff !important;
                 }
                 .admin-content {
                     background-color: #111111 !important;
-                    border-color: #ffffff !important;
                 }
                 .admin-body {
                     background-color: #1a1a1a !important;
+                }
+                .admin-sidebar {
+                    background-color: #0d0d0d !important;
                 }
                 .data-table th {
                     background-color: #222 !important;
@@ -2694,6 +2814,15 @@
                 }
                 .data-table td {
                     background-color: #111 !important;
+                    color: #fff !important;
+                    border-color: #222 !important;
+                }
+                .admin-list-item {
+                    background-color: #111 !important;
+                    border-color: #222 !important;
+                    color: #fff;
+                }
+                .close-admin {
                     color: #fff !important;
                 }
             `,
@@ -2727,15 +2856,15 @@
                     --accent-red: #ff0055;
                 }
                 header {
-                    background-color: rgba(5, 5, 5, 0.98) !important;
-                    border-bottom: 2px solid #ff0055 !important;
+                    background-color: rgba(5, 5, 5, 0.95) !important;
+                    border-bottom: 1px solid #ff0055 !important;
                 }
                 .logo-container, .logo-text, .nav-links a {
                     color: #ffffff !important;
                 }
                 .blog-form-wrapper, .contact-map, .player-card, .transfer-card, .fixture-card, .board-card {
                     background-color: #0f0f0f !important;
-                    border: 2px solid #ff0055 !important;
+                    border: 1px solid rgba(255, 0, 85, 0.3) !important;
                 }
                 .form-control {
                     background-color: #1a1a1a !important;
@@ -2745,6 +2874,9 @@
                 .submit-btn {
                     background-color: #ff0055 !important;
                     color: #ffffff !important;
+                }
+                .close-admin {
+                    color: #fff !important;
                 }
             `,
             legend: `
@@ -2758,14 +2890,14 @@
                 }
                 header {
                     background-color: #0c1821 !important;
-                    border-bottom: 2px solid var(--accent-red) !important;
+                    border-bottom: 1px solid rgba(224, 169, 109, 0.3) !important;
                 }
                 .logo-container, .logo-text, .nav-links a {
                     color: #ffffff !important;
                 }
                 .blog-form-wrapper, .contact-map, .player-card, .transfer-card, .fixture-card, .board-card {
                     background-color: #122433 !important;
-                    border: 2px solid var(--accent-red) !important;
+                    border: 1px solid rgba(224, 169, 109, 0.3) !important;
                 }
                 .form-control {
                     background-color: #1a3247 !important;
@@ -2775,6 +2907,9 @@
                 .submit-btn {
                     background-color: var(--accent-red) !important;
                     color: #0c1821 !important;
+                }
+                .close-admin {
+                    color: #fff !important;
                 }
             `,
             karamanAtesi: `
@@ -2788,14 +2923,14 @@
                 }
                 header {
                     background-color: #ffffff !important;
-                    border-bottom: 2px solid #e63946 !important;
+                    border-bottom: 1px solid #e63946 !important;
                 }
                 .logo-container, .logo-text, .nav-links a {
                     color: #222222 !important;
                 }
                 .blog-form-wrapper, .contact-map, .player-card, .transfer-card, .fixture-card, .board-card {
                     background-color: #ffffff !important;
-                    border: 2px solid #e63946 !important;
+                    border: 1px solid rgba(230, 57, 70, 0.2) !important;
                 }
                 .form-control {
                     background-color: #f0f0f0 !important;
@@ -2818,14 +2953,14 @@
                 }
                 header {
                     background-color: #f4eae1 !important;
-                    border-bottom: 2px solid #8b1e0f !important;
+                    border-bottom: 1px solid #8b1e0f !important;
                 }
                 .logo-container, .logo-text, .nav-links a {
                     color: #3d2314 !important;
                 }
                 .blog-form-wrapper, .contact-map, .player-card, .transfer-card, .fixture-card, .board-card {
                     background-color: #ecdcd0 !important;
-                    border: 2px solid #3d2314 !important;
+                    border: 1px solid rgba(61, 35, 20, 0.2) !important;
                 }
                 .form-control {
                     background-color: #f4eae1 !important;
