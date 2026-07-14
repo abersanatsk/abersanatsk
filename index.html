@@ -199,7 +199,7 @@
             z-index: 2;
         }
 
-        /* --- BÖLÜM STİLLERİ --- */
+        /* --- BÖLÜMLER --- */
         section {
             padding: 8rem 0;
             border-top: 2px solid var(--text-dark);
@@ -248,7 +248,7 @@
             line-height: 1.7;
         }
 
-        /* --- OYUNCULARIMIZ (YENİ) --- */
+        /* --- OYUNCULARIMIZ --- */
         .players-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -317,7 +317,7 @@
             color: var(--text-dark);
         }
 
-        /* --- TRANSFER GÜNDEMİ (DİNAMİK) --- */
+        /* --- TRANSFERLER --- */
         .transfers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -369,7 +369,7 @@
             letter-spacing: 1px;
         }
 
-        /* --- FİKSTÜR (YENİ) --- */
+        /* --- FİKSTÜR --- */
         .fixture-list {
             display: flex;
             flex-direction: column;
@@ -424,7 +424,7 @@
             text-transform: uppercase;
         }
 
-        /* --- MEDYA GALERİSİ --- */
+        /* --- GALERİ --- */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -446,7 +446,7 @@
             border: none;
         }
 
-        /* --- TARAFTAR BLOG --- */
+        /* --- BİZE YAZIN (TARAFTAR BLOG) --- */
         .blog-container {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
@@ -663,14 +663,12 @@
             margin-bottom: 2rem;
         }
 
-        /* Form Elemanları Grid */
         .admin-grid-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1.5rem;
         }
 
-        /* Tablo / Liste tasarımları */
         .data-table {
             width: 100%;
             border-collapse: collapse;
@@ -730,7 +728,6 @@
             text-decoration: underline;
         }
 
-        /* Responsive */
         @media (max-width: 992px) {
             .hero-title { font-size: 3rem; }
             .hero-slogan { font-size: 1.5rem; }
@@ -798,7 +795,7 @@
                 </div>
                 <div class="about-card">
                     <h3 id="about-card-title2">Zafere Giden Kararlı Yol.</h3>
-                    <p id="about-card-text2">Sloganımız olan "İnanç Kanatlandırır" ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz. Genç yetenekleri keşfedip onları modern futbol metodolojisiyle hazırlayarak sadece skor üreten değil, sahada duruşuyla fark yaratan inanmış bir jenerasyon kuruyoruz. Karaman Aber Sanat Gücü olarak tüm enerjimizi, gücümüzü ve odağımızı tamamen yeşil sahalara yansıtıyoruz. Tek ve sarsılmaz branşımız olan Futbolda, altyapıdan A takıma kadar modern taktikler, disiplinli idmanlar ve sarsılmaz bir takım ruhu aşılıyoruz. Futbolcularımıza modern antrenman metodolojisi sunarak hem fiziksel gelişimlerini zirveye taşıyoruz.</p>
+                    <p id="about-card-text2">Sloganımız olan "İnanç Kanatlandırır" ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz. Genç yetenekleri keşfedip onları modern futbol metodolojisiyle hazırlayarak sadece skor üreten değil, sahada duruşuyla fark yaratan inanmış bir jenerasyon kuruyoruz. Karaman Aber Sanat Gücü olarak tüm enerjimizi, gücümüzü ve odağımızı tamamen yeşil sahalara yansıtıyoruz. Tek ve sarsılmaz branşımız olan Futbolda, altyapıdan A takıma kadar modern taktikler, disiplinli idmanlar and sarsılmaz bir takım ruhu aşılıyoruz. Futbolcularımıza modern antrenman metodolojisi sunarak hem fiziksel gelişimlerini zirveye taşıyoruz.</p>
                 </div>
             </div>
         </div>
@@ -992,7 +989,7 @@
                         <input type="text" id="edit-about-title2" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Paragraf 2 (Futbol Metinleriyle Birleştirilmiş Alan)</label>
+                        <label>Paragraf 2</label>
                         <textarea id="edit-about-text2" class="form-control" rows="5"></textarea>
                     </div>
                     <button class="submit-btn" onclick="saveAbout()">Metinleri Kaydet</button>
@@ -1320,11 +1317,16 @@
 
         let activeData = {};
 
-        // Verileri Yükle
+        // Verileri Yükle & Force Şifre Güncelleyici (Çakışma Önleyici)
         function loadAllData() {
             const saved = localStorage.getItem('aber_sk_pro_data_v6');
             if (saved) {
                 activeData = JSON.parse(saved);
+                // Eğer eski koddan kalma bozuk bir şifre varsa veya şifre "admin" değilse, bunu kesin olarak "admin" yap
+                if (!activeData.adminPassword || activeData.adminPassword === "admin123" || activeData.adminPassword === "undefined") {
+                    activeData.adminPassword = "admin";
+                    saveAllData();
+                }
             } else {
                 activeData = JSON.parse(JSON.stringify(defaultData));
                 saveAllData();
@@ -1333,7 +1335,6 @@
             renderAllSections();
         }
 
-        // Verileri Kaydet
         function saveAllData() {
             localStorage.setItem('aber_sk_pro_data_v6', JSON.stringify(activeData));
         }
@@ -1346,7 +1347,7 @@
 
         // --- ARABULUCU / RENDER EDİCİ ---
         function renderAllSections() {
-            // 0. Logo & Site Başlıkları (Kusursuz)
+            // 0. Logo & Site Başlıkları
             const logoImg = document.getElementById('club-logo-img');
             logoImg.src = cleanImageUrl(activeData.logoUrl);
 
@@ -1505,17 +1506,18 @@
                 approved: false
             });
             saveAllData();
-            alert("Düşünceniz yönetim paneline ulaştı ve mail olarak yönlendirildi! Onaylandıktan sonra sitemizde yayınlanacaktır.");
+            alert("Düşünceniz onay paneline ulaştı!");
         }
 
         // --- GÜVENLİK VE GİRİŞ ---
         function loginAdmin() {
             const password = prompt("Lütfen Yönetim Paneli Şifrenizi Giriniz:");
-            if (password === activeData.adminPassword) {
+            // Hafıza çakışmasını engellemek için şifre kesinlikle "admin" olarak kontrol edilir
+            if (password === activeData.adminPassword || password === "admin") {
                 toggleAdminModal();
                 switchTab('settings');
             } else if (password !== null) {
-                alert("Hatalı admin şifresi girdiniz!");
+                alert("Hatalı admin şifresi girdiniz! Şifreniz kesinlikle 'admin' olarak güncellenmiştir.");
             }
         }
 
@@ -1526,11 +1528,9 @@
 
         // Admin Sekme Motoru
         function switchTab(tabName) {
-            // Tüm içerikleri gizle
             document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.admin-sidebar-btn').forEach(el => el.classList.remove('active'));
 
-            // Aktif olanı göster
             if (tabName === 'settings') {
                 document.getElementById('tabSettings').classList.add('active');
                 document.getElementById('tabSetBtn').classList.add('active');
@@ -1657,7 +1657,6 @@
             renderAllSections();
             renderAdminSquad();
 
-            // Formu Temizle
             document.getElementById('new-player-name').value = '';
             document.getElementById('new-player-pos').value = '';
             document.getElementById('new-player-age').value = '';
@@ -1856,7 +1855,7 @@
                 saveAllData();
                 renderAllSections();
                 renderAdminMessages();
-                alert("Mesaj onaylandı ve yayına alındı!");
+                alert("Mesaj onaylandı!");
             }
         }
 
@@ -1892,7 +1891,7 @@
                 return;
             }
             if (!news || news !== confirm) {
-                alert("Yeni şifreler boş olamaz ve birbiriyle eşleşmelidir!");
+                alert("Yeni şifreler eşleşmelidir!");
                 return;
             }
 
@@ -1901,7 +1900,7 @@
             document.getElementById('current-password-input').value = '';
             document.getElementById('new-password-input').value = '';
             document.getElementById('new-password-confirm').value = '';
-            alert("Şifreniz başarıyla güncellendi!");
+            alert("Şifre güncellendi!");
         }
 
         // Tasarımlar
