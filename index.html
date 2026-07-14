@@ -133,18 +133,19 @@
 
         /* Dinamik ve Bozulmayan Logo Görsel Alanı */
         .logo-img-wrapper {
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             overflow: hidden;
             display: none; /* Logo URL eklenene kadar gizli kalır */
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--accent-color);
+            background: #020305;
         }
 
         .logo-img-wrapper img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
 
         .logo-text-top {
@@ -267,7 +268,7 @@
             100% { transform: translateY(-10px) rotate(0.5deg); }
         }
 
-        /* Cam Eriyik Slogan Alanı (Glassmorphism Sculpt) */
+        /* Cam Eriyik Slogan Alanı */
         .hero-slogan-monument {
             background: rgba(255, 255, 255, 0.01);
             backdrop-filter: blur(40px);
@@ -388,7 +389,7 @@
             letter-spacing: 3px;
         }
 
-        /* --- KADROMUZ: BRÜTALİST KART SİSTEMİ --- */
+        /* --- KADROMUZ --- */
         .position-group-title {
             font-family: var(--font-sport);
             font-size: 1.4rem;
@@ -1215,8 +1216,27 @@
                 <!-- TAB: AYARLAR -->
                 <div id="tabSettings" class="admin-tab-content active">
                     <div class="admin-section-heading">GENEL AYARLAR</div>
-                    <div class="form-group"><label>Logo URL (Drive/Normal)</label><input type="text" id="edit-logo-url" class="form-control"></div>
-                    <div class="form-group"><label>Hero Arka Plan Görsel URL (Drive/Normal)</label><input type="text" id="edit-hero-bg-url" class="form-control"></div>
+                    
+                    <div class="form-group" style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 2rem;">
+                        <label style="color: var(--accent-color); font-weight: 800;">KULÜP LOGOSU YÜKLE</label>
+                        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem;">Doğrudan cihazından yüksek çözünürlüklü şeffaf logo seç.</p>
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <input type="file" id="upload-logo-file" accept="image/*" class="form-control" style="flex:1; padding: 0.8rem;" onchange="uploadImage(this, 300, 300, 'logoUrl')">
+                            <button type="button" class="admin-btn-delete" onclick="clearImage('logoUrl')" style="height:50px;">Logoyu Kaldır</button>
+                        </div>
+                        <input type="text" id="edit-logo-url" class="form-control" placeholder="Veya internetten bir resim URL'si yapıştırın" style="margin-top:10px;">
+                    </div>
+
+                    <div class="form-group" style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 2rem;">
+                        <label style="color: var(--accent-color); font-weight: 800;">ANA ARKA PLAN GÖRSELİ (HERO BACKGROUND)</label>
+                        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem;">Ana sayfadaki dev arka plan görselini doğrudan cihazından seç. Kalite ve netlik korunacaktır.</p>
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <input type="file" id="upload-hero-bg-file" accept="image/*" class="form-control" style="flex:1; padding: 0.8rem;" onchange="uploadImage(this, 1920, 1080, 'heroBgUrl')">
+                            <button type="button" class="admin-btn-delete" onclick="clearImage('heroBgUrl')" style="height:50px;">Varsayılana Dön</button>
+                        </div>
+                        <input type="text" id="edit-hero-bg-url" class="form-control" placeholder="Veya internetten bir resim URL'si yapıştırın" style="margin-top:10px;">
+                    </div>
+
                     <div class="form-group"><label>Kulüp Başlığı</label><input type="text" id="edit-header-title" class="form-control"></div>
                     <div class="form-group"><label>Hero Başlığı</label><input type="text" id="edit-hero-title" class="form-control"></div>
                     <div class="form-group"><label>Slogan</label><input type="text" id="edit-hero-slogan" class="form-control"></div>
@@ -1278,7 +1298,11 @@
                     <div class="blog-form-wrapper" style="box-shadow:none; margin-bottom:2rem;">
                         <div class="form-group"><label>Ad Soyad</label><input type="text" id="new-board-name" class="form-control"></div>
                         <div class="form-group"><label>Unvanı</label><input type="text" id="new-board-role" class="form-control"></div>
-                        <div class="form-group"><label>Resim URL (Drive/Normal)</label><input type="text" id="new-board-img" class="form-control"></div>
+                        <div class="form-group">
+                            <label>Fotoğraf Seç (Cihazdan Yükle)</label>
+                            <input type="file" accept="image/*" class="form-control" onchange="uploadImage(this, 400, 400, null, function(b64){ document.getElementById('new-board-img').value = b64; })">
+                            <input type="text" id="new-board-img" class="form-control" placeholder="Veya internet resim linki yapıştırın" style="margin-top:5px;">
+                        </div>
                         <button type="button" class="submit-btn" onclick="addBoardMember()">Yönetici Ekle</button>
                     </div>
                     <table class="data-table"><thead><tr><th>Foto</th><th>Ad Soyad</th><th>Görevi</th><th>İşlem</th></tr></thead><tbody id="admin-board-list"></tbody></table>
@@ -1290,7 +1314,11 @@
                     <div class="blog-form-wrapper" style="box-shadow:none; margin-bottom:2rem;">
                         <div class="form-group"><label>Hoca Ad Soyad</label><input type="text" id="new-staff-name" class="form-control"></div>
                         <div class="form-group"><label>Görevi</label><input type="text" id="new-staff-role" class="form-control"></div>
-                        <div class="form-group"><label>Resim URL (Drive/Normal)</label><input type="text" id="new-staff-img" class="form-control"></div>
+                        <div class="form-group">
+                            <label>Fotoğraf Seç (Cihazdan Yükle)</label>
+                            <input type="file" accept="image/*" class="form-control" onchange="uploadImage(this, 400, 400, null, function(b64){ document.getElementById('new-staff-img').value = b64; })">
+                            <input type="text" id="new-staff-img" class="form-control" placeholder="Veya internet resim linki yapıştırın" style="margin-top:5px;">
+                        </div>
                         <button type="button" class="submit-btn" onclick="addStaffMember()">Hoca Ekle</button>
                     </div>
                     <table class="data-table"><thead><tr><th>Foto</th><th>Ad Soyad</th><th>Görevi</th><th>İşlem</th></tr></thead><tbody id="admin-staff-list"></tbody></table>
@@ -1306,7 +1334,11 @@
                         <div class="form-group"><label>Boy (cm)</label><input type="number" id="new-player-height" class="form-control"></div>
                         <div class="form-group"><label>Kilo (kg)</label><input type="number" id="new-player-weight" class="form-control"></div>
                         <div class="form-group"><label>Ayak</label><select id="new-player-foot" class="form-control"><option value="Sağ">Sağ</option><option value="Sol">Sol</option><option value="Her İkisi">Her İkisi</option></select></div>
-                        <div class="form-group"><label>Resim URL (Drive/Normal)</label><input type="text" id="new-player-img" class="form-control"></div>
+                        <div class="form-group">
+                            <label>Oyuncu Resmi Seç (Cihazdan Yükle)</label>
+                            <input type="file" accept="image/*" class="form-control" onchange="uploadImage(this, 500, 700, null, function(b64){ document.getElementById('new-player-img').value = b64; })">
+                            <input type="text" id="new-player-img" class="form-control" placeholder="Veya internet resim linki yapıştırın" style="margin-top:5px;">
+                        </div>
                         <button type="button" class="submit-btn" onclick="addPlayer()">Kadroya Ekle</button>
                     </div>
                     <table class="data-table"><thead><tr><th>Foto</th><th>Ad Soyad</th><th>Mevki</th><th>Özellikler</th><th>İşlem</th></tr></thead><tbody id="admin-squad-list"></tbody></table>
@@ -1317,7 +1349,11 @@
                     <div class="admin-section-heading">YENİ SEZON FORMALARI YÖNETİMİ</div>
                     <div class="blog-form-wrapper" style="box-shadow:none; margin-bottom:2rem;">
                         <div class="form-group"><label>Forma Adı / Teması</label><input type="text" id="new-kit-title" class="form-control"></div>
-                        <div class="form-group"><label>Büyük Boyut Forma Resim URL (Drive/Normal)</label><input type="text" id="new-kit-img" class="form-control"></div>
+                        <div class="form-group">
+                            <label>Forma Görseli Seç (Cihazdan Yükle)</label>
+                            <input type="file" accept="image/*" class="form-control" onchange="uploadImage(this, 800, 1000, null, function(b64){ document.getElementById('new-kit-img').value = b64; })">
+                            <input type="text" id="new-kit-img" class="form-control" placeholder="Veya büyük boy görsel linki yapıştırın" style="margin-top:5px;">
+                        </div>
                         <button type="button" class="submit-btn" onclick="addKit()">Formayı Ekle</button>
                     </div>
                     <table class="data-table"><thead><tr><th>Forma Adı</th><th>Görsel Linki</th><th>İşlem</th></tr></thead><tbody id="admin-kits-list"></tbody></table>
@@ -1330,7 +1366,11 @@
                         <div class="form-group"><label>Oyuncu Adı</label><input type="text" id="new-trans-name" class="form-control"></div>
                         <div class="form-group"><label>Kulüp Akışı</label><input type="text" id="new-trans-club" class="form-control"></div>
                         <div class="form-group"><label>Durum</label><input type="text" id="new-trans-status" class="form-control"></div>
-                        <div class="form-group"><label>Resim URL (Drive/Normal)</label><input type="text" id="new-trans-img" class="form-control"></div>
+                        <div class="form-group">
+                            <label>Fotoğraf Seç (Cihazdan Yükle)</label>
+                            <input type="file" accept="image/*" class="form-control" onchange="uploadImage(this, 600, 600, null, function(b64){ document.getElementById('new-trans-img').value = b64; })">
+                            <input type="text" id="new-trans-img" class="form-control" placeholder="Veya internet resim linki yapıştırın" style="margin-top:5px;">
+                        </div>
                         <button type="button" class="submit-btn" onclick="addTransfer()">Transfer Ekle</button>
                     </div>
                     <table class="data-table"><thead><tr><th>Resim</th><th>Oyuncu</th><th>Kulüp</th><th>Durum</th><th>İşlem</th></tr></thead><tbody id="admin-transfer-list"></tbody></table>
@@ -1354,7 +1394,11 @@
                     <div class="admin-section-heading">MEDYA LİSTESİ</div>
                     <div class="blog-form-wrapper" style="box-shadow:none; margin-bottom:2rem;">
                         <div class="form-group"><label>Tür</label><select id="new-media-type" class="form-control"><option value="image">Fotoğraf</option><option value="video">Video</option></select></div>
-                        <div class="form-group"><label>URL (Drive/Normal)</label><input type="text" id="new-media-url" class="form-control"></div>
+                        <div class="form-group">
+                            <label>Medya Dosyası (Sadece fotoğraflar için cihazdan yükleyebilirsiniz)</label>
+                            <input type="file" accept="image/*" class="form-control" onchange="uploadImage(this, 1200, 800, null, function(b64){ document.getElementById('new-media-url').value = b64; })">
+                            <input type="text" id="new-media-url" class="form-control" placeholder="Veya internet görsel/YouTube video linki yapıştırın" style="margin-top:5px;">
+                        </div>
                         <button type="button" class="submit-btn" onclick="addGalleryItem()">Galeriye Ekle</button>
                     </div>
                     <div id="admin-gallery-list"></div>
@@ -1368,7 +1412,11 @@
                         <div class="form-group"><label>Menü Adı</label><input type="text" id="new-page-menu-title" class="form-control"></div>
                         <div class="form-group"><label>Büyük Başlık</label><input type="text" id="new-page-title" class="form-control"></div>
                         <div class="form-group"><label>Slogan</label><input type="text" id="new-page-slogan" class="form-control"></div>
-                        <div class="form-group"><label>Görsel URL (Drive/Normal)</label><input type="text" id="new-page-image-url" class="form-control"></div>
+                        <div class="form-group">
+                            <label>Dinamik Sayfa Resmi Seç (Cihazdan Yükle)</label>
+                            <input type="file" accept="image/*" class="form-control" onchange="uploadImage(this, 1200, 800, null, function(b64){ document.getElementById('new-page-image-url').value = b64; })">
+                            <input type="text" id="new-page-image-url" class="form-control" placeholder="Veya görsel linki yapıştırın" style="margin-top:5px;">
+                        </div>
                         <div class="form-group"><label>Detaylı İçerik</label><textarea id="new-page-content" rows="4" class="form-control"></textarea></div>
                         <button type="button" class="submit-btn" id="save-page-btn" onclick="saveCustomPage()">Sayfayı Kaydet</button>
                         <button type="button" class="submit-btn" id="cancel-edit-page-btn" onclick="cancelPageEdit()" style="background:#64748b; display:none; margin-top:0.5rem;">İptal</button>
@@ -1430,53 +1478,114 @@
     </footer>
 
     <script>
-        // --- ULTIMATE GOOGLE DRIVE DIRECT LINK TRANSLATOR (THUMBNAIL MAX HD SYSTEM) ---
+        // --- MULTI-INPUT HIGH-PERFORMANCE BASE64 COMPRESSOR MOTOR ---
+        function uploadImage(inputElement, maxWidth, maxHeight, targetField, callback) {
+            const file = inputElement.files[0];
+            if (!file) return;
+            
+            const originalText = inputElement.previousElementSibling ? inputElement.previousElementSibling.innerText : "Resim Seçin";
+            if (inputElement.previousElementSibling && inputElement.previousElementSibling.tagName === "LABEL") {
+                inputElement.previousElementSibling.innerText = "Yükleniyor ve Optimize Ediliyor... ⏳";
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+
+                    // Orantılı Boyutlandırma Algoritması
+                    if (width > height) {
+                        if (width > maxWidth) {
+                            height = Math.round((height * maxWidth) / width);
+                            width = maxWidth;
+                        }
+                    } else {
+                        if (height > maxHeight) {
+                            width = Math.round((width * maxHeight) / height);
+                            height = maxHeight;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    
+                    // Ultra Keskin Filtre Ayarları
+                    ctx.imageSmoothingEnabled = true;
+                    ctx.imageSmoothingQuality = 'high';
+                    
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Yüksek kaliteli JPEG formatında (0.85 oranında) sıkıştırıp Base64 çıktısı alma
+                    const base64Data = canvas.toDataURL('image/jpeg', 0.85);
+                    
+                    if (targetField) {
+                        activeData[targetField] = base64Data;
+                        
+                        // İlgili yazı kutularını güncelleme
+                        const textInputId = targetField === 'logoUrl' ? 'edit-logo-url' : (targetField === 'heroBgUrl' ? 'edit-hero-bg-url' : '');
+                        if (textInputId && document.getElementById(textInputId)) {
+                            document.getElementById(textInputId).value = "[Cihazdan Yüklendi]";
+                        }
+                    }
+                    
+                    if (callback) {
+                        callback(base64Data);
+                    }
+                    
+                    if (inputElement.previousElementSibling && inputElement.previousElementSibling.tagName === "LABEL") {
+                        inputElement.previousElementSibling.innerText = originalText;
+                    }
+                    
+                    alert("Görsel başarıyla sıkıştırıldı ve doğrudan web sitene yüklendi!");
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // --- BELİRLİ GÖRSELİ TEMİZLEME MOTORU ---
+        function clearImage(targetField) {
+            if (targetField === 'logoUrl') {
+                activeData.logoUrl = "";
+                document.getElementById('edit-logo-url').value = "";
+                document.getElementById('upload-logo-file').value = "";
+            } else if (targetField === 'heroBgUrl') {
+                activeData.heroBgUrl = defaultData.heroBgUrl;
+                document.getElementById('edit-hero-bg-url').value = "";
+                document.getElementById('upload-hero-bg-file').value = "";
+            }
+            saveAllData();
+            renderAllSections();
+            alert("Görsel başarıyla kaldırıldı veya varsayılana sıfırlandı!");
+        }
+
+        // --- GOOGLE DRIVE DIRECT LINK TRANSLATOR (FALLBACK) ---
         function convertDriveUrl(url) {
             if (!url || typeof url !== 'string') return '';
             let rawUrl = url.trim();
             
-            let fileId = '';
+            // Eğer Base64 verisi ise dönüştürücüyü tamamen bypass et
+            if (rawUrl.startsWith('data:image')) return rawUrl;
             
-            // Google Drive Linklerinden ID Ayıklama Motoru
+            let fileId = '';
             if (rawUrl.includes('drive.google.com/file/d/')) {
                 const parts = rawUrl.split('/file/d/');
-                if (parts[1]) {
-                    fileId = parts[1].split('/')[0].split('?')[0];
-                }
+                if (parts[1]) fileId = parts[1].split('/')[0].split('?')[0];
             } else if (rawUrl.includes('drive.google.com/open?id=')) {
                 const parts = rawUrl.split('?id=');
-                if (parts[1]) {
-                    fileId = parts[1].split('&')[0];
-                }
+                if (parts[1]) fileId = parts[1].split('&')[0];
             } else if (rawUrl.includes('drive.google.com/uc?id=')) {
                 const parts = rawUrl.split('?id=');
-                if (parts[1]) {
-                    fileId = parts[1].split('&')[0];
-                }
-            } else if (rawUrl.includes('docs.google.com/uc?id=')) {
-                const parts = rawUrl.split('?id=');
-                if (parts[1]) {
-                    fileId = parts[1].split('&')[0];
-                }
-            } else if (rawUrl.includes('docs.google.com/uc?export=view&id=')) {
-                 const parts = rawUrl.split('id=');
-                 if (parts[1]) {
-                     fileId = parts[1].split('&')[0];
-                 }
+                if (parts[1]) fileId = parts[1].split('&')[0];
             }
 
-            // ID bulunduysa, çerez engelini aşan ve HD kalitesini koruyan (w2000 piksellik) thumbnail url'ine çevir.
             if (fileId) {
                 return `https://drive.google.com/thumbnail?id=${fileId}&sz=w2000`;
             }
-            
-            // ImgBB Linklerini Direct Linke Çeviren Yapı
-            if (rawUrl.includes('ibb.co/') && !rawUrl.includes('i.ibb.co')) {
-                const parts = rawUrl.split('/');
-                const id = parts[parts.length - 1] || parts[parts.length - 2];
-                if (id && id.length >= 5) return `https://i.ibb.co/${id}/image.png`;
-            }
-
             return rawUrl;
         }
 
@@ -1518,11 +1627,6 @@
                 else if (url.includes('v=')) videoId = url.split('v=')[1].split('&')[0];
                 if (videoId) return `https://www.youtube.com/embed/${videoId}`;
             }
-            if (url.includes('streamable.com')) {
-                const parts = url.split('/');
-                const id = parts[parts.length - 1] || parts[parts.length - 2];
-                if (id) return `https://streamable.com/e/${id}`;
-            }
             return url;
         }
 
@@ -1561,7 +1665,8 @@
 
         function loadAllData() {
             try {
-                const saved = localStorage.getItem('aber_sk_premium_data_v15');
+                // Temiz yeni versiyon depolama kilidi
+                const saved = localStorage.getItem('aber_sk_premium_data_v16');
                 activeData = JSON.parse(JSON.stringify(defaultData));
                 if (saved) {
                     const parsed = JSON.parse(saved);
@@ -1586,7 +1691,7 @@
         }
 
         function saveAllData() {
-            localStorage.setItem('aber_sk_premium_data_v15', JSON.stringify(activeData));
+            localStorage.setItem('aber_sk_premium_data_v16', JSON.stringify(activeData));
         }
 
         function applySavedTheme() {
@@ -1618,18 +1723,17 @@
             document.getElementById('header-club-title').innerText = rawHeaderTitle;
             document.getElementById('footer-logo-text').innerText = rawHeaderTitle;
 
-            // Logo Render Ayarı (Drive Desteğiyle)
+            // Logo Render Ayarı (Drive ve Base64 Desteğiyle)
             const headerLogoImg = document.getElementById('header-logo-img');
             const headerLogoWrapper = document.getElementById('header-logo-wrapper');
             if (activeData.logoUrl && activeData.logoUrl.trim() !== "") {
-                const convertedLogo = convertDriveUrl(activeData.logoUrl);
-                headerLogoImg.src = convertedLogo;
+                headerLogoImg.src = convertDriveUrl(activeData.logoUrl);
                 headerLogoWrapper.style.display = "block";
             } else {
                 headerLogoWrapper.style.display = "none";
             }
 
-            // Hero Arka Planı (Drive Desteğiyle)
+            // Hero Arka Planı (Drive ve Base64 Desteğiyle)
             const heroBgOverlay = document.getElementById('hero-bg-overlay');
             const cleanBg = convertDriveUrl(activeData.heroBgUrl);
             heroBgOverlay.style.backgroundImage = `url('${cleanBg || defaultData.heroBgUrl}')`;
@@ -1829,8 +1933,17 @@
         }
 
         function saveSettings() {
-            activeData.logoUrl = convertDriveUrl(document.getElementById('edit-logo-url').value);
-            activeData.heroBgUrl = convertDriveUrl(document.getElementById('edit-hero-bg-url').value);
+            // Eğer dosya seçilmediyse manuel girilen url'yi oku, seçildiyse zaten base64 kaydedilmiştir.
+            const urlLogo = document.getElementById('edit-logo-url').value.trim();
+            if (urlLogo !== "[Cihazdan Yüklendi]" && urlLogo !== "") {
+                activeData.logoUrl = convertDriveUrl(urlLogo);
+            }
+            
+            const urlBg = document.getElementById('edit-hero-bg-url').value.trim();
+            if (urlBg !== "[Cihazdan Yüklendi]" && urlBg !== "") {
+                activeData.heroBgUrl = convertDriveUrl(urlBg);
+            }
+
             activeData.headerTitle = document.getElementById('edit-header-title').value.trim();
             if(!activeData.hero) activeData.hero = {};
             activeData.hero.title = document.getElementById('edit-hero-title').value;
@@ -1875,7 +1988,7 @@
         function addBoardMember() {
             const name = document.getElementById('new-board-name').value;
             const role = document.getElementById('new-board-role').value;
-            const img = convertDriveUrl(document.getElementById('new-board-img').value);
+            const img = document.getElementById('new-board-img').value;
             if(!name || !role) return;
             activeData.board.push({ id: Date.now(), name, role, img });
             saveAllData(); renderAllSections(); renderAdminBoard();
@@ -1892,7 +2005,7 @@
         function addStaffMember() {
             const name = document.getElementById('new-staff-name').value;
             const role = document.getElementById('new-staff-role').value;
-            const img = convertDriveUrl(document.getElementById('new-staff-img').value);
+            const img = document.getElementById('new-staff-img').value;
             if(!name || !role) return;
             if(!activeData.staff) activeData.staff = [];
             activeData.staff.push({ id: Date.now(), name, role, img });
@@ -1909,7 +2022,7 @@
         }
         function addKit() {
             const title = document.getElementById('new-kit-title').value;
-            const img = convertDriveUrl(document.getElementById('new-kit-img').value);
+            const img = document.getElementById('new-kit-img').value;
             if(!title || !img) return;
             if(!activeData.kits) activeData.kits = [];
             activeData.kits.push({ id: Date.now(), title, img });
@@ -1931,7 +2044,7 @@
             const height = document.getElementById('new-player-height').value;
             const weight = document.getElementById('new-player-weight').value;
             const foot = document.getElementById('new-player-foot').value;
-            const img = convertDriveUrl(document.getElementById('new-player-img').value);
+            const img = document.getElementById('new-player-img').value;
             if(!name) return;
             activeData.players.push({ id: Date.now(), name, position: pos, age, height, weight, foot, img });
             saveAllData(); renderAllSections(); renderAdminSquad();
@@ -1949,7 +2062,7 @@
             const name = document.getElementById('new-trans-name').value;
             const club = document.getElementById('new-trans-club').value;
             const status = document.getElementById('new-trans-status').value;
-            const img = convertDriveUrl(document.getElementById('new-trans-img').value);
+            const img = document.getElementById('new-trans-img').value;
             if(!name) return;
             activeData.transfers.push({ id: Date.now(), name, club, status, img });
             saveAllData(); renderAllSections(); renderAdminTransfers();
@@ -1978,11 +2091,11 @@
         function renderAdminGallery() {
             const list = document.getElementById('admin-gallery-list'); list.innerHTML = '';
             (activeData.gallery || []).forEach(g => {
-                list.innerHTML += `<div class="admin-list-item"><div>[${g.type.toUpperCase()}] ${g.url}</div><button class="admin-btn-delete" onclick="deleteGalleryItem(${g.id})">Sil</button></div>`;
+                list.innerHTML += `<div class="admin-list-item"><div>[${g.type.toUpperCase()}] ${g.url.slice(0, 30)}...</div><button class="admin-btn-delete" onclick="deleteGalleryItem(${g.id})">Sil</button></div>`;
             });
         }
         function addGalleryItem() {
-            const type = document.getElementById('new-media-type').value; const url = convertDriveUrl(document.getElementById('new-media-url').value);
+            const type = document.getElementById('new-media-type').value; const url = document.getElementById('new-media-url').value;
             if(!url) return;
             activeData.gallery.push({ id: Date.now(), type, url });
             saveAllData(); renderAllSections(); renderAdminGallery();
@@ -2000,7 +2113,7 @@
             const mTitle = document.getElementById('new-page-menu-title').value;
             const title = document.getElementById('new-page-title').value;
             const slogan = document.getElementById('new-page-slogan').value;
-            const img = convertDriveUrl(document.getElementById('new-page-image-url').value);
+            const img = document.getElementById('new-page-image-url').value;
             const content = document.getElementById('new-page-content').value;
             if(!mTitle || !title) return;
             if(id) {
