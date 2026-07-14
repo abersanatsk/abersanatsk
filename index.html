@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karaman Aber Sanat Gücü Spor Kulübü</title>
-    <!-- Google Fonts: Inter (Modern & Sert Karakterli) -->
+    <!-- Google Fonts: Inter (Kalın ve İtalik için kusursuz modern font) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,600;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
@@ -244,6 +244,31 @@
             margin-bottom: 1.5rem;
         }
 
+        /* --- MEDYA VE GALERİ BÖLÜMÜ --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+            border: 2px solid var(--text-dark);
+        }
+
+        .gallery-item img, .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img, .gallery-item:hover video {
+            transform: scale(1.05);
+        }
+
         /* --- TRANSFERLER BÖLÜMÜ --- */
         .transfers-banner {
             border: 4px dashed var(--text-dark);
@@ -425,7 +450,7 @@
             background-color: var(--bg-white);
             border: 3px solid var(--text-dark);
             padding: 3rem;
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
             position: relative;
         }
@@ -445,7 +470,8 @@
             background: none;
             font-weight: 900;
             cursor: pointer;
-            margin-right: 1rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
             text-transform: uppercase;
         }
 
@@ -560,6 +586,7 @@
                 <ul class="nav-links">
                     <li><a href="#kulup">Hakkımızda</a></li>
                     <li><a href="#futbol">Futbol</a></li>
+                    <li><a href="#galeri">Medya</a></li>
                     <li><a href="#transferler">Transferler</a></li>
                     <li><a href="#bize-yazin">Bize Yazın</a></li>
                     <li><a href="#iletisim">İletişim</a></li>
@@ -570,8 +597,8 @@
 
     <!-- HERO SECTION -->
     <section class="hero" id="home">
-        <h1 class="hero-title">KARAMAN<br>ABER SANAT GÜCÜ<br>SPOR KULÜBÜ</h1>
-        <div class="hero-slogan">İNANÇ KANATLANDIRIR</div>
+        <h1 class="hero-title" id="hero-title-text">KARAMAN<br>ABER SANAT GÜCÜ<br>SPOR KULÜBÜ</h1>
+        <div class="hero-slogan" id="hero-slogan-text">İNANÇ KANATLANDIRIR</div> [cite: Karaman Aber Sanat Gücü Spor Kulübü için hazırlanan web sitesi tasarımı, kurumsal kimliği siyah, beyaz ve kırmızı renk paleti üzerine kurgulamıştır. Kulübün resmi sloganı "İNANÇ KANATLANDIRIR" olarak belirlenmiş olup, tasarımda profesyonel bir arayüz hedeflenmiştir . Görsel materyaller arasında kanat figürlü bir kalkan logosu ve taraftar etkileşimli alanlar yer almaktadır.]
         <div class="hero-signature">© RIDVAN ARSLAN</div>
     </section>
 
@@ -581,12 +608,12 @@
             <h2 class="section-title">Biz Kimiz?</h2>
             <div class="about-grid">
                 <div class="about-card">
-                    <h3>İnanmış Bir Takım Ruhu.</h3>
-                    <p>Karaman Aber Sanat Gücü Spor Kulübü, yeşil sahalarda sadece fiziksel gücü değil, sarsılmaz bir disiplini ve takım bütünlüğünü temsil eder [cite: Karaman Aber Sanat Gücü Spor Kulübü için hazırlanan web sitesi tasarımı, kurumsal kimliği siyah, beyaz ve kırmızı renk paleti üzerine kurgulamıştır. Kulübün resmi sloganı "İNANÇ KANATLANDIRIR" olarak belirlenmiş olup, tasarımda profesyonel bir arayüz hedeflenmiştir . Görsel materyaller arasında kanat figürlü bir kalkan logosu ve taraftar etkileşimli alanlar yer almaktadır.]. Bizler, sporcularımızın karakter gelişimini en ön planda tutarak dürüstlük, azim ve yüksek ahlak bilinciyle geleceğin futbolcularını yetiştiriyoruz.</p>
+                    <h3 id="about-card-title1">İnanmış Bir Takım Ruhu.</h3>
+                    <p id="about-card-text1">Karaman Aber Sanat Gücü Spor Kulübü, yeşil sahalarda sadece fiziksel gücü değil, sarsılmaz bir disiplini ve takım bütünlüğünü temsil eder [cite: Karaman Aber Sanat Gücü Spor Kulübü için hazırlanan web sitesi tasarımı, kurumsal kimliği siyah, beyaz ve kırmızı renk paleti üzerine kurgulamıştır. Kulübün resmi sloganı "İNANÇ KANATLANDIRIR" olarak belirlenmiş olup, tasarımda profesyonel bir arayüz hedeflenmiştir . Görsel materyaller arasında kanat figürlü bir kalkan logosu ve taraftar etkileşimli alanlar yer almaktadır.]. Bizler, sporcularımızın karakter gelişimini en ön planda tutarak dürüstlük, azim ve yüksek ahlak bilinciyle geleceğin futbolcularını yetiştiriyoruz.</p>
                 </div>
                 <div class="about-card">
-                    <h3>Zafere Giden Kararlı Yol.</h3>
-                    <p>Sloganımız olan "İnanç Kanatlandırır" ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz [cite: Karaman Aber Sanat Gücü Spor Kulübü için hazırlanan web sitesi tasarımı, kurumsal kimliği siyah, beyaz ve kırmızı renk paleti üzerine kurgulamıştır. Kulübün resmi sloganı "İNANÇ KANATLANDIRIR" olarak belirlenmiş olup, tasarımda profesyonel bir arayüz hedeflenmiştir . Görsel materyaller arasında kanat figürlü bir kalkan logosu ve taraftar etkileşimli alanlar yer almaktadır.]. Genç yetenekleri keşfedip onları modern futbol metodolojisiyle hazırlayarak sadece skor üreten değil, sahada duruşuyla fark yaratan inanmış bir jenerasyon kuruyoruz.</p>
+                    <h3 id="about-card-title2">Zafere Giden Kararlı Yol.</h3>
+                    <p id="about-card-text2">Sloganımız olan "İnanç Kanatlandırır" ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz [cite: Karaman Aber Sanat Gücü Spor Kulübü için hazırlanan web sitesi tasarımı, kurumsal kimliği siyah, beyaz ve kırmızı renk paleti üzerine kurgulamıştır. Kulübün resmi sloganı "İNANÇ KANATLANDIRIR" olarak belirlenmiş olup, tasarımda profesyonel bir arayüz hedeflenmiştir . Görsel materyaller arasında kanat figürlü bir kalkan logosu ve taraftar etkileşimli alanlar yer almaktadır.]. Genç yetenekleri keşfedip onları modern futbol metodolojisiyle hazırlayarak sadece skor üreten değil, sahada duruşuyla fark yaratan inanmış bir jenerasyon kuruyoruz.</p>
                 </div>
             </div>
         </div>
@@ -597,12 +624,22 @@
         <div class="container">
             <h2 class="section-title">Branşımız</h2>
             <div class="futbol-grid">
-                <div class="futbol-image"></div>
+                <div class="futbol-image" id="futbol-image-bg"></div>
                 <div class="futbol-details">
-                    <h3>Sadece Futbol</h3>
-                    <p>Karaman Aber Sanat Gücü olarak tüm enerjimizi, gücümüzü ve odağımızı tamamen yeşil sahalara yansıtıyoruz. Tek ve sarsılmaz branşımız olan Futbolda, altyapıdan A takıma kadar modern taktikler, disiplinli idmanlar ve sarsılmaz bir takım ruhu aşılıyoruz.</p>
-                    <p>Futbolcularımıza modern antrenman metodolojisi sunarak hem fiziksel gelişimlerini zirveye taşıyor hem de taktiksel zekalarını futbol zekasıyla birleştiriyoruz.</p>
+                    <h3 id="futbol-title-text">Sadece Futbol</h3>
+                    <p id="futbol-desc-text">Karaman Aber Sanat Gücü olarak tüm enerjimizi, gücümüzü ve odağımızı tamamen yeşil sahalara yansıtıyoruz. Tek ve sarsılmaz branşımız olan Futbolda, altyapıdan A takıma kadar modern taktikler, disiplinli idmanlar ve sarsılmaz bir takım ruhu aşılıyoruz.</p>
+                    <p id="futbol-desc-text-2">Futbolcularımıza modern antrenman metodolojisi sunarak hem fiziksel gelişimlerini zirveye taşıyor hem de taktiksel zekalarını futbol zekasıyla birleştiriyoruz.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MEDYA GALERİSİ BÖLÜMÜ -->
+    <section id="galeri">
+        <div class="container">
+            <h2 class="section-title">Medya & Galeri</h2>
+            <div class="gallery-grid" id="gallery-container">
+                <!-- Fotoğraflar ve videolar buraya dinamik olarak yüklenecek -->
             </div>
         </div>
     </section>
@@ -661,16 +698,16 @@
                 <div class="contact-info">
                     <div class="info-item">
                         <h4>Telefon</h4>
-                        <a href="tel:+905368939415" id="club-phone-link">0 536 893 94 15</a>
+                        <a href="tel:+905368939415" id="club-phone-link">0 536 893 94 15</a> [cite: Karaman Aber Sanat Gücü Spor Kulübü için hazırlanan web sitesi tasarımı, kurumsal kimliği siyah, beyaz ve kırmızı renk paleti üzerine kurgulamıştır. Kulübün resmi sloganı "İNANÇ KANATLANDIRIR" olarak belirlenmiş olup, tasarımda profesyonel bir arayüz hedeflenmiştir . Görsel materyaller arasında kanat figürlü bir kalkan logosu ve taraftar etkileşimli alanlar yer almaktadır.]
                     </div>
                     <div class="info-item">
                         <h4>E-Posta Adreslerimiz</h4>
-                        <p style="margin-bottom: 0.5rem;"><a href="mailto:info@abersanatsk.org" id="club-email-1">info@abersanatsk.org</a></p>
-                        <p><a href="mailto:ridvan@abersanatsk.org" id="club-email-2">ridvan@abersanatsk.org</a></p>
+                        <p style="margin-bottom: 0.5rem;"><a href="mailto:info@abersanatsk.org" id="club-email-1">info@abersanatsk.org</a></p> [cite: Karaman Aber Sanat Gücü Spor Kulübü için hazırlanan web sitesi tasarımı, kurumsal kimliği siyah, beyaz ve kırmızı renk paleti üzerine kurgulamıştır. Kulübün resmi sloganı "İNANÇ KANATLANDIRIR" olarak belirlenmiş olup, tasarımda profesyonel bir arayüz hedeflenmiştir . Görsel materyaller arasında kanat figürlü bir kalkan logosu ve taraftar etkileşimli alanlar yer almaktadır.]
+                        <p><a href="mailto:ridvan@abersanatsk.org" id="club-email-2">ridvan@abersanatsk.org</a></p> [cite: Karaman Aber Sanat Gücü Spor Kulübü için hazırlanan web sitesi tasarımı, kurumsal kimliği siyah, beyaz ve kırmızı renk paleti üzerine kurgulamıştır. Kulübün resmi sloganı "İNANÇ KANATLANDIRIR" olarak belirlenmiş olup, tasarımda profesyonel bir arayüz hedeflenmiştir . Görsel materyaller arasında kanat figürlü bir kalkan logosu ve taraftar etkileşimli alanlar yer almaktadır.]
                     </div>
                     <div class="info-item">
                         <h4>Kulüp Ofisi</h4>
-                        <p style="font-size: 1.25rem; font-weight: 900;" id="club-address-text">Cedit Mah. 319. Sk. No:2/A <br>Merkez / Karaman</p>
+                        <p style="font-size: 1.25rem; font-weight: 900;" id="club-address-text">Cedit Mah. 319. Sk. No:2/A <br>Merkez / Karaman</p> [cite: Karaman Aber Sanat Gücü Spor Kulübü için hazırlanan web sitesi tasarımı, kurumsal kimliği siyah, beyaz ve kırmızı renk paleti üzerine kurgulamıştır. Kulübün resmi sloganı "İNANÇ KANATLANDIRIR" olarak belirlenmiş olup, tasarımda profesyonel bir arayüz hedeflenmiştir . Görsel materyaller arasında kanat figürlü bir kalkan logosu ve taraftar etkileşimli alanlar yer almaktadır.]
                     </div>
                 </div>
                 <div class="contact-map">
@@ -683,57 +720,143 @@
         </div>
     </section>
 
-    <!-- ADMIN PANELİ MODAL PENCERESİ -->
+    <!-- GELECEKTEKİ ADMIN PANELİ MODALI -->
     <div class="admin-modal" id="adminModal">
         <div class="admin-content">
             <span class="close-admin" onclick="toggleAdminModal()">&times;</span>
-            <h2 style="font-style: italic; font-weight: 900; margin-bottom: 2rem; border-bottom: 2px solid #000; padding-bottom: 0.5rem;">ABER SK YÖNETİM PANELİ</h2>
+            <h2 style="font-style: italic; font-weight: 900; margin-bottom: 2rem; border-bottom: 2px solid #000; padding-bottom: 0.5rem;">ABER SK GELİŞMİŞ YÖNETİM PANELİ</h2>
             
-            <div style="margin-bottom: 2rem;">
-                <button class="admin-tab-btn active" id="tabMessagesBtn" onclick="switchTab('messages')">Gelen Mesajlar</button>
+            <div style="margin-bottom: 2rem; display: flex; flex-wrap: wrap;">
+                <button class="admin-tab-btn active" id="tabMessagesBtn" onclick="switchTab('messages')">Mesajlar</button>
                 <button class="admin-tab-btn" id="tabSettingsBtn" onclick="switchTab('settings')">Site Bilgileri</button>
+                <button class="admin-tab-btn" id="tabGalleryBtn" onclick="switchTab('gallery')">Medya / Galeri</button>
+                <button class="admin-tab-btn" id="tabSecurityBtn" onclick="switchTab('security')">Güvenlik / Şifre</button>
             </div>
 
-            <!-- TAB 1: GELEN MESAJLAR -->
+            <!-- TAB 1: MESAJLAR -->
             <div id="tabMessages">
-                <h4 style="margin-bottom: 1rem; font-weight: 800;">Onay Bekleyen veya Yayındaki Mesajlar</h4>
-                <div id="admin-posts-list">
-                    <!-- Mesaj listesi JS ile dolacak -->
+                <h4 style="margin-bottom: 1rem; font-weight: 800; text-transform: uppercase;">Onay Bekleyen veya Yayındaki Taraftar Yazıları</h4>
+                <div id="admin-posts-list" style="max-height: 400px; overflow-y: auto;">
+                    <!-- JS ile dolacak -->
                 </div>
             </div>
 
-            <!-- TAB 2: SİTE BİLGİLERİ GÜNCELLEME -->
-            <div id="tabSettings" style="display: none;">
-                <h4 style="margin-bottom: 1.5rem; font-weight: 800;">Kulüp İletişim & Transfer Bilgileri</h4>
+            <!-- TAB 2: SİTE BİLGİLERİ -->
+            <div id="tabSettings" style="display: none; max-height: 450px; overflow-y: auto; padding-right: 1rem;">
+                <h4 style="margin-bottom: 1.5rem; font-weight: 800; text-transform: uppercase;">Sitenin Tüm Yazı ve İletişim Bilgileri</h4>
                 <div class="form-group">
+                    <label>Ana Başlık (Hero)</label>
+                    <textarea id="edit-hero-title" class="form-control" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Slogan (Kırmızı Alan)</label>
+                    <input type="text" id="edit-hero-slogan" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Hakkımızda Başlık 1</label>
+                    <input type="text" id="edit-about-title1" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Hakkımızda Metin 1</label>
+                    <textarea id="edit-about-text1" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Hakkımızda Başlık 2</label>
+                    <input type="text" id="edit-about-title2" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Hakkımızda Metin 2</label>
+                    <textarea id="edit-about-text2" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Futbol Alanı Başlığı</label>
+                    <input type="text" id="edit-futbol-title" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Futbol Paragraf 1</label>
+                    <textarea id="edit-futbol-desc" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Futbol Paragraf 2</label>
+                    <textarea id="edit-futbol-desc2" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Futbol Bölümü Görsel URL'si</label>
+                    <input type="text" id="edit-futbol-img-url" class="form-control">
+                </div>
+                <div class="form-group" style="border-top: 1px dashed #ccc; padding-top: 1rem;">
                     <label>Telefon Numarası</label>
-                    <input type="text" id="edit-phone" class="form-control" value="0 536 893 94 15">
+                    <input type="text" id="edit-phone" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>E-Posta 1</label>
-                    <input type="text" id="edit-email1" class="form-control" value="info@abersanatsk.org">
+                    <input type="text" id="edit-email1" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>E-Posta 2</label>
-                    <input type="text" id="edit-email2" class="form-control" value="ridvan@abersanatsk.org">
+                    <input type="text" id="edit-email2" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>Adres Bilgisi</label>
-                    <textarea id="edit-address" class="form-control" rows="2">Cedit Mah. 319. Sk. No:2/A Merkez / Karaman</textarea>
+                    <label>Adres</label>
+                    <textarea id="edit-address" class="form-control" rows="2"></textarea>
                 </div>
                 <div class="form-group" style="border-top: 1px dashed #ccc; padding-top: 1rem;">
                     <label>Transfer Başlığı</label>
-                    <input type="text" id="edit-transfers-title" class="form-control" value="TRANSFERLER">
+                    <input type="text" id="edit-transfers-title" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Transfer Rozeti (Badge)</label>
-                    <input type="text" id="edit-transfers-badge" class="form-control" value="ÇOK YAKINDA">
+                    <input type="text" id="edit-transfers-badge" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label>Transfer Detayı</label>
-                    <input type="text" id="edit-transfers-desc" class="form-control" value="Kadromuzu güçlendirecek yeni kanatlarımız yolda. Takipte kalın.">
+                    <label>Transfer Detay Yazısı</label>
+                    <input type="text" id="edit-transfers-desc" class="form-control">
                 </div>
                 <button class="submit-btn" onclick="saveSettings()">Değişiklikleri Kaydet</button>
+            </div>
+
+            <!-- TAB 3: MEDYA VE GALERİ YÖNETİMİ -->
+            <div id="tabGallery" style="display: none;">
+                <h4 style="margin-bottom: 1.5rem; font-weight: 800; text-transform: uppercase;">Galeriye Resim/Video Ekle ve Sil</h4>
+                
+                <div class="blog-form-wrapper" style="box-shadow: none; margin-bottom: 2rem;">
+                    <h5 style="margin-bottom: 1rem; font-weight: 800;">YENİ MEDYA EKLE</h5>
+                    <div class="form-group">
+                        <label>Medya Türü</label>
+                        <select id="new-media-type" class="form-control">
+                            <option value="image">Resim (Görsel URL)</option>
+                            <option value="video">Video (MP4 / Youtube Video URL)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Medya URL'si (İnternet Adresi)</label>
+                        <input type="text" id="new-media-url" class="form-control" placeholder="Örn: https://images.unsplash.com/photo-...">
+                    </div>
+                    <button class="submit-btn" onclick="addGalleryItem()">Galeriye Ekle</button>
+                </div>
+
+                <h5 style="margin-bottom: 1rem; font-weight: 800;">MEVCUT GALERİ ELEMANLARI</h5>
+                <div id="admin-gallery-list" style="max-height: 250px; overflow-y: auto;">
+                    <!-- JS ile dolacak -->
+                </div>
+            </div>
+
+            <!-- TAB 4: ŞİFRE GÜNCELLEME -->
+            <div id="tabSecurity" style="display: none;">
+                <h4 style="margin-bottom: 1.5rem; font-weight: 800; text-transform: uppercase;">Admin Paneli Giriş Şifresini Değiştir</h4>
+                <div class="form-group">
+                    <label>Mevcut Şifre</label>
+                    <input type="password" id="current-password-input" class="form-control" placeholder="Mevcut admin şifreniz">
+                </div>
+                <div class="form-group">
+                    <label>Yeni Şifre</label>
+                    <input type="password" id="new-password-input" class="form-control" placeholder="Yeni belirlemek istediğiniz şifre">
+                </div>
+                <div class="form-group">
+                    <label>Yeni Şifre Tekrar</label>
+                    <input type="password" id="new-password-confirm" class="form-control" placeholder="Yeni şifreyi tekrar yazın">
+                </div>
+                <button class="submit-btn" onclick="changeAdminPassword()">Şifreyi Güncelle</button>
             </div>
         </div>
     </div>
@@ -744,7 +867,7 @@
             <div class="footer-logo">ABER <span>SANAT GÜCÜ</span></div>
             <p>© 2026 Tüm Hakları Saklıdır.</p>
             <div class="signature">DESIGNED BY <span>RIDVAN ARSLAN</span></div>
-            <div class="admin-trigger" onclick="loginAdmin()">Yönetim Paneli Girişi</div>
+            <div class="admin-trigger" onclick="loginAdmin()">Yönetim Paneline Giriş Yap</div>
         </div>
     </footer>
 
@@ -761,8 +884,13 @@
             }
         }
 
-        // --- DINAMIK VERITABANI (LOCALSTORAGE) ALT YAPISI ---
-        let siteData = {
+        // --- GELİŞMİŞ DİNAMİK ALTYAPI (LOCALSTORAGE) ---
+        let defaultData = {
+            adminPassword: "admin123", // Varsayılan şifre
+            hero: {
+                title: "KARAMAN\nABER SANAT GÜCÜ\nSPOR KULÜBÜ",
+                slogan: "İNANÇ KANATLANDIRIR"
+            },
             posts: [
                 { id: 1, author: "Ahmet Yılmaz", text: "Karaman'da futbolun çehresini değiştirecek bir inanmışlık görüyorum. Başarılar Sanat Gücü!", approved: true }
             ],
@@ -776,90 +904,147 @@
                 title: "TRANSFERLER",
                 badge: "ÇOK YAKINDA",
                 desc: "Kadromuzu güçlendirecek yeni kanatlarımız yolda. Takipte kalın."
-            }
+            },
+            about: {
+                title1: "İnanmış Bir Takım Ruhu.",
+                text1: "Karaman Aber Sanat Gücü Spor Kulübü, yeşil sahalarda sadece fiziksel gücü değil, sarsılmaz bir disiplini ve takım bütünlüğünü temsil eder. Bizler, sporcularımızın karakter gelişimini en ön planda tutarak dürüstlük, azim ve yüksek ahlak bilinciyle geleceğin futbolcularını yetiştiriyoruz.",
+                title2: "Zafere Giden Kararlı Yol.",
+                text2: "Sloganımız olan 'İnanç Kanatlandırır' ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz. Genç yetenekleri keşfedip onları modern futbol metodolojisiyle hazırlayarak sadece skor üreten değil, sahada duruşuyla fark yaratan inanmış bir jenerasyon kuruyoruz."
+            },
+            futbol: {
+                title: "Sadece Futbol",
+                desc: "Karaman Aber Sanat Gücü olarak tüm enerjimizi, gücümüzü ve odağımızı tamamen yeşil sahalara yansıtıyoruz. Tek ve sarsılmaz branşımız olan Futbolda, altyapıdan A takıma kadar modern taktikler, disiplinli idmanlar ve sarsılmaz bir takım ruhu aşılıyoruz.",
+                desc2: "Futbolcularımıza modern antrenman metodolojisi sunarak hem fiziksel gelişimlerini zirveye taşıyor hem de taktiksel zekalarını futbol zekasıyla birleştiriyoruz.",
+                imgUrl: "https://images.unsplash.com/photo-1518063319789-7217e6706b04?q=80&w=800"
+            },
+            gallery: [
+                { id: 1, type: "image", url: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=800" },
+                { id: 2, type: "image", url: "https://images.unsplash.com/photo-1518063319789-7217e6706b04?q=80&w=800" }
+            ]
         };
 
-        // Verileri tarayıcı hafızasından yükleme
-        function loadData() {
-            const savedData = localStorage.getItem('aber_sk_data');
-            if (savedData) {
-                siteData = JSON.parse(savedData);
+        let activeData = {};
+
+        // Verileri Yükle
+        function loadAllData() {
+            const saved = localStorage.getItem('aber_sk_pro_data');
+            if (saved) {
+                activeData = JSON.parse(saved);
+                // Geriye dönük uyumluluk için varsayılan şifre kontrolü
+                if (!activeData.adminPassword) activeData.adminPassword = "admin123";
             } else {
-                saveData(); // Varsayılan değerleri ilk açılışta kaydet
+                activeData = JSON.parse(JSON.stringify(defaultData));
+                saveAllData();
             }
-            renderSite();
+            renderAllSections();
         }
 
-        // Verileri tarayıcı hafızasına kaydetme
-        function saveData() {
-            localStorage.setItem('aber_sk_data', JSON.stringify(siteData));
+        // Verileri Kaydet
+        function saveAllData() {
+            localStorage.setItem('aber_sk_pro_data', JSON.stringify(activeData));
         }
 
-        // --- SİTEYİ YENİDEN YAZDIRMA (RENDER) ---
-        function renderSite() {
-            // 1. İletişim Bilgileri
-            document.getElementById('club-phone-link').innerText = siteData.contact.phone;
-            document.getElementById('club-phone-link').href = "tel:" + siteData.contact.phone.replace(/\s+/g, '');
-            document.getElementById('club-email-1').innerText = siteData.contact.email1;
-            document.getElementById('club-email-1').href = "mailto:" + siteData.contact.email1;
-            document.getElementById('club-email-2').innerText = siteData.contact.email2;
-            document.getElementById('club-email-2').href = "mailto:" + siteData.contact.email2;
-            document.getElementById('club-address-text').innerHTML = siteData.contact.address;
+        // --- TÜM SİTEYİ GÜNCELLE (RENDER) ---
+        function renderAllSections() {
+            // 1. Hero Kısmı
+            document.getElementById('hero-title-text').innerText = activeData.hero.title;
+            document.getElementById('hero-slogan-text').innerText = activeData.hero.slogan;
 
-            // 2. Transfer Bilgileri
-            document.getElementById('transfer-title-text').innerText = siteData.transfers.title;
-            document.getElementById('transfer-badge-text').innerText = siteData.transfers.badge;
-            document.getElementById('transfer-desc-text').innerText = siteData.transfers.desc;
+            // 2. Hakkımızda Kısmı
+            document.getElementById('about-card-title1').innerText = activeData.about.title1;
+            document.getElementById('about-card-text1').innerText = activeData.about.text1;
+            document.getElementById('about-card-title2').innerText = activeData.about.title2;
+            document.getElementById('about-card-text2').innerText = activeData.about.text2;
 
-            // 3. Onaylanmış Mesajlar Listesi
-            const container = document.getElementById('posts-container');
-            container.innerHTML = '';
-            
-            const approvedPosts = siteData.posts.filter(p => p.approved === true);
-            if(approvedPosts.length === 0) {
-                container.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">Henüz onaylanmış mesaj yok.</p>';
+            // 3. Futbol Kısmı
+            document.getElementById('futbol-title-text').innerText = activeData.futbol.title;
+            document.getElementById('futbol-desc-text').innerText = activeData.futbol.desc;
+            document.getElementById('futbol-desc-text-2').innerText = activeData.futbol.desc2;
+            document.getElementById('futbol-image-bg').style.backgroundImage = `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('${activeData.futbol.imgUrl}')`;
+
+            // 4. İletişim Bilgileri
+            document.getElementById('club-phone-link').innerText = activeData.contact.phone;
+            document.getElementById('club-phone-link').href = "tel:" + activeData.contact.phone.replace(/\s+/g, '');
+            document.getElementById('club-email-1').innerText = activeData.contact.email1;
+            document.getElementById('club-email-1').href = "mailto:" + activeData.contact.email1;
+            document.getElementById('club-email-2').innerText = activeData.contact.email2;
+            document.getElementById('club-email-2').href = "mailto:" + activeData.contact.email2;
+            document.getElementById('club-address-text').innerHTML = activeData.contact.address;
+
+            // 5. Transfer Bilgileri
+            document.getElementById('transfer-title-text').innerText = activeData.transfers.title;
+            document.getElementById('transfer-badge-text').innerText = activeData.transfers.badge;
+            document.getElementById('transfer-desc-text').innerText = activeData.transfers.desc;
+
+            // 6. Galeri / Medya Render
+            const galleryGrid = document.getElementById('gallery-container');
+            galleryGrid.innerHTML = '';
+            if (activeData.gallery.length === 0) {
+                galleryGrid.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">Sitenin galerisine henüz bir fotoğraf veya video eklenmedi.</p>';
+            } else {
+                activeData.gallery.forEach(item => {
+                    const mediaBox = document.createElement('div');
+                    mediaBox.className = 'gallery-item';
+                    if (item.type === 'image') {
+                        mediaBox.innerHTML = `<img src="${item.url}" alt="Aber SK Galeri" onerror="this.src='https://placehold.co/800x600/000/fff?text=Resim+Yuklenemedi';">`;
+                    } else {
+                        mediaBox.innerHTML = `
+                            <video controls muted preload="metadata">
+                                <source src="${item.url}" type="video/mp4">
+                                Tarayıcınız video oynatmayı desteklemiyor.
+                            </video>
+                        `;
+                    }
+                    galleryGrid.appendChild(mediaBox);
+                });
+            }
+
+            // 7. Onaylanmış Yazılar Duvarı
+            const postsContainer = document.getElementById('posts-container');
+            postsContainer.innerHTML = '';
+            const approvedPosts = activeData.posts.filter(p => p.approved === true);
+            if (approvedPosts.length === 0) {
+                postsContainer.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">Henüz onaylanmış taraftar yazısı bulunmuyor.</p>';
             } else {
                 approvedPosts.forEach(post => {
                     const card = document.createElement('div');
                     card.className = 'post-card';
                     card.innerHTML = `
-                        <div class="post-meta">${post.author} // Ziyaretçi</div>
+                        <div class="post-meta">${post.author} // Taraftar</div>
                         <div class="post-text">"${post.text}"</div>
                     `;
-                    container.appendChild(card);
+                    postsContainer.appendChild(card);
                 });
             }
         }
 
-        // --- ZİYARETÇİ FORM GÖNDERİMİ ---
+        // --- FORMSPREE VE YEREL HAFIZAYA FORM KAYDETME ---
         function handleFormSubmit(event) {
-            // Tarayıcının formu direkt Formspree'ye göndermesine izin veriyoruz (mail gitmesi için)
-            // Ama aynı zamanda sayfa yenilenmeden veriyi yerel hafızaya onaysız olarak kaydediyoruz.
             const nameInput = document.getElementById('name').value;
             const messageInput = document.getElementById('message').value;
 
+            // Yerel hafızaya onaysız olarak kaydet
             const newPost = {
                 id: Date.now(),
                 author: nameInput,
                 text: messageInput,
-                approved: false // Onaylanana kadar sitede gözükmez
+                approved: false
             };
 
-            siteData.posts.push(newPost);
-            saveData();
-            
-            // Kullanıcıya teşekkür mesajı
-            alert("Harika! Düşünceleriniz abersanat@gmail.com e-posta adresimize gönderildi ve admin onay sırasına eklendi. Onaylandıktan sonra yayına alınacaktır!");
+            activeData.posts.push(newPost);
+            saveAllData();
+
+            alert("Düşünceniz yönetim onay paneline ulaştı ve abersanat@gmail.com adresine mail olarak yönlendirildi! Onaylandığında sitemizde yayınlanacaktır.");
         }
 
-        // --- ADMIN PANELİ FONKSİYONLARI ---
+        // --- GÜVENLİK VE GİRİŞ MEKANİZMASI ---
         function loginAdmin() {
-            const password = prompt("Admin Şifresini Giriniz:");
-            if (password === "admin123") { // Varsayılan Şifre: admin123
+            const password = prompt("Lütfen Yönetim Paneli Şifrenizi Giriniz:");
+            if (password === activeData.adminPassword) {
                 toggleAdminModal();
                 renderAdminPanel();
             } else if (password !== null) {
-                alert("Hatalı şifre girdiniz!");
+                alert("Hatalı admin şifresi girdiniz!");
             }
         }
 
@@ -868,44 +1053,49 @@
             modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
         }
 
+        // Sekme Geçişleri
         function switchTab(tabName) {
-            const tabMessages = document.getElementById('tabMessages');
-            const tabSettings = document.getElementById('tabSettings');
-            const tabMessagesBtn = document.getElementById('tabMessagesBtn');
-            const tabSettingsBtn = document.getElementById('tabSettingsBtn');
+            const tabs = ['tabMessages', 'tabSettings', 'tabGallery', 'tabSecurity'];
+            const buttons = ['tabMessagesBtn', 'tabSettingsBtn', 'tabGalleryBtn', 'tabSecurityBtn'];
+
+            tabs.forEach(tab => document.getElementById(tab).style.display = 'none');
+            buttons.forEach(btn => document.getElementById(btn).classList.remove('active'));
 
             if (tabName === 'messages') {
-                tabMessages.style.display = 'block';
-                tabSettings.style.display = 'none';
-                tabMessagesBtn.classList.add('active');
-                tabSettingsBtn.classList.remove('active');
+                document.getElementById('tabMessages').style.display = 'block';
+                document.getElementById('tabMessagesBtn').classList.add('active');
                 renderAdminPanel();
-            } else {
-                tabMessages.style.display = 'none';
-                tabSettings.style.display = 'block';
-                tabMessagesBtn.classList.remove('active');
-                tabSettingsBtn.classList.add('active');
-                loadSettingsToForm();
+            } else if (tabName === 'settings') {
+                document.getElementById('tabSettings').style.display = 'block';
+                document.getElementById('tabSettingsBtn').classList.add('active');
+                loadSettingsToAdminForm();
+            } else if (tabName === 'gallery') {
+                document.getElementById('tabGallery').style.display = 'block';
+                document.getElementById('tabGalleryBtn').classList.add('active');
+                renderAdminGallery();
+            } else if (tabName === 'security') {
+                document.getElementById('tabSecurity').style.display = 'block';
+                document.getElementById('tabSecurityBtn').classList.add('active');
             }
         }
 
-        // Admin Panelindeki Mesajları Listeleme
+        // --- TAB 1: TARAFTAR YAZILARI YÖNETİMİ ---
         function renderAdminPanel() {
-            const listContainer = document.getElementById('admin-posts-list');
-            listContainer.innerHTML = '';
+            const container = document.getElementById('admin-posts-list');
+            container.innerHTML = '';
 
-            if (siteData.posts.length === 0) {
-                listContainer.innerHTML = '<p>Gelen mesaj bulunmuyor.</p>';
+            if (activeData.posts.length === 0) {
+                container.innerHTML = '<p>Şu an sistemde hiç taraftar yazısı bulunmuyor.</p>';
                 return;
             }
 
-            siteData.posts.forEach(post => {
+            activeData.posts.forEach(post => {
                 const item = document.createElement('div');
                 item.className = 'admin-list-item';
                 item.innerHTML = `
                     <div>
                         <strong>${post.author}:</strong> <span>"${post.text}"</span>
-                        <div style="font-size:0.8rem; margin-top:5px; color:${post.approved ? 'green':'red'}">
+                        <div style="font-size: 0.8rem; margin-top: 5px; color: ${post.approved ? 'green':'red'}">
                             Durum: ${post.approved ? 'Yayında' : 'Onay Bekliyor'}
                         </div>
                     </div>
@@ -914,64 +1104,175 @@
                         <button class="admin-btn-delete" onclick="deletePost(${post.id})">Sil</button>
                     </div>
                 `;
-                listContainer.appendChild(item);
+                container.appendChild(item);
             });
         }
 
-        // Mesaj Onaylama
         function approvePost(id) {
-            const post = siteData.posts.find(p => p.id === id);
+            const post = activeData.posts.find(p => p.id === id);
             if (post) {
                 post.approved = true;
-                saveData();
-                renderSite();
+                saveAllData();
+                renderAllSections();
                 renderAdminPanel();
-                alert("Mesaj başarıyla onaylandı ve sitede yayına alındı!");
+                alert("Yazı onaylandı ve başarıyla yayına alındı!");
             }
         }
 
-        // Mesaj Silme
         function deletePost(id) {
-            if(confirm("Bu mesajı tamamen silmek istediğinize emin misiniz?")) {
-                siteData.posts = siteData.posts.filter(p => p.id !== id);
-                saveData();
-                renderSite();
+            if (confirm("Bu taraftar yazısını tamamen silmek istediğinize emin misiniz?")) {
+                activeData.posts = activeData.posts.filter(p => p.id !== id);
+                saveAllData();
+                renderAllSections();
                 renderAdminPanel();
             }
         }
 
-        // Site Ayarlarını Düzenleme Formuna Yükleme
-        function loadSettingsToForm() {
-            document.getElementById('edit-phone').value = siteData.contact.phone;
-            document.getElementById('edit-email1').value = siteData.contact.email1;
-            document.getElementById('edit-email2').value = siteData.contact.email2;
-            document.getElementById('edit-address').value = siteData.contact.address.replace('<br>', '\n');
-            
-            document.getElementById('edit-transfers-title').value = siteData.transfers.title;
-            document.getElementById('edit-transfers-badge').value = siteData.transfers.badge;
-            document.getElementById('edit-transfers-desc').value = siteData.transfers.desc;
+        // --- TAB 2: SİTE METİNLERİ YÖNETİMİ ---
+        function loadSettingsToAdminForm() {
+            document.getElementById('edit-hero-title').value = activeData.hero.title;
+            document.getElementById('edit-hero-slogan').value = activeData.hero.slogan;
+
+            document.getElementById('edit-about-title1').value = activeData.about.title1;
+            document.getElementById('edit-about-text1').value = activeData.about.text1;
+            document.getElementById('edit-about-title2').value = activeData.about.title2;
+            document.getElementById('edit-about-text2').value = activeData.about.text2;
+
+            document.getElementById('edit-futbol-title').value = activeData.futbol.title;
+            document.getElementById('edit-futbol-desc').value = activeData.futbol.desc;
+            document.getElementById('edit-futbol-desc2').value = activeData.futbol.desc2;
+            document.getElementById('edit-futbol-img-url').value = activeData.futbol.imgUrl;
+
+            document.getElementById('edit-phone').value = activeData.contact.phone;
+            document.getElementById('edit-email1').value = activeData.contact.email1;
+            document.getElementById('edit-email2').value = activeData.contact.email2;
+            document.getElementById('edit-address').value = activeData.contact.address.replace(/<br\s*\/?>/gi, '\n');
+
+            document.getElementById('edit-transfers-title').value = activeData.transfers.title;
+            document.getElementById('edit-transfers-badge').value = activeData.transfers.badge;
+            document.getElementById('edit-transfers-desc').value = activeData.transfers.desc;
         }
 
-        // Site Ayarlarını Kaydetme
         function saveSettings() {
-            siteData.contact.phone = document.getElementById('edit-phone').value;
-            siteData.contact.email1 = document.getElementById('edit-email1').value;
-            siteData.contact.email2 = document.getElementById('edit-email2').value;
-            siteData.contact.address = document.getElementById('edit-address').value.replace('\n', '<br>');
+            activeData.hero.title = document.getElementById('edit-hero-title').value;
+            activeData.hero.slogan = document.getElementById('edit-hero-slogan').value;
 
-            siteData.transfers.title = document.getElementById('edit-transfers-title').value;
-            siteData.transfers.badge = document.getElementById('edit-transfers-badge').value;
-            siteData.transfers.desc = document.getElementById('edit-transfers-desc').value;
+            activeData.about.title1 = document.getElementById('edit-about-title1').value;
+            activeData.about.text1 = document.getElementById('edit-about-text1').value;
+            activeData.about.title2 = document.getElementById('edit-about-title2').value;
+            activeData.about.text2 = document.getElementById('edit-about-text2').value;
 
-            saveData();
-            renderSite();
-            alert("Site bilgileri başarıyla güncellendi!");
+            activeData.futbol.title = document.getElementById('edit-futbol-title').value;
+            activeData.futbol.desc = document.getElementById('edit-futbol-desc').value;
+            activeData.futbol.desc2 = document.getElementById('edit-futbol-desc2').value;
+            activeData.futbol.imgUrl = document.getElementById('edit-futbol-img-url').value;
+
+            activeData.contact.phone = document.getElementById('edit-phone').value;
+            activeData.contact.email1 = document.getElementById('edit-email1').value;
+            activeData.contact.email2 = document.getElementById('edit-email2').value;
+            activeData.contact.address = document.getElementById('edit-address').value.replace(/\n/g, '<br>');
+
+            activeData.transfers.title = document.getElementById('edit-transfers-title').value;
+            activeData.transfers.badge = document.getElementById('edit-transfers-badge').value;
+            activeData.transfers.desc = document.getElementById('edit-transfers-desc').value;
+
+            saveAllData();
+            renderAllSections();
+            alert("Sitedeki tüm metin ve iletişim bilgileri başarıyla güncellendi!");
+            toggleAdminModal();
+        }
+
+        // --- TAB 3: MEDYA / GALERİ YÖNETİMİ ---
+        function renderAdminGallery() {
+            const container = document.getElementById('admin-gallery-list');
+            container.innerHTML = '';
+
+            if (activeData.gallery.length === 0) {
+                container.innerHTML = '<p>Galeride şu an hiç medya dosyası bulunmuyor.</p>';
+                return;
+            }
+
+            activeData.gallery.forEach(item => {
+                const row = document.createElement('div');
+                row.className = 'admin-list-item';
+                row.innerHTML = `
+                    <div style="display:flex; align-items:center; gap: 15px;">
+                        <span style="font-weight:900; color:var(--accent-red); font-size:0.8rem;">[${item.type.toUpperCase()}]</span>
+                        <span style="font-size:0.85rem; max-width:400px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${item.url}</span>
+                    </div>
+                    <button class="admin-btn-delete" onclick="deleteGalleryItem(${item.id})">Sil</button>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        function addGalleryItem() {
+            const type = document.getElementById('new-media-type').value;
+            const url = document.getElementById('new-media-url').value;
+
+            if (!url) {
+                alert("Lütfen geçerli bir internet adresi (URL) giriniz!");
+                return;
+            }
+
+            const newItem = {
+                id: Date.now(),
+                type: type,
+                url: url
+            };
+
+            activeData.gallery.push(newItem);
+            saveAllData();
+            renderAllSections();
+            renderAdminGallery();
+            document.getElementById('new-media-url').value = '';
+            alert("Yeni medya başarıyla galeriye eklendi!");
+        }
+
+        function deleteGalleryItem(id) {
+            if (confirm("Bu medya dosyasını galeriden kaldırmak istediğinize emin misiniz?")) {
+                activeData.gallery = activeData.gallery.filter(g => g.id !== id);
+                saveAllData();
+                renderAllSections();
+                renderAdminGallery();
+            }
+        }
+
+        // --- TAB 4: ŞİFRE GÜNCELLEME ---
+        function changeAdminPassword() {
+            const currInput = document.getElementById('current-password-input').value;
+            const newInput = document.getElementById('new-password-input').value;
+            const confirmInput = document.getElementById('new-password-confirm').value;
+
+            if (currInput !== activeData.adminPassword) {
+                alert("Mevcut şifrenizi hatalı girdiniz!");
+                return;
+            }
+
+            if (!newInput) {
+                alert("Yeni şifre boş bırakılamaz!");
+                return;
+            }
+
+            if (newInput !== confirmInput) {
+                alert("Yeni şifreler uyuşmuyor!");
+                return;
+            }
+
+            activeData.adminPassword = newInput;
+            saveAllData();
+            
+            document.getElementById('current-password-input').value = '';
+            document.getElementById('new-password-input').value = '';
+            document.getElementById('new-password-confirm').value = '';
+
+            alert("Yönetim paneli giriş şifreniz başarıyla değiştirildi!");
             toggleAdminModal();
         }
 
         // Sayfa ilk yüklendiğinde verileri çek
         window.onload = function() {
-            loadData();
+            loadAllData();
         };
     </script>
 </body>
