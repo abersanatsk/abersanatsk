@@ -272,7 +272,7 @@
             transform: rotate(-2deg);
         }
 
-        /* --- DÜŞÜNCE DUVARI BÖLÜMÜ --- */
+        /* --- BİZE YAZIN (BLOG) BÖLÜMÜ --- */
         .blog-container {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
@@ -475,14 +475,14 @@
                     <li><a href="#kulup">Hakkımızda</a></li>
                     <li><a href="#futbol">Futbol</a></li>
                     <li><a href="#transferler">Transferler</a></li>
-                    <li><a href="#dusunce-duvari">Düşünce Duvarı</a></li>
+                    <li><a href="#bize-yazin">Bize Yazın</a></li>
                     <li><a href="#iletisim">İletişim</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- HERO SECTION (Görseldeki Saf Bembeyaz Tasarım) -->
+    <!-- HERO SECTION -->
     <section class="hero" id="home">
         <h1 class="hero-title">KARAMAN<br>ABER SANAT GÜCÜ<br>SPOR KULÜBÜ</h1>
         <div class="hero-slogan">İNANÇ KANATLANDIRIR</div>
@@ -533,30 +533,33 @@
         </div>
     </section>
 
-    <!-- DÜŞÜNCE DUVARI BÖLÜMÜ -->
-    <section id="dusunce-duvari">
+    <!-- BİZE YAZIN (BLOG) BÖLÜMÜ -->
+    <section id="bize-yazin">
         <div class="container">
-            <h2 class="section-title">Düşünce Duvarı</h2>
+            <h2 class="section-title">Bize Yazın</h2>
             <div class="blog-container">
                 <div class="blog-form-wrapper">
-                    <h3>Fikirlerinizi Yazın</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem;">Fikirleriniz bizim için değerli. Buraya yazın, mail yoluyla onayımıza gelsin ve sitemizde yayınlansın!</p>
+                    <h3>Fikirlerinizi Paylaşın</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem;">Fikirleriniz bizim için değerli. Formu doldurup gönderin, onayımızın ardından sitemizde yayınlayalım!</p>
                     
-                    <form action="javascript:void(0);" onsubmit="sendPost();">
+                    <!-- Güvenli Formspree Altyapısı (Doğrudan abersanat@gmail.com adresine yönlendirir) -->
+                    <form action="https://formspree.io/f/xvgonzzo" method="POST">
                         <div class="form-group">
-                            <label for="post-author">İsminiz</label>
-                            <input type="text" id="post-author" class="form-control" placeholder="Adınız Soyadınız" required>
+                            <label for="name">İsminiz</label>
+                            <input type="text" name="name" id="name" class="form-control" placeholder="Adınız Soyadınız" required>
                         </div>
                         <div class="form-group">
-                            <label for="post-message">Düşünceniz</label>
-                            <textarea id="post-message" rows="5" class="form-control" placeholder="Mesajınızı yazın..." required></textarea>
+                            <label for="message">Düşünceniz</label>
+                            <textarea name="message" id="message" rows="5" class="form-control" placeholder="Mesajınızı yazın..." required></textarea>
                         </div>
+                        <!-- Onay kodunu kopyalaman için şablonu otomatik olarak Formspree'ye gizli alan olarak gönderiyoruz -->
+                        <input type="hidden" name="_subject" value="Aber SK - Yeni Bize Yazın Mesajı">
                         <button type="submit" class="submit-btn">Onaya Gönder</button>
                     </form>
                 </div>
 
                 <div>
-                    <h3 style="font-size: 1.5rem; font-weight: 900; font-style: italic; text-transform: uppercase; margin-bottom: 2rem;">Duvarımızda Yazılanlar</h3>
+                    <h3 style="font-size: 1.5rem; font-weight: 900; font-style: italic; text-transform: uppercase; margin-bottom: 2rem;">Yazılanlar</h3>
                     <div class="approved-posts" id="posts-container">
                         <div class="post-card">
                             <div class="post-meta">Ahmet Yılmaz // Taraftar</div>
@@ -619,26 +622,6 @@
             } else {
                 imgElement.style.display = 'none';
             }
-        }
-
-        // Onay maili fonksiyonu (abersanat@gmail.com adresine yönlendirmeli)
-        function sendPost() {
-            var author = document.getElementById('post-author').value;
-            var message = document.getElementById('post-message').value;
-            
-            var emailBody = "Merhaba,\n\nWeb sitenizin Düşünce Duvarı'ndan onay bekleyen yeni bir mesaj var:\n\n";
-            emailBody += "Gönderen: " + author + "\n";
-            emailBody += "Mesajı: " + message + "\n\n";
-            emailBody += "--------------------------------------------------\n";
-            emailBody += "BU YAZIYI ONAYLAMAK VE SİTEYE EKLEMEK İÇİN:\n";
-            emailBody += "Aşağıdaki kodu kopyalayıp index.html içindeki 'posts-container' div'inin altına ekleyin:\n\n";
-            emailBody += '<div class="post-card">\n    <div class="post-meta">' + author + ' // Onaylı Gönderi</div>\n    <div class="post-text">"' + message + '"</div>\n</div>\n';
-            emailBody += "--------------------------------------------------";
-            
-            var mailtoLink = "mailto:abersanat@gmail.com?subject=Aber SK - Dusunce Duvari Onay Mesaji&body=" + encodeURIComponent(emailBody);
-            window.location.href = mailtoLink;
-            
-            alert("Mesajınız abersanat@gmail.com adresine yönlendiriliyor. Onaylandıktan sonra duvarda listelenecektir!");
         }
     </script>
 </body>
