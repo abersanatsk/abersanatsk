@@ -109,7 +109,7 @@
             color: var(--accent-red);
         }
 
-        /* --- GÖRSELDEKİ BEMBEYAZ KAPAK (HERO) ALANI --- */
+        /* --- BEMBEYAZ KAPAK (HERO) ALANI --- */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -542,8 +542,8 @@
                     <h3>Fikirlerinizi Paylaşın</h3>
                     <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem;">Fikirleriniz bizim için değerli. Formu doldurup gönderin, onayımızın ardından sitemizde yayınlayalım!</p>
                     
-                    <!-- Güvenli Formspree Altyapısı (Doğrudan abersanat@gmail.com adresine yönlendirir) -->
-                    <form action="https://formspree.io/f/xvgonzzo" method="POST">
+                    <!-- Formspree Kendi Hesabına Bağlı Link -->
+                    <form action="https://formspree.io/f/xeeyoqbe" method="POST">
                         <div class="form-group">
                             <label for="name">İsminiz</label>
                             <input type="text" name="name" id="name" class="form-control" placeholder="Adınız Soyadınız" required>
@@ -552,7 +552,6 @@
                             <label for="message">Düşünceniz</label>
                             <textarea name="message" id="message" rows="5" class="form-control" placeholder="Mesajınızı yazın..." required></textarea>
                         </div>
-                        <!-- Onay kodunu kopyalaman için şablonu otomatik olarak Formspree'ye gizli alan olarak gönderiyoruz -->
                         <input type="hidden" name="_subject" value="Aber SK - Yeni Bize Yazın Mesajı">
                         <button type="submit" class="submit-btn">Onaya Gönder</button>
                     </form>
