@@ -73,7 +73,7 @@
             gap: 15px;
             text-decoration: none;
             color: var(--text-dark);
-            max-width: 65%;
+            max-width: 45%;
         }
 
         .club-logo-wrapper {
@@ -116,6 +116,7 @@
             display: flex;
             list-style: none;
             gap: 1.2rem;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
@@ -807,7 +808,7 @@
                         KARAMAN ABER SANAT GÜCÜ <span>SPOR KULÜBÜ</span>
                     </div>
                 </a>
-                <ul class="nav-links">
+                <ul class="nav-links" id="main-nav-links">
                     <li><a href="#kulup">Hakkımızda</a></li>
                     <li><a href="#kadro">Oyuncularımız</a></li>
                     <li><a href="#transferler">Transferler</a></li>
@@ -815,6 +816,7 @@
                     <li><a href="#galeri">Medya</a></li>
                     <li><a href="#bize-yazin">Bize Yazın</a></li>
                     <li><a href="#iletisim">İletişim</a></li>
+                    <!-- Dinamik menü bağlantıları buraya yüklenecek -->
                 </ul>
             </nav>
         </div>
@@ -886,6 +888,9 @@
             </div>
         </div>
     </section>
+
+    <!-- DİNAMİK OLARAK EKLENEN SAYFALAR BU ALANA ENJEKTE EDİLECEK -->
+    <div id="dynamic-pages-container"></div>
 
     <!-- BİZE YAZIN BÖLÜMÜ -->
     <section id="bize-yazin">
@@ -964,6 +969,7 @@
                 <button type="button" class="admin-sidebar-btn" id="tabTransBtn" onclick="switchTab('transfers')">Transfer Gündemi</button>
                 <button type="button" class="admin-sidebar-btn" id="tabFixBtn" onclick="switchTab('fixture')">Fikstür / Sonuçlar</button>
                 <button type="button" class="admin-sidebar-btn" id="tabGalBtn" onclick="switchTab('gallery')">Medya / Galeri</button>
+                <button type="button" class="admin-sidebar-btn" id="tabPagesBtn" onclick="switchTab('pages')">Yeni Sayfa Ekle</button>
                 <button type="button" class="admin-sidebar-btn" id="tabMsgBtn" onclick="switchTab('messages')">Taraftar Yazıları</button>
                 <button type="button" class="admin-sidebar-btn" id="tabSecBtn" onclick="switchTab('security')">Tema & Şifre</button>
             </div>
@@ -1211,6 +1217,43 @@
                     <div id="admin-gallery-list" style="max-height: 300px; overflow-y: auto;"></div>
                 </div>
 
+                <!-- TAB: SAYFA EKLEME (YENİ EKLEME) -->
+                <div id="tabPages" class="admin-tab-content">
+                    <div class="admin-section-heading">YENİ SAYFA EKLE VE YÖNET</div>
+                    <div class="blog-form-wrapper" style="box-shadow: none; margin-bottom: 2rem;">
+                        <h5 style="margin-bottom: 1rem; font-weight: 900; color: #000; text-transform: uppercase;">YENİ SAYFA BİLGİLERİ</h5>
+                        <div class="form-group">
+                            <label>Sayfa / Menü Adı (Kısa ve tek kelime önerilir)</label>
+                            <input type="text" id="new-page-menu-title" class="form-control" placeholder="Örn: Tesislerimiz, Altyapı">
+                        </div>
+                        <div class="form-group">
+                            <label>Bölüm Başlığı (Sayfa içi büyük başlık)</label>
+                            <input type="text" id="new-page-title" class="form-control" placeholder="Örn: Modern Tesislerimiz">
+                        </div>
+                        <div class="form-group">
+                            <label>Sayfa Sloganı (Örn: Gelecek Burada Yetişiyor)</label>
+                            <input type="text" id="new-page-slogan" class="form-control" placeholder="Opsiyonel slogan yazısı">
+                        </div>
+                        <div class="form-group">
+                            <label>Sayfa İçerik Metni</label>
+                            <textarea id="new-page-content" rows="6" class="form-control" placeholder="Sayfanın detaylı metnini buraya yazın..."></textarea>
+                        </div>
+                        <button type="button" class="submit-btn" onclick="addCustomPage()">Yeni Sayfayı Yayına Al</button>
+                    </div>
+
+                    <h5 style="margin-bottom: 1rem; font-weight: 900; color: #000;">EKLENEN DİNAMİK SAYFALAR</h5>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Menü Adı</th>
+                                <th>Bölüm Başlığı</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-pages-list"></tbody>
+                    </table>
+                </div>
+
                 <!-- TAB: MESAJLAR -->
                 <div id="tabMessages" class="admin-tab-content">
                     <div class="admin-section-heading">TARAFTAR MESAJLARI ONAYLAMA ALANI</div>
@@ -1336,9 +1379,9 @@
             },
             about: {
                 title1: "İnanmış Bir Takım Ruhu.",
-                text1: "Karaman Aber Sanat Gücü Spor Kulübü, yeşil sahalarda sadece fiziksel gücü değil, sarsılmaz bir disiplini ve takım bütünlüğünü temsil eder. Bizler, sporcularımızın karakter gelişimini en ön planda tutarak dürüstlük, azim ve yüksek ahlak bilinciyle geleceğin futbolcularını yetiştiriyoruz.",
+                text1: "Karaman Aber Sanat Gücü Spor Kulübü, yeşil sahalarda sadece fiziksel gücü değil, sarsılmaz bir disiplini ve takım bütünlüğünü temsil eder. Bizler, sporcularımızın karakter gelişimini en ön planda tutarak dürüstlük, azim og yüksek ahlak bilinciyle geleceğin futbolcularını yetiştiriyoruz.",
                 title2: "Zafere Giden Kararlı Yol.",
-                text2: "Sloganımız olan 'İNANÇ KANATLANDIRIR' ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz. Genç yetenekleri keşfedip onları modern futbol metodolojisiyle hazırlayarak sadece skor üreten değil, sahada duruşuyla fark yaratan inanmış bir jenerasyon kuruyoruz. Karaman Aber Sanat Gücü olarak tüm enerjimizi, gücümüzü ve odağımızı tamamen yeşil sahalara yansıtıyoruz. Tek ve sarsılmaz branşımız olan Futbolda, altyapıdan A takıma kadar modern taktikler, disiplinli idmanlar og sarsılmaz bir takım ruhu aşılıyoruz. Futbolcularımıza modern antrenman metodolojisi sunarak hem fiziksel gelişimlerini zirveye taşıyoruz."
+                text2: "Sloganımız olan 'İNANÇ KANATLANDIRIR' ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz. Genç yetenekleri keşfedip onları modern futbol metodolojisiyle hazırlayarak sadece skor üreten değil, sahada duruşuyla fark yaratan inanmış bir jenerasyon kuruyoruz. Karaman Aber Sanat Gücü olarak tüm enerjimizi, gücümüzü og odağımızı tamamen yeşil sahalara yansıtıyoruz. Tek og sarsılmaz branşımız olan Futbolda, altyapıdan A takıma kadar modern taktikler, disiplinli idmanlar og sarsılmaz bir takım ruhu aşılıyoruz. Futbolcularımıza modern antrenman metodolojisi sunarak hem fiziksel gelişimlerini zirveye taşıyoruz."
             },
             contact: {
                 phone: "0 536 893 94 15",
@@ -1360,22 +1403,23 @@
             ],
             gallery: [
                 { id: 1, type: "image", url: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=800" }
-            ]
+            ],
+            customPages: [] // Dinamik olarak eklenen sayfalar buraya kayıt edilecek
         };
 
         let activeData = {};
 
-        // --- GÜVENLİ DERİN BİRLEŞTİRİCİ VERİ YÜKLEME MOTORU (GÜNCELLENDİ) ---
+        // --- GÜVENLİ DERİN BİRLEŞTİRİCİ VERİ YÜKLEME MOTORU ---
         function loadAllData() {
             try {
                 const saved = localStorage.getItem('aber_sk_pro_data_v6');
                 
-                // Başlangıçta tüm şablonu tertemiz kopyala (Asla undefined kalmaz!)
+                // Başlangıçta tüm şablonu tertemiz kopyala
                 activeData = JSON.parse(JSON.stringify(defaultData));
                 
                 if (saved) {
                     const parsed = JSON.parse(saved);
-                    // Derin Birleştirme (Deep Merge): Eskiden olmayan alanları default'tan tamamlar
+                    // Derin Birleştirme
                     for (let key in parsed) {
                         if (parsed[key] !== null && parsed[key] !== undefined) {
                             if (typeof parsed[key] === 'object' && !Array.isArray(parsed[key])) {
@@ -1387,8 +1431,8 @@
                     }
                 }
 
-                // --- %100 ÇÖKME KORUMASI: Tüm Array (Dizi) yapılarını onar ---
-                const arrayKeys = ['players', 'transfers', 'fixtures', 'gallery', 'posts'];
+                // Array yapılarını onar
+                const arrayKeys = ['players', 'transfers', 'fixtures', 'gallery', 'posts', 'customPages'];
                 arrayKeys.forEach(key => {
                     if (!Array.isArray(activeData[key])) {
                         activeData[key] = defaultData[key] ? JSON.parse(JSON.stringify(defaultData[key])) : [];
@@ -1420,7 +1464,6 @@
         }
 
         function renderAllSections() {
-            // Güvenli Okuma Katmanı (Optional Chaining Koruması)
             const heroData = activeData.hero || defaultData.hero;
             const aboutData = activeData.about || defaultData.about;
             const contactData = activeData.contact || defaultData.contact;
@@ -1453,7 +1496,7 @@
             document.getElementById('about-card-title2').innerText = aboutData.title2 || defaultData.about.title2;
             document.getElementById('about-card-text2').innerText = aboutData.text2 || defaultData.about.text2;
 
-            // 3. Oyuncularımız (GÜVENLİ LENGTH KONTROLÜ)
+            // 3. Oyuncularımız
             const playersGrid = document.getElementById('players-container');
             playersGrid.innerHTML = '';
             const safePlayers = Array.isArray(activeData.players) ? activeData.players : [];
@@ -1482,7 +1525,7 @@
                 });
             }
 
-            // 4. Transferler (GÜVENLİ LENGTH KONTROLÜ)
+            // 4. Transferler
             const transfersGrid = document.getElementById('transfers-container');
             transfersGrid.innerHTML = '';
             const safeTransfers = Array.isArray(activeData.transfers) ? activeData.transfers : [];
@@ -1506,7 +1549,7 @@
                 });
             }
 
-            // 5. Fikstür (GÜVENLİ LENGTH KONTROLÜ)
+            // 5. Fikstür
             const fixtureGrid = document.getElementById('fixture-container');
             fixtureGrid.innerHTML = '';
             const safeFixtures = Array.isArray(activeData.fixtures) ? activeData.fixtures : [];
@@ -1527,7 +1570,7 @@
                 });
             }
 
-            // 6. Galeri (GÜVENLİ LENGTH KONTROLÜ)
+            // 6. Galeri
             const galleryGrid = document.getElementById('gallery-container');
             galleryGrid.innerHTML = '';
             const safeGallery = Array.isArray(activeData.gallery) ? activeData.gallery : [];
@@ -1552,7 +1595,46 @@
                 });
             }
 
-            // 7. Taraftar Mesajları (GÜVENLİ LENGTH KONTROLÜ)
+            // --- DİNAMİK OLARAK EKLENEN SAYFALARI RENDER ETME (YENİ) ---
+            const dynamicContainer = document.getElementById('dynamic-pages-container');
+            const mainNavLinks = document.getElementById('main-nav-links');
+            
+            // Önce sadece dinamik nav linkleri temizle (Varsayılan nav linkleri koru)
+            const defaultNavHtml = `
+                <li><a href="#kulup">Hakkımızda</a></li>
+                <li><a href="#kadro">Oyuncularımız</a></li>
+                <li><a href="#transferler">Transferler</a></li>
+                <li><a href="#fikstur">Fikstür</a></li>
+                <li><a href="#galeri">Medya</a></li>
+                <li><a href="#bize-yazin">Bize Yazın</a></li>
+                <li><a href="#iletisim">İletişim</a></li>
+            `;
+            mainNavLinks.innerHTML = defaultNavHtml;
+            dynamicContainer.innerHTML = '';
+
+            const safeCustomPages = Array.isArray(activeData.customPages) ? activeData.customPages : [];
+            
+            safeCustomPages.forEach(page => {
+                const safeId = 'dynamic-' + page.id;
+                
+                // 1. Menüye link olarak ekle:
+                mainNavLinks.innerHTML += `<li><a href="#${safeId}">${page.menuTitle}</a></li>`;
+                
+                // 2. Sitenin gövdesine yeni bölüm olarak enjekte et:
+                dynamicContainer.innerHTML += `
+                    <section id="${safeId}">
+                        <div class="container">
+                            <h2 class="section-title">${page.title}</h2>
+                            <div style="background-color: transparent; border: none; padding: 0;">
+                                ${page.slogan ? `<h3 style="font-size: 1.6rem; font-weight: 900; font-style: italic; text-transform: uppercase; color: var(--accent-red); margin-bottom: 1.5rem;">${page.slogan}</h3>` : ''}
+                                <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.7; white-space: pre-line;">${page.content}</p>
+                            </div>
+                        </div>
+                    </section>
+                `;
+            });
+
+            // 7. Taraftar Mesajları
             const postsContainer = document.getElementById('posts-container');
             postsContainer.innerHTML = '';
             const safePosts = Array.isArray(activeData.posts) ? activeData.posts : [];
@@ -1638,6 +1720,10 @@
                 document.getElementById('tabGallery').classList.add('active');
                 document.getElementById('tabGalBtn').classList.add('active');
                 renderAdminGallery();
+            } else if (tabName === 'pages') {
+                document.getElementById('tabPages').classList.add('active');
+                document.getElementById('tabPagesBtn').classList.add('active');
+                renderAdminPages();
             } else if (tabName === 'messages') {
                 document.getElementById('tabMessages').classList.add('active');
                 document.getElementById('tabMsgBtn').classList.add('active');
@@ -1717,6 +1803,76 @@
                 alert("Hakkımızda metinleri başarıyla güncellendi!");
             } catch (e) {
                 alert("Hakkımızda kaydedilirken bir hata oluştu: " + e.message);
+            }
+        }
+
+        // --- DİNAMİK SAYFA EKLEME METODLARI (YENİ) ---
+        function renderAdminPages() {
+            try {
+                const list = document.getElementById('admin-pages-list');
+                list.innerHTML = '';
+                const safeCustomPages = Array.isArray(activeData.customPages) ? activeData.customPages : [];
+
+                safeCustomPages.forEach(p => {
+                    list.innerHTML += `
+                        <tr>
+                            <td><strong>${p.menuTitle}</strong></td>
+                            <td>${p.title}</td>
+                            <td><button type="button" class="admin-btn-delete" onclick="deleteCustomPage(${p.id})">Sil</button></td>
+                        </tr>
+                    `;
+                });
+            } catch(e) {
+                console.error("Dinamik sayfalar yükleme hatası:", e);
+            }
+        }
+
+        function addCustomPage() {
+            try {
+                const menuTitle = document.getElementById('new-page-menu-title').value.trim();
+                const title = document.getElementById('new-page-title').value.trim();
+                const slogan = document.getElementById('new-page-slogan').value.trim();
+                const content = document.getElementById('new-page-content').value.trim();
+
+                if(!menuTitle || !title || !content) {
+                    alert("HATA: Lütfen Menü Adı, Bölüm Başlığı ve İçerik alanlarını boş bırakmayın!");
+                    return;
+                }
+
+                if (!Array.isArray(activeData.customPages)) activeData.customPages = [];
+
+                activeData.customPages.push({
+                    id: Date.now(),
+                    menuTitle, title, slogan, content
+                });
+
+                saveAllData();
+                renderAllSections();
+                renderAdminPages();
+
+                document.getElementById('new-page-menu-title').value = '';
+                document.getElementById('new-page-title').value = '';
+                document.getElementById('new-page-slogan').value = '';
+                document.getElementById('new-page-content').value = '';
+                
+                alert("BAŞARILI: Yeni sayfa oluşturuldu ve menüye başarıyla eklendi!");
+            } catch (e) {
+                alert("Sayfa eklenirken bir sorun oluştu: " + e.message);
+            }
+        }
+
+        function deleteCustomPage(id) {
+            try {
+                if(confirm("Bu sayfayı tamamen kaldırmak istediğinize emin misiniz?")) {
+                    const safeCustomPages = Array.isArray(activeData.customPages) ? activeData.customPages : [];
+                    activeData.customPages = safeCustomPages.filter(p => p.id !== id);
+                    saveAllData();
+                    renderAllSections();
+                    renderAdminPages();
+                    alert("Sayfa başarıyla silindi ve menüden kaldırıldı!");
+                }
+            } catch (e) {
+                alert("Silme işlemi sırasında hata oluştu: " + e.message);
             }
         }
 
@@ -1866,7 +2022,6 @@
             }
         }
 
-        // FİKSTÜR, GALERİ VE DİĞER FONKSİYONLAR DA AYNI KORUYUCU YAPIYA ALINDI
         function renderAdminFixture() {
             try {
                 const list = document.getElementById('admin-fixture-list');
