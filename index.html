@@ -49,16 +49,16 @@
             padding: 0 2rem;
         }
 
-        /* --- HEADER & MENÜ --- */
+        /* --- HEADER & MENÜ (Yeniden Tasarlandı) --- */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(8px);
             z-index: 100;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 2px solid var(--text-dark);
             transition: background-color 0.3s ease;
         }
 
@@ -66,39 +66,60 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 90px;
+            min-height: 110px;
+            padding: 0.5rem 0;
         }
 
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             text-decoration: none;
+            color: var(--text-dark);
+            max-width: 60%;
+        }
+
+        /* Logo Boyutu Büyütüldü & Netleştirildi */
+        .club-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 50%;
+            border: 3px solid var(--text-dark);
+            padding: 3px;
+            background: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover .club-logo {
+            transform: scale(1.05);
+        }
+
+        /* Büyük Harflerle Kulüp İsmi Yanına Eklendi */
+        .logo-text {
+            font-weight: 900;
+            font-size: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
             color: var(--text-dark);
         }
 
-        .club-logo {
-            width: 55px;
-            height: 55px;
-            object-fit: contain;
-            border-radius: 50%;
-            border: 2px solid var(--text-dark);
-            padding: 2px;
-            background: #fff;
-            display: block; /* Logoyu görünür kıl */
-        }
-
-        .logo-text {
-            font-weight: 900;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
+        .logo-text span {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--accent-red);
+            letter-spacing: 2px;
+            margin-top: 3px;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .nav-links a {
@@ -115,7 +136,7 @@
             color: var(--accent-red);
         }
 
-        /* --- HERO --- */
+        /* --- HERO (Arka Plan Görsel Destekli) --- */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -123,9 +144,30 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background-color: var(--bg-white);
-            padding: 2rem;
+            padding: 8rem 2rem 4rem 2rem;
             position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.85); /* Arka plan resmi varken yazılar rahat okunsun diye */
+            z-index: 1;
+        }
+
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .hero-title {
@@ -158,6 +200,7 @@
             letter-spacing: 4px;
             color: #b3b3b3;
             text-transform: uppercase;
+            z-index: 2;
         }
 
         /* --- BÖLÜMLER --- */
@@ -253,7 +296,7 @@
         /* --- MEDYA VE GALERİ --- */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 2rem;
         }
 
@@ -262,16 +305,21 @@
             height: 250px;
             overflow: hidden;
             border: 2px solid var(--text-dark);
+            background-color: #000;
         }
 
-        .gallery-item img, .gallery-item video {
+        .gallery-item img, .gallery-item iframe, .gallery-item video {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border: none;
+        }
+
+        .gallery-item img {
             transition: transform 0.3s ease;
         }
 
-        .gallery-item:hover img, .gallery-item:hover video {
+        .gallery-item:hover img {
             transform: scale(1.05);
         }
 
@@ -576,6 +624,9 @@
             .nav-links {
                 gap: 1rem;
             }
+            .logo-container {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
@@ -586,9 +637,10 @@
         <div class="container">
             <nav>
                 <a href="#" class="logo-container">
-                    <!-- Dinamik Kulüp Logosu (Sol Üstte Görünür) -->
                     <img id="club-logo-img" src="logo.png" alt="ABER SK" class="club-logo" onerror="handleLogoFallback(this);">
-                    <div class="logo-text">Aber</div>
+                    <div class="logo-text">
+                        KARAMAN ABER SANAT GÜCÜ <span>SPOR KULÜBÜ</span> [cite: Karaman Aber Sanat Gücü Spor Kulübü için hazırlanan web sitesi tasarımı, kurumsal kimliği siyah, beyaz ve kırmızı renk paleti üzerine kurgulamıştır. Kulübün resmi sloganı "İNANÇ KANATLANDIRIR" olarak belirlenmiş olup, tasarımda profesyonel bir arayüz hedeflenmiştir . Görsel materyaller arasında kanat figürlü bir kalkan logosu ve taraftar etkileşimli alanlar yer almaktadır.]
+                    </div>
                 </a>
                 <ul class="nav-links">
                     <li><a href="#kulup">Hakkımızda</a></li>
@@ -604,8 +656,11 @@
 
     <!-- HERO SECTION -->
     <section class="hero" id="home">
-        <h1 class="hero-title" id="hero-title-text">KARAMAN<br>ABER SANAT GÜCÜ<br>SPOR KULÜBÜ</h1>
-        <div class="hero-slogan" id="hero-slogan-text">İNANÇ KANATLANDIRIR</div> [cite: Karaman Aber Sanat Gücü Spor Kulübü için hazırlanan web sitesi tasarımı, kurumsal kimliği siyah, beyaz ve kırmızı renk paleti üzerine kurgulamıştır. Kulübün resmi sloganı "İNANÇ KANATLANDIRIR" olarak belirlenmiş olup, tasarımda profesyonel bir arayüz hedeflenmiştir . Görsel materyaller arasında kanat figürlü bir kalkan logosu ve taraftar etkileşimli alanlar yer almaktadır.]
+        <div class="hero-overlay" id="hero-bg-overlay"></div>
+        <div class="hero-content-wrapper">
+            <h1 class="hero-title" id="hero-title-text">KARAMAN<br>ABER SANAT GÜCÜ<br>SPOR KULÜBÜ</h1>
+            <div class="hero-slogan" id="hero-slogan-text">İNANÇ KANATLANDIRIR</div> [cite: Karaman Aber Sanat Gücü Spor Kulübü için hazırlanan web sitesi tasarımı, kurumsal kimliği siyah, beyaz ve kırmızı renk paleti üzerine kurgulamıştır. Kulübün resmi sloganı "İNANÇ KANATLANDIRIR" olarak belirlenmiş olup, tasarımda profesyonel bir arayüz hedeflenmiştir . Görsel materyaller arasında kanat figürlü bir kalkan logosu ve taraftar etkileşimli alanlar yer almaktadır.]
+        </div>
         <div class="hero-signature">© RIDVAN ARSLAN</div>
     </section>
 
@@ -635,7 +690,7 @@
                 <div class="futbol-details">
                     <h3 id="futbol-title-text">Sadece Futbol</h3>
                     <p id="futbol-desc-text">Karaman Aber Sanat Gücü olarak tüm enerjimizi, gücümüzü ve odağımızı tamamen yeşil sahalara yansıtıyoruz. Tek ve sarsılmaz branşımız olan Futbolda, altyapıdan A takıma kadar modern taktikler, disiplinli idmanlar ve sarsılmaz bir takım ruhu aşılıyoruz.</p>
-                    <p id="futbol-desc-text-2">Futbolcularımıza modern antrenman metodolojisi sunarak hem fiziksel gelişimlerini zirveye taşıyor hem de taktiksel zekalarını futbol zekasıyla birleştiriyoruz.</p>
+                    <p id="futbol-desc-text-2">Futbolcularımıza modern antrenman metodolojisi sunarak hem fiziksel gelişimlerini zirveye taşıyoruz.</p>
                 </div>
             </div>
         </div>
@@ -737,7 +792,7 @@
                 <button class="admin-tab-btn" id="tabSettingsBtn" onclick="switchTab('settings')">Site Bilgileri</button>
                 <button class="admin-tab-btn" id="tabGalleryBtn" onclick="switchTab('gallery')">Medya / Galeri</button>
                 <button class="admin-tab-btn" id="tabThemeBtn" onclick="switchTab('theme')">Tasarım & Tema</button>
-                <button class="admin-tab-btn" id="tabSecurityBtn" onclick="switchTab('security')">Güvenlik / Şifre</button>
+                <button class="admin-tab-btn" id="tabSecurityBtn" onclick="someTab('security'); switchTab('security');">Güvenlik / Şifre</button>
             </div>
 
             <!-- TAB 1: GELEN MESAJLAR -->
@@ -751,10 +806,17 @@
             <!-- TAB 2: SİTE BİLGİLERİ GÜNCELLEME -->
             <div id="tabSettings" style="display: none; max-height: 450px; overflow-y: auto; padding-right: 1rem;">
                 <h4 style="margin-bottom: 1.5rem; font-weight: 800; text-transform: uppercase;">Sitenin Yazı ve Logo Bilgileri</h4>
+                
                 <div class="form-group" style="background: #fff8f8; padding: 1.5rem; border: 1px solid var(--accent-red); margin-bottom: 1.5rem;">
-                    <label style="color: var(--accent-red); font-weight: 900;">Kulüp Logo URL'si (Görsel Linki Yapıştırın)</label>
+                    <label style="color: var(--accent-red); font-weight: 900;">1. KULÜP LOGO URL'Sİ (ImgBB Direct Link)</label>
                     <input type="text" id="edit-logo-url" class="form-control" placeholder="Örn: https://i.ibb.co/.../logo.png">
                 </div>
+
+                <div class="form-group" style="background: #f8faff; padding: 1.5rem; border: 1px solid #2b6cb0; margin-bottom: 1.5rem;">
+                    <label style="color: #2b6cb0; font-weight: 900;">2. ANA SAYFA ARKA PLAN GÖRSEL URL'Sİ</label>
+                    <input type="text" id="edit-hero-bg-url" class="form-control" placeholder="Örn: https://i.ibb.co/... (Boş bırakırsanız düz beyaz olur)">
+                </div>
+
                 <div class="form-group">
                     <label>Ana Sayfa Başlığı (Hero)</label>
                     <textarea id="edit-hero-title" class="form-control" rows="2"></textarea>
@@ -835,13 +897,13 @@
                     <div class="form-group">
                         <label>Medya Türü</label>
                         <select id="new-media-type" class="form-control">
-                            <option value="image">Resim (Görsel Linki)</option>
-                            <option value="video">Video (Gofile/Streamable MP4 Linki)</option>
+                            <option value="image">Fotoğraf (Görsel Linki)</option>
+                            <option value="video">Video (YouTube / Streamable / MP4 Linki)</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Medya İnternet Adresi (URL)</label>
-                        <input type="text" id="new-media-url" class="form-control" placeholder="Linkinizi buraya yapıştırın...">
+                        <input type="text" id="new-media-url" class="form-control" placeholder="ImgBB, YouTube veya Streamable linkini yapıştırın...">
                     </div>
                     <button class="submit-btn" onclick="addGalleryItem()">Galeriye Ekle</button>
                 </div>
@@ -905,7 +967,6 @@
             
             let url = dirtyUrl.trim();
             
-            // Eğer doğrudan HTML kodu yapıştırdıysa içindeki linki ayıkla
             if (url.startsWith('<') && url.includes('src=')) {
                 const match = url.match(/src="([^"]+)"/);
                 if (match && match[1]) {
@@ -913,7 +974,6 @@
                 }
             }
 
-            // Eğer ImgBB sayfa linki yapıştırdıysa otomatik olarak doğrudan i.ibb.co link şablonuna dönüştür
             if (url.includes('ibb.co/') && !url.includes('i.ibb.co')) {
                 const parts = url.split('/');
                 const id = parts[parts.length - 1] || parts[parts.length - 2];
@@ -925,15 +985,52 @@
             return url;
         }
 
-        // Logo kontrolü (Sonsuz döngüyü engellemek için özelleştirilmiş hata yakalama yapısı)
+        // --- AKILLI VİDEO EMBED URL OLUŞTURUCU (YouTube & Streamable Destekli) ---
+        function getEmbedVideoUrl(videoUrl) {
+            if (!videoUrl) return '';
+            let url = videoUrl.trim();
+
+            // YouTube Kontrolü
+            if (url.includes('youtube.com') || url.includes('youtu.be')) {
+                let videoId = '';
+                if (url.includes('youtu.be/')) {
+                    videoId = url.split('youtu.be/')[1].split(/[?#]/)[0];
+                } else if (url.includes('embed/')) {
+                    videoId = url.split('embed/')[1].split(/[?#]/)[0];
+                } else if (url.includes('v=')) {
+                    videoId = url.split('v=')[1].split('&')[0];
+                }
+                if (videoId) {
+                    return `https://www.youtube.com/embed/${videoId}`;
+                }
+            }
+
+            // Streamable Kontrolü
+            if (url.includes('streamable.com')) {
+                const parts = url.split('/');
+                const id = parts[parts.length - 1] || parts[parts.length - 2];
+                if (id) {
+                    return `https://streamable.com/e/${id}`;
+                }
+            }
+
+            // Direkt MP4 linkleri için kendisini dön
+            return url;
+        }
+
+        // Logo Fallback Mekanizması
         function handleLogoFallback(imgElement) {
+            if (activeData.logoUrl) {
+                imgElement.src = cleanImageUrl(activeData.logoUrl);
+                return;
+            }
+
             if (imgElement.src.endsWith('logo.png')) {
                 imgElement.src = 'logo.png.png';
             } else if (imgElement.src.endsWith('logo.png.png')) {
                 imgElement.src = 'logo.jpg';
             } else {
-                // Eğer özel logo URL'si de kırıksa, geçici bir yer tutucu veya boş bir yuvarlak göster
-                imgElement.src = 'https://placehold.co/100x100/000/fff?text=LOGO';
+                imgElement.src = 'https://placehold.co/150x150/000/fff?text=ABER+SK';
             }
         }
 
@@ -959,10 +1056,10 @@
                     --accent-red: #ff3333;
                 }
                 header {
-                    background-color: rgba(10, 10, 10, 0.95) !important;
-                    border-bottom: 1px solid #222 !important;
+                    background-color: rgba(10, 10, 10, 0.98) !important;
+                    border-bottom: 2px solid #ffffff !important;
                 }
-                .logo-container, .nav-links a {
+                .logo-container, .logo-text, .nav-links a {
                     color: #ffffff !important;
                 }
                 .blog-form-wrapper, .contact-map {
@@ -993,7 +1090,7 @@
                     --text-light: #ffffff;
                     --text-dark: #1b263b;
                     --text-muted: #5c677d;
-                    --accent-red: #e5a93b; /* Kraliyet Sarısı */
+                    --accent-red: #e5a93b;
                 }
             `,
             pitch: `
@@ -1003,7 +1100,7 @@
                     --text-light: #ffffff;
                     --text-dark: #132a13;
                     --text-muted: #4f772d;
-                    --accent-red: #38b000; /* Çimen Yeşili */
+                    --accent-red: #38b000;
                 }
             `
         };
@@ -1013,6 +1110,7 @@
             adminPassword: "admin123",
             currentTheme: "classic",
             logoUrl: "logo.png",
+            heroBgUrl: "", // Varsayılan boş (düz zemin)
             hero: {
                 title: "KARAMAN\nABER SANAT GÜCÜ\nSPOR KULÜBÜ",
                 slogan: "İNANÇ KANATLANDIRIR"
@@ -1051,9 +1149,8 @@
 
         let activeData = {};
 
-        // Verileri Yükle
         function loadAllData() {
-            const saved = localStorage.getItem('aber_sk_pro_data_v3');
+            const saved = localStorage.getItem('aber_sk_pro_data_v4');
             if (saved) {
                 activeData = JSON.parse(saved);
             } else {
@@ -1064,12 +1161,10 @@
             renderAllSections();
         }
 
-        // Verileri Kaydet
         function saveAllData() {
-            localStorage.setItem('aber_sk_pro_data_v3', JSON.stringify(activeData));
+            localStorage.setItem('aber_sk_pro_data_v4', JSON.stringify(activeData));
         }
 
-        // Temayı Uygula
         function applySavedTheme() {
             const selectedTheme = activeData.currentTheme || "classic";
             document.getElementById('theme-styles').innerHTML = themes[selectedTheme];
@@ -1078,27 +1173,36 @@
 
         // --- TÜM SİTEYİ GÜNCELLE (RENDER) ---
         function renderAllSections() {
-            // 0. Logo (Sitedeki sol üst logo alanı, artık admin panelinden gelen veriyi dinamik olarak çeker)
+            // 0. Logo
             const logoImg = document.getElementById('club-logo-img');
             logoImg.src = cleanImageUrl(activeData.logoUrl || "logo.png");
 
-            // 1. Hero Kısmı
+            // 1. Hero Arka Planı ve Bilgileri
+            const heroSection = document.getElementById('home');
+            const overlay = document.getElementById('hero-bg-overlay');
+            if (activeData.heroBgUrl) {
+                heroSection.style.backgroundImage = `url('${cleanImageUrl(activeData.heroBgUrl)}')`;
+                overlay.style.backgroundColor = "rgba(255, 255, 255, 0.75)"; // Görsel varken yazılar için opaklık
+            } else {
+                heroSection.style.backgroundImage = "none";
+                overlay.style.backgroundColor = "transparent"; // Görsel yokken tam transparan
+            }
             document.getElementById('hero-title-text').innerText = activeData.hero.title;
             document.getElementById('hero-slogan-text').innerText = activeData.hero.slogan;
 
-            // 2. Hakkımızda Kısmı
+            // 2. Hakkımızda
             document.getElementById('about-card-title1').innerText = activeData.about.title1;
             document.getElementById('about-card-text1').innerText = activeData.about.text1;
             document.getElementById('about-card-title2').innerText = activeData.about.title2;
             document.getElementById('about-card-text2').innerText = activeData.about.text2;
 
-            // 3. Futbol Kısmı
+            // 3. Futbol
             document.getElementById('futbol-title-text').innerText = activeData.futbol.title;
             document.getElementById('futbol-desc-text').innerText = activeData.futbol.desc;
             document.getElementById('futbol-desc-text-2').innerText = activeData.futbol.desc2;
             document.getElementById('futbol-image-bg').style.backgroundImage = `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('${cleanImageUrl(activeData.futbol.imgUrl)}')`;
 
-            // 4. İletişim Bilgileri
+            // 4. İletişim
             document.getElementById('club-phone-link').innerText = activeData.contact.phone;
             document.getElementById('club-phone-link').href = "tel:" + activeData.contact.phone.replace(/\s+/g, '');
             document.getElementById('club-email-1').innerText = activeData.contact.email1;
@@ -1107,30 +1211,40 @@
             document.getElementById('club-email-2').href = "mailto:" + activeData.contact.email2;
             document.getElementById('club-address-text').innerHTML = activeData.contact.address;
 
-            // 5. Transfer Bilgileri
+            // 5. Transferler
             document.getElementById('transfer-title-text').innerText = activeData.transfers.title;
             document.getElementById('transfer-badge-text').innerText = activeData.transfers.badge;
             document.getElementById('transfer-desc-text').innerText = activeData.transfers.desc;
 
-            // 6. Galeri / Medya Render
+            // 6. Dinamik Galeri Render (Akıllı Video Çalar Ekranı)
             const galleryGrid = document.getElementById('gallery-container');
             galleryGrid.innerHTML = '';
             if (activeData.gallery.length === 0) {
-                galleryGrid.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">Sitenin galerisine henüz bir fotoğraf veya video eklenmedi.</p>';
+                galleryGrid.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">Galeride henüz bir dosya yok.</p>';
             } else {
                 activeData.gallery.forEach(item => {
                     const mediaBox = document.createElement('div');
                     mediaBox.className = 'gallery-item';
-                    const cleanedUrl = cleanImageUrl(item.url);
+                    
                     if (item.type === 'image') {
+                        const cleanedUrl = cleanImageUrl(item.url);
                         mediaBox.innerHTML = `<img src="${cleanedUrl}" alt="Aber SK Galeri" onerror="this.src='https://placehold.co/800x600/000/fff?text=Resim+Yuklenemedi';">`;
                     } else {
-                        mediaBox.innerHTML = `
-                            <video controls muted preload="metadata">
-                                <source src="${cleanedUrl}" type="video/mp4">
-                                Tarayıcınız video oynatmayı desteklemiyor.
-                            </video>
-                        `;
+                        // Akıllı Embed Video Çalar (YouTube & Streamable Destekli)
+                        const embedUrl = getEmbedVideoUrl(item.url);
+                        if (embedUrl.includes('youtube.com/embed') || embedUrl.includes('streamable.com/e')) {
+                            mediaBox.innerHTML = `
+                                <iframe src="${embedUrl}" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+                            `;
+                        } else {
+                            // Doğrudan MP4 video linkleri için
+                            mediaBox.innerHTML = `
+                                <video controls muted preload="metadata">
+                                    <source src="${embedUrl}" type="video/mp4">
+                                    Oynatılamıyor.
+                                </video>
+                            `;
+                        }
                     }
                     galleryGrid.appendChild(mediaBox);
                 });
@@ -1141,7 +1255,7 @@
             postsContainer.innerHTML = '';
             const approvedPosts = activeData.posts.filter(p => p.approved === true);
             if (approvedPosts.length === 0) {
-                postsContainer.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">Henüz onaylanmış taraftar yazısı bulunmuyor.</p>';
+                postsContainer.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">Henüz yazılan mesaj yok.</p>';
             } else {
                 approvedPosts.forEach(post => {
                     const card = document.createElement('div');
@@ -1170,7 +1284,7 @@
             activeData.posts.push(newPost);
             saveAllData();
 
-            alert("Düşünceniz yönetim onay paneline ulaştı ve abersanat@gmail.com adresine mail olarak yönlendirildi! Onaylandıktan sonra sitemizde yayınlanacaktır.");
+            alert("Düşünceniz yönetim onay paneline ulaştı ve mail olarak yönlendirildi! Onaylandığında sitemizde yayınlanacaktır.");
         }
 
         // --- GÜVENLİK VE GİRİŞ ---
@@ -1224,7 +1338,7 @@
             container.innerHTML = '';
 
             if (activeData.posts.length === 0) {
-                container.innerHTML = '<p>Şu an sistemde hiç taraftar yazısı bulunmuyor.</p>';
+                container.innerHTML = '<p>Şu an sistemde hiç yazı bulunmuyor.</p>';
                 return;
             }
 
@@ -1254,12 +1368,12 @@
                 saveAllData();
                 renderAllSections();
                 renderAdminPanel();
-                alert("Yazı onaylandı ve başarıyla yayına alındı!");
+                alert("Yazı onaylandı!");
             }
         }
 
         function deletePost(id) {
-            if (confirm("Bu taraftar yazısını tamamen silmek istediğinize emin misiniz?")) {
+            if (confirm("Bu yazıyı silmek istediğinize emin misiniz?")) {
                 activeData.posts = activeData.posts.filter(p => p.id !== id);
                 saveAllData();
                 renderAllSections();
@@ -1267,9 +1381,10 @@
             }
         }
 
-        // --- TAB 2: SİTE METİNLERİ & LOGO ---
+        // --- TAB 2: SİTE METİNLERİ, LOGO & HERO BG ---
         function loadSettingsToAdminForm() {
             document.getElementById('edit-logo-url').value = activeData.logoUrl || '';
+            document.getElementById('edit-hero-bg-url').value = activeData.heroBgUrl || '';
             document.getElementById('edit-hero-title').value = activeData.hero.title;
             document.getElementById('edit-hero-slogan').value = activeData.hero.slogan;
 
@@ -1295,6 +1410,7 @@
 
         function saveSettings() {
             activeData.logoUrl = cleanImageUrl(document.getElementById('edit-logo-url').value);
+            activeData.heroBgUrl = cleanImageUrl(document.getElementById('edit-hero-bg-url').value);
             activeData.hero.title = document.getElementById('edit-hero-title').value;
             activeData.hero.slogan = document.getElementById('edit-hero-slogan').value;
 
@@ -1349,10 +1465,13 @@
 
         function addGalleryItem() {
             const type = document.getElementById('new-media-type').value;
-            const url = cleanImageUrl(document.getElementById('new-media-url').value);
+            let rawUrl = document.getElementById('new-media-url').value;
+            
+            // Eğer resimse akıllı temizleyici ile temizle, video ise doğrudan altyapı işleyecek
+            let url = (type === 'image') ? cleanImageUrl(rawUrl) : rawUrl.trim();
 
             if (!url) {
-                alert("Lütfen geçerli bir URL adresi giriniz!");
+                alert("Lütfen geçerli bir adres giriniz!");
                 return;
             }
 
@@ -1367,7 +1486,7 @@
             renderAllSections();
             renderAdminGallery();
             document.getElementById('new-media-url').value = '';
-            alert("Yeni medya başarıyla galeriye eklendi!");
+            alert("Medya başarıyla galeriye eklendi!");
         }
 
         function deleteGalleryItem(id) {
