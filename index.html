@@ -689,7 +689,7 @@
             text-transform: uppercase;
         }
 
-        /* Liste ve Buton Tasarımları (YENİ EKLENDİ) */
+        /* Liste ve Buton Tasarımları */
         .admin-list-item {
             background: #fff;
             padding: 1rem;
@@ -1081,8 +1081,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Oyuncu Fotoğraf URL (Boş bırakabilirsiniz)</label>
-                            <input type="text" id="new-player-img" class="form-control">
+                            <label>Oyuncu Fotoğraf URL'si (Boş bırakabilirsiniz veya tüm kodu yapıştırabilirsiniz)</label>
+                            <input type="text" id="new-player-img" class="form-control" placeholder="ImgBB'den aldığınız link veya tam kodu buraya yapıştırın">
                         </div>
                         <button type="button" class="submit-btn" onclick="addPlayer()">Kadroya Ekle</button>
                     </div>
@@ -1123,8 +1123,8 @@
                                 <input type="text" id="new-trans-status" class="form-control" placeholder="Örn: Söylenti, Anlaşma Sağlandı">
                             </div>
                             <div class="form-group">
-                                <label>Görsel URL (Boş bırakabilirsiniz)</label>
-                                <input type="text" id="new-trans-img" class="form-control">
+                                <label>Görsel URL</label>
+                                <input type="text" id="new-trans-img" class="form-control" placeholder="Görsel linkini veya kodunu buraya yapıştırın">
                             </div>
                         </div>
                         <button type="button" class="submit-btn" onclick="addTransfer()">Transfer Bilgisi Ekle</button>
@@ -1266,27 +1266,28 @@
 
     <!-- JAVASCRIPT MOTORU -->
     <script>
-        // Boş veya hatalı linkleri korumaya alan akıllı temizleme motoru
+        // --- SÜPER AKILLI LINK VE KOD AYIKLAYICI (GÜNCELLENDİ) ---
         function cleanImageUrl(dirtyUrl) {
             if (!dirtyUrl || typeof dirtyUrl !== 'string') return '';
             let url = dirtyUrl.trim();
             if (url === "") return "";
             
-            if (url.startsWith('<') && url.includes('src=')) {
-                const match = url.match(/src=["']([^"']+)["']/);
-                if (match && match[1]) url = match[1];
-            }
-
-            if (url.includes('[img]') || url.includes('[url]')) {
-                const match = url.match(/\[img\](.*?)\[\/img\]/i);
-                if (match && match[1]) {
-                    url = match[1];
-                } else {
-                    const matchUrl = url.match(/\[url=.*?\](.*?)\[\/url\]/i);
-                    if (matchUrl && matchUrl[1]) url = matchUrl[1];
+            // Eğer HTML, BBCode veya karmaşık kod girildiyse içindeki ilk http/https adresini cımbızla çeker
+            const urlRegex = /(https?:\/\/[^\s"'<>]+)/g;
+            const matches = url.match(urlRegex);
+            if (matches && matches.length > 0) {
+                let bestMatch = matches[0];
+                // Eğer birden fazla link varsa, i.ibb.co içeren veya resim uzantılı olanı öncelikli seçer
+                for (let m of matches) {
+                    if (m.includes('i.ibb.co') || m.match(/\.(jpg|jpeg|png|gif|webp)/i)) {
+                        bestMatch = m;
+                        break;
+                    }
                 }
+                url = bestMatch;
             }
 
+            // Standart ImgBB sayfa linklerini doğrudan resim linkine çevirme koruması
             if (url.includes('ibb.co/') && !url.includes('i.ibb.co')) {
                 const parts = url.split('/');
                 const id = parts[parts.length - 1] || parts[parts.length - 2];
@@ -1325,7 +1326,7 @@
             imgElement.src = 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=200';
         }
 
-        // --- VARSAYILAN DATA ŞABLONU ---
+        // --- VARSAYILAN ŞABLON VERİSİ ---
         let defaultData = {
             adminPassword: "admin",
             currentTheme: "classic",
@@ -1367,24 +1368,44 @@
 
         let activeData = {};
 
+        // Verileri Yükleme ve Eksikleri Doldurma (Çökme Önleyici Yapı)
         function loadAllData() {
-            const saved = localStorage.getItem('aber_sk_pro_data_v6');
-            if (saved) {
-                activeData = JSON.parse(saved);
-                if (!activeData.adminPassword || activeData.adminPassword === "undefined") {
-                    activeData.adminPassword = "admin";
+            try {
+                const saved = localStorage.getItem('aber_sk_pro_data_v6');
+                if (saved) {
+                    activeData = JSON.parse(saved);
+                    // Veritabanı yapısını senkronize et
+                    if (!activeData.hero) activeData.hero = {...defaultData.hero};
+                    if (!activeData.about) activeData.about = {...defaultData.about};
+                    if (!activeData.contact) activeData.contact = {...defaultData.contact};
+                    if (!activeData.posts) activeData.posts = [...defaultData.posts];
+                    if (!activeData.players) activeData.players = [...defaultData.players];
+                    if (!activeData.transfers) activeData.transfers = [...defaultData.transfers];
+                    if (!activeData.fixtures) activeData.fixtures = [...defaultData.fixtures];
+                    if (!activeData.gallery) activeData.gallery = [...defaultData.gallery];
+                    if (!activeData.adminPassword || activeData.adminPassword === "undefined") {
+                        activeData.adminPassword = "admin";
+                    }
+                } else {
+                    activeData = JSON.parse(JSON.stringify(defaultData));
                     saveAllData();
                 }
-            } else {
+                applySavedTheme();
+                renderAllSections();
+            } catch (e) {
+                console.error("Yükleme hatası:", e);
                 activeData = JSON.parse(JSON.stringify(defaultData));
                 saveAllData();
+                renderAllSections();
             }
-            applySavedTheme();
-            renderAllSections();
         }
 
         function saveAllData() {
-            localStorage.setItem('aber_sk_pro_data_v6', JSON.stringify(activeData));
+            try {
+                localStorage.setItem('aber_sk_pro_data_v6', JSON.stringify(activeData));
+            } catch(e) {
+                alert("Tarayıcı hafızasına yazılırken bir sorun oluştu: " + e.message);
+            }
         }
 
         function applySavedTheme() {
@@ -1611,306 +1632,387 @@
             }
         }
 
-        // --- VERİ KAYDETME VE OKUMA MOTORLARI ---
+        // --- GÜVENLİ VERİ KAYDETME VE OKUMA MOTORLARI (TRY-CATCH KORUMALI) ---
         function loadSettingsToAdminForm() {
-            document.getElementById('edit-logo-url').value = activeData.logoUrl || '';
-            document.getElementById('edit-hero-bg-url').value = activeData.heroBgUrl || '';
-            document.getElementById('edit-header-title').value = activeData.headerTitle || '';
-            document.getElementById('edit-hero-title').value = activeData.hero.title;
-            document.getElementById('edit-hero-slogan').value = activeData.hero.slogan;
-            document.getElementById('edit-phone').value = activeData.contact.phone;
-            document.getElementById('edit-email1').value = activeData.contact.email1;
-            document.getElementById('edit-email2').value = activeData.contact.email2;
-            document.getElementById('edit-address').value = activeData.contact.address.replace(/<br\s*\/?>/gi, '\n');
+            try {
+                document.getElementById('edit-logo-url').value = activeData.logoUrl || '';
+                document.getElementById('edit-hero-bg-url').value = activeData.heroBgUrl || '';
+                document.getElementById('edit-header-title').value = activeData.headerTitle || '';
+                document.getElementById('edit-hero-title').value = activeData.hero.title || '';
+                document.getElementById('edit-hero-slogan').value = activeData.hero.slogan || '';
+                document.getElementById('edit-phone').value = activeData.contact.phone || '';
+                document.getElementById('edit-email1').value = activeData.contact.email1 || '';
+                document.getElementById('edit-email2').value = activeData.contact.email2 || '';
+                document.getElementById('edit-address').value = (activeData.contact.address || '').replace(/<br\s*\/?>/gi, '\n');
+            } catch(e) {
+                console.error("Settings formu yükleme hatası:", e);
+            }
         }
 
         function saveSettings() {
-            activeData.logoUrl = cleanImageUrl(document.getElementById('edit-logo-url').value);
-            activeData.heroBgUrl = cleanImageUrl(document.getElementById('edit-hero-bg-url').value);
-            activeData.headerTitle = document.getElementById('edit-header-title').value.trim();
-            activeData.hero.title = document.getElementById('edit-hero-title').value;
-            activeData.hero.slogan = document.getElementById('edit-hero-slogan').value;
-            activeData.contact.phone = document.getElementById('edit-phone').value;
-            activeData.contact.email1 = document.getElementById('edit-email1').value;
-            activeData.contact.email2 = document.getElementById('edit-email2').value;
-            activeData.contact.address = document.getElementById('edit-address').value.replace(/\n/g, '<br>');
+            try {
+                activeData.logoUrl = cleanImageUrl(document.getElementById('edit-logo-url').value);
+                activeData.heroBgUrl = cleanImageUrl(document.getElementById('edit-hero-bg-url').value);
+                activeData.headerTitle = document.getElementById('edit-header-title').value.trim();
+                activeData.hero.title = document.getElementById('edit-hero-title').value;
+                activeData.hero.slogan = document.getElementById('edit-hero-slogan').value;
+                activeData.contact.phone = document.getElementById('edit-phone').value;
+                activeData.contact.email1 = document.getElementById('edit-email1').value;
+                activeData.contact.email2 = document.getElementById('edit-email2').value;
+                activeData.contact.address = document.getElementById('edit-address').value.replace(/\n/g, '<br>');
 
-            saveAllData();
-            renderAllSections();
-            alert("Site ayarları güncellendi!");
+                saveAllData();
+                renderAllSections();
+                alert("Site ayarları başarıyla kaydedildi ve güncellendi!");
+            } catch (e) {
+                alert("Kaydetme sırasında bir hata oluştu: " + e.message);
+            }
         }
 
         function loadAboutToAdminForm() {
-            document.getElementById('edit-about-title1').value = activeData.about.title1;
-            document.getElementById('edit-about-text1').value = activeData.about.text1;
-            document.getElementById('edit-about-title2').value = activeData.about.title2;
-            document.getElementById('edit-about-text2').value = activeData.about.text2;
+            try {
+                document.getElementById('edit-about-title1').value = activeData.about.title1 || '';
+                document.getElementById('edit-about-text1').value = activeData.about.text1 || '';
+                document.getElementById('edit-about-title2').value = activeData.about.title2 || '';
+                document.getElementById('edit-about-text2').value = activeData.about.text2 || '';
+            } catch(e) {
+                console.error("Hakkımızda formu yükleme hatası:", e);
+            }
         }
 
         function saveAbout() {
-            activeData.about.title1 = document.getElementById('edit-about-title1').value;
-            activeData.about.text1 = document.getElementById('edit-about-text1').value;
-            activeData.about.title2 = document.getElementById('edit-about-title2').value;
-            activeData.about.text2 = document.getElementById('edit-about-text2').value;
+            try {
+                activeData.about.title1 = document.getElementById('edit-about-title1').value;
+                activeData.about.text1 = document.getElementById('edit-about-text1').value;
+                activeData.about.title2 = document.getElementById('edit-about-title2').value;
+                activeData.about.text2 = document.getElementById('edit-about-text2').value;
 
-            saveAllData();
-            renderAllSections();
-            alert("Hakkımızda metinleri güncellendi!");
+                saveAllData();
+                renderAllSections();
+                alert("Hakkımızda metinleri başarıyla güncellendi!");
+            } catch (e) {
+                alert("Hakkımızda kaydedilirken bir hata oluştu: " + e.message);
+            }
         }
 
         function renderAdminSquad() {
-            const list = document.getElementById('admin-squad-list');
-            list.innerHTML = '';
-            if (!activeData.players) activeData.players = [];
+            try {
+                const list = document.getElementById('admin-squad-list');
+                list.innerHTML = '';
+                if (!activeData.players) activeData.players = [];
 
-            activeData.players.forEach(p => {
-                const cleanPImg = cleanImageUrl(p.img) || 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=100';
-                list.innerHTML += `
-                    <tr>
-                        <td><img src="${cleanPImg}" width="50" height="50" style="object-fit:cover;"></td>
-                        <td><strong>${p.name}</strong></td>
-                        <td>${p.position}</td>
-                        <td>Yaş: ${p.age || '--'} | Boy: ${p.height || '--'} cm | Kilo: ${p.weight || '--'} kg | Ayak: ${p.foot || 'Sağ'}</td>
-                        <td><button type="button" class="admin-btn-delete" onclick="deletePlayer(${p.id})">Sil</button></td>
-                    </tr>
-                `;
-            });
+                activeData.players.forEach(p => {
+                    const cleanPImg = cleanImageUrl(p.img) || 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=100';
+                    list.innerHTML += `
+                        <tr>
+                            <td><img src="${cleanPImg}" width="50" height="50" style="object-fit:cover;"></td>
+                            <td><strong>${p.name}</strong></td>
+                            <td>${p.position}</td>
+                            <td>Yaş: ${p.age || '--'} | Boy: ${p.height || '--'} cm | Kilo: ${p.weight || '--'} kg | Ayak: ${p.foot || 'Sağ'}</td>
+                            <td><button type="button" class="admin-btn-delete" onclick="deletePlayer(${p.id})">Sil</button></td>
+                        </tr>
+                    `;
+                });
+            } catch(e) {
+                console.error("Kadro tablosu yükleme hatası:", e);
+            }
         }
 
         function addPlayer() {
-            const name = document.getElementById('new-player-name').value.trim();
-            const pos = document.getElementById('new-player-pos').value.trim();
-            const age = document.getElementById('new-player-age').value;
-            const height = document.getElementById('new-player-height').value;
-            const weight = document.getElementById('new-player-weight').value;
-            const foot = document.getElementById('new-player-foot').value;
-            const img = cleanImageUrl(document.getElementById('new-player-img').value);
+            try {
+                const name = document.getElementById('new-player-name').value.trim();
+                const pos = document.getElementById('new-player-pos').value.trim();
+                const age = document.getElementById('new-player-age').value;
+                const height = document.getElementById('new-player-height').value;
+                const weight = document.getElementById('new-player-weight').value;
+                const foot = document.getElementById('new-player-foot').value;
+                const img = cleanImageUrl(document.getElementById('new-player-img').value);
 
-            if(!name || !pos) {
-                alert("Lütfen en azından Oyuncu Adı ve Mevki bilgilerini girin!");
-                return;
-            }
+                if(!name || !pos) {
+                    alert("HATA: Lütfen en azından Oyuncu Adı ve Mevki bilgilerini doldurun!");
+                    return;
+                }
 
-            if (!activeData.players) activeData.players = [];
+                if (!activeData.players) activeData.players = [];
 
-            activeData.players.push({
-                id: Date.now(),
-                name, position: pos, age, height, weight, foot, img
-            });
+                activeData.players.push({
+                    id: Date.now(),
+                    name, position: pos, age, height, weight, foot, img
+                });
 
-            saveAllData();
-            renderAllSections();
-            renderAdminSquad();
-
-            document.getElementById('new-player-name').value = '';
-            document.getElementById('new-player-pos').value = '';
-            document.getElementById('new-player-age').value = '';
-            document.getElementById('new-player-height').value = '';
-            document.getElementById('new-player-weight').value = '';
-            document.getElementById('new-player-img').value = '';
-            alert("Oyuncu kadroya eklendi!");
-        }
-
-        function deletePlayer(id) {
-            if(confirm("Bu oyuncuyu kadrodan silmek istediğinize emin misiniz?")) {
-                activeData.players = activeData.players.filter(p => p.id !== id);
                 saveAllData();
                 renderAllSections();
                 renderAdminSquad();
+
+                document.getElementById('new-player-name').value = '';
+                document.getElementById('new-player-pos').value = '';
+                document.getElementById('new-player-age').value = '';
+                document.getElementById('new-player-height').value = '';
+                document.getElementById('new-player-weight').value = '';
+                document.getElementById('new-player-img').value = '';
+                alert("BAŞARILI: Oyuncu kadroya eklendi ve tüm site güncellendi!");
+            } catch (e) {
+                alert("Oyuncu eklenirken bir hata oluştu: " + e.message);
+            }
+        }
+
+        function deletePlayer(id) {
+            try {
+                if(confirm("Bu oyuncuyu kadrodan silmek istediğinize emin misiniz?")) {
+                    activeData.players = activeData.players.filter(p => p.id !== id);
+                    saveAllData();
+                    renderAllSections();
+                    renderAdminSquad();
+                    alert("Oyuncu kadrodan silindi!");
+                }
+            } catch (e) {
+                alert("Silme işlemi sırasında hata oluştu: " + e.message);
             }
         }
 
         function renderAdminTransfers() {
-            const list = document.getElementById('admin-transfer-list');
-            list.innerHTML = '';
-            if(!activeData.transfers) activeData.transfers = [];
+            try {
+                const list = document.getElementById('admin-transfer-list');
+                list.innerHTML = '';
+                if(!activeData.transfers) activeData.transfers = [];
 
-            activeData.transfers.forEach(t => {
-                const cleanTImg = cleanImageUrl(t.img) || 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=100';
-                list.innerHTML += `
-                    <tr>
-                        <td><img src="${cleanTImg}" width="50" height="50" style="object-fit:cover;"></td>
-                        <td><strong>${t.name}</strong></td>
-                        <td>${t.club}</td>
-                        <td>${t.status}</td>
-                        <td><button type="button" class="admin-btn-delete" onclick="deleteTransfer(${t.id})">Sil</button></td>
-                    </tr>
-                `;
-            });
+                activeData.transfers.forEach(t => {
+                    const cleanTImg = cleanImageUrl(t.img) || 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=100';
+                    list.innerHTML += `
+                        <tr>
+                            <td><img src="${cleanTImg}" width="50" height="50" style="object-fit:cover;"></td>
+                            <td><strong>${t.name}</strong></td>
+                            <td>${t.club}</td>
+                            <td>${t.status}</td>
+                            <td><button type="button" class="admin-btn-delete" onclick="deleteTransfer(${t.id})">Sil</button></td>
+                        </tr>
+                    `;
+                });
+            } catch(e) {
+                console.error("Transfer listesi yükleme hatası:", e);
+            }
         }
 
         function addTransfer() {
-            const name = document.getElementById('new-trans-name').value.trim();
-            const club = document.getElementById('new-trans-club').value.trim();
-            const status = document.getElementById('new-trans-status').value.trim();
-            const img = cleanImageUrl(document.getElementById('new-trans-img').value);
+            try {
+                const name = document.getElementById('new-trans-name').value.trim();
+                const club = document.getElementById('new-trans-club').value.trim();
+                const status = document.getElementById('new-trans-status').value.trim();
+                const img = cleanImageUrl(document.getElementById('new-trans-img').value);
 
-            if(!name || !status) {
-                alert("Oyuncu adı ve durum boş bırakılamaz!");
-                return;
-            }
+                if(!name || !status) {
+                    alert("HATA: Oyuncu adı ve durum alanları boş bırakılamaz!");
+                    return;
+                }
 
-            if(!activeData.transfers) activeData.transfers = [];
+                if(!activeData.transfers) activeData.transfers = [];
 
-            activeData.transfers.push({
-                id: Date.now(), name, club, status, img
-            });
+                activeData.transfers.push({
+                    id: Date.now(), name, club, status, img
+                });
 
-            saveAllData();
-            renderAllSections();
-            renderAdminTransfers();
-
-            document.getElementById('new-trans-name').value = '';
-            document.getElementById('new-trans-club').value = '';
-            document.getElementById('new-trans-status').value = '';
-            document.getElementById('new-trans-img').value = '';
-            alert("Transfer bilgisi eklendi!");
-        }
-
-        function deleteTransfer(id) {
-            if(confirm("Bu transfer kaydını silmek istiyor musunuz?")) {
-                activeData.transfers = activeData.transfers.filter(t => t.id !== id);
                 saveAllData();
                 renderAllSections();
                 renderAdminTransfers();
+
+                document.getElementById('new-trans-name').value = '';
+                document.getElementById('new-trans-club').value = '';
+                document.getElementById('new-trans-status').value = '';
+                document.getElementById('new-trans-img').value = '';
+                alert("BAŞARILI: Transfer bilgisi eklendi!");
+            } catch (e) {
+                alert("Transfer eklenirken hata oluştu: " + e.message);
+            }
+        }
+
+        function deleteTransfer(id) {
+            try {
+                if(confirm("Bu transfer kaydını silmek istiyor musunuz?")) {
+                    activeData.transfers = activeData.transfers.filter(t => t.id !== id);
+                    saveAllData();
+                    renderAllSections();
+                    renderAdminTransfers();
+                    alert("Transfer bilgisi silindi!");
+                }
+            } catch(e) {
+                alert("Transfer silinirken hata oluştu: " + e.message);
             }
         }
 
         function renderAdminFixture() {
-            const list = document.getElementById('admin-fixture-list');
-            list.innerHTML = '';
-            if(!activeData.fixtures) activeData.fixtures = [];
+            try {
+                const list = document.getElementById('admin-fixture-list');
+                list.innerHTML = '';
+                if(!activeData.fixtures) activeData.fixtures = [];
 
-            activeData.fixtures.forEach(f => {
-                list.innerHTML += `
-                    <tr>
-                        <td>${f.home}</td>
-                        <td><strong>${f.score || 'v'}</strong></td>
-                        <td>${f.away}</td>
-                        <td>${f.date}</td>
-                        <td><button type="button" class="admin-btn-delete" onclick="deleteFixture(${f.id})">Sil</button></td>
-                    </tr>
-                `;
-            });
+                activeData.fixtures.forEach(f => {
+                    list.innerHTML += `
+                        <tr>
+                            <td>${f.home}</td>
+                            <td><strong>${f.score || 'v'}</strong></td>
+                            <td>${f.away}</td>
+                            <td>${f.date}</td>
+                            <td><button type="button" class="admin-btn-delete" onclick="deleteFixture(${f.id})">Sil</button></td>
+                        </tr>
+                    `;
+                });
+            } catch(e) {
+                console.error("Fikstür listesi yükleme hatası:", e);
+            }
         }
 
         function addFixture() {
-            const home = document.getElementById('new-fix-home').value.trim();
-            const away = document.getElementById('new-fix-away').value.trim();
-            const score = document.getElementById('new-fix-score').value.trim();
-            const date = document.getElementById('new-fix-date').value.trim();
+            try {
+                const home = document.getElementById('new-fix-home').value.trim();
+                const away = document.getElementById('new-fix-away').value.trim();
+                const score = document.getElementById('new-fix-score').value.trim();
+                const date = document.getElementById('new-fix-date').value.trim();
 
-            if(!home || !away || !date) {
-                alert("Lütfen takımları ve maç tarihini girin!");
-                return;
-            }
+                if(!home || !away || !date) {
+                    alert("HATA: Lütfen takımları ve maç tarihini girin!");
+                    return;
+                }
 
-            if(!activeData.fixtures) activeData.fixtures = [];
+                if(!activeData.fixtures) activeData.fixtures = [];
 
-            activeData.fixtures.push({
-                id: Date.now(), home, away, score, date
-            });
+                activeData.fixtures.push({
+                    id: Date.now(), home, away, score, date
+                });
 
-            saveAllData();
-            renderAllSections();
-            renderAdminFixture();
-
-            document.getElementById('new-fix-home').value = '';
-            document.getElementById('new-fix-away').value = '';
-            document.getElementById('new-fix-score').value = '';
-            document.getElementById('new-fix-date').value = '';
-            alert("Maç fikstüre eklendi!");
-        }
-
-        function deleteFixture(id) {
-            if(confirm("Bu maç bilgisini fikstürden kaldırmak istiyor musunuz?")) {
-                activeData.fixtures = activeData.fixtures.filter(f => f.id !== id);
                 saveAllData();
                 renderAllSections();
                 renderAdminFixture();
+
+                document.getElementById('new-fix-home').value = '';
+                document.getElementById('new-fix-away').value = '';
+                document.getElementById('new-fix-score').value = '';
+                document.getElementById('new-fix-date').value = '';
+                alert("BAŞARILI: Maç fikstüre eklendi!");
+            } catch (e) {
+                alert("Fikstür eklenirken hata oluştu: " + e.message);
+            }
+        }
+
+        function deleteFixture(id) {
+            try {
+                if(confirm("Bu maç bilgisini fikstürden kaldırmak istiyor musunuz?")) {
+                    activeData.fixtures = activeData.fixtures.filter(f => f.id !== id);
+                    saveAllData();
+                    renderAllSections();
+                    renderAdminFixture();
+                    alert("Maç fikstürden kaldırıldı!");
+                }
+            } catch (e) {
+                alert("Fikstür silinirken hata oluştu: " + e.message);
             }
         }
 
         function renderAdminGallery() {
-            const list = document.getElementById('admin-gallery-list');
-            list.innerHTML = '';
+            try {
+                const list = document.getElementById('admin-gallery-list');
+                list.innerHTML = '';
 
-            activeData.gallery.forEach(item => {
-                list.innerHTML += `
-                    <div class="admin-list-item">
-                        <div>
-                            <strong>[${item.type.toUpperCase()}]</strong> - ${item.url}
+                activeData.gallery.forEach(item => {
+                    list.innerHTML += `
+                        <div class="admin-list-item">
+                            <div>
+                                <strong>[${item.type.toUpperCase()}]</strong> - ${item.url}
+                            </div>
+                            <button type="button" class="admin-btn-delete" onclick="deleteGalleryItem(${item.id})">Sil</button>
                         </div>
-                        <button type="button" class="admin-btn-delete" onclick="deleteGalleryItem(${item.id})">Sil</button>
-                    </div>
-                `;
-            });
+                    `;
+                });
+            } catch(e) {
+                console.error("Galeri listesi yükleme hatası:", e);
+            }
         }
 
         function addGalleryItem() {
-            const type = document.getElementById('new-media-type').value;
-            const rawUrl = document.getElementById('new-media-url').value;
-            const url = (type === 'image') ? cleanImageUrl(rawUrl) : rawUrl.trim();
+            try {
+                const type = document.getElementById('new-media-type').value;
+                const rawUrl = document.getElementById('new-media-url').value;
+                const url = (type === 'image') ? cleanImageUrl(rawUrl) : rawUrl.trim();
 
-            if(!url) {
-                alert("Lütfen geçerli bir bağlantı adresi girin!");
-                return;
-            }
+                if(!url) {
+                    alert("HATA: Lütfen geçerli bir bağlantı adresi girin!");
+                    return;
+                }
 
-            activeData.gallery.push({ id: Date.now(), type, url });
-            saveAllData();
-            renderAllSections();
-            renderAdminGallery();
-            document.getElementById('new-media-url').value = '';
-            alert("Medya eklendi!");
-        }
-
-        function deleteGalleryItem(id) {
-            if(confirm("Bu medyayı silmek istediğinize emin misiniz?")) {
-                activeData.gallery = activeData.gallery.filter(g => g.id !== id);
+                activeData.gallery.push({ id: Date.now(), type, url });
                 saveAllData();
                 renderAllSections();
                 renderAdminGallery();
+                document.getElementById('new-media-url').value = '';
+                alert("BAŞARILI: Medya dosyası galeriye eklendi!");
+            } catch (e) {
+                alert("Medya eklenirken hata oluştu: " + e.message);
+            }
+        }
+
+        function deleteGalleryItem(id) {
+            try {
+                if(confirm("Bu medyayı silmek istediğinize emin misiniz?")) {
+                    activeData.gallery = activeData.gallery.filter(g => g.id !== id);
+                    saveAllData();
+                    renderAllSections();
+                    renderAdminGallery();
+                    alert("Medya silindi!");
+                }
+            } catch(e) {
+                alert("Medya silinirken hata oluştu: " + e.message);
             }
         }
 
         function renderAdminMessages() {
-            const list = document.getElementById('admin-posts-list');
-            list.innerHTML = '';
-            
-            activeData.posts.forEach(post => {
-                list.innerHTML += `
-                    <div class="admin-list-item">
-                        <div>
-                            <strong>${post.author}:</strong> "${post.text}"
-                            <div style="font-size:0.8rem; color:${post.approved ? 'green':'red'}">Durum: ${post.approved ? 'Yayında' : 'Onay Bekliyor'}</div>
+            try {
+                const list = document.getElementById('admin-posts-list');
+                list.innerHTML = '';
+                
+                activeData.posts.forEach(post => {
+                    list.innerHTML += `
+                        <div class="admin-list-item">
+                            <div>
+                                <strong>${post.author}:</strong> "${post.text}"
+                                <div style="font-size:0.8rem; color:${post.approved ? 'green':'red'}">Durum: ${post.approved ? 'Yayında' : 'Onay Bekliyor'}</div>
+                            </div>
+                            <div>
+                                ${!post.approved ? `<button type="button" class="admin-btn-approve" onclick="approvePost(${post.id})">Onayla</button>` : ''}
+                                <button type="button" class="admin-btn-delete" onclick="deletePost(${post.id})">Sil</button>
+                            </div>
                         </div>
-                        <div>
-                            ${!post.approved ? `<button type="button" class="admin-btn-approve" onclick="approvePost(${post.id})">Onayla</button>` : ''}
-                            <button type="button" class="admin-btn-delete" onclick="deletePost(${post.id})">Sil</button>
-                        </div>
-                    </div>
-                `;
-            });
+                    `;
+                });
+            } catch(e) {
+                console.error("Taraftar mesajları yükleme hatası:", e);
+            }
         }
 
         function approvePost(id) {
-            const post = activeData.posts.find(p => p.id === id);
-            if(post) {
-                post.approved = true;
-                saveAllData();
-                renderAllSections();
-                renderAdminMessages();
-                alert("Mesaj onaylandı!");
+            try {
+                const post = activeData.posts.find(p => p.id === id);
+                if(post) {
+                    post.approved = true;
+                    saveAllData();
+                    renderAllSections();
+                    renderAdminMessages();
+                    alert("Yorum onaylandı ve yayına alındı!");
+                }
+            } catch (e) {
+                alert("Onaylama hatası: " + e.message);
             }
         }
 
         function deletePost(id) {
-            if(confirm("Bu mesajı tamamen silmek istiyor musunuz?")) {
-                activeData.posts = activeData.posts.filter(p => p.id !== id);
-                saveAllData();
-                renderAllSections();
-                renderAdminMessages();
+            try {
+                if(confirm("Bu mesajı tamamen silmek istiyor musunuz?")) {
+                    activeData.posts = activeData.posts.filter(p => p.id !== id);
+                    saveAllData();
+                    renderAllSections();
+                    renderAdminMessages();
+                    alert("Mesaj başarıyla silindi!");
+                }
+            } catch (e) {
+                alert("Mesaj silinirken hata oluştu: " + e.message);
             }
         }
 
@@ -1920,32 +2022,40 @@
         }
 
         function saveTheme() {
-            activeData.currentTheme = document.getElementById('theme-select').value;
-            saveAllData();
-            renderAllSections();
-            alert("Tema güncellendi!");
+            try {
+                activeData.currentTheme = document.getElementById('theme-select').value;
+                saveAllData();
+                renderAllSections();
+                alert("Tema tasarımı başarıyla güncellendi!");
+            } catch(e) {
+                alert("Tema güncellenirken hata oluştu: " + e.message);
+            }
         }
 
         function changeAdminPassword() {
-            const current = document.getElementById('current-password-input').value;
-            const news = document.getElementById('new-password-input').value;
-            const confirm = document.getElementById('new-password-confirm').value;
+            try {
+                const current = document.getElementById('current-password-input').value;
+                const news = document.getElementById('new-password-input').value;
+                const confirm = document.getElementById('new-password-confirm').value;
 
-            if (current !== activeData.adminPassword) {
-                alert("Mevcut şifreniz yanlış!");
-                return;
-            }
-            if (!news || news !== confirm) {
-                alert("Yeni şifreler eşleşmelidir!");
-                return;
-            }
+                if (current !== activeData.adminPassword) {
+                    alert("HATA: Mevcut şifreniz yanlış!");
+                    return;
+                }
+                if (!news || news !== confirm) {
+                    alert("HATA: Yeni şifreler boş olamaz ve birbiriyle eşleşmelidir!");
+                    return;
+                }
 
-            activeData.adminPassword = news;
-            saveAllData();
-            document.getElementById('current-password-input').value = '';
-            document.getElementById('new-password-input').value = '';
-            document.getElementById('new-password-confirm').value = '';
-            alert("Şifre güncellendi!");
+                activeData.adminPassword = news;
+                saveAllData();
+                document.getElementById('current-password-input').value = '';
+                document.getElementById('new-password-input').value = '';
+                document.getElementById('new-password-confirm').value = '';
+                alert("Şifreniz başarıyla güncellendi!");
+            } catch (e) {
+                alert("Şifre güncellenirken hata oluştu: " + e.message);
+            }
         }
 
         // --- GELİŞMİŞ TEMALAR ---
