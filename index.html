@@ -4,1005 +4,470 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karaman Aber Sanat Gücü Spor Kulübü</title>
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Syne:wght@500;700;800&family=Inter:wght@400;700&family=Montserrat:wght@700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     
-    <!-- DİNAMİK TEMA VE RENK DEĞİŞKENLERİ MOTORU -->
     <style id="theme-styles">
         :root {
-            /* Varsayılan: Aber Efsanesi (Siyah, Beyaz, Kırmızı) */
-            --bg-main: #070707; 
-            --bg-card: #111111; 
-            --text-main: #ffffff; 
-            --text-muted: #a1a1aa; 
-            --accent-color: #e60000; 
-            --border-color: rgba(255, 255, 255, 0.08);
-            --header-bg: rgba(7, 7, 7, 0.85);
-            
-            /* Tipografi ve Hizalama */
-            --font-main: 'Syne', sans-serif;
-            --font-sport: 'Space Grotesk', sans-serif;
-            --hero-title-size: 8.5rem;
-            --section-title-size: 3rem;
-            --logo-size: 80px;
-            --global-text-align: center;
-
-            /* Şablon Tarzı */
-            --card-radius: 24px;
-            --border-style: 1px solid var(--border-color);
-            --card-align: var(--global-text-align);
+            --bg-main: #070707; --bg-card: #111111; --text-main: #ffffff; --text-muted: #a1a1aa; 
+            --accent-color: #e60000; --border-color: rgba(255, 255, 255, 0.08); --header-bg: rgba(7, 7, 7, 0.85);
+            --font-main: 'Syne', sans-serif; --font-sport: 'Space Grotesk', sans-serif;
+            --hero-title-size: 8.5rem; --section-title-size: 3rem; --logo-size: 80px; --global-text-align: center;
+            --card-radius: 24px; --border-style: 1px solid var(--border-color); --card-align: var(--global-text-align);
             --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
     </style>
 
     <style>
-        /* --- GÖRSEL OTOMATİK NETLEŞTİRME VE İYİLEŞTİRME --- */
-        img, .board-img, .player-img-box img, .kit-img-box img, .transfer-img {
-            image-rendering: -webkit-optimize-contrast !important;
-            image-rendering: crisp-edges !important;
-            -webkit-font-smoothing: antialiased;
-            backface-visibility: hidden;
-            transform: translateZ(0);
-            transition: filter 0.5s ease, transform 0.5s ease;
-        }
-
+        img { image-rendering: -webkit-optimize-contrast !important; image-rendering: crisp-edges !important; -webkit-font-smoothing: antialiased; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            font-family: var(--font-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: background-color 0.4s ease, color 0.4s ease;
-            text-align: var(--global-text-align);
-        }
-
+        body { background-color: var(--bg-main); color: var(--text-main); font-family: var(--font-main); line-height: 1.6; overflow-x: hidden; text-align: var(--global-text-align); }
         .container { max-width: 1400px; margin: 0 auto; padding: 0 3rem; }
 
-        /* --- SIRA DIŞI HEADER VE DİNAMİK LOGO --- */
-        header {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            z-index: 100;
-            background: var(--header-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            min-height: 110px;
-        }
-
-        .logo-container {
-            text-decoration: none;
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column; /* Logo Yazının Üstünde */
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-
-        /* YENİ LOGO MOTORU: Özgür boyut, şeffaf arka plan */
-        .logo-img-wrapper {
-            height: var(--logo-size);
-            min-height: 40px;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-        }
-
-        .logo-img-wrapper img {
-            max-height: 100%;
-            width: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.2));
-        }
-
-        .logo-text-top {
-            font-family: var(--font-sport);
-            font-weight: 700;
-            font-size: 1.4rem;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            line-height: 1;
-            color: var(--text-main);
-        }
-
-        .logo-text-sub {
-            font-size: 0.75rem;
-            color: var(--accent-color);
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            margin-top: 3px;
-            font-weight: 700;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 1.8rem;
-            flex-wrap: wrap;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-main);
-            font-weight: 600;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 5px 0;
-            opacity: 0.7;
-        }
-
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: 0; left: 50%;
-            width: 0; height: 2px; background: var(--accent-color);
-            transition: all 0.3s ease; transform: translateX(-50%);
-        }
-
+        /* HEADER & LOGO */
+        header { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; background: var(--header-bg); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-color); }
+        nav { display: flex; justify-content: space-between; align-items: center; min-height: 110px; }
+        .logo-container { text-decoration: none; color: var(--text-main); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; margin: 10px 0; }
+        .logo-img-wrapper { height: var(--logo-size); min-height: 40px; display: none; align-items: center; justify-content: center; }
+        .logo-img-wrapper img { max-height: 100%; width: auto; object-fit: contain; }
+        .logo-text-top { font-family: var(--font-sport); font-weight: 700; font-size: 1.4rem; text-transform: uppercase; letter-spacing: -1px; line-height: 1; }
+        .logo-text-sub { font-size: 0.75rem; color: var(--accent-color); letter-spacing: 5px; text-transform: uppercase; margin-top: 3px; font-weight: 700; }
+        .nav-links { display: flex; list-style: none; gap: 1.8rem; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s; position: relative; padding: 5px 0; opacity: 0.7; }
         .nav-links a:hover { opacity: 1; color: var(--accent-color); }
-        .nav-links a:hover::after { width: 100%; }
 
-        /* --- HERO: KESKİN OKUNABİLİRLİK --- */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center; /* Genelde ortalı durması iyidir ancak form içeriği esnektir */
-            padding: 12rem 2rem 6rem 2rem;
-            position: relative;
-            overflow: hidden;
-        }
+        /* HERO */
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 12rem 2rem 6rem 2rem; position: relative; overflow: hidden; }
+        .hero-bg-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover !important; background-position: center center !important; filter: brightness(0.35); z-index: 1; }
+        .hero-content-wrapper { position: relative; z-index: 2; max-width: 1100px; width: 100%; text-align: var(--global-text-align); }
+        .hero-title-sculpture { font-family: var(--font-sport); font-size: var(--hero-title-size); font-weight: 700; text-transform: uppercase; line-height: 0.9; letter-spacing: -4px; color: #ffffff; text-shadow: 0 15px 40px rgba(0, 0, 0, 0.9); margin-bottom: 3rem; }
+        .hero-slogan-monument { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(25px); border-left: 4px solid var(--accent-color); padding: 3.5rem; border-radius: var(--card-radius); max-width: 850px; display: inline-block; text-align: var(--global-text-align); }
 
-        .hero-bg-canvas {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover !important;
-            background-position: center center !important;
-            background-repeat: no-repeat !important;
-            filter: brightness(0.35) contrast(1.1);
-            transform: scale(1.02);
-            transition: transform 5s ease;
-            z-index: 1;
-        }
-
-        .hero:hover .hero-bg-canvas { transform: scale(1); }
-
-        .hero-content-wrapper { 
-            position: relative; 
-            z-index: 2; 
-            max-width: 1100px; 
-            width: 100%;
-            text-align: var(--global-text-align); 
-        }
-
-        .hero-title-sculpture {
-            font-family: var(--font-sport);
-            font-size: var(--hero-title-size);
-            font-weight: 700;
-            text-transform: uppercase;
-            line-height: 0.9;
-            letter-spacing: -4px;
-            color: #ffffff;
-            text-shadow: 0 15px 40px rgba(0, 0, 0, 0.9);
-            margin-bottom: 3rem;
-            animation: floatText 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes floatText {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(-8px); }
-        }
-
-        .hero-slogan-monument {
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-left: 4px solid var(--accent-color);
-            padding: 3.5rem;
-            border-radius: var(--card-radius);
-            max-width: 850px;
-            display: inline-block;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
-            text-align: var(--global-text-align);
-        }
-
-        .monument-badge {
-            font-family: var(--font-sport);
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 6px;
-            margin-bottom: 1.2rem;
-        }
-
-        .monument-text {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #ffffff;
-            line-height: 1.6;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-
-        /* --- SECTIONS --- */
-        section { padding: 10rem 0; border-top: 1px solid var(--border-color); position: relative; }
-
-        .section-title {
-            font-family: var(--font-sport);
-            font-size: var(--section-title-size);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: -2px;
-            margin-bottom: 6rem;
-            color: var(--text-main);
-            text-align: var(--global-text-align);
-        }
+        /* SECTIONS & GRIDS */
+        section { padding: 8rem 0; border-top: 1px solid var(--border-color); }
+        .section-title { font-family: var(--font-sport); font-size: var(--section-title-size); font-weight: 700; text-transform: uppercase; margin-bottom: 4rem; color: var(--text-main); text-align: var(--global-text-align); }
         .section-title span { color: var(--accent-color); }
-
-        /* --- DİNAMİK KART SİSTEMİ --- */
-        .board-grid, .players-grid, .transfers-grid, .gallery-grid {
-            display: grid; gap: 3rem;
-        }
-        .board-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
-        .players-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
-        .transfers-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
-        .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); }
-
-        .board-card, .player-card, .transfer-card, .fixture-card, .post-card, .contact-map, .blog-form-wrapper {
-            background: var(--bg-card);
-            border-radius: var(--card-radius);
-            border: var(--border-style);
-            box-shadow: var(--card-shadow);
-            transition: all 0.4s ease;
-            overflow: hidden;
-            text-align: var(--card-align);
-        }
-
-        .board-card { padding: 3.5rem 2.5rem; }
-        .board-card:hover, .player-card:hover, .transfer-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-color);
-        }
-
-        .board-img-wrapper {
-            width: 140px; height: 140px; border-radius: 28px;
-            margin: 0 auto 2rem auto; overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-        .board-img { width: 100%; height: 100%; object-fit: cover; }
+        .grid-container { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
         
-        .board-name, .player-name, .transfer-name, .fixture-team {
-            font-size: 1.4rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.5rem;
-        }
-        
-        .board-role, .player-position {
-            font-size: 0.8rem; font-weight: 700; color: var(--accent-color);
-            text-transform: uppercase; letter-spacing: 2px;
-        }
+        .card { background: var(--bg-card); border-radius: var(--card-radius); border: var(--border-style); box-shadow: var(--card-shadow); transition: all 0.4s ease; overflow: hidden; text-align: var(--card-align); }
+        .card:hover { transform: translateY(-10px); border-color: var(--accent-color); }
+        .card-img-box { width: 100%; height: 320px; background: #000; overflow: hidden; }
+        .card-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .card-content { padding: 2rem; }
+        .card-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .card-subtitle { font-size: 0.85rem; font-weight: 700; color: var(--accent-color); text-transform: uppercase; letter-spacing: 1px; }
 
-        .player-img-box { height: 380px; background-color: var(--bg-main); position: relative; }
-        .player-img-box img { width: 100%; height: 100%; object-fit: cover; }
-        .player-info { padding: 2.5rem; }
-        
-        .player-stats {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;
-            font-size: 0.85rem; border-top: 1px solid var(--border-color);
-            padding-top: 1.5rem; color: var(--text-muted);
-        }
-        .stat-line strong { color: var(--text-main); }
+        /* FIXTURE */
+        .fixture-list { display: flex; flex-direction: column; gap: 1rem; }
+        .fixture-item { display: flex; align-items: center; justify-content: space-between; padding: 2rem; background: var(--bg-card); border-radius: var(--card-radius); border: var(--border-style); }
+        .fix-team { font-size: 1.2rem; font-weight: bold; width: 40%; }
+        .fix-team.home { text-align: right; } .fix-team.away { text-align: left; }
+        .fix-score { font-family: var(--font-sport); font-size: 2rem; background: var(--accent-color); color: #fff; padding: 5px 20px; border-radius: 8px; font-weight: bold; }
 
-        .position-group-title {
-            font-family: var(--font-sport); font-size: 1.4rem; font-weight: 700;
-            text-transform: uppercase; margin: 6rem 0 3rem 0; color: var(--accent-color); letter-spacing: 3px;
-        }
+        /* FOOTER */
+        footer { padding: 4rem 0; background-color: #000; color: #fff; text-align: center; border-top: 1px solid #111; }
+        .footer-logo { font-family: var(--font-sport); font-size: 1.8rem; margin-bottom: 1rem; color: #fff; }
+        .admin-trigger { font-size: 0.75rem; color: #444; cursor: pointer; margin-top: 2rem; }
 
-        /* --- FORMALAR --- */
-        .kits-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 4rem; }
-        .kit-card { border-radius: var(--card-radius); overflow: hidden; border: var(--border-style); transition: all 0.4s ease; background: var(--bg-card); }
-        .kit-img-box { width: 100%; height: 580px; background: transparent; overflow: hidden; }
-        .kit-img-box img { width: 100%; height: 100%; object-fit: cover; }
-        .kit-title { padding: 2rem; font-size: 1.3rem; font-weight: 700; text-align: center; color: var(--text-main); border-top: var(--border-style); }
-
-        /* --- TRANSFERLER --- */
-        .transfer-img { height: 280px; width: 100%; object-fit: cover; }
-        .transfer-body { padding: 2rem; }
-        .transfer-club { font-size: 0.85rem; color: var(--text-muted); margin: 0.5rem 0 1.5rem 0; }
-        .transfer-status { background: var(--accent-color); color: #fff; font-size: 0.75rem; font-weight: 700; padding: 8px 18px; border-radius: 6px; display: inline-block; }
-
-        /* --- FİKSTÜR --- */
-        .fixture-list { display: flex; flex-direction: column; gap: 2rem; }
-        .fixture-card { display: flex; align-items: center; justify-content: space-between; padding: 2.5rem 4rem; }
-        .fixture-team.home { text-align: right; }
-        .fixture-team.away { text-align: left; }
-        .fixture-mid { text-align: center; width: 20%; }
-        .fixture-score { font-family: var(--font-sport); font-size: 2.2rem; font-weight: 700; background: var(--accent-color); color: #fff; padding: 6px 28px; border-radius: 8px; display: inline-block; margin-bottom: 0.5rem; }
-        .fixture-date { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); }
-
-        /* --- GALERİ --- */
-        .gallery-item { aspect-ratio: 16 / 10; background: #000; border-radius: var(--card-radius); overflow: hidden; border: var(--border-style); box-shadow: var(--card-shadow); }
-        .gallery-item img, .gallery-item iframe { width: 100%; height: 100%; object-fit: cover; border: none; }
-
-        /* --- BİZE YAZIN & İLETİŞİM --- */
-        .blog-container, .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; text-align: left; }
-        .blog-form-wrapper { padding: 4rem; }
-        
-        .form-group { margin-bottom: 2rem; }
-        .form-group label { display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.8rem; color: var(--accent-color); letter-spacing: 2px; }
-        .form-control {
-            width: 100%; padding: 1.2rem; border: 1px solid var(--border-color); border-radius: 8px;
-            font-family: var(--font-main); font-size: 1rem; outline: none;
-            background: rgba(128, 128, 128, 0.05); color: var(--text-main); transition: all 0.3s ease;
-        }
-        .form-control:focus { border-color: var(--accent-color); }
-        .submit-btn {
-            width: 100%; padding: 1.4rem; background-color: var(--accent-color); color: #ffffff;
-            border: none; border-radius: 8px; font-weight: 700; text-transform: uppercase; cursor: pointer; letter-spacing: 3px; transition: all 0.3s;
-        }
-        .submit-btn:hover { opacity: 0.9; }
-
-        .post-card { padding: 2.5rem; border-left: 4px solid var(--accent-color); margin-bottom: 2rem; color: var(--text-main); }
-        .post-meta { font-size: 0.8rem; font-weight: 700; color: var(--accent-color); margin-bottom: 0.8rem; }
-
-        .contact-info { display: flex; flex-direction: column; gap: 3rem; }
-        .info-item h4 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--accent-color); margin-bottom: 0.8rem; letter-spacing: 2px; }
-        .info-item p, .info-item a { font-size: 1.6rem; font-weight: 700; color: var(--text-main); text-decoration: none; }
-        .contact-map { display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; color: var(--text-main); border-radius: var(--card-radius); background: var(--bg-card); border: var(--border-style); }
-
-        /* --- FOOTER --- */
-        footer { padding: 5rem 0; background-color: #000000; color: #ffffff; text-align: center; border-top: 1px solid #111; }
-        .footer-logo { font-family: var(--font-sport); font-size: 1.8rem; margin-bottom: 1rem; letter-spacing: 1px; color: #fff; }
-        footer p { font-size: 0.9rem; font-weight: 600; letter-spacing: 2px; color: #aaa; margin-bottom: 2rem; }
-        
-        .admin-trigger { font-size: 0.75rem; color: #333; cursor: pointer; }
-
-        /* --- ADMIN PANEL --- */
-        .admin-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0, 0.9); backdrop-filter: blur(20px); z-index: 1000; justify-content: center; align-items: center; text-align: left; }
-        .admin-content { background-color: #0c0f17; border-radius: 30px; width: 95%; max-width: 1400px; height: 85vh; display: flex; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.08); color: white;}
-        .close-admin { position: absolute; top: 20px; right: 25px; font-size: 2.5rem; cursor: pointer; z-index: 10; color: white; }
-        .admin-sidebar { width: 300px; background-color: #06080d; padding: 3rem 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; overflow-y: auto; border-right: 1px solid rgba(255, 255, 255, 0.08); }
-        .admin-sidebar h3 { font-family: var(--font-sport); font-size: 1.1rem; color: #ff2a4b; margin-bottom: 2.5rem; text-align: center; }
-        .admin-sidebar-btn { background: none; border: none; color: #72829c; padding: 14px 20px; text-align: left; font-weight: 600; font-size: 0.9rem; cursor: pointer; border-radius: 8px; transition: all 0.3s; }
-        .admin-sidebar-btn:hover, .admin-sidebar-btn.active { color: #ffffff; background-color: #ff2a4b; }
-        .admin-body { flex-grow: 1; padding: 3.5rem; overflow-y: auto; background-color: #0a0e14; position: relative; }
+        /* ADMIN PANEL */
+        .admin-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0, 0.95); z-index: 1000; justify-content: center; align-items: center; }
+        .admin-content { background: #0c0f17; border-radius: 20px; width: 95%; max-width: 1400px; height: 85vh; display: flex; border: 1px solid #222; color: white; overflow: hidden; }
+        .close-admin { position: absolute; top: 20px; right: 25px; font-size: 2rem; cursor: pointer; z-index: 10; }
+        .admin-sidebar { width: 280px; background: #06080d; padding: 2rem 1rem; display: flex; flex-direction: column; gap: 5px; overflow-y: auto; border-right: 1px solid #222; }
+        .admin-sidebar-btn { background: none; border: none; color: #72829c; padding: 12px 15px; text-align: left; font-weight: 600; cursor: pointer; border-radius: 8px; transition: 0.3s; }
+        .admin-sidebar-btn:hover, .admin-sidebar-btn.active { color: #fff; background: #e60000; }
+        .admin-body { flex-grow: 1; padding: 3rem; overflow-y: auto; background: #0a0e14; position: relative; }
         .admin-tab-content { display: none; }
         .admin-tab-content.active { display: block; }
-        .admin-section-heading { font-family: var(--font-sport); font-size: 1.4rem; border-bottom: 2px solid #ff2a4b; padding-bottom: 0.8rem; margin-bottom: 2.5rem; color: white;}
         
-        .data-table { width: 100%; border-collapse: collapse; margin-top: 2rem; background: #0d121d; border-radius: 12px; overflow: hidden; }
-        .data-table th, .data-table td { padding: 16px; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.05); color: white; }
-        .data-table th { background-color: #06080d; font-weight: 700; color: #ff2a4b; }
-        .admin-btn-delete { background-color: #ff3344; color: white; border: none; border-radius: 4px; padding: 8px 16px; font-weight: 600; cursor: pointer; }
-        .admin-btn-approve { background-color: #22c55e; color: white; border: none; border-radius: 4px; padding: 8px 16px; font-weight: 600; cursor: pointer; margin-right: 5px; }
-
-        @media (max-width: 992px) {
-            .hero-title-sculpture { font-size: 4rem; }
-            .blog-container, .contact-grid, .kits-grid { grid-template-columns: 1fr; }
-            nav { flex-direction: column; padding: 2rem 0; gap: 1.5rem; }
-            .admin-content { flex-direction: column; height: 95vh; }
-            .admin-sidebar { width: 100%; height: auto; }
-        }
+        .form-group { margin-bottom: 1.5rem; background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+        .form-group label { display: block; color: #e60000; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem; font-size: 0.8rem; }
+        .form-control { width: 100%; padding: 1rem; background: #111; border: 1px solid #333; color: white; border-radius: 8px; outline: none; }
+        .submit-btn { width: 100%; padding: 1.2rem; background: #e60000; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 1rem; }
+        
+        .admin-list-item { background: #111; padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #333; margin-top: 10px; }
+        .btn-del { background: #ff3344; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <!-- HEADER -->
-    <header id="site-header">
+    <header>
         <div class="container">
             <nav>
                 <a href="#" class="logo-container">
-                    <div class="logo-img-wrapper" id="header-logo-wrapper">
-                        <img src="" id="header-logo-img" alt="Logo">
-                    </div>
+                    <div class="logo-img-wrapper" id="header-logo-wrapper"><img src="" id="header-logo-img"></div>
                     <div>
                         <div class="logo-text-top" id="header-club-title">KARAMAN ABER SANAT GÜCÜ</div>
                         <div class="logo-text-sub">SPOR KULÜBÜ</div>
                     </div>
                 </a>
-                <ul class="nav-links" id="main-nav-links">
+                <ul class="nav-links">
                     <li><a href="#yonetim-kurulu">Yönetim Kurulu</a></li>
                     <li><a href="#teknik-heyet">Teknik Heyet</a></li>
                     <li><a href="#kadro">Kadromuz</a></li>
-                    <li><a href="#formalar">Formalarımız</a></li>
+                    <li><a href="#formalar">Formalar</a></li>
                     <li><a href="#transferler">Transferler</a></li>
                     <li><a href="#fikstur">Fikstür</a></li>
                     <li><a href="#galeri">Medya</a></li>
-                    <li><a href="#iletisim">İletişim</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
     <section class="hero" id="home">
         <div class="hero-bg-canvas" id="hero-bg-overlay"></div>
         <div class="hero-content-wrapper">
             <h1 class="hero-title-sculpture" id="hero-title-text">İNANÇ<br><span>MÜZESİ</span></h1>
             <div class="hero-slogan-monument">
-                <div class="monument-badge">İNANÇ KANATLANDIRIR</div>
-                <div class="monument-text" id="hero-slogan-text">
-                    Sloganımız olan 'İNANÇ KANATLANDIRIR' ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz.
-                </div>
+                <div style="color:var(--accent-color); font-weight:bold; margin-bottom:10px;">İNANÇ KANATLANDIRIR</div>
+                <div id="hero-slogan-text">Sloganımız olan 'İNANÇ KANATLANDIRIR' ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz.</div>
             </div>
         </div>
     </section>
 
-    <!-- YÖNETİM KURULU BÖLÜMÜ -->
-    <section id="yonetim-kurulu">
-        <div class="container">
-            <h2 class="section-title">Yönetim <span>Kurulu</span></h2>
-            <div class="board-grid" id="board-container"></div>
-        </div>
-    </section>
+    <!-- DINAMIK ALANLAR -->
+    <section id="yonetim-kurulu"><div class="container"><h2 class="section-title">Yönetim <span>Kurulu</span></h2><div class="grid-container" id="front-board"></div></div></section>
+    <section id="teknik-heyet"><div class="container"><h2 class="section-title">Teknik <span>Heyet</span></h2><div class="grid-container" id="front-staff"></div></div></section>
+    <section id="kadro"><div class="container"><h2 class="section-title">Kulüp <span>Kadromuz</span></h2><div class="grid-container" id="front-squad"></div></div></section>
+    <section id="formalar"><div class="container"><h2 class="section-title">Sezon <span>Formalarımız</span></h2><div class="grid-container" id="front-kits"></div></div></section>
+    <section id="transferler"><div class="container"><h2 class="section-title">Transfer <span>Gündemi</span></h2><div class="grid-container" id="front-transfers"></div></div></section>
+    <section id="fikstur"><div class="container"><h2 class="section-title">Maç <span>Fikstürü</span></h2><div class="fixture-list" id="front-fixture"></div></div></section>
+    <section id="galeri"><div class="container"><h2 class="section-title">Kulüp <span>Medya</span></h2><div class="grid-container" id="front-gallery"></div></div></section>
 
-    <!-- TEKNİK HEYET BÖLÜMÜ -->
-    <section id="teknik-heyet">
-        <div class="container">
-            <h2 class="section-title">Teknik <span>Heyet</span></h2>
-            <div class="board-grid" id="staff-container"></div>
-        </div>
-    </section>
-
-    <!-- KADROMUZ BÖLÜMÜ -->
-    <section id="kadro">
-        <div class="container">
-            <h2 class="section-title">Kulüp <span>Kadromuz</span></h2>
-            <div id="gk-section"><h3 class="position-group-title">Kaleciler</h3><div class="players-grid" id="gk-players-container"></div></div>
-            <div id="df-section"><h3 class="position-group-title">Defans Oyuncuları</h3><div class="players-grid" id="df-players-container"></div></div>
-            <div id="mf-section"><h3 class="position-group-title">Orta Saha Oyuncuları</h3><div class="players-grid" id="mf-players-container"></div></div>
-            <div id="fw-section"><h3 class="position-group-title">Forvet Oyuncuları</h3><div class="players-grid" id="fw-players-container"></div></div>
-        </div>
-    </section>
-
-    <!-- FORMALARIMIZ BÖLÜMÜ -->
-    <section id="formalar">
-        <div class="container">
-            <h2 class="section-title">Kulüp <span>Formalarımız</span></h2>
-            <div class="kits-grid" id="kits-container"></div>
-        </div>
-    </section>
-
-    <!-- TRANSFERLER BÖLÜMÜ -->
-    <section id="transferler">
-        <div class="container">
-            <h2 class="section-title">Transfer <span>Gündemi</span></h2>
-            <div class="transfers-grid" id="transfers-container"></div>
-        </div>
-    </section>
-
-    <!-- FİKSTÜR BÖLÜMÜ -->
-    <section id="fikstur">
-        <div class="container">
-            <h2 class="section-title">Maç <span>Fikstürü</span></h2>
-            <div class="fixture-list" id="fixture-container"></div>
-        </div>
-    </section>
-
-    <!-- MEDYA GALERİSİ BÖLÜMÜ -->
-    <section id="galeri">
-        <div class="container">
-            <h2 class="section-title">Kulüp <span>Medya & Galeri</span></h2>
-            <div class="gallery-grid" id="gallery-container">
-                <!-- Javascript ile Doldurulacak -->
-            </div>
-        </div>
-    </section>
-
-    <div id="dynamic-pages-container"></div>
-
-    <!-- İLETİŞİM BÖLÜMÜ -->
-    <section id="iletisim" style="border-bottom: none;">
-        <div class="container">
-            <h2 class="section-title">Bize <span>Ulaşın</span></h2>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="info-item">
-                        <h4>Telefon</h4>
-                        <a href="tel:+905368939415" id="club-phone-link">0 536 893 94 15</a>
-                    </div>
-                    <div class="info-item">
-                        <h4>E-Posta Adreslerimiz</h4>
-                        <p style="margin-bottom: 0.5rem;"><a href="mailto:info@abersanatsk.org" id="club-email-1">info@abersanatsk.org</a></p>
-                        <p><a href="mailto:ridvan@abersanatsk.org" id="club-email-2">ridvan@abersanatsk.org</a></p>
-                    </div>
-                    <div class="info-item">
-                        <h4>Kulüp Ofisi</h4>
-                        <p id="club-address-text">Cedit Mah. 319. Sk. No:2/A <br>Merkez / Karaman</p>
-                    </div>
-                </div>
-                <div class="contact-map">
-                    <div>📍 Karaman Merkez</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ADMIN PANEL MODAL -->
-    <div class="admin-modal" id="adminModal">
-        <div class="admin-content">
-            <span class="close-admin" onclick="toggleAdminModal()">&times;</span>
-            <div class="admin-sidebar">
-                <h3>Aber SK Dashboard</h3>
-                <button type="button" class="admin-sidebar-btn active" id="tabSetBtn" onclick="switchTab('settings')">Site Ayarları</button>
-                <button type="button" class="admin-sidebar-btn" id="tabStyleBtn" onclick="switchTab('style')">Tipografi & Stil</button>
-                <button type="button" class="admin-sidebar-btn" id="tabGalBtn" onclick="switchTab('gallery')">Medya / Galeri</button>
-                <button type="button" class="admin-sidebar-btn" id="tabSecBtn" onclick="switchTab('security')">Tema & Güvenlik</button>
-                <p style="color:#72829c; font-size: 0.8rem; padding: 20px; margin-top: auto;">© RIDVAN ARSLAN</p>
-            </div>
-
-            <div class="admin-body">
-                <!-- TAB: AYARLAR -->
-                <div id="tabSettings" class="admin-tab-content active">
-                    <div class="admin-section-heading">GENEL AYARLAR</div>
-                    
-                    <div class="form-group" style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 2rem;">
-                        <label style="color: #ff2a4b; font-weight: 800;">KULÜP LOGOSU YÜKLE</label>
-                        <p style="font-size:0.8rem; color:#a1a1aa; margin-bottom:1rem;">Doğrudan cihazından logonun PNG, JPG halini seç.</p>
-                        <div style="display:flex; gap:10px; align-items:center;">
-                            <input type="file" id="upload-logo-file" accept="image/*" class="form-control" style="flex:1; padding: 0.8rem; background: #111;" onchange="uploadImage(this, 400, 400, 'logoUrl')">
-                            <button type="button" class="admin-btn-delete" onclick="clearImage('logoUrl')" style="height:50px;">Kaldır</button>
-                        </div>
-                        <input type="text" id="edit-logo-url" class="form-control" placeholder="Veya resim URL'si yapıştır" style="margin-top:10px; background: #111;">
-                    </div>
-
-                    <div class="form-group" style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 2rem;">
-                        <label style="color: #ff2a4b; font-weight: 800;">ANA ARKA PLAN GÖRSELİ</label>
-                        <div style="display:flex; gap:10px; align-items:center;">
-                            <input type="file" id="upload-hero-bg-file" accept="image/*" class="form-control" style="flex:1; padding: 0.8rem; background: #111;" onchange="uploadImage(this, 1920, 1080, 'heroBgUrl')">
-                            <button type="button" class="admin-btn-delete" onclick="clearImage('heroBgUrl')" style="height:50px;">Kaldır</button>
-                        </div>
-                        <input type="text" id="edit-hero-bg-url" class="form-control" placeholder="Veya resim URL'si yapıştır" style="margin-top:10px; background: #111;">
-                    </div>
-
-                    <div class="form-group"><label style="color:#ff2a4b;">Kulüp Başlığı</label><input type="text" id="edit-header-title" class="form-control" style="background: #111;"></div>
-                    <div class="form-group"><label style="color:#ff2a4b;">Hero Başlığı</label><input type="text" id="edit-hero-title" class="form-control" style="background: #111;"></div>
-                    <div class="form-group"><label style="color:#ff2a4b;">Slogan</label><input type="text" id="edit-hero-slogan" class="form-control" style="background: #111;"></div>
-                    <div class="form-group"><label style="color:#ff2a4b;">Telefon</label><input type="text" id="edit-phone" class="form-control" style="background: #111;"></div>
-                    <div class="form-group"><label style="color:#ff2a4b;">Adres</label><textarea id="edit-address" class="form-control" rows="2" style="background: #111;"></textarea></div>
-                    <button type="button" class="submit-btn" onclick="saveSettings()">Ayarları Kaydet</button>
-                </div>
-
-                <!-- TAB: TİPOGRAFİ & STİL -->
-                <div id="tabStyle" class="admin-tab-content">
-                    <div class="admin-section-heading">YERLEŞİM, TİPOGRAFİ & STİL EDİTÖRÜ</div>
-                    
-                    <div class="form-group" style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 2rem;">
-                        <label style="color:#ff2a4b;">Logo Boyutu (px)</label>
-                        <input type="range" id="style-logo-size" min="40" max="250" value="80" class="form-control" oninput="document.getElementById('logo-size-preview').innerText = this.value">
-                        <span style="color:white; font-weight:bold;"><span id="logo-size-preview">80</span> Piksel</span>
-                    </div>
-
-                    <div class="form-group" style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 2rem;">
-                        <label style="color:#ff2a4b;">Sitenin Genel Yazı Hizalaması</label>
-                        <select id="style-text-align" class="form-control" style="background: #111;">
-                            <option value="left">Sola Yaslı (Modern)</option>
-                            <option value="center">Ortalanmış (Klasik)</option>
-                            <option value="right">Sağa Yaslı</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label style="color:#ff2a4b;">Başlık Yazı Tipi (Font-Family)</label>
-                        <select id="style-font-sport" class="form-control" style="background: #111;">
-                            <option value="'Space Grotesk', sans-serif">Space Grotesk</option>
-                            <option value="'Syne', sans-serif">Syne</option>
-                            <option value="'Montserrat', sans-serif">Montserrat</option>
-                            <option value="'Rajdhani', sans-serif">Rajdhani</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label style="color:#ff2a4b;">Ana Sayfa Dev Başlık Boyutu</label>
-                        <select id="style-hero-size" class="form-control" style="background: #111;">
-                            <option value="5.5rem">Küçük (5.5rem)</option>
-                            <option value="7rem">Orta (7.0rem)</option>
-                            <option value="8.5rem">Büyük / Dev (8.5rem - Varsayılan)</option>
-                        </select>
-                    </div>
-                    <button type="button" class="submit-btn" onclick="saveTypographyStyles()">Tasarım Stillerini Uygula</button>
-                </div>
-
-                <!-- TAB: MEDYA / GALERİ -->
-                <div id="tabGallery" class="admin-tab-content">
-                    <div class="admin-section-heading">MEDYA VE GALERİ (YOUTUBE & GITHUB)</div>
-                    
-                    <div class="form-group" style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 2rem;">
-                        <label style="color:#ff2a4b;">YouTube Video Linki Ekle</label>
-                        <p style="font-size:0.8rem; color:#a1a1aa; margin-bottom:1rem;">Herhangi bir YouTube videosunun linkini yapıştır.</p>
-                        <div style="display:flex; gap:10px;">
-                            <input type="text" id="youtube-link-input" class="form-control" placeholder="Örn: https://www.youtube.com/watch?v=..." style="flex:1;">
-                            <button type="button" class="admin-btn-approve" onclick="addYoutubeVideo()" style="height: 50px;">Video Ekle</button>
-                        </div>
-                    </div>
-
-                    <div class="form-group" style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 2rem;">
-                        <label style="color:#ff2a4b;">GitHub veya Web Resim Linki Ekle</label>
-                        <p style="font-size:0.8rem; color:#a1a1aa; margin-bottom:1rem;">GitHub (Raw) veya sonu .jpg / .png ile biten herhangi bir resim bağlantısı.</p>
-                        <div style="display:flex; gap:10px;">
-                            <input type="text" id="github-link-input" class="form-control" placeholder="Örn: https://raw.githubusercontent.com/..." style="flex:1;">
-                            <button type="button" class="admin-btn-approve" onclick="addWebImage()" style="height: 50px;">Resim Ekle</button>
-                        </div>
-                    </div>
-
-                    <h3 style="color:white; margin-top:2rem;">Galeri İçerikleri</h3>
-                    <div id="admin-gallery-list" style="margin-top: 1rem; display: flex; flex-direction: column; gap: 10px;"></div>
-                </div>
-
-                <!-- TAB: TEMA VE ŞİFRE -->
-                <div id="tabSecurity" class="admin-tab-content">
-                    <div class="admin-section-heading">TEMA SEÇİMİ VE GÜVENLİK</div>
-                    <div class="form-group" style="margin-bottom:2rem; background: #0d121d; padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.08);">
-                        <label style="color: #ff2a4b; font-weight: 800;">SİTENİN GENEL RENK ŞABLONU</label>
-                        <select id="theme-select" class="form-control" style="background: #111;" onchange="previewTheme()">
-                            <option value="aberEfsanesi">Aber Efsanesi (Siyah, Beyaz ve Kırmızı) - Önerilen</option>
-                            <option value="monokrom">Klasik Monokrom (Siyah ve Beyaz)</option>
-                            <option value="karanlik">Gece Modu (Tam Siyah)</option>
-                            <option value="aydinlik">Aydınlık Mod (Beyaz Zemin, Siyah Yazı)</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom:2.5rem; background: #0d121d; padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.08);">
-                        <label style="color: #ff2a4b; font-weight: 800; font-size: 0.9rem;">SİTE YERLEŞİM ŞABLONU</label>
-                        <select id="layout-select" class="form-control" style="background: #111;" onchange="previewTheme()">
-                            <option value="asymmetric">Modern Grid (Yumuşak Çizgiler)</option>
-                            <option value="minimalist">Sonsuz Minimalizm (Çerçevesiz)</option>
-                            <option value="aggressive">Agresif Köşeli (Sert Çizgiler)</option>
-                        </select>
-                    </div>
-
-                    <button type="button" class="submit-btn" style="margin-bottom:3rem;" onclick="saveTheme()">Tema & Şablonu Kaydet</button>
-
-                    <div class="form-group"><label style="color:#ff2a4b;">Mevcut Şifre</label><input type="password" id="current-password-input" class="form-control" style="background:#111;"></div>
-                    <div class="form-group"><label style="color:#ff2a4b;">Yeni Şifre</label><input type="password" id="new-password-input" class="form-control" style="background:#111;"></div>
-                    <button type="button" class="submit-btn" onclick="changeAdminPassword()">Şifreyi Güncelle</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- FOOTER -->
     <footer>
         <div class="container">
-            <div class="footer-logo" id="footer-logo-text">KARAMAN ABER SANAT GÜCÜ</div>
+            <div class="footer-logo">KARAMAN ABER SANAT GÜCÜ</div>
             <p>KARAMAN ABER MÜHENDSİLİK ENERJİ SAN.TİC.LTD.ŞTİ.</p>
-            <p>©RIDVAN ARSLAN</p>
+            <p style="color:#777; margin-top:10px;">©RIDVAN ARSLAN</p>
             <div class="admin-trigger" onclick="loginAdmin()">Yönetim Paneli Girişi</div>
         </div>
     </footer>
 
-    <script>
-        // --- MULTI-INPUT HIGH-PERFORMANCE BASE64 COMPRESSOR MOTOR ---
-        function uploadImage(inputElement, maxWidth, maxHeight, targetField, callback) {
-            const file = inputElement.files[0];
-            if (!file) return;
-            
-            const originalText = inputElement.previousElementSibling ? inputElement.previousElementSibling.innerText : "Resim Seçin";
-            if (inputElement.previousElementSibling && inputElement.previousElementSibling.tagName === "LABEL") {
-                inputElement.previousElementSibling.innerText = "Yükleniyor ve Optimize Ediliyor... ⏳";
-            }
+    <!-- YÖNETİM PANELİ -->
+    <div class="admin-modal" id="adminModal">
+        <div class="admin-content">
+            <span class="close-admin" onclick="toggleAdminModal()">&times;</span>
+            <div class="admin-sidebar">
+                <h3 style="color:#e60000; text-align:center; margin-bottom:20px;">Aber Dashboard</h3>
+                <button class="admin-sidebar-btn active" onclick="switchTab('settings', this)">Genel Ayarlar</button>
+                <button class="admin-sidebar-btn" onclick="switchTab('style', this)">Tasarım & Yerleşim</button>
+                <button class="admin-sidebar-btn" onclick="switchTab('board', this)">Yönetim Kurulu</button>
+                <button class="admin-sidebar-btn" onclick="switchTab('staff', this)">Teknik Heyet</button>
+                <button class="admin-sidebar-btn" onclick="switchTab('squad', this)">Oyuncu Kadrosu</button>
+                <button class="admin-sidebar-btn" onclick="switchTab('kits', this)">Formalar</button>
+                <button class="admin-sidebar-btn" onclick="switchTab('transfers', this)">Transferler</button>
+                <button class="admin-sidebar-btn" onclick="switchTab('fixture', this)">Fikstür</button>
+                <button class="admin-sidebar-btn" onclick="switchTab('gallery', this)">Medya & Galeri</button>
+                <button class="admin-sidebar-btn" onclick="switchTab('theme', this)">Tema & Güvenlik</button>
+            </div>
 
+            <div class="admin-body">
+                <!-- 1. GENEL AYARLAR -->
+                <div id="tab-settings" class="admin-tab-content active">
+                    <h2 style="margin-bottom:20px;">Genel Site Ayarları</h2>
+                    <div class="form-group">
+                        <label>Kulüp Logosu</label>
+                        <input type="file" class="form-control" onchange="uploadImage(this, 400, 'logoUrl')">
+                    </div>
+                    <div class="form-group">
+                        <label>Ana Arka Plan Görseli</label>
+                        <input type="file" class="form-control" onchange="uploadImage(this, 1920, 'heroBgUrl')">
+                    </div>
+                    <div class="form-group"><label>Slogan</label><input type="text" id="set-slogan" class="form-control"></div>
+                    <button class="submit-btn" onclick="saveGeneralSettings()">Kaydet</button>
+                </div>
+
+                <!-- 2. TASARIM VE YERLEŞİM -->
+                <div id="tab-style" class="admin-tab-content">
+                    <h2 style="margin-bottom:20px;">Tipografi & Yerleşim</h2>
+                    <div class="form-group">
+                        <label>Logo Boyutu: <span id="logo-preview">80</span>px</label>
+                        <input type="range" id="style-logo-size" min="40" max="250" value="80" class="form-control" oninput="document.getElementById('logo-preview').innerText = this.value">
+                    </div>
+                    <div class="form-group">
+                        <label>Yazı Hizalaması</label>
+                        <select id="style-align" class="form-control">
+                            <option value="left">Sola Yaslı</option>
+                            <option value="center">Ortalı</option>
+                            <option value="right">Sağa Yaslı</option>
+                        </select>
+                    </div>
+                    <button class="submit-btn" onclick="saveStyleSettings()">Uygula</button>
+                </div>
+
+                <!-- 3. YÖNETİM KURULU -->
+                <div id="tab-board" class="admin-tab-content">
+                    <h2 style="margin-bottom:20px;">Yönetim Kurulu Ekle</h2>
+                    <div class="form-group">
+                        <label>İsim Soyisim</label><input type="text" id="board-name" class="form-control">
+                        <label style="margin-top:10px;">Görevi</label><input type="text" id="board-role" class="form-control">
+                        <label style="margin-top:10px;">Fotoğraf Seç</label><input type="file" class="form-control" onchange="storeTempImage(this)">
+                        <button class="submit-btn" onclick="addDynamicItem('board')">Listeye Ekle</button>
+                    </div>
+                    <div id="admin-list-board"></div>
+                </div>
+
+                <!-- 4. TEKNİK HEYET -->
+                <div id="tab-staff" class="admin-tab-content">
+                    <h2 style="margin-bottom:20px;">Teknik Heyet Ekle</h2>
+                    <div class="form-group">
+                        <label>İsim Soyisim</label><input type="text" id="staff-name" class="form-control">
+                        <label style="margin-top:10px;">Görevi</label><input type="text" id="staff-role" class="form-control">
+                        <label style="margin-top:10px;">Fotoğraf Seç</label><input type="file" class="form-control" onchange="storeTempImage(this)">
+                        <button class="submit-btn" onclick="addDynamicItem('staff')">Listeye Ekle</button>
+                    </div>
+                    <div id="admin-list-staff"></div>
+                </div>
+
+                <!-- 5. KADROMUZ -->
+                <div id="tab-squad" class="admin-tab-content">
+                    <h2 style="margin-bottom:20px;">Oyuncu Ekle</h2>
+                    <div class="form-group">
+                        <label>İsim Soyisim</label><input type="text" id="squad-name" class="form-control">
+                        <label style="margin-top:10px;">Mevki</label>
+                        <select id="squad-role" class="form-control"><option>Kaleci</option><option>Defans</option><option>Orta Saha</option><option>Forvet</option></select>
+                        <label style="margin-top:10px;">Fotoğraf Seç</label><input type="file" class="form-control" onchange="storeTempImage(this)">
+                        <button class="submit-btn" onclick="addDynamicItem('squad')">Oyuncuyu Ekle</button>
+                    </div>
+                    <div id="admin-list-squad"></div>
+                </div>
+
+                <!-- 6. FORMALAR -->
+                <div id="tab-kits" class="admin-tab-content">
+                    <h2 style="margin-bottom:20px;">Forma Ekle</h2>
+                    <div class="form-group">
+                        <label>Forma Adı (Örn: İç Saha)</label><input type="text" id="kits-name" class="form-control">
+                        <label style="margin-top:10px;">Forma Görseli</label><input type="file" class="form-control" onchange="storeTempImage(this)">
+                        <button class="submit-btn" onclick="addDynamicItem('kits')">Formayı Ekle</button>
+                    </div>
+                    <div id="admin-list-kits"></div>
+                </div>
+
+                <!-- 7. TRANSFERLER -->
+                <div id="tab-transfers" class="admin-tab-content">
+                    <h2 style="margin-bottom:20px;">Transfer Ekle</h2>
+                    <div class="form-group">
+                        <label>Oyuncu Adı</label><input type="text" id="transfers-name" class="form-control">
+                        <label style="margin-top:10px;">Durum</label>
+                        <select id="transfers-role" class="form-control"><option>Geldi</option><option>Gitti</option></select>
+                        <label style="margin-top:10px;">Fotoğraf Seç</label><input type="file" class="form-control" onchange="storeTempImage(this)">
+                        <button class="submit-btn" onclick="addDynamicItem('transfers')">Transferi Ekle</button>
+                    </div>
+                    <div id="admin-list-transfers"></div>
+                </div>
+
+                <!-- 8. FİKSTÜR -->
+                <div id="tab-fixture" class="admin-tab-content">
+                    <h2 style="margin-bottom:20px;">Maç Ekle</h2>
+                    <div class="form-group" style="display:flex; gap:10px; align-items:center;">
+                        <input type="text" id="fix-home" placeholder="Ev Sahibi" class="form-control">
+                        <input type="text" id="fix-score" placeholder="Skor (Örn: 2-1)" class="form-control" style="width:100px; text-align:center;">
+                        <input type="text" id="fix-away" placeholder="Deplasman" class="form-control">
+                    </div>
+                    <button class="submit-btn" onclick="addFixture()">Maçı Ekle</button>
+                    <div id="admin-list-fixture" style="margin-top:20px;"></div>
+                </div>
+
+                <!-- 9. MEDYA / GALERİ -->
+                <div id="tab-gallery" class="admin-tab-content">
+                    <h2 style="margin-bottom:20px;">Medya Yükle</h2>
+                    <div class="form-group">
+                        <label>YouTube Linki (veya GitHub Resim Linki)</label>
+                        <input type="text" id="media-url" class="form-control" placeholder="https://youtube.com/... veya https://raw.github...">
+                        <button class="submit-btn" onclick="addMedia()">Galeriye Ekle</button>
+                    </div>
+                    <div id="admin-list-gallery"></div>
+                </div>
+
+                <!-- 10. TEMA VE GÜVENLİK -->
+                <div id="tab-theme" class="admin-tab-content">
+                    <h2 style="margin-bottom:20px;">Tema & Güvenlik</h2>
+                    <div class="form-group">
+                        <label>Sitenin Renk Teması</label>
+                        <select id="theme-select" class="form-control">
+                            <option value="aberEfsanesi">Aber Efsanesi (Siyah/Beyaz/Kırmızı)</option>
+                            <option value="karanlik">Tam Karanlık Mod</option>
+                            <option value="aydinlik">Aydınlık Mod</option>
+                        </select>
+                    </div>
+                    <button class="submit-btn" onclick="saveTheme()">Temayı Uygula</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- VERİ YAPISI ---
+        let activeData = JSON.parse(localStorage.getItem('aber_data_v20')) || {
+            logoUrl: "", heroBgUrl: "", slogan: "Sloganımız olan 'İNANÇ KANATLANDIRIR' ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz.",
+            styles: { logoSize: "80px", align: "center" }, theme: "aberEfsanesi",
+            board: [], staff: [], squad: [], kits: [], transfers: [], fixture: [], gallery: []
+        };
+        let tempImageBase64 = "";
+
+        // --- PANEL KONTROLLERİ ---
+        function loginAdmin() { document.getElementById('adminModal').style.display = 'flex'; loadPanelData(); renderAllAdminLists(); }
+        function toggleAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
+        
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.admin-sidebar-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        // --- RESİM YÜKLEME VE SIKIŞTIRMA MOTURU ---
+        function uploadImage(input, maxWidth, targetKey) {
+            const file = input.files[0]; if(!file) return;
             const reader = new FileReader();
-            reader.onload = function(event) {
+            reader.onload = function(e) {
                 const img = new Image();
                 img.onload = function() {
                     const canvas = document.createElement('canvas');
-                    let width = img.width;
-                    let height = img.height;
+                    let w = img.width, h = img.height;
+                    if(w > maxWidth) { h = Math.round(h * maxWidth / w); w = maxWidth; }
+                    canvas.width = w; canvas.height = h;
+                    canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                    activeData[targetKey] = canvas.toDataURL(file.type === 'image/png' ? 'image/png' : 'image/jpeg', 0.85);
+                    saveData(); renderSite(); alert("Görsel Güncellendi!");
+                }; img.src = e.target.result;
+            }; reader.readAsDataURL(file);
+        }
 
-                    if (width > height) {
-                        if (width > maxWidth) { height = Math.round((height * maxWidth) / width); width = maxWidth; }
-                    } else {
-                        if (height > maxHeight) { width = Math.round((width * maxHeight) / height); height = maxHeight; }
-                    }
-
-                    canvas.width = width; canvas.height = height;
-                    const ctx = canvas.getContext('2d');
-                    ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
-                    
-                    ctx.clearRect(0,0,width,height);
-                    ctx.drawImage(img, 0, 0, width, height);
-
-                    let format = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
-                    const base64Data = canvas.toDataURL(format, 0.85);
-                    
-                    if (targetField) {
-                        activeData[targetField] = base64Data;
-                        const textInputId = targetField === 'logoUrl' ? 'edit-logo-url' : (targetField === 'heroBgUrl' ? 'edit-hero-bg-url' : '');
-                        if (textInputId && document.getElementById(textInputId)) { document.getElementById(textInputId).value = "[Cihazdan Yüklendi]"; }
-                    }
-                    if (callback) callback(base64Data);
-                    if (inputElement.previousElementSibling && inputElement.previousElementSibling.tagName === "LABEL") {
-                        inputElement.previousElementSibling.innerText = originalText;
-                    }
-                    alert("Görsel başarıyla web sitene eklendi!");
-                };
-                img.src = event.target.result;
-            };
+        function storeTempImage(input) {
+            const file = input.files[0]; if(!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) { tempImageBase64 = e.target.result; }; // Listeler için hafif sıkıştırmasız
             reader.readAsDataURL(file);
         }
 
-        function clearImage(targetField) {
-            if (targetField === 'logoUrl') { activeData.logoUrl = ""; document.getElementById('edit-logo-url').value = ""; document.getElementById('upload-logo-file').value = ""; } 
-            else if (targetField === 'heroBgUrl') { activeData.heroBgUrl = defaultData.heroBgUrl; document.getElementById('edit-hero-bg-url').value = ""; document.getElementById('upload-hero-bg-file').value = ""; }
-            saveAllData(); renderAllSections(); alert("Görsel sıfırlandı!");
-        }
-
-        function convertDriveUrl(url) {
-            if (!url || typeof url !== 'string') return '';
-            let rawUrl = url.trim();
-            if (rawUrl.startsWith('data:image')) return rawUrl;
-            let fileId = '';
-            if (rawUrl.includes('drive.google.com/file/d/')) fileId = rawUrl.split('/file/d/')[1].split('/')[0].split('?')[0];
-            else if (rawUrl.includes('drive.google.com/open?id=')) fileId = rawUrl.split('?id=')[1].split('&')[0];
-            else if (rawUrl.includes('drive.google.com/uc?id=')) fileId = rawUrl.split('?id=')[1].split('&')[0];
-            if (fileId) return `https://drive.google.com/thumbnail?id=${fileId}&sz=w2000`;
-            return rawUrl;
-        }
-
-        let defaultData = {
-            adminPassword: "admin",
-            currentTheme: "aberEfsanesi",
-            currentLayout: "asymmetric",
-            logoUrl: "",
-            heroBgUrl: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1400", 
-            headerTitle: "KARAMAN ABER SANAT GÜCÜ",
-            hero: { title: "İNANÇ", slogan: "Sloganımız olan 'İNANÇ KANATLANDIRIR' ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz." },
-            contact: { phone: "0 536 893 94 15", email1: "info@abersanatsk.org", email2: "ridvan@abersanatsk.org", address: "Cedit Mah. 319. Sk. No:2/A <br>Merkez / Karaman" },
-            styles: { fontSport: "'Space Grotesk', sans-serif", fontMain: "'Syne', sans-serif", heroTitleSize: "8.5rem", sectionTitleSize: "3rem", logoSize: "80px", textAlign: "center" },
-            players: [], board: [], staff: [], kits: [], transfers: [], fixtures: [], gallery: [], posts: [], customPages: []
-        };
+        // --- AYARLARI KAYDETME ---
+        function saveData() { localStorage.setItem('aber_data_v20', JSON.stringify(activeData)); }
         
-        let activeData = {};
-
-        function loadAllData() {
-            try {
-                const saved = localStorage.getItem('aber_sk_premium_data_v18');
-                activeData = JSON.parse(JSON.stringify(defaultData));
-                if (saved) {
-                    const parsed = JSON.parse(saved);
-                    for (let key in parsed) {
-                        if (parsed[key] !== null) {
-                            if (typeof parsed[key] === 'object' && !Array.isArray(parsed[key])) activeData[key] = Object.assign({}, activeData[key], parsed[key]);
-                            else activeData[key] = parsed[key];
-                        }
-                    }
-                }
-                const arrayKeys = ['players', 'board', 'staff', 'kits', 'transfers', 'fixtures', 'gallery', 'posts', 'customPages'];
-                arrayKeys.forEach(key => { if (!Array.isArray(activeData[key])) activeData[key] = []; });
-                applySavedTheme(); renderAllSections();
-            } catch (e) { activeData = JSON.parse(JSON.stringify(defaultData)); saveAllData(); renderAllSections(); }
-        }
-
-        function saveAllData() { localStorage.setItem('aber_sk_premium_data_v18', JSON.stringify(activeData)); }
-
-        function applySavedTheme() {
-            const selectedTheme = activeData.currentTheme || "aberEfsanesi";
-            const selectedLayout = activeData.currentLayout || "asymmetric";
-            const s = activeData.styles || defaultData.styles;
-            const customStyleVars = `
-                :root {
-                    --font-sport: ${s.fontSport || "'Space Grotesk', sans-serif"};
-                    --font-main: ${s.fontMain || "'Syne', sans-serif"};
-                    --hero-title-size: ${s.heroTitleSize || "8.5rem"};
-                    --section-title-size: ${s.sectionTitleSize || "3rem"};
-                    --logo-size: ${s.logoSize || "80px"};
-                    --global-text-align: ${s.textAlign || "center"};
-                }
-            `;
-            const cssContent = customStyleVars + "\n" + themes[selectedTheme] + "\n" + layouts[selectedLayout];
-            document.getElementById('theme-styles').innerHTML = cssContent;
-            document.getElementById('theme-select').value = selectedTheme;
-            document.getElementById('layout-select').value = selectedLayout;
-        }
-
-        function renderAllSections() {
-            const heroData = activeData.hero || defaultData.hero;
-            const contactData = activeData.contact || defaultData.contact;
-
-            document.getElementById('header-club-title').innerText = activeData.headerTitle || defaultData.headerTitle;
-            document.getElementById('footer-logo-text').innerText = activeData.headerTitle || defaultData.headerTitle;
-
-            const headerLogoImg = document.getElementById('header-logo-img');
-            const headerLogoWrapper = document.getElementById('header-logo-wrapper');
-            if (activeData.logoUrl && activeData.logoUrl.trim() !== "") {
-                headerLogoImg.src = convertDriveUrl(activeData.logoUrl);
-                headerLogoWrapper.style.display = "flex";
-            } else { headerLogoWrapper.style.display = "none"; }
-
-            const heroBgOverlay = document.getElementById('hero-bg-overlay');
-            heroBgOverlay.style.backgroundImage = `url('${convertDriveUrl(activeData.heroBgUrl) || defaultData.heroBgUrl}')`;
-            
-            document.getElementById('hero-title-text').innerHTML = (heroData.title || defaultData.hero.title).replace('\n', '<br>');
-            document.getElementById('hero-slogan-text').innerText = heroData.slogan || defaultData.hero.slogan;
-            
-            document.getElementById('club-phone-link').innerText = contactData.phone || defaultData.contact.phone;
-            document.getElementById('club-email-1').innerText = contactData.email1 || defaultData.contact.email1;
-            document.getElementById('club-email-2').innerText = contactData.email2 || defaultData.contact.email2;
-            document.getElementById('club-address-text').innerHTML = contactData.address || defaultData.contact.address;
-
-            renderGallerySection();
-        }
-
-        // --- YOUTUBE VE WEB RESİM (GITHUB) FONKSİYONLARI ---
-        function extractYoutubeId(url) {
-            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-            const match = url.match(regExp);
-            return (match && match[2].length === 11) ? match[2] : null;
-        }
-
-        function addYoutubeVideo() {
-            const url = document.getElementById('youtube-link-input').value;
-            const vid = extractYoutubeId(url);
-            if(vid) {
-                activeData.gallery.push({ id: Date.now(), type: 'youtube', url: `https://www.youtube.com/embed/${vid}` });
-                saveAllData(); renderAllSections(); renderAdminGallery();
-                document.getElementById('youtube-link-input').value = '';
-                alert("YouTube videosu galeriye eklendi!");
-            } else { alert('Geçersiz YouTube Linki!'); }
-        }
-
-        function addWebImage() {
-            const url = document.getElementById('github-link-input').value;
-            if(url.startsWith('http')) {
-                activeData.gallery.push({ id: Date.now(), type: 'image', url: url });
-                saveAllData(); renderAllSections(); renderAdminGallery();
-                document.getElementById('github-link-input').value = '';
-                alert("Resim bağlantısı galeriye eklendi!");
-            } else { alert('Geçerli bir web bağlantısı (URL) girin!'); }
-        }
-
-        function renderGallerySection() {
-            const container = document.getElementById('gallery-container');
-            container.innerHTML = '';
-            (activeData.gallery || []).forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'gallery-item';
-                if(item.type === 'youtube') {
-                    div.innerHTML = `<iframe src="${item.url}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-                } else {
-                    div.innerHTML = `<img src="${item.url}" alt="Kulüp Medyası">`;
-                }
-                container.appendChild(div);
-            });
-        }
-
-        function renderAdminGallery() {
-            const container = document.getElementById('admin-gallery-list');
-            container.innerHTML = '';
-            (activeData.gallery || []).forEach((item, index) => {
-                const div = document.createElement('div');
-                div.style.cssText = "background: #222; padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #444;";
-                const title = item.type === 'youtube' ? 'YouTube Videosu' : 'Web/GitHub Resmi';
-                div.innerHTML = `
-                    <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 80%;">
-                        <strong style="color:var(--accent-color);">${title}:</strong> <span style="font-size:0.8rem;">${item.url}</span>
-                    </div>
-                    <button class="admin-btn-delete" onclick="deleteGalleryItem(${index})">Sil</button>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        function deleteGalleryItem(index) {
-            activeData.gallery.splice(index, 1);
-            saveAllData(); renderAllSections(); renderAdminGallery();
-        }
-
-
-        function loginAdmin() { const pw = prompt("Admin Şifresi:"); if(pw === activeData.adminPassword || pw === "admin") { toggleAdminModal(); switchTab('settings'); } else if (pw !== null) alert("Şifre Hatalı!"); }
-        function toggleAdminModal() { const m = document.getElementById('adminModal'); m.style.display = (m.style.display === 'flex') ? 'none' : 'flex'; }
+        function saveGeneralSettings() { activeData.slogan = document.getElementById('set-slogan').value; saveData(); renderSite(); alert("Kaydedildi!"); }
         
-        function switchTab(name) {
-            document.querySelectorAll('.admin-tab-content').forEach(e => e.classList.remove('active'));
-            document.querySelectorAll('.admin-sidebar-btn').forEach(e => e.classList.remove('active'));
-            const btnMap = { settings: 'tabSetBtn', style: 'tabStyleBtn', security: 'tabSecBtn', gallery: 'tabGalBtn' };
-            if(document.getElementById('tab' + name.charAt(0).toUpperCase() + name.slice(1))) document.getElementById('tab' + name.charAt(0).toUpperCase() + name.slice(1)).classList.add('active');
-            if(btnMap[name]) document.getElementById(btnMap[name]).classList.add('active');
-            
-            if(name === 'settings') loadSettingsToAdminForm(); 
-            else if(name === 'style') loadStyleToAdminForm();
-            else if(name === 'gallery') renderAdminGallery();
-        }
-
-        function loadSettingsToAdminForm() {
-            const heroData = activeData.hero || defaultData.hero; const contactData = activeData.contact || defaultData.contact;
-            document.getElementById('edit-logo-url').value = activeData.logoUrl || ''; document.getElementById('edit-hero-bg-url').value = activeData.heroBgUrl || '';
-            document.getElementById('edit-header-title').value = activeData.headerTitle || ''; document.getElementById('edit-hero-title').value = heroData.title || '';
-            document.getElementById('edit-hero-slogan').value = heroData.slogan || ''; document.getElementById('edit-phone').value = contactData.phone || '';
-            document.getElementById('edit-email1').value = contactData.email1 || ''; document.getElementById('edit-email2').value = contactData.email2 || '';
-            document.getElementById('edit-address').value = (contactData.address || '').replace(/<br\s*\/?>/gi, '\n');
-        }
-
-        function saveSettings() {
-            const urlLogo = document.getElementById('edit-logo-url').value.trim(); if (urlLogo !== "[Cihazdan Yüklendi]" && urlLogo !== "") activeData.logoUrl = convertDriveUrl(urlLogo);
-            const urlBg = document.getElementById('edit-hero-bg-url').value.trim(); if (urlBg !== "[Cihazdan Yüklendi]" && urlBg !== "") activeData.heroBgUrl = convertDriveUrl(urlBg);
-            activeData.headerTitle = document.getElementById('edit-header-title').value.trim();
-            if(!activeData.hero) activeData.hero = {}; activeData.hero.title = document.getElementById('edit-hero-title').value; activeData.hero.slogan = document.getElementById('edit-hero-slogan').value;
-            if(!activeData.contact) activeData.contact = {}; activeData.contact.phone = document.getElementById('edit-phone').value;
-            activeData.contact.email1 = document.getElementById('edit-email1').value; activeData.contact.email2 = document.getElementById('edit-email2').value;
-            activeData.contact.address = document.getElementById('edit-address').value.replace(/\n/g, '<br>');
-            saveAllData(); renderAllSections(); alert("Ayarlar Kaydedildi!");
-        }
-
-        function loadStyleToAdminForm() {
-            const s = activeData.styles || defaultData.styles;
-            document.getElementById('style-font-sport').value = s.fontSport || "'Space Grotesk', sans-serif";
-            document.getElementById('style-font-main').value = s.fontMain || "'Syne', sans-serif";
-            document.getElementById('style-hero-size').value = s.heroTitleSize || "8.5rem";
-            
-            document.getElementById('style-text-align').value = s.textAlign || "center";
-            const currentSize = s.logoSize ? parseInt(s.logoSize) : 80;
-            document.getElementById('style-logo-size').value = currentSize;
-            document.getElementById('logo-size-preview').innerText = currentSize;
-        }
-
-        function saveTypographyStyles() {
-            if(!activeData.styles) activeData.styles = {};
-            activeData.styles.fontSport = document.getElementById('style-font-sport').value;
-            activeData.styles.fontMain = document.getElementById('style-font-main').value;
-            activeData.styles.heroTitleSize = document.getElementById('style-hero-size').value;
-            
-            activeData.styles.textAlign = document.getElementById('style-text-align').value;
+        function saveStyleSettings() { 
             activeData.styles.logoSize = document.getElementById('style-logo-size').value + 'px';
+            activeData.styles.align = document.getElementById('style-align').value;
+            saveData(); applyStyles(); alert("Tasarım Uygulandı!");
+        }
+        
+        function saveTheme() { activeData.theme = document.getElementById('theme-select').value; saveData(); applyTheme(); alert("Tema Uygulandı!"); }
+
+        function loadPanelData() {
+            document.getElementById('set-slogan').value = activeData.slogan;
+            document.getElementById('style-logo-size').value = parseInt(activeData.styles.logoSize);
+            document.getElementById('style-align').value = activeData.styles.align;
+            document.getElementById('theme-select').value = activeData.theme;
+        }
+
+        // --- DİNAMİK İÇERİK EKLEME (CRUD) ---
+        function addDynamicItem(type) {
+            const name = document.getElementById(type + '-name').value;
+            const roleEl = document.getElementById(type + '-role');
+            const role = roleEl ? roleEl.value : '';
+            if(!name) return alert("İsim/Ad alanı zorunludur!");
             
-            saveAllData(); applySavedTheme(); renderAllSections(); alert("Yerleşim ve Stiller uygulandı!");
+            activeData[type].push({ id: Date.now(), name, role, img: tempImageBase64 || 'https://via.placeholder.com/300x300?text=Gorsel+Yok' });
+            tempImageBase64 = ""; // sıfırla
+            document.getElementById(type + '-name').value = ''; 
+            
+            saveData(); renderAllAdminLists(); renderSite(); alert("Eklendi!");
         }
 
-        function previewTheme() {
-            const selTheme = document.getElementById('theme-select').value;
-            const selLayout = document.getElementById('layout-select').value;
-            const s = activeData.styles || defaultData.styles;
-            document.getElementById('theme-styles').innerHTML = `
-                :root {
-                    --font-sport: ${s.fontSport || "'Space Grotesk', sans-serif"};
-                    --font-main: ${s.fontMain || "'Syne', sans-serif"};
-                    --hero-title-size: ${s.heroTitleSize || "8.5rem"};
-                    --section-title-size: ${s.sectionTitleSize || "3rem"};
-                    --logo-size: ${s.logoSize || "80px"};
-                    --global-text-align: ${s.textAlign || "center"};
-                }
-            ` + "\n" + themes[selTheme] + "\n" + layouts[selLayout];
+        function addFixture() {
+            const home = document.getElementById('fix-home').value;
+            const score = document.getElementById('fix-score').value;
+            const away = document.getElementById('fix-away').value;
+            if(!home || !away) return;
+            activeData.fixture.push({ home, score: score || 'v', away });
+            document.getElementById('fix-home').value = ''; document.getElementById('fix-score').value = ''; document.getElementById('fix-away').value = '';
+            saveData(); renderAllAdminLists(); renderSite();
         }
 
-        function saveTheme() { activeData.currentTheme = document.getElementById('theme-select').value; activeData.currentLayout = document.getElementById('layout-select').value; saveAllData(); renderAllSections(); alert("Tema Kaydedildi!"); }
-        function changeAdminPassword() {
-            const cur = document.getElementById('current-password-input').value; const nw = document.getElementById('new-password-input').value;
-            if(cur !== activeData.adminPassword && cur !== "admin") return alert("Mevcut şifre yanlış!");
-            activeData.adminPassword = nw; saveAllData(); alert("Şifre güncellendi!");
+        function addMedia() {
+            const url = document.getElementById('media-url').value;
+            if(!url) return;
+            const isYoutube = url.includes('youtube.com') || url.includes('youtu.be');
+            let finalUrl = url;
+            if(isYoutube) {
+                const match = url.match(/^.*(youtu.be\/|v\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/);
+                if(match && match[2].length === 11) finalUrl = `https://www.youtube.com/embed/${match[2]}`;
+            }
+            activeData.gallery.push({ url: finalUrl, isYoutube });
+            document.getElementById('media-url').value = '';
+            saveData(); renderAllAdminLists(); renderSite();
         }
 
-        // --- RENK PALETLERİ ---
-        const themes = {
-            aberEfsanesi: `:root { --bg-main: #070707; --bg-card: #111111; --text-main: #ffffff; --text-muted: #a1a1aa; --accent-color: #e60000; --border-color: rgba(255, 255, 255, 0.08); --header-bg: rgba(7, 7, 7, 0.9); }`,
-            monokrom: `:root { --bg-main: #000000; --bg-card: #0a0a0a; --text-main: #ffffff; --text-muted: #a3a3a3; --accent-color: #ffffff; --border-color: rgba(255, 255, 255, 0.15); --header-bg: rgba(0, 0, 0, 0.9); }`,
-            karanlik: `:root { --bg-main: #020202; --bg-card: #080808; --text-main: #e5e5e5; --text-muted: #737373; --accent-color: #555555; --border-color: rgba(255, 255, 255, 0.04); --header-bg: rgba(2, 2, 2, 0.9); }`,
-            aydinlik: `:root { --bg-main: #ffffff; --bg-card: #f8fafc; --text-main: #09090b; --text-muted: #52525b; --accent-color: #000000; --border-color: rgba(0, 0, 0, 0.1); --header-bg: rgba(255, 255, 255, 0.95); }`
-        }; 
+        function deleteItem(type, index) { activeData[type].splice(index, 1); saveData(); renderAllAdminLists(); renderSite(); }
 
-        const layouts = {
-            asymmetric: `:root { --card-radius: 24px; --border-style: 1px solid var(--border-color); --card-align: left; }`,
-            minimalist: `:root { --card-radius: 0px; --border-style: none; --card-align: center; } .board-card, .player-card, .transfer-card, .fixture-card { box-shadow: none !important; background: transparent !important; border-bottom: 1px solid var(--border-color); }`,
-            aggressive: `:root { --card-radius: 0px; --border-style: 2px solid var(--accent-color); --card-align: left; } .board-card, .player-card { box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.9) !important; }`
-        };
+        // --- RENDER (GÖRÜNTÜLEME) FONKSİYONLARI ---
+        function renderAllAdminLists() {
+            ['board', 'staff', 'squad', 'kits', 'transfers'].forEach(type => {
+                const box = document.getElementById('admin-list-' + type); box.innerHTML = '';
+                activeData[type].forEach((item, i) => {
+                    box.innerHTML += `<div class="admin-list-item"><span>${item.name} (${item.role})</span><button class="btn-del" onclick="deleteItem('${type}', ${i})">Sil</button></div>`;
+                });
+            });
+            
+            const fixBox = document.getElementById('admin-list-fixture'); fixBox.innerHTML = '';
+            activeData.fixture.forEach((item, i) => {
+                fixBox.innerHTML += `<div class="admin-list-item"><span>${item.home} ${item.score} ${item.away}</span><button class="btn-del" onclick="deleteItem('fixture', ${i})">Sil</button></div>`;
+            });
 
-        window.onload = loadAllData;
+            const galBox = document.getElementById('admin-list-gallery'); galBox.innerHTML = '';
+            activeData.gallery.forEach((item, i) => {
+                galBox.innerHTML += `<div class="admin-list-item"><span>${item.isYoutube ? 'Video' : 'Resim'}: ${item.url.substring(0,30)}...</span><button class="btn-del" onclick="deleteItem('gallery', ${i})">Sil</button></div>`;
+            });
+        }
+
+        function renderSite() {
+            if(activeData.logoUrl) { document.getElementById('header-logo-img').src = activeData.logoUrl; document.getElementById('header-logo-wrapper').style.display = 'flex'; }
+            if(activeData.heroBgUrl) document.getElementById('hero-bg-overlay').style.backgroundImage = `url(${activeData.heroBgUrl})`;
+            document.getElementById('hero-slogan-text').innerText = activeData.slogan;
+
+            // Kart Şablonu
+            const buildCard = (i) => `<div class="card"><div class="card-img-box"><img src="${i.img}"></div><div class="card-content"><div class="card-title">${i.name}</div><div class="card-subtitle">${i.role}</div></div></div>`;
+            
+            document.getElementById('front-board').innerHTML = activeData.board.map(buildCard).join('');
+            document.getElementById('front-staff').innerHTML = activeData.staff.map(buildCard).join('');
+            document.getElementById('front-squad').innerHTML = activeData.squad.map(buildCard).join('');
+            document.getElementById('front-kits').innerHTML = activeData.kits.map(i => `<div class="card"><div class="card-img-box" style="height:500px;"><img src="${i.img}"></div><div class="card-content"><div class="card-title">${i.name}</div></div></div>`).join('');
+            document.getElementById('front-transfers').innerHTML = activeData.transfers.map(buildCard).join('');
+            
+            document.getElementById('front-fixture').innerHTML = activeData.fixture.map(i => `
+                <div class="fixture-item">
+                    <div class="fix-team home">${i.home}</div>
+                    <div class="fix-score">${i.score}</div>
+                    <div class="fix-team away">${i.away}</div>
+                </div>
+            `).join('');
+
+            document.getElementById('front-gallery').innerHTML = activeData.gallery.map(i => `
+                <div class="card" style="height:250px;">
+                    ${i.isYoutube ? `<iframe width="100%" height="100%" src="${i.url}" frameborder="0" allowfullscreen></iframe>` : `<img src="${i.url}" style="width:100%;height:100%;object-fit:cover;">`}
+                </div>
+            `).join('');
+        }
+
+        function applyStyles() {
+            document.documentElement.style.setProperty('--logo-size', activeData.styles.logoSize);
+            document.documentElement.style.setProperty('--global-text-align', activeData.styles.align);
+            document.documentElement.style.setProperty('--card-align', activeData.styles.align);
+        }
+
+        function applyTheme() {
+            const t = activeData.theme;
+            if(t === 'aberEfsanesi') { document.documentElement.style.setProperty('--bg-main', '#070707'); document.documentElement.style.setProperty('--bg-card', '#111111'); document.documentElement.style.setProperty('--text-main', '#ffffff'); document.documentElement.style.setProperty('--accent-color', '#e60000'); }
+            if(t === 'karanlik') { document.documentElement.style.setProperty('--bg-main', '#000000'); document.documentElement.style.setProperty('--bg-card', '#0a0a0a'); document.documentElement.style.setProperty('--text-main', '#e0e0e0'); document.documentElement.style.setProperty('--accent-color', '#555555'); }
+            if(t === 'aydinlik') { document.documentElement.style.setProperty('--bg-main', '#f4f4f4'); document.documentElement.style.setProperty('--bg-card', '#ffffff'); document.documentElement.style.setProperty('--text-main', '#111111'); document.documentElement.style.setProperty('--accent-color', '#000000'); }
+        }
+
+        // Başlangıç
+        applyStyles(); applyTheme(); renderSite();
     </script>
 </body>
 </html>
