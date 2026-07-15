@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Syne:wght@500;700;800&family=Inter:wght@400;700&family=Montserrat:wght@700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     
-    <!-- Dinamik Renk, Font, Boyut ve LOGO Ayarları -->
+    <!-- DİNAMİK LOGO BOYUTU VE ALAN AYARLARI -->
     <style id="theme-styles">
         :root {
             --bg-white: #04060a; /* Uzay Karanlığı */
@@ -21,12 +21,8 @@
             --premium-gray: rgba(255, 255, 255, 0.02);
             --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
             
-            /* ÖZELLEŞTİRİLEBİLİR LOGO PARAMETRELERİ */
-            --logo-url: url('https://placehold.co/150x150/ff2a4b/ffffff?text=LOGO'); /* Buraya logonun linkini koyun */
-            --logo-size: 60px;       /* Logonun genişliği ve yüksekliği */
-            --logo-radius: 50%;      /* Yuvarlaklık derecesi (Kare için 0px, Yuvarlak için 50%) */
-            --logo-border: 2px solid var(--accent-color); /* Logo kenar çizgisi */
-            --logo-bg: #020305;      /* Logo arkasındaki boşluğun rengi */
+            /* BURADAN LOGO BOYUTUNU AYARLAYABİLİRSİNİZ */
+            --logo-size: 60px; 
 
             /* Özelleştirilebilir Font ve Boyut Parametreleri */
             --font-main: 'Syne', sans-serif;
@@ -44,16 +40,15 @@
     <style>
         /* --- GÖRSEL OTOMATİK NETLEŞTİRME VE İYİLEŞTİRME FİLTRELERİ (ULTRA SHARP) --- */
         img, .board-img, .player-img-box img, .kit-img-box img, .transfer-img {
-            image-rendering: -webkit-optimize-contrast !important; /* Safari/Chrome keskinleştirme */
-            image-rendering: crisp-edges !important;               /* Firefox keskinleştirme */
+            image-rendering: -webkit-optimize-contrast !important;
+            image-rendering: crisp-edges !important;
             -webkit-font-smoothing: antialiased;
             backface-visibility: hidden;
-            transform: translateZ(0); /* Donanım hızlandırmayı tetikler */
-            filter: contrast(1.02) saturate(1.04) brightness(0.98); /* Dinamik renk kalibrasyonu */
+            transform: translateZ(0);
+            filter: contrast(1.02) saturate(1.04) brightness(0.98);
             transition: filter 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* Görsellerin üzerine gelindiğinde kontrastı keskinleştiren efekt */
         img:hover, .player-card:hover .player-img-box img, .kit-card:hover .kit-img-box img {
             filter: contrast(1.08) saturate(1.08) brightness(1.02) !important;
         }
@@ -110,7 +105,7 @@
             filter: blur(120px);
         }
 
-        /* --- SIRA DIŞI HEADER --- */
+        /* --- HEADER --- */
         header {
             position: fixed;
             top: 0;
@@ -138,26 +133,11 @@
             gap: 15px;
         }
 
-        /* CSS Değişkenleri ile Kontrol Edilen Yeni Esnek Logo Tasarımı */
-        .logo-img-wrapper {
+        /* Orijinal Logo Alanına Sadece Boyut Değişkeni Entegre Edildi */
+        .logo-img {
             width: var(--logo-size);
             height: var(--logo-size);
-            border-radius: var(--logo-radius);
-            overflow: hidden;
-            display: block; /* Her durumda görünür kılındı */
-            border: var(--logo-border);
-            background-color: var(--logo-bg);
-            background-image: var(--logo-url);
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        /* Hover durumunda logonun hafifçe büyümesi ve parlaması efekti */
-        .logo-container:hover .logo-img-wrapper {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(255, 42, 75, 0.4);
+            object-fit: contain;
         }
 
         .logo-text-top {
@@ -219,7 +199,7 @@
             width: 100%;
         }
 
-        /* --- HERO: BOZULMAYAN ARKA PLAN --- */
+        /* --- HERO --- */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -238,7 +218,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-size: cover !important; /* Bozulmaları tamamen engelleyen sabitleyici */
+            background-size: cover !important;
             background-position: center center !important;
             background-repeat: no-repeat !important;
             filter: brightness(0.25) contrast(1.1);
@@ -280,7 +260,6 @@
             100% { transform: translateY(-10px) rotate(0.5deg); }
         }
 
-        /* Cam Eriyik Slogan Alanı */
         .hero-slogan-monument {
             background: rgba(255, 255, 255, 0.01);
             backdrop-filter: blur(40px);
@@ -342,7 +321,7 @@
             font-family: var(--font-sport);
         }
 
-        /* --- ASİMETRİK ULTRA BOARDS --- */
+        /* --- BOARDS --- */
         .board-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -401,7 +380,7 @@
             letter-spacing: 3px;
         }
 
-        /* --- KADROMUZ --- */
+        /* --- KADRO --- */
         .position-group-title {
             font-family: var(--font-sport);
             font-size: 1.4rem;
@@ -494,7 +473,7 @@
             color: #ffffff;
         }
 
-        /* --- FORMALARIMIZ --- */
+        /* --- FORMALAR --- */
         .kits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
@@ -804,7 +783,7 @@
             font-size: 1.2rem;
         }
 
-        /* --- PREMIUM ADMIN MODAL --- */
+        /* --- ADMIN MODAL --- */
         .admin-modal {
             display: none;
             position: fixed;
@@ -1040,8 +1019,8 @@
         <div class="container">
             <nav>
                 <a href="#" class="logo-container">
-                    <!-- Dinamik Logo Alanı -->
-                    <div class="logo-img-wrapper" id="header-logo-wrapper"></div>
+                    <!-- Orijinal <img> etiket yapısı korunarak CSS değişkenine bağlandı -->
+                    <img src="https://placehold.co/150x150/ff2a4b/ffffff?text=LOGO" alt="Logo" class="logo-img" id="header-logo-img">
                     <div>
                         <div class="logo-text-top" id="header-club-title">KARAMAN ABER SANAT GÜCÜ</div>
                         <div class="logo-text-sub">SPOR KULÜBÜ</div>
@@ -1157,9 +1136,7 @@
                         <button type="submit" class="submit-btn">Gönder</button>
                     </form>
                 </div>
-                <div id="posts-container">
-                    <!-- Kullanıcı mesajları ve yorumlar dinamik olarak buraya gelecek -->
-                </div>
+                <div id="posts-container"></div>
             </div>
         </div>
     </section>
@@ -1225,35 +1202,29 @@
                 </div>
                 <div class="admin-tab-content" id="admin-tab-messages">
                     <h3 class="admin-section-heading">Gelen Mesajlar</h3>
-                    <div id="admin-messages-list">
-                        <!-- Yönetim paneli mesajları buraya gelecek -->
-                    </div>
+                    <div id="admin-messages-list"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- SİTE DİNAMİK YÖNETİMİ VE JAVASCRIPT KODLARI -->
+    <!-- SCRIPT ALANI -->
     <script>
-        // Admin Modal ve Tab geçişleri
         function toggleAdminModal(show) {
             const modal = document.getElementById('admin-modal');
             modal.style.display = show ? 'flex' : 'none';
         }
 
         function switchAdminTab(tabName) {
-            // Tab butonlarını güncelle
             const buttons = document.querySelectorAll('.admin-sidebar-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
 
-            // Tab içeriklerini güncelle
             const contents = document.querySelectorAll('.admin-tab-content');
             contents.forEach(content => content.classList.remove('active'));
             document.getElementById(`admin-tab-${tabName}`).classList.add('active');
         }
 
-        // Basit Form ve Mesaj Gönderme İşlemleri
         const contactForm = document.getElementById('contact-form');
         const postsContainer = document.getElementById('posts-container');
         const adminMessagesList = document.getElementById('admin-messages-list');
@@ -1281,7 +1252,6 @@
         });
 
         function updateMessagesUI() {
-            // Sitedeki Mesajlar Alanını Güncelle
             postsContainer.innerHTML = '';
             messages.forEach(msg => {
                 const postHTML = `
@@ -1293,7 +1263,6 @@
                 postsContainer.insertAdjacentHTML('beforeend', postHTML);
             });
 
-            // Admin Paneli Mesajlarını Güncelle
             adminMessagesList.innerHTML = '';
             messages.forEach(msg => {
                 const adminMsgHTML = `
