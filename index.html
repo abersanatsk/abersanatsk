@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karaman Aber Sanat Gücü Spor Kulübü</title>
-    <!-- Google Fonts: Space Grotesk, Syne, Inter, Montserrat, Rajdhani -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Syne:wght@500;700;800&family=Inter:wght@400;700&family=Montserrat:wght@700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     
-    <!-- Dinamik Renk, Font ve Boyut Ayarları İçin Style Alanı -->
     <style id="theme-styles">
         :root {
             --bg-white: #04060a; /* Uzay Karanlığı */
@@ -26,6 +24,7 @@
             --font-sport: 'Space Grotesk', sans-serif;
             --hero-title-size: 8.5rem;
             --section-title-size: 3rem;
+            --logo-size: 65px;
 
             /* Şablon Tarzı Değişkenleri */
             --card-radius: 24px;
@@ -131,21 +130,21 @@
             gap: 15px;
         }
 
-        /* Dinamik ve Bozulmayan Logo Görsel Alanı */
+        /* Dinamik ve Bozulmayan Logo Görsel Alanı (GÜNCELLENDİ) */
         .logo-img-wrapper {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            overflow: hidden;
+            width: var(--logo-size, 65px);
+            height: var(--logo-size, 65px);
             display: none; /* Logo URL eklenene kadar gizli kalır */
-            border: 2px solid var(--accent-color);
-            background: #020305;
+            transition: width 0.3s, height 0.3s;
+            align-items: center;
+            justify-content: center;
         }
 
         .logo-img-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: contain;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5));
         }
 
         .logo-text-top {
@@ -1023,7 +1022,6 @@
 </head>
 <body>
 
-    <!-- HEADER -->
     <header id="site-header">
         <div class="container">
             <nav>
@@ -1051,7 +1049,6 @@
         </div>
     </header>
 
-    <!-- HERO SECTION -->
     <section class="hero" id="home">
         <div class="hero-bg-canvas" id="hero-bg-overlay"></div>
         <div class="hero-content-wrapper">
@@ -1065,7 +1062,6 @@
         </div>
     </section>
 
-    <!-- YÖNETİM KURULU BÖLÜMÜ -->
     <section id="yonetim-kurulu">
         <div class="container">
             <h2 class="section-title">Yönetim <span>Kurulu</span></h2>
@@ -1073,7 +1069,6 @@
         </div>
     </section>
 
-    <!-- TEKNİK HEYET BÖLÜMÜ -->
     <section id="teknik-heyet">
         <div class="container">
             <h2 class="section-title">Teknik <span>Heyet</span></h2>
@@ -1081,7 +1076,6 @@
         </div>
     </section>
 
-    <!-- KADROMUZ BÖLÜMÜ -->
     <section id="kadro">
         <div class="container">
             <h2 class="section-title">Kulüp <span>Kadromuz</span></h2>
@@ -1092,7 +1086,6 @@
         </div>
     </section>
 
-    <!-- FORMALARIMIZ BÖLÜMÜ -->
     <section id="formalar">
         <div class="container">
             <h2 class="section-title">Kulüp <span>Formalarımız</span></h2>
@@ -1100,7 +1093,6 @@
         </div>
     </section>
 
-    <!-- TRANSFERLER BÖLÜMÜ -->
     <section id="transferler">
         <div class="container">
             <h2 class="section-title">Transfer <span>Gündemi</span></h2>
@@ -1108,7 +1100,6 @@
         </div>
     </section>
 
-    <!-- FİKSTÜR BÖLÜMÜ -->
     <section id="fikstur">
         <div class="container">
             <h2 class="section-title">Maç <span>Fikstürü</span></h2>
@@ -1116,7 +1107,6 @@
         </div>
     </section>
 
-    <!-- MEDYA GALERİSİ BÖLÜMÜ -->
     <section id="galeri">
         <div class="container">
             <h2 class="section-title">Kulüp <span>Medya & Galeri</span></h2>
@@ -1126,7 +1116,6 @@
 
     <div id="dynamic-pages-container"></div>
 
-    <!-- BİZE YAZIN BÖLÜMÜ -->
     <section id="bize-yazin">
         <div class="container">
             <h2 class="section-title">Bize <span>Yazın</span></h2>
@@ -1153,7 +1142,6 @@
         </div>
     </section>
 
-    <!-- İLETİŞİM BÖLÜMÜ -->
     <section id="iletisim" style="border-bottom: none;">
         <div class="container">
             <h2 class="section-title">Bize <span>Ulaşın</span></h2>
@@ -1180,7 +1168,6 @@
         </div>
     </section>
 
-    <!-- ADMIN PANEL MODAL -->
     <div class="admin-modal" id="adminModal">
         <div class="admin-content">
             <span class="close-admin" onclick="toggleAdminModal()">&times;</span>
@@ -1201,7 +1188,6 @@
             </div>
 
             <div class="admin-body">
-                <!-- ANALYTICS PANEL -->
                 <div class="analytics-container">
                     <div class="analytic-card">
                         <span>Günlük Giriş</span>
@@ -1213,18 +1199,22 @@
                     </div>
                 </div>
 
-                <!-- TAB: AYARLAR -->
                 <div id="tabSettings" class="admin-tab-content active">
                     <div class="admin-section-heading">GENEL AYARLAR</div>
                     
                     <div class="form-group" style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 2rem;">
-                        <label style="color: var(--accent-color); font-weight: 800;">KULÜP LOGOSU YÜKLE</label>
-                        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem;">Doğrudan cihazından yüksek çözünürlüklü şeffaf logo seç.</p>
+                        <label style="color: var(--accent-color); font-weight: 800;">KULÜP LOGOSU YÜKLE & AYARLA</label>
+                        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem;">Doğrudan cihazından yüksek çözünürlüklü şeffaf logo seç. Logonun sitedeki büyüklüğünü piksel cinsinden ayarlayabilirsin.</p>
                         <div style="display:flex; gap:10px; align-items:center;">
-                            <input type="file" id="upload-logo-file" accept="image/*" class="form-control" style="flex:1; padding: 0.8rem;" onchange="uploadImage(this, 300, 300, 'logoUrl')">
+                            <input type="file" id="upload-logo-file" accept="image/*" class="form-control" style="flex:1; padding: 0.8rem;" onchange="uploadImage(this, 500, 500, 'logoUrl')">
                             <button type="button" class="admin-btn-delete" onclick="clearImage('logoUrl')" style="height:50px;">Logoyu Kaldır</button>
                         </div>
                         <input type="text" id="edit-logo-url" class="form-control" placeholder="Veya internetten bir resim URL'si yapıştırın" style="margin-top:10px;">
+                        
+                        <div style="margin-top:15px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px;">
+                            <label style="color: #fff; font-size: 0.9rem;">Logo Boyutu (Piksel)</label>
+                            <input type="number" id="edit-logo-size" class="form-control" placeholder="Varsayılan: 65" min="30" max="250" style="margin-top:5px;">
+                        </div>
                     </div>
 
                     <div class="form-group" style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 2rem;">
@@ -1247,7 +1237,6 @@
                     <button type="button" class="submit-btn" onclick="saveSettings()">Ayarları Kaydet</button>
                 </div>
 
-                <!-- TAB: TİPOGRAFİ & STİL -->
                 <div id="tabStyle" class="admin-tab-content">
                     <div class="admin-section-heading">TİPOGRAFİ & STİL EDİTÖRÜ</div>
                     <div class="form-group">
@@ -1292,7 +1281,6 @@
                     <button type="button" class="submit-btn" onclick="saveTypographyStyles()">Yazı & Renk Stillerini Uygula</button>
                 </div>
 
-                <!-- TAB: YÖNETİM KURULU -->
                 <div id="tabBoard" class="admin-tab-content">
                     <div class="admin-section-heading">YÖNETİM KURULU</div>
                     <div class="blog-form-wrapper" style="box-shadow:none; margin-bottom:2rem;">
@@ -1308,7 +1296,6 @@
                     <table class="data-table"><thead><tr><th>Foto</th><th>Ad Soyad</th><th>Görevi</th><th>İşlem</th></tr></thead><tbody id="admin-board-list"></tbody></table>
                 </div>
 
-                <!-- TAB: TEKNİK HEYET -->
                 <div id="tabStaff" class="admin-tab-content">
                     <div class="admin-section-heading">TEKNİK HEYET YÖNETİMİ</div>
                     <div class="blog-form-wrapper" style="box-shadow:none; margin-bottom:2rem;">
@@ -1324,7 +1311,6 @@
                     <table class="data-table"><thead><tr><th>Foto</th><th>Ad Soyad</th><th>Görevi</th><th>İşlem</th></tr></thead><tbody id="admin-staff-list"></tbody></table>
                 </div>
 
-                <!-- TAB: OYUNCU KADROSU -->
                 <div id="tabSquad" class="admin-tab-content">
                     <div class="admin-section-heading">KADRO YÖNETİMİ</div>
                     <div class="blog-form-wrapper" style="box-shadow:none; margin-bottom:2rem;">
@@ -1344,7 +1330,6 @@
                     <table class="data-table"><thead><tr><th>Foto</th><th>Ad Soyad</th><th>Mevki</th><th>Özellikler</th><th>İşlem</th></tr></thead><tbody id="admin-squad-list"></tbody></table>
                 </div>
 
-                <!-- TAB: SEZON FORMALARI -->
                 <div id="tabKits" class="admin-tab-content">
                     <div class="admin-section-heading">YENİ SEZON FORMALARI YÖNETİMİ</div>
                     <div class="blog-form-wrapper" style="box-shadow:none; margin-bottom:2rem;">
@@ -1359,7 +1344,6 @@
                     <table class="data-table"><thead><tr><th>Forma Adı</th><th>Görsel Linki</th><th>İşlem</th></tr></thead><tbody id="admin-kits-list"></tbody></table>
                 </div>
 
-                <!-- TAB: TRANSFERLER -->
                 <div id="tabTransfers" class="admin-tab-content">
                     <div class="admin-section-heading">TRANSFER PANELİ</div>
                     <div class="blog-form-wrapper" style="box-shadow:none; margin-bottom:2rem;">
@@ -1376,7 +1360,6 @@
                     <table class="data-table"><thead><tr><th>Resim</th><th>Oyuncu</th><th>Kulüp</th><th>Durum</th><th>İşlem</th></tr></thead><tbody id="admin-transfer-list"></tbody></table>
                 </div>
 
-                <!-- TAB: FİKSTÜR -->
                 <div id="tabFixture" class="admin-tab-content">
                     <div class="admin-section-heading">MÜSABAKA FİKSTÜRÜ</div>
                     <div class="blog-form-wrapper" style="box-shadow:none; margin-bottom:2rem;">
@@ -1389,7 +1372,6 @@
                     <table class="data-table"><thead><tr><th>Ev Sahibi</th><th>Skor</th><th>Deplasman</th><th>Tarih</th><th>İşlem</th></tr></thead><tbody id="admin-fixture-list"></tbody></table>
                 </div>
 
-                <!-- TAB: GALERİ -->
                 <div id="tabGallery" class="admin-tab-content">
                     <div class="admin-section-heading">MEDYA LİSTESİ</div>
                     <div class="blog-form-wrapper" style="box-shadow:none; margin-bottom:2rem;">
@@ -1404,7 +1386,6 @@
                     <div id="admin-gallery-list"></div>
                 </div>
 
-                <!-- TAB: DİNAMİK SAYFALAR -->
                 <div id="tabPages" class="admin-tab-content">
                     <div class="admin-section-heading">ÖZEL DİNAMİK BÖLÜMLER</div>
                     <div class="blog-form-wrapper" style="box-shadow:none; margin-bottom:2rem;" id="page-form-container">
@@ -1424,13 +1405,11 @@
                     <table class="data-table"><thead><tr><th>Menü</th><th>Başlık</th><th>İşlem</th></tr></thead><tbody id="admin-pages-list"></tbody></table>
                 </div>
 
-                <!-- TAB: TARAFTAR MESAJLARI -->
                 <div id="tabMessages" class="admin-tab-content">
                     <div class="admin-section-heading">TARAFTAR YORUMLARI ONAYLAMA ALANI</div>
                     <div id="admin-posts-list"></div>
                 </div>
 
-                <!-- TAB: TEMA VE ŞİFRE -->
                 <div id="tabSecurity" class="admin-tab-content">
                     <div class="admin-section-heading">TEMA SEÇİMİ VE GÜVENLİK</div>
                     <div class="form-group" style="margin-bottom:2rem;">
@@ -1467,7 +1446,6 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer>
         <div class="container">
             <div class="footer-logo" id="footer-logo-text">KARAMAN ABER SANAT GÜCÜ</div>
@@ -1520,7 +1498,7 @@
                     ctx.drawImage(img, 0, 0, width, height);
 
                     // Yüksek kaliteli JPEG formatında (0.85 oranında) sıkıştırıp Base64 çıktısı alma
-                    const base64Data = canvas.toDataURL('image/jpeg', 0.85);
+                    const base64Data = canvas.toDataURL('image/png'); // Logo saydamlığını korumak için PNG'ye çevrildi
                     
                     if (targetField) {
                         activeData[targetField] = base64Data;
@@ -1540,7 +1518,7 @@
                         inputElement.previousElementSibling.innerText = originalText;
                     }
                     
-                    alert("Görsel başarıyla sıkıştırıldı ve doğrudan web sitene yüklendi!");
+                    alert("Görsel başarıyla optimize edildi ve eklendi!");
                 };
                 img.src = event.target.result;
             };
@@ -1639,6 +1617,7 @@
             currentTheme: "classic",
             currentLayout: "asymmetric",
             logoUrl: "",
+            logoSize: "65",
             heroBgUrl: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1400", 
             headerTitle: "KARAMAN ABER SANAT GÜCÜ",
             hero: { title: "İNANÇ", slogan: "Sloganımız olan 'İNANÇ KANATLANDIRIR' ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz." },
@@ -1706,6 +1685,7 @@
                     --hero-title-size: ${s.heroTitleSize || "8.5rem"};
                     --section-title-size: ${s.sectionTitleSize || "3rem"};
                     --accent-color: ${s.accentColor || "#ff2a4b"};
+                    --logo-size: ${activeData.logoSize || "65"}px;
                 }
             `;
 
@@ -1723,12 +1703,12 @@
             document.getElementById('header-club-title').innerText = rawHeaderTitle;
             document.getElementById('footer-logo-text').innerText = rawHeaderTitle;
 
-            // Logo Render Ayarı (Drive ve Base64 Desteğiyle)
+            // Logo Render Ayarı
             const headerLogoImg = document.getElementById('header-logo-img');
             const headerLogoWrapper = document.getElementById('header-logo-wrapper');
             if (activeData.logoUrl && activeData.logoUrl.trim() !== "") {
                 headerLogoImg.src = convertDriveUrl(activeData.logoUrl);
-                headerLogoWrapper.style.display = "block";
+                headerLogoWrapper.style.display = "flex";
             } else {
                 headerLogoWrapper.style.display = "none";
             }
@@ -1922,6 +1902,7 @@
             const heroData = activeData.hero || defaultData.hero;
             const contactData = activeData.contact || defaultData.contact;
             document.getElementById('edit-logo-url').value = activeData.logoUrl || '';
+            document.getElementById('edit-logo-size').value = activeData.logoSize || '65';
             document.getElementById('edit-hero-bg-url').value = activeData.heroBgUrl || '';
             document.getElementById('edit-header-title').value = activeData.headerTitle || '';
             document.getElementById('edit-hero-title').value = heroData.title || '';
@@ -1939,6 +1920,8 @@
                 activeData.logoUrl = convertDriveUrl(urlLogo);
             }
             
+            activeData.logoSize = document.getElementById('edit-logo-size').value || '65';
+
             const urlBg = document.getElementById('edit-hero-bg-url').value.trim();
             if (urlBg !== "[Cihazdan Yüklendi]" && urlBg !== "") {
                 activeData.heroBgUrl = convertDriveUrl(urlBg);
@@ -1953,7 +1936,8 @@
             activeData.contact.email1 = document.getElementById('edit-email1').value;
             activeData.contact.email2 = document.getElementById('edit-email2').value;
             activeData.contact.address = document.getElementById('edit-address').value.replace(/\n/g, '<br>');
-            saveAllData(); renderAllSections(); alert("Ayarlar Kaydedildi!");
+            
+            saveAllData(); applySavedTheme(); renderAllSections(); alert("Ayarlar Kaydedildi!");
         }
 
         function loadStyleToAdminForm() {
