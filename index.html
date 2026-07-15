@@ -1,57 +1,519 @@
-let defaultData = {
-    "adminPassword": "admin",
-    "currentTheme": "karamanAtesi",
-    "currentLayout": "asymmetric",
-    "logoUrl": "loog3.svg",
-    "logoSize": "250",
-    "headerTitle": "KARAMAN ABER SANAT GÜCÜ",
-    "heroBgUrl": "takım (19).jpeg",
-    "hero": {
-        "title": "",
-        "slogan": "İlkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz."
-    },
-    "contact": {
-        "phone": "0 536 893 94 15",
-        "email1": "info@abersanatsk.org",
-        "email2": "ridvan@abersanatsk.org",
-        "address": "Cedit Mah. 319. Sk. No:2/A <br>Merkez / Karaman"
-    },
-    "styles": {
-        "fontSport": "'Space Grotesk', sans-serif",
-        "fontMain": "'Syne', sans-serif",
-        "heroTitleSize": "8.5rem",
-        "sectionTitleSize": "3rem",
-        "heroSloganSize": "1.3rem",
-        "headerTitleSize": "1.4rem",
-        "accentColor": "#ff2a4b"
-    },
-    "posts": [],
-    "players": [],
-    "board": [
-        {
-            "id": 1,
-            "name": "Rıdvan Arslan",
-            "role": "Kulüp Başkanı",
-            "img": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=300"
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karaman Aber Sanat Gücü Spor Kulübü</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Syne:wght@500;700;800&family=Inter:wght@400;700&family=Montserrat:wght@700;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    
+    <style id="theme-styles">
+        :root {
+            --bg-white: #04060a; 
+            --bg-dark: #ffffff;
+            --text-light: #04060a;
+            --text-dark: #ffffff;
+            --text-muted: #8892b0;
+            --accent-color: #ff2a4b; 
+            --premium-gray: rgba(255, 255, 255, 0.02);
+            --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+            
+            /* Font ve Boyut Parametreleri */
+            --font-main: 'Syne', sans-serif;
+            --font-sport: 'Space Grotesk', sans-serif;
+            --hero-title-size: 8.5rem;
+            --section-title-size: 3rem;
+            --logo-size: 65px;
+            --hero-slogan-size: 1.3rem;
+            --header-title-size: 1.4rem;
+
+            /* Şablon Değişkenleri */
+            --card-radius: 24px;
+            --border-style: 1px solid rgba(255, 255, 255, 0.05);
+            --card-align: left;
         }
-    ],
-    "staff": [
-        {
-            "id": 1,
-            "name": "Teknik Hoca",
-            "role": "Teknik Direktör",
-            "img": "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=300"
+    </style>
+
+    <style>
+        img, .board-img, .player-img-box img, .kit-img-box img, .transfer-img {
+            image-rendering: -webkit-optimize-contrast !important;
+            image-rendering: crisp-edges !important;
+            -webkit-font-smoothing: antialiased;
+            backface-visibility: hidden;
+            transform: translateZ(0); 
+            filter: contrast(1.02) saturate(1.04) brightness(0.98); 
+            transition: filter 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
-    ],
-    "kits": [
-        {
-            "id": 1,
-            "title": "2026 İç Saha Forması",
-            "img": "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=600"
+
+        img:hover, .player-card:hover .player-img-box img, .kit-card:hover .kit-img-box img {
+            filter: contrast(1.08) saturate(1.08) brightness(1.02) !important;
         }
-    ],
-    "transfers": [],
-    "fixtures": [],
-    "gallery": [],
-    "customPages": []
-};
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1450px; 
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            width: 70%; height: 70%;
+            z-index: -1;
+            pointer-events: none;
+            filter: blur(120px);
+        }
+
+        body::before {
+            top: -20%; left: -20%;
+            background: radial-gradient(circle, rgba(255, 42, 75, 0.08) 0%, rgba(0,0,0,0) 70%);
+        }
+
+        body::after {
+            bottom: -20%; right: -20%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.02) 0%, rgba(0,0,0,0) 70%);
+        }
+
+        header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            z-index: 100;
+            background: rgba(4, 6, 10, 0.85); 
+            backdrop-filter: blur(40px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            min-height: 110px; gap: 2rem; 
+        }
+
+        .logo-container {
+            text-decoration: none; color: #ffffff;
+            display: flex; align-items: center; gap: 15px; flex-shrink: 0; 
+        }
+
+        .logo-img-wrapper {
+            width: var(--logo-size, 65px); height: var(--logo-size, 65px);
+            display: none; flex-shrink: 0; transition: all 0.3s ease;
+        }
+
+        .logo-img-wrapper img { width: 100%; height: 100%; object-fit: contain; }
+
+        .logo-text-group { display: flex; flex-direction: column; justify-content: center; }
+
+        .logo-text-top {
+            font-family: var(--font-sport); font-weight: 700; font-size: var(--header-title-size, 1.4rem);
+            text-transform: uppercase; letter-spacing: -1px; line-height: 1.1; max-width: 320px; transition: font-size 0.3s;
+        }
+
+        .logo-text-sub {
+            font-size: 0.75rem; color: var(--accent-color); letter-spacing: 5px; text-transform: uppercase; margin-top: 4px; font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex; list-style: none; gap: 1.2rem; flex-wrap: wrap; justify-content: flex-end; align-items: center; flex-grow: 1; 
+        }
+
+        .nav-links a {
+            text-decoration: none; color: #ffffff; font-weight: 500; font-size: 0.7rem; text-transform: uppercase;
+            letter-spacing: 2px; transition: all 0.3s ease; position: relative; padding: 5px 0; opacity: 0.6; cursor: pointer;
+        }
+
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px;
+            background: var(--accent-color); transition: all 0.3s; transform: translateX(-50%);
+        }
+
+        .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--accent-color); }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+        section {
+            display: none; padding: 10rem 0; border-top: 1px solid rgba(255, 255, 255, 0.03);
+            position: relative; animation: fadeIn 0.6s ease-out; min-height: calc(100vh - 300px); 
+        }
+
+        section.active-page { display: block; }
+        section.hero { padding: 12rem 2rem 6rem 2rem; min-height: 100vh; }
+        section.hero.active-page { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero { flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; overflow: hidden; }
+
+        .hero-bg-canvas {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover !important; background-position: center center !important; background-repeat: no-repeat !important;
+            filter: brightness(0.25) contrast(1.1); transform: scale(1.02); transition: transform 5s ease; z-index: 1;
+        }
+
+        .hero:hover .hero-bg-canvas { transform: scale(1); }
+        .hero-content-wrapper { position: relative; z-index: 2; max-width: 1100px; }
+
+        .hero-title-sculpture {
+            font-family: var(--font-sport); font-size: var(--hero-title-size); font-weight: 700; text-transform: uppercase;
+            line-height: 0.85; letter-spacing: -6px; color: #ffffff; margin-bottom: 3rem; position: relative;
+            animation: floatText 4s ease-in-out infinite alternate; transition: font-size 0.3s;
+        }
+
+        .hero-title-sculpture span { color: transparent; -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.3); }
+
+        @keyframes floatText {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-10px) rotate(0.5deg); }
+        }
+
+        .hero-slogan-monument {
+            background: rgba(255, 255, 255, 0.01); backdrop-filter: blur(40px); border: 1px solid rgba(255, 255, 255, 0.04);
+            border-left: 4px solid var(--accent-color); padding: 3rem; border-radius: var(--card-radius); max-width: 850px;
+            margin: 0 auto; text-align: left; box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+        }
+
+        .monument-badge { font-family: var(--font-sport); font-size: 0.8rem; font-weight: 700; color: var(--accent-color); text-transform: uppercase; letter-spacing: 6px; margin-bottom: 1rem; }
+        .monument-text { font-family: var(--font-main); font-size: var(--hero-slogan-size, 1.3rem); font-weight: 500; color: #e2e8f0; line-height: 1.6; transition: font-size 0.3s; }
+
+        .section-title {
+            font-family: var(--font-sport); font-size: var(--section-title-size); font-weight: 700; text-transform: uppercase;
+            letter-spacing: -2px; margin-bottom: 6rem; position: relative; transition: font-size 0.3s ease;
+        }
+        .section-title span { color: var(--accent-color); }
+        .section-title::after { content: '//'; position: absolute; right: -40px; top: 0; color: rgba(255, 255, 255, 0.1); font-family: var(--font-sport); }
+
+        .board-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 3rem; }
+        .board-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.01) 0%, rgba(255, 255, 255, 0.03) 100%);
+            border-radius: var(--card-radius); padding: 3.5rem 2.5rem; border: var(--border-style);
+            text-align: var(--card-align); transition: all 0.4s ease; box-shadow: var(--card-shadow);
+        }
+        .board-card:hover { transform: translateY(-12px) scale(1.02); border-color: var(--accent-color); box-shadow: 0 40px 80px rgba(255, 42, 75, 0.1); }
+        .board-img-wrapper { width: 140px; height: 140px; border-radius: 28px; margin: 0 auto 2rem auto; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05); transform: rotate(-3deg); transition: transform 0.4s ease; }
+        .board-card:hover .board-img-wrapper { transform: rotate(0deg); }
+        .board-img { width: 100%; height: 100%; object-fit: cover; }
+        .board-name { font-size: 1.4rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem; }
+        .board-role { font-size: 0.8rem; font-weight: 700; color: var(--accent-color); text-transform: uppercase; letter-spacing: 3px; }
+
+        /* Admin Ekstra Stiller */
+        .admin-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(4, 6, 10, 0.95); backdrop-filter: blur(20px); z-index: 1000; justify-content: center; align-items: center;
+        }
+        .admin-content {
+            background-color: #0c0f17; border-radius: 20px; width: 95%; max-width: 1000px; height: 85vh;
+            display: flex; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .close-admin { position: absolute; top: 20px; right: 25px; font-size: 2.5rem; cursor: pointer; z-index: 10; color: white; }
+        .admin-sidebar { width: 250px; background-color: #06080d; padding: 2rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; border-right: 1px solid rgba(255, 255, 255, 0.08); }
+        .admin-sidebar h3 { font-family: var(--font-sport); color: var(--accent-color); margin-bottom: 2rem; text-align: center; }
+        .admin-sidebar-btn { background: none; border: none; color: #72829c; padding: 12px 15px; text-align: left; font-weight: 600; cursor: pointer; border-radius: 8px; transition: all 0.3s; }
+        .admin-sidebar-btn:hover, .admin-sidebar-btn.active { color: #ffffff; background-color: var(--accent-color); }
+        .admin-body { flex-grow: 1; padding: 3rem; overflow-y: auto; background-color: #0a0e14; color: white; }
+        .admin-tab-content { display: none; }
+        .admin-tab-content.active { display: block; }
+        
+        /* Form Stilleri (Admin Panel İçin) */
+        .admin-form-group { margin-bottom: 1.5rem; }
+        .admin-form-group label { display: block; font-size: 0.85rem; color: var(--accent-color); text-transform: uppercase; margin-bottom: 0.5rem; font-weight: bold; }
+        .admin-form-control { width: 100%; padding: 1rem; background: #151a23; border: 1px solid #2a3441; border-radius: 8px; color: white; font-family: inherit; }
+        .admin-btn-save { background: #22c55e; color: white; padding: 1rem 2rem; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 1rem; }
+        
+        .btn-export { background-color: var(--accent-color); color: white; margin-top: auto; border: none; padding: 1rem; border-radius: 8px; font-weight: bold; cursor: pointer; text-align: center; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 42, 75, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(255, 42, 75, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 42, 75, 0); } }
+
+        /* Footer */
+        footer { padding: 4rem 0; background-color: #030406; color: #ffffff; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.03); margin-top: 5rem; }
+        .admin-trigger { margin-top: 2rem; font-size: 0.8rem; color: #2b3342; cursor: pointer; text-decoration: underline; background: none; border: none; }
+        .admin-trigger:hover { color: var(--accent-color); }
+    </style>
+</head>
+<body>
+
+    <header id="site-header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo-container" onclick="switchPage('home'); return false;">
+                    <div class="logo-img-wrapper" id="header-logo-wrapper">
+                        <img src="" id="header-logo-img" alt="Logo">
+                    </div>
+                    <div class="logo-text-group" id="logo-text-group">
+                        <div class="logo-text-top" id="header-club-title">KARAMAN ABER SANAT GÜCÜ</div>
+                        <div class="logo-text-sub">SPOR KULÜBÜ</div>
+                    </div>
+                </a>
+                <ul class="nav-links">
+                    <li><a onclick="switchPage('home')">Ana Sayfa</a></li>
+                    <li><a onclick="switchPage('yonetim-kurulu')">Yönetim</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- ANA SAYFA -->
+        <section class="hero active-page" id="home">
+            <div class="hero-bg-canvas" id="hero-bg-overlay"></div>
+            <div class="hero-content-wrapper">
+                <h1 class="hero-title-sculpture" id="hero-title-text">İNANÇ<br><span>MÜZESİ</span></h1>
+                <div class="hero-slogan-monument">
+                    <div class="monument-badge">İNANÇ KANATLANDIRIR</div>
+                    <div class="monument-text" id="hero-slogan-text">
+                        Sloganımız olan 'İNANÇ KANATLANDIRIR' ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- YÖNETİM KURULU -->
+        <section id="yonetim-kurulu">
+            <div class="container">
+                <h2 class="section-title">Yönetim <span>Kurulu</span></h2>
+                <div class="board-grid" id="board-container">
+                    <!-- JS ile Doldurulacak -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <h3>KARAMAN ABER SANAT GÜCÜ</h3>
+            <p>© 2026 Tüm Hakları Saklıdır.</p>
+            <button class="admin-trigger" onclick="openAdmin()">Yönetim Paneli Girişi</button>
+        </div>
+    </footer>
+
+    <!-- ADMİN PANELİ -->
+    <div id="adminModal" class="admin-modal">
+        <div class="admin-content">
+            <span class="close-admin" onclick="closeAdmin()">&times;</span>
+            <div class="admin-sidebar">
+                <h3>YÖNETİM</h3>
+                <button class="admin-sidebar-btn active" onclick="switchAdminTab('tab-genel')">Genel Ayarlar</button>
+                <button class="admin-sidebar-btn" onclick="switchAdminTab('tab-yonetim')">Yönetim Kurulu</button>
+                <button class="btn-export" onclick="exportHTML()">🌐 Değişiklikleri İndir (Yayınla)</button>
+            </div>
+            
+            <div class="admin-body">
+                <!-- Genel Ayarlar Tab -->
+                <div id="tab-genel" class="admin-tab-content active">
+                    <h2>Genel Site Ayarları</h2>
+                    <hr style="border-color: #2a3441; margin: 1rem 0 2rem 0;">
+                    
+                    <div class="admin-form-group">
+                        <label>Kulüp Adı</label>
+                        <input type="text" id="admin-club-name" class="admin-form-control">
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label>Ana Sayfa Büyük Başlık (HTML Kullanılabilir, örn: INANC<br><span>MUZESI</span>)</label>
+                        <input type="text" id="admin-hero-title" class="admin-form-control">
+                    </div>
+
+                    <div class="admin-form-group">
+                        <label>Ana Sayfa Sloganı</label>
+                        <textarea id="admin-hero-slogan" class="admin-form-control" rows="4"></textarea>
+                    </div>
+
+                    <button class="admin-btn-save" onclick="saveGeneralSettings()">Ayarları Kaydet</button>
+                </div>
+
+                <!-- Yönetim Tab -->
+                <div id="tab-yonetim" class="admin-tab-content">
+                    <h2>Yönetim Kurulu Üyesi Ekle</h2>
+                    <hr style="border-color: #2a3441; margin: 1rem 0 2rem 0;">
+                    
+                    <div class="admin-form-group">
+                        <label>İsim Soyisim</label>
+                        <input type="text" id="admin-board-name" class="admin-form-control">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Görevi</label>
+                        <input type="text" id="admin-board-role" class="admin-form-control">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Görsel URL (Resim Linki)</label>
+                        <input type="text" id="admin-board-img" class="admin-form-control" placeholder="https://...">
+                    </div>
+                    
+                    <button class="admin-btn-save" onclick="addBoardMember()">Üye Ekle</button>
+                    
+                    <h3 style="margin-top: 3rem; color: var(--accent-color);">Mevcut Üyeleri Sıfırla</h3>
+                    <button class="admin-btn-save" style="background: #ff2a4b;" onclick="resetBoardMembers()">Tüm Üyeleri Sil</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* --- VERİ YÖNETİMİ (Local Storage) --- */
+        
+        // Varsayılan Veriler (İlk açılışta veya sıfırlandığında yüklenir)
+        const defaultData = {
+            general: {
+                clubName: "KARAMAN ABER SANAT GÜCÜ",
+                heroTitle: "İNANÇ<br><span>MÜZESİ</span>",
+                heroSlogan: "Sloganımız olan 'İNANÇ KANATLANDIRIR' ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz."
+            },
+            board: [
+                { name: "Ahmet Yılmaz", role: "Başkan", img: "https://via.placeholder.com/150/04060a/ff2a4b?text=Baskan" },
+                { name: "Mehmet Demir", role: "Asbaşkan", img: "https://via.placeholder.com/150/04060a/ff2a4b?text=Asbaskan" }
+            ]
+        };
+
+        // Veriyi çek
+        let siteData = JSON.parse(localStorage.getItem('karamanSporData')) || defaultData;
+
+        // Sayfa yüklendiğinde verileri ekrana bas
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSite();
+        });
+
+        // Tüm arayüzü siteData objesine göre güncelleyen ana fonksiyon
+        function renderSite() {
+            // Genel Ayarlar
+            document.getElementById('header-club-title').innerHTML = siteData.general.clubName;
+            document.getElementById('hero-title-text').innerHTML = siteData.general.heroTitle;
+            document.getElementById('hero-slogan-text').innerHTML = siteData.general.heroSlogan;
+
+            // Yönetim Kurulu Listesini Çiz
+            const boardContainer = document.getElementById('board-container');
+            boardContainer.innerHTML = '';
+            siteData.board.forEach(member => {
+                boardContainer.innerHTML += `
+                    <div class="board-card">
+                        <div class="board-img-wrapper">
+                            <img src="${member.img}" alt="${member.name}" class="board-img" onerror="this.src='https://via.placeholder.com/150/04060a/ffffff?text=Resim+Yok'">
+                        </div>
+                        <h3 class="board-name">${member.name}</h3>
+                        <div class="board-role">${member.role}</div>
+                    </div>
+                `;
+            });
+        }
+
+        /* --- SAYFA GEÇİŞ MANTIĞI --- */
+        function switchPage(pageId) {
+            document.querySelectorAll('section').forEach(sec => sec.classList.remove('active-page'));
+            document.getElementById(pageId).classList.add('active-page');
+            window.scrollTo(0,0);
+        }
+
+        /* --- ADMİN PANELİ FONKSİYONLARI --- */
+        function openAdmin() {
+            document.getElementById('adminModal').style.display = 'flex';
+            // Formları mevcut verilerle doldur
+            document.getElementById('admin-club-name').value = siteData.general.clubName;
+            document.getElementById('admin-hero-title').value = siteData.general.heroTitle;
+            document.getElementById('admin-hero-slogan').value = siteData.general.heroSlogan;
+        }
+
+        function closeAdmin() {
+            document.getElementById('adminModal').style.display = 'none';
+        }
+
+        function switchAdminTab(tabId) {
+            document.querySelectorAll('.admin-tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.admin-sidebar-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function saveGeneralSettings() {
+            siteData.general.clubName = document.getElementById('admin-club-name').value;
+            siteData.general.heroTitle = document.getElementById('admin-hero-title').value;
+            siteData.general.heroSlogan = document.getElementById('admin-hero-slogan').value;
+            
+            saveToStorage();
+            alert("Genel ayarlar kaydedildi!");
+        }
+
+        function addBoardMember() {
+            const name = document.getElementById('admin-board-name').value;
+            const role = document.getElementById('admin-board-role').value;
+            const img = document.getElementById('admin-board-img').value || 'https://via.placeholder.com/150/04060a/ffffff?text=Uye';
+
+            if(name && role) {
+                siteData.board.push({ name, role, img });
+                saveToStorage();
+                
+                // Formu Temizle
+                document.getElementById('admin-board-name').value = '';
+                document.getElementById('admin-board-role').value = '';
+                document.getElementById('admin-board-img').value = '';
+                alert("Üye başarıyla eklendi!");
+            } else {
+                alert("Lütfen isim ve görev alanlarını doldurun.");
+            }
+        }
+
+        function resetBoardMembers() {
+            if(confirm("Tüm yönetim kurulu üyeleri silinecek. Emin misiniz?")) {
+                siteData.board = [];
+                saveToStorage();
+                alert("Üyeler temizlendi.");
+            }
+        }
+
+        function saveToStorage() {
+            localStorage.setItem('karamanSporData', JSON.stringify(siteData));
+            renderSite(); // Veri kaydedilince arayüzü anında güncelle
+        }
+
+        /* --- DEĞİŞİKLİKLERİ YAYINLAMA (EXPORT SİSTEMİ) --- */
+        // Bu sistem yapılan değişiklikleri statik bir HTML dosyası olarak indirmeyi sağlar.
+        function exportHTML() {
+            // 1. Mevcut sayfanın tam kopyasını oluştur
+            let clone = document.documentElement.cloneNode(true);
+            
+            // 2. LocalStorage'a kaydettiğimiz güncel veriyi, indirilecek dosyanın JS kodunun içine "defaultData" olarak göm!
+            // Böylece indirilen sayfa ilk açıldığında doğrudan bizim yaptığımız değişikliklerle açılır.
+            let scriptTags = clone.getElementsByTagName('script');
+            for(let script of scriptTags) {
+                if(script.innerHTML.includes('const defaultData =')) {
+                    // Mevcut defaultData'yı regex ile bul ve bizim güncel siteData'mız ile değiştir
+                    let updatedScript = script.innerHTML.replace(
+                        /const defaultData = [\s\S]*?};/, 
+                        `const defaultData = ${JSON.stringify(siteData, null, 4)};`
+                    );
+                    script.innerHTML = updatedScript;
+                }
+            }
+
+            // 3. İndirilebilir HTML formatını hazırla
+            let htmlContent = "<!DOCTYPE html>\n" + clone.outerHTML;
+            
+            // 4. Dosya indirme işlemini tetikle
+            let blob = new Blob([htmlContent], {type: "text/html;charset=utf-8"});
+            let link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "index.html"; 
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            alert("Site dosyası (index.html) başarıyla indirildi. Yaptığınız değişiklikleri yayınlamak için mevcut index.html dosyanız ile bu yeni indirdiğiniz dosyayı değiştirin.");
+        }
+    </script>
+</body>
+</html>
