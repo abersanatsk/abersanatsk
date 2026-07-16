@@ -2263,61 +2263,51 @@
         };
 
         window.onload = loadAllData;
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-(function () {
-  const supabase = window.supabase.createClient(
-    "https://wbwxaqdwlypnpcdlrcfa.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indid3hhcWR3bHlwbnBjZGxyY2ZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQxMTcxMTEsImV4cCI6MjA5OTY5MzExMX0.PS-UsGe0LuQ8EVL1psnHMbchT4mHdrA8etIGdtEGH84"
-  );
+    
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        <script>
+const supabase = window.supabase.createClient(
+  "https://wbwxaqdwlypnpcdlrcfa.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indid3hhcWR3bHlwbnBjZGxyY2ZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQxMTcxMTEsImV4cCI6MjA5OTY5MzExMX0.PS-UsGe0LuQ8EVL1psnHMbchT4mHdrA8etIGdtEGH84"
+);
 
-  // Eski kaydet fonksiyonunu koru
-  if (typeof saveAllData === "function") {
-    const originalSave = saveAllData;
+// Sayfa açılırken verileri yükle
+window.addEventListener("load", async () => {
+  try {
+    const { data } = await supabase
+      .from("site_ayar")
+      .select("ayarlar")
+      .eq("id", 1)
+      .single();
 
-    window.saveAllData = async function () {
-      // Önce mevcut sistem çalışsın
-      originalSave();
-
-      // Sonra buluta kaydet
-      try {
-        await supabase.from("site_ayar").upsert({
-          id: 1,
-          ayarlar: window.activeData || activeData
-        });
-        console.log("Supabase kaydedildi");
-      } catch (e) {
-        console.error("Supabase kayıt hatası:", e);
-      }
-    };
-  }
-
-  // Sayfa açılırken veriyi yükle
-  window.addEventListener("load", async function () {
-    try {
-      const { data } = await supabase
-        .from("site_ayar")
-        .select("ayarlar")
-        .eq("id", 1)
-        .single();
-
-      if (data && data.ayarlar) {
-        if (typeof activeData !== "undefined") {
-          activeData = data.ayarlar;
-        } else {
-          window.activeData = data.ayarlar;
-        }
-
-        // Mevcut render fonksiyonlarını çağır
-        if (typeof renderAllSections === "function") renderAllSections();
-        if (typeof renderSite === "function") renderSite();
-      }
-    } catch (e) {
-      console.error("Supabase yükleme hatası:", e);
+    if (data && data.ayarlar) {
+      activeData = data.ayarlar;
+      if (typeof renderAllSections === "function") renderAllSections();
     }
-  });
-})();
-</script>
+  } catch (e) {
+    console.log("İlk yükleme boş olabilir");
+  }
+});
 
+// Kaydet fonksiyonunu genişlet
+if (typeof saveAllData === "function") {
+  const eskiKaydet = saveAllData;
+
+  saveAllData = async function () {
+    eskiKaydet();
+
+    try {
+      await supabase.from("site_ayar").upsert({
+        id: 1,
+        ayarlar: activeData
+      });
+
+      console.log("Supabase kaydedildi");
+    } catch (e) {
+      console.error(e);
+    }
+  };
+}
+</script>
 </body>
 </html>
