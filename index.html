@@ -1072,14 +1072,25 @@
                     </div>
                 </a>
                 <ul class="nav-links" id="main-nav-links">
-                    <!-- JavaScript ile dinamik olarak doldurulacaktır -->
+                    <!-- Başlangıçta boş kalmaması için varsayılan linkleri ekledik -->
+                    <li><a href="#" onclick="switchPage('home'); return false;">Anasayfa</a></li>
+                    <li><a href="#" onclick="switchPage('yonetim-kurulu'); return false;">Yönetim Kurulu</a></li>
+                    <li><a href="#" onclick="switchPage('teknik-heyet'); return false;">Teknik Heyet</a></li>
+                    <li><a href="#" onclick="switchPage('kadro'); return false;">Kadromuz</a></li>
+                    <li><a href="#" onclick="switchPage('formalar'); return false;">Formalarımız</a></li>
+                    <li><a href="#" onclick="switchPage('transferler'); return false;">Transferler</a></li>
+                    <li><a href="#" onclick="switchPage('fikstur'); return false;">Fikstür</a></li>
+                    <li><a href="#" onclick="switchPage('galeri'); return false;">Medya</a></li>
+                    <li><a href="#" onclick="switchPage('bize-yazin'); return false;">Bize Yazın</a></li>
+                    <li><a href="#" onclick="switchPage('iletisim'); return false;">İletişim</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <section class="hero active-page" id="home">
-        <div class="hero-bg-canvas" id="hero-bg-overlay"></div>
+        <!-- Arka plan varsayılanı doğrudan eklendi ki ekran siyah kalmasın -->
+        <div class="hero-bg-canvas" id="hero-bg-overlay" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1400');"></div>
         <div class="hero-content-wrapper">
             <h1 class="hero-title-sculpture" id="hero-title-text">ABER SANAT GÜCÜ<br><span></span></h1>
             <div class="hero-slogan-monument">
@@ -1570,11 +1581,11 @@
             }
         };
 
-        // Tarayıcı Yüklendiğinde Firebase'den Verileri Getir
-        if (document.readyState === 'complete') {
-            window.loadAllData();
+        // Tarayıcı Yüklendiğinde Firebase'den Verileri Getir (DÜZELTİLDİ: Siyah Ekran Hatasını Çözen Kısım)
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', window.loadAllData);
         } else {
-            window.addEventListener('load', window.loadAllData);
+            window.loadAllData();
         }
     </script>
 
@@ -2309,6 +2320,13 @@
                 }
             `
         };
+
+        // Sayfa ilk açıldığında (Firebase beklenmeden) varsayılan verilerle sayfayı hemen çiziyoruz!
+        // Bu sayede kullanıcı siyah bir ekran veya boş bir menü görmüyor (F5 sorununun ikinci çözümü).
+        window.activeData = JSON.parse(JSON.stringify(window.defaultData));
+        applySavedTheme();
+        renderAllSections();
+
     </script>
 </body>
 </html>
