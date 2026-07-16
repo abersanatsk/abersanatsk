@@ -1074,8 +1074,7 @@
                     </div>
                 </a>
                 <ul class="nav-links" id="main-nav-links">
-                    <!-- Dinamik olarak JS tarafından doldurulacak -->
-                </ul>
+                    </ul>
             </nav>
         </div>
     </header>
@@ -1083,13 +1082,13 @@
     <section class="hero active-page" id="home">
         <div class="hero-bg-canvas" id="hero-bg-overlay" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1400');"></div>
         <div class="hero-content-wrapper">
-            <h1 class="hero-title-sculpture" id="hero-title-text">ABER SANAT GÜCÜ<br><span></span></h1>
-            <div class="hero-slogan-monument">
-                <div class="monument-badge">İNANÇ KANATLANDIRIR</div>
+            <div class="hero-slogan-monument" style="margin-bottom: 3rem;">
+                <div class="monument-badge"></div>
                 <div class="monument-text" id="hero-slogan-text">
                     Sloganımız olan 'İNANÇ KANATLANDIRIR' ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz.
                 </div>
             </div>
+            <h1 class="hero-title-sculpture" style="margin-bottom: 0; font-size: 4rem;" id="hero-title-text">ABER SANAT GÜCÜ<br><span></span></h1>
         </div>
     </section>
 
@@ -1199,7 +1198,6 @@
         </div>
     </section>
 
-    <!-- ADMIN MODAL -->
     <div class="admin-modal" id="adminModal">
         <div class="admin-content">
             <span class="close-admin" onclick="toggleAdminModal()">&times;</span>
@@ -1309,22 +1307,36 @@
                     
                     <div class="form-group" style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 2rem;">
                         <label style="color: var(--accent-color); font-weight: 800; margin-bottom: 1rem;">ÖZEL YAZI RENKLERİ SEÇİMİ</label>
-                        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem;">Seçili temanın varsayılan yazı renklerini ezip, kendi özel renklerinizi kullanabilirsiniz. Eğer temanın orijinal rengine dönmek isterseniz "Renkleri Sıfırla" butonunu kullanın.</p>
+                        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem;">Kutucukları işaretleyerek temanın renklerini ezip kendi renklerinizi zorlayabilirsiniz. İşareti kaldırırsanız tema orijinal rengine döner.</p>
                         
                         <div style="margin-bottom: 1.5rem;">
                             <label style="color: #fff; font-size: 0.9rem;">Ana Metin Rengi (Başlıklar ve Düz Yazılar)</label>
                             <div style="display:flex; gap:10px; align-items:center; margin-top:5px;">
+                                <input type="checkbox" id="override-text-color" style="width: 20px; height: 20px; cursor: pointer;"> 
+                                <span style="font-size: 0.8rem;">Özel Renk Kullan</span>
                                 <input type="color" id="style-text-color" class="form-control" style="height:50px; padding: 5px; flex:1;">
                             </div>
                         </div>
 
-                        <div>
+                        <div style="margin-bottom: 1.5rem;">
                             <label style="color: #fff; font-size: 0.9rem;">İkincil / Sönük Metin Rengi (Alt Bilgiler ve Yaş/Boy vs.)</label>
                             <div style="display:flex; gap:10px; align-items:center; margin-top:5px;">
+                                <input type="checkbox" id="override-text-muted" style="width: 20px; height: 20px; cursor: pointer;"> 
+                                <span style="font-size: 0.8rem;">Özel Renk Kullan</span>
                                 <input type="color" id="style-text-muted" class="form-control" style="height:50px; padding: 5px; flex:1;">
                             </div>
                         </div>
-                        <button type="button" class="admin-btn-delete" style="margin-top: 15px; width: 100%; height: 45px;" onclick="resetTextColors()">Yazı Renklerini Sıfırla (Temaya Dön)</button>
+
+                        <div>
+                            <label style="color: #fff; font-size: 0.9rem;">Genel Vurgu Rengi (Çizgiler, İkonlar ve Süslemeler)</label>
+                            <div style="display:flex; gap:10px; align-items:center; margin-top:5px;">
+                                <input type="checkbox" id="override-accent-color" style="width: 20px; height: 20px; cursor: pointer;"> 
+                                <span style="font-size: 0.8rem;">Özel Renk Kullan</span>
+                                <input type="color" id="style-accent-color" class="form-control" style="height:50px; padding: 5px; flex:1;">
+                            </div>
+                        </div>
+
+                        <button type="button" class="admin-btn-delete" style="margin-top: 20px; width: 100%; height: 45px;" onclick="resetAllColors()">Tüm Renk Zorlamalarını Sıfırla (Temaya Dön)</button>
                     </div>
 
                     <div class="form-group">
@@ -1381,10 +1393,6 @@
                             <option value="4.5rem">Ultra Görkemli (4.5rem)</option>
                             <option value="5rem">Devasa (5.0rem)</option>
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Genel Vurgu Rengi (Çizgiler, İkonlar ve Süslemeler)</label>
-                        <input type="color" id="style-accent-color" class="form-control" style="height:50px;">
                     </div>
                     <button type="button" class="submit-btn" onclick="saveTypographyStyles()">Yazı & Renk Stillerini Uygula</button>
                 </div>
@@ -1521,16 +1529,18 @@
                 <div id="tabSecurity" class="admin-tab-content">
                     <div class="admin-section-heading">TEMA SEÇİMİ VE GÜVENLİK</div>
                     <div class="form-group" style="margin-bottom:2rem;">
-                        <label>Sitenin Genel Renk Şablonu (15 Farklı Tema)</label>
+                        <label>Sitenin Genel Renk Şablonu (Premium 30+ Tema)</label>
                         <select id="theme-select" class="form-control" onchange="previewTheme()">
                             <optgroup label="Klasik & Karanlık Spor">
                                 <option value="classic">Karanlık Spor Gece (Varsayılan Premium)</option>
                                 <option value="monochrome">Koyu Gri Monokrom (Sade Şıklık)</option>
                                 <option value="cyberpunk">Cyberpunk (Koyu Kömür & Parlak Turuncu)</option>
+                                <option value="matrix">Matrix Hacker (Siyah & Neon Yeşil)</option>
                             </optgroup>
                             <optgroup label="Siyah & Beyaz (Black & White)">
                                 <option value="blackAndWhite">Tam Siyah & Beyaz (Yüksek Kontrast)</option>
                                 <option value="silverBlack">Gümüş & Siyah (Açık Gri Tonlar)</option>
+                                <option value="goldRush">Altına Hücum (Gece Siyahı & Altın)</option>
                             </optgroup>
                             <optgroup label="Renkli & Güçlü Tonlar">
                                 <option value="karamanAtesi">Karaman Ateşi (Sıcak Canlı Kırmızı & Siyah)</option>
@@ -1538,6 +1548,7 @@
                                 <option value="royal">Royal Asil Mavi & Altın (Saray Şıklığı)</option>
                                 <option value="legend">Efsane Lacivert & Altın (Şampiyon Ruhu)</option>
                                 <option value="pitch">Çimen Yeşili & Koyu Orman</option>
+                                <option value="volcano">Volkanik Patlama (Siyah & Ateş Turuncusu)</option>
                             </optgroup>
                             <optgroup label="Modern & Yenilikçi">
                                 <option value="neonPurple">Neon Geceler (Derin Mor & Neon Pembe)</option>
@@ -1545,6 +1556,20 @@
                                 <option value="desertSand">Çöl Fırtınası (Koyu Kahve & Toprak)</option>
                                 <option value="forest">Orman Yolu (Koyu Yeşil & Kiremit)</option>
                                 <option value="sunset">Günbatımı Kızılı (Koyu Kırmızı & Turuncu)</option>
+                                <option value="dracula">Dracula (Koyu Mor & Pembe Vurgular)</option>
+                                <option value="synthwave">Synthwave (Karanlık Mor & Mavi/Pembe Neon)</option>
+                            </optgroup>
+                            <optgroup label="Mücevher Tonları">
+                                <option value="ruby">Yakut Kırmızısı (Koyu Bordo & Yakut)</option>
+                                <option value="emerald">Zümrüt Yeşili (Derin Yeşil & Altın)</option>
+                                <option value="sapphire">Safir Mavisi (Derin Lacivert & Gümüş)</option>
+                                <option value="amethyst">Ametist (Koyu Mor & Lila)</option>
+                            </optgroup>
+                            <optgroup label="Agresif & Enerjik">
+                                <option value="bloodMoon">Kanlı Ay (Simsiyah & Kan Kırmızı)</option>
+                                <option value="electricBlue">Elektrik Mavisi (Simsiyah & Cam Göbeği)</option>
+                                <option value="highContrast">Tehlike Bölgesi (Simsiyah & Uyarı Sarısı)</option>
+                                <option value="toxic">Radyasyon (Koyu Gri & Zehir Yeşili)</option>
                             </optgroup>
                         </select>
                     </div>
@@ -1579,7 +1604,6 @@
         </div>
     </footer>
 
-    <!-- Firebase SDK Modülü (Veritabanı Bağlantısı) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
@@ -1597,7 +1621,6 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // BULUTA VE YEREL HAFIZAYA (LOCALSTORAGE) ÇİFT KAYIT
         window.saveAllData = async function() {
             try {
                 localStorage.setItem("aber_site_data", JSON.stringify(window.activeData));
@@ -1608,10 +1631,8 @@
             }
         };
 
-        // YEREL HAFIZA DESTEKLİ BULUTTAN YÜKLEME
         window.loadAllData = async function() {
             try {
-                // Önce her ihtimale karşı LocalStorage (Yerel Hafıza) yedeğini alıyoruz
                 let localData = localStorage.getItem("aber_site_data");
                 if (localData) {
                     window.activeData = JSON.parse(localData);
@@ -1633,7 +1654,7 @@
                             }
                         }
                     }
-                    localStorage.setItem("aber_site_data", JSON.stringify(window.activeData)); // Buluttan gelen taze veriyi lokale yaz
+                    localStorage.setItem("aber_site_data", JSON.stringify(window.activeData)); 
                 }
                 
                 const arrayKeys = ['players', 'board', 'staff', 'kits', 'transfers', 'fixtures', 'gallery', 'posts', 'customPages'];
@@ -1646,7 +1667,6 @@
                 updateTrafficStats();
             } catch (e) {
                 console.error("Veritabanı bağlantı hatası! Siteniz yerel yedek ile sorunsuz çalışmaya devam ediyor.", e);
-                // Hata olsa dahi yerel aktif veri (localData) devrede kalır
                 applySavedTheme();
                 renderAllSections();
                 updateTrafficStats();
@@ -1660,10 +1680,17 @@
         }
     </script>
 
-    <!-- Ana Fonksiyonlar Scripti -->
     <script>
         window.saveAllData = window.saveAllData || function() { console.log("Firebase henüz yüklenmedi..."); };
         window.loadAllData = window.loadAllData || function() { console.log("Firebase henüz yüklenmedi..."); };
+
+        // Yeni Veri Çekme Fonksiyonu (Objeler Boş Geldiğinde Varsayılanı Kullanması İçin)
+        function getSafeData(key) {
+            if (typeof window.defaultData[key] === 'object' && !Array.isArray(window.defaultData[key])) {
+                return Object.assign({}, window.defaultData[key], window.activeData[key] || {});
+            }
+            return window.activeData[key] !== undefined ? window.activeData[key] : window.defaultData[key];
+        }
 
         function switchPage(pageId) {
             document.querySelectorAll('section').forEach(sec => {
@@ -1822,8 +1849,8 @@
             logoSize: "65",
             headerTitle: "KARAMAN ABER SANAT GÜCÜ",
             heroBgUrl: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1400", 
-            hero: { title: "", slogan: "Sloganımız olan 'İNANÇ KANATLANDIRIR' ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz." },
-            contact: { phone: "0 536 893 94 15", email1: "info@abersanatsk.org", email2: "abersanat@gmail.com", address: "Cedit Mah. 319. Sk. No:2/A <br>Merkez / Karaman" },
+            hero: { title: "", slogan: "Sloganımız olan '' ilkesinden aldığımız güçle Karaman futboluna yeni bir soluk getiriyoruz." },
+            contact: { phone: "0 536 893 94 15", email1: "info@abersanatsk.org", email2: "ridvan@abersanatsk.org", address: "Cedit Mah. 319. Sk. No:2/A <br>Merkez / Karaman" },
             styles: {
                 fontSport: "'Space Grotesk', sans-serif",
                 fontMain: "'Syne', sans-serif",
@@ -1831,7 +1858,7 @@
                 sectionTitleSize: "3rem",
                 heroSloganSize: "1.3rem",
                 headerTitleSize: "1.4rem",
-                accentColor: "#ff2a4b",
+                accentColor: "",
                 textColor: "", 
                 textMuted: ""
             },
@@ -1862,17 +1889,15 @@
             const selectedTheme = activeData.currentTheme || "classic";
             const selectedLayout = activeData.currentLayout || "asymmetric";
             
-            const s = activeData.styles || defaultData.styles;
+            const s = getSafeData('styles');
             
             let textColorOverride = "";
             let textMutedOverride = "";
+            let accentColorOverride = "";
             
-            if (s.textColor && s.textColor.trim() !== "") {
-                textColorOverride = `--text-dark: ${s.textColor} !important;`;
-            }
-            if (s.textMuted && s.textMuted.trim() !== "") {
-                textMutedOverride = `--text-muted: ${s.textMuted} !important;`;
-            }
+            if (s.textColor && s.textColor.trim() !== "") textColorOverride = `--text-dark: ${s.textColor} !important;`;
+            if (s.textMuted && s.textMuted.trim() !== "") textMutedOverride = `--text-muted: ${s.textMuted} !important;`;
+            if (s.accentColor && s.accentColor.trim() !== "") accentColorOverride = `--accent-color: ${s.accentColor} !important;`;
 
             const customStyleVars = `
                 :root {
@@ -1882,10 +1907,10 @@
                     --section-title-size: ${s.sectionTitleSize || "3rem"};
                     --hero-slogan-size: ${s.heroSloganSize || "1.3rem"};
                     --header-title-size: ${s.headerTitleSize || "1.4rem"};
-                    --accent-color: ${s.accentColor || "#ff2a4b"};
                     --logo-size: ${activeData.logoSize || "65"}px;
                     ${textColorOverride}
                     ${textMutedOverride}
+                    ${accentColorOverride}
                 }
             `;
 
@@ -1896,9 +1921,9 @@
         }
 
         function renderAllSections() {
-            const heroData = activeData.hero || defaultData.hero;
-            const contactData = activeData.contact || defaultData.contact;
-            const t = activeData.siteTexts || defaultData.siteTexts;
+            const heroData = getSafeData('hero');
+            const contactData = getSafeData('contact');
+            const t = getSafeData('siteTexts');
 
             const rawHeaderTitle = activeData.headerTitle || defaultData.headerTitle;
             
@@ -1920,10 +1945,9 @@
             const cleanBg = convertDriveUrl(activeData.heroBgUrl);
             heroBgOverlay.style.backgroundImage = `url('${cleanBg || defaultData.heroBgUrl}')`;
             
-            document.getElementById('hero-title-text').innerHTML = (heroData.title || defaultData.hero.title).replace('\n', '<br>');
-            document.getElementById('hero-slogan-text').innerText = heroData.slogan || defaultData.hero.slogan;
+            document.getElementById('hero-title-text').innerHTML = (heroData.title !== undefined ? heroData.title : defaultData.hero.title).replace(/\n/g, '<br>');
+            document.getElementById('hero-slogan-text').innerText = heroData.slogan !== undefined ? heroData.slogan : defaultData.hero.slogan;
 
-            // MENÜ DİNAMİK RENDER
             const mainNavLinks = document.getElementById('main-nav-links');
             mainNavLinks.innerHTML = `
                 <li><a href="#" onclick="switchPage('home'); return false;">${t.menuHome}</a></li>
@@ -1937,7 +1961,6 @@
                 <li><a href="#" onclick="switchPage('bize-yazin'); return false;">${t.menuWriteUs}</a></li>
                 <li><a href="#" onclick="switchPage('iletisim'); return false;">${t.menuContact}</a></li>`;
 
-            // BÖLÜM BAŞLIKLARI DİNAMİK RENDER
             document.getElementById('title-board').innerHTML = t.titleBoard;
             document.getElementById('title-staff').innerHTML = t.titleStaff;
             document.getElementById('title-squad').innerHTML = t.titleSquad;
@@ -2130,12 +2153,12 @@
         }
 
         function loadSettingsToAdminForm() {
-            const heroData = activeData.hero || defaultData.hero;
-            const contactData = activeData.contact || defaultData.contact;
+            const heroData = getSafeData('hero');
+            const contactData = getSafeData('contact');
             document.getElementById('edit-logo-url').value = activeData.logoUrl || '';
             document.getElementById('edit-logo-size').value = activeData.logoSize || '65';
             document.getElementById('edit-hero-bg-url').value = activeData.heroBgUrl || '';
-            document.getElementById('edit-header-title').value = activeData.headerTitle || '';
+            document.getElementById('edit-header-title').value = activeData.headerTitle || defaultData.headerTitle;
             document.getElementById('edit-hero-title').value = heroData.title || '';
             document.getElementById('edit-hero-slogan').value = heroData.slogan || '';
             document.getElementById('edit-phone').value = contactData.phone || '';
@@ -2170,29 +2193,28 @@
             saveAllData(); applySavedTheme(); renderAllSections(); alert("Ayarlar Kaydedildi!");
         }
 
-        // YENİ: SİTE YAZILARI & MENÜLER FONKSİYONLARI
         function loadTextsToAdminForm() {
-            const t = activeData.siteTexts || defaultData.siteTexts;
-            document.getElementById('t-menu-home').value = t.menuHome;
-            document.getElementById('t-menu-board').value = t.menuBoard;
-            document.getElementById('t-menu-staff').value = t.menuStaff;
-            document.getElementById('t-menu-squad').value = t.menuSquad;
-            document.getElementById('t-menu-kits').value = t.menuKits;
-            document.getElementById('t-menu-transfers').value = t.menuTransfers;
-            document.getElementById('t-menu-fixture').value = t.menuFixture;
-            document.getElementById('t-menu-gallery').value = t.menuGallery;
-            document.getElementById('t-menu-writeus').value = t.menuWriteUs;
-            document.getElementById('t-menu-contact').value = t.menuContact;
+            const t = getSafeData('siteTexts');
+            document.getElementById('t-menu-home').value = t.menuHome || '';
+            document.getElementById('t-menu-board').value = t.menuBoard || '';
+            document.getElementById('t-menu-staff').value = t.menuStaff || '';
+            document.getElementById('t-menu-squad').value = t.menuSquad || '';
+            document.getElementById('t-menu-kits').value = t.menuKits || '';
+            document.getElementById('t-menu-transfers').value = t.menuTransfers || '';
+            document.getElementById('t-menu-fixture').value = t.menuFixture || '';
+            document.getElementById('t-menu-gallery').value = t.menuGallery || '';
+            document.getElementById('t-menu-writeus').value = t.menuWriteUs || '';
+            document.getElementById('t-menu-contact').value = t.menuContact || '';
 
-            document.getElementById('t-title-board').value = t.titleBoard;
-            document.getElementById('t-title-staff').value = t.titleStaff;
-            document.getElementById('t-title-squad').value = t.titleSquad;
-            document.getElementById('t-title-kits').value = t.titleKits;
-            document.getElementById('t-title-transfers').value = t.titleTransfers;
-            document.getElementById('t-title-fixture').value = t.titleFixture;
-            document.getElementById('t-title-gallery').value = t.titleGallery;
-            document.getElementById('t-title-writeus').value = t.titleWriteUs;
-            document.getElementById('t-title-contact').value = t.titleContact;
+            document.getElementById('t-title-board').value = t.titleBoard || '';
+            document.getElementById('t-title-staff').value = t.titleStaff || '';
+            document.getElementById('t-title-squad').value = t.titleSquad || '';
+            document.getElementById('t-title-kits').value = t.titleKits || '';
+            document.getElementById('t-title-transfers').value = t.titleTransfers || '';
+            document.getElementById('t-title-fixture').value = t.titleFixture || '';
+            document.getElementById('t-title-gallery').value = t.titleGallery || '';
+            document.getElementById('t-title-writeus').value = t.titleWriteUs || '';
+            document.getElementById('t-title-contact').value = t.titleContact || '';
         }
 
         function saveSiteTexts() {
@@ -2224,15 +2246,21 @@
         }
 
         function loadStyleToAdminForm() {
-            const s = activeData.styles || defaultData.styles;
+            const s = getSafeData('styles');
             document.getElementById('style-font-sport').value = s.fontSport || "'Space Grotesk', sans-serif";
             document.getElementById('style-font-main').value = s.fontMain || "'Syne', sans-serif";
             document.getElementById('style-hero-size').value = s.heroTitleSize || "8.5rem";
             document.getElementById('style-section-size').value = s.sectionTitleSize || "3rem";
             document.getElementById('style-header-title-size').value = s.headerTitleSize || "1.4rem";
             document.getElementById('style-hero-slogan-size').value = s.heroSloganSize || "1.3rem";
+
+            document.getElementById('override-accent-color').checked = !!(s.accentColor && s.accentColor.trim() !== "");
             document.getElementById('style-accent-color').value = s.accentColor || "#ff2a4b";
+
+            document.getElementById('override-text-color').checked = !!(s.textColor && s.textColor.trim() !== "");
             document.getElementById('style-text-color').value = s.textColor || "#ffffff";
+
+            document.getElementById('override-text-muted').checked = !!(s.textMuted && s.textMuted.trim() !== "");
             document.getElementById('style-text-muted').value = s.textMuted || "#8892b0";
         }
 
@@ -2244,23 +2272,26 @@
             activeData.styles.sectionTitleSize = document.getElementById('style-section-size').value;
             activeData.styles.headerTitleSize = document.getElementById('style-header-title-size').value;
             activeData.styles.heroSloganSize = document.getElementById('style-hero-slogan-size').value;
-            activeData.styles.accentColor = document.getElementById('style-accent-color').value;
-            activeData.styles.textColor = document.getElementById('style-text-color').value;
-            activeData.styles.textMuted = document.getElementById('style-text-muted').value;
+            
+            activeData.styles.accentColor = document.getElementById('override-accent-color').checked ? document.getElementById('style-accent-color').value : "";
+            activeData.styles.textColor = document.getElementById('override-text-color').checked ? document.getElementById('style-text-color').value : "";
+            activeData.styles.textMuted = document.getElementById('override-text-muted').checked ? document.getElementById('style-text-muted').value : "";
+            
             saveAllData();
             applySavedTheme();
             renderAllSections();
             alert("Tipografi ve stil tercihleri başarıyla uygulandı!");
         }
 
-        function resetTextColors() {
+        function resetAllColors() {
             if(!activeData.styles) activeData.styles = {};
             activeData.styles.textColor = "";
             activeData.styles.textMuted = "";
+            activeData.styles.accentColor = "";
             saveAllData();
             applySavedTheme();
             loadStyleToAdminForm();
-            alert("Özel yazı renkleri sıfırlandı. Artık temanın kendi renkleri kullanılıyor!");
+            alert("Tüm özel renkler sıfırlandı. Artık seçili temanın orijinal renkleri kullanılıyor!");
         }
 
         function renderAdminBoard() {
@@ -2434,7 +2465,23 @@
         function previewTheme() {
             const selTheme = document.getElementById('theme-select').value;
             const selLayout = document.getElementById('layout-select').value;
-            const cssContent = themes[selTheme] + "\n" + layouts[selLayout];
+            
+            // Temayı denerken, varsa özel font boyutlarını da hesaba katarak gösteriyoruz
+            // Ancak "Özel Renk" seçimlerini, saf temayı görebilmeleri için dahil etmiyoruz.
+            const s = getSafeData('styles');
+            const customStyleVars = `
+                :root {
+                    --font-sport: ${s.fontSport || "'Space Grotesk', sans-serif"};
+                    --font-main: ${s.fontMain || "'Syne', sans-serif"};
+                    --hero-title-size: ${s.heroTitleSize || "8.5rem"};
+                    --section-title-size: ${s.sectionTitleSize || "3rem"};
+                    --hero-slogan-size: ${s.heroSloganSize || "1.3rem"};
+                    --header-title-size: ${s.headerTitleSize || "1.4rem"};
+                    --logo-size: ${window.activeData.logoSize || "65"}px;
+                }
+            `;
+            
+            const cssContent = themes[selTheme] + "\n" + customStyleVars + "\n" + layouts[selLayout];
             document.getElementById('theme-styles').innerHTML = cssContent;
         }
         
@@ -2466,26 +2513,39 @@
             classic: `:root { --bg-white: #04060a; --bg-dark: #ffffff; --text-light: #04060a; --text-dark: #ffffff; --text-muted: #8892b0; --accent-color: #ff2a4b; --premium-gray: rgba(255, 255, 255, 0.02); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.8); }`,
             monochrome: `:root { --bg-white: #111111; --bg-dark: #ffffff; --text-light: #111111; --text-dark: #eeeeee; --text-muted: #666666; --accent-color: #888888; --premium-gray: rgba(255, 255, 255, 0.03); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.4); }`,
             cyberpunk: `:root { --bg-white: #05070a; --bg-dark: #ffffff; --text-light: #05070a; --text-dark: #ffffff; --text-muted: #84939c; --accent-color: #f97316; --premium-gray: rgba(249, 115, 22, 0.02); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.8); }`,
+            matrix: `:root { --bg-white: #000000; --bg-dark: #001100; --text-light: #000000; --text-dark: #00ff00; --text-muted: #008800; --accent-color: #00ff00; --premium-gray: rgba(0, 255, 0, 0.05); --card-shadow: 0 30px 60px rgba(0, 255, 0, 0.2); }`,
             
             blackAndWhite: `:root { --bg-white: #000000; --bg-dark: #111111; --text-light: #000000; --text-dark: #ffffff; --text-muted: #888888; --accent-color: #ffffff; --premium-gray: rgba(255, 255, 255, 0.05); --card-shadow: 0 30px 60px rgba(255, 255, 255, 0.02); } 
             .submit-btn, .fixture-score, .transfer-status { color: #000000 !important; font-weight: 900; } .nav-links a:hover { color: #ffffff !important; }`,
-            
             silverBlack: `:root { --bg-white: #d9d9d9; --bg-dark: #ffffff; --text-light: #d9d9d9; --text-dark: #000000; --text-muted: #444444; --accent-color: #111111; --premium-gray: rgba(0, 0, 0, 0.05); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.1); } 
             body { color: #000000 !important; } .player-name, .board-name, .kit-title, .transfer-name, .hero-slogan-monument, .fixture-team, .info-item p { color: #000000 !important; }`,
+            goldRush: `:root { --bg-white: #0a0a0a; --bg-dark: #1a1a1a; --text-light: #0a0a0a; --text-dark: #ffffff; --text-muted: #a68a56; --accent-color: #ffd700; --premium-gray: rgba(255, 215, 0, 0.03); --card-shadow: 0 30px 60px rgba(255, 215, 0, 0.1); }`,
             
             karamanAtesi: `:root { --bg-white: #0f0103; --bg-dark: #ffffff; --text-light: #0f0103; --text-dark: #ffffff; --text-muted: #c9a4a7; --accent-color: #c1121f; --premium-gray: rgba(193, 18, 31, 0.02); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.8); }`,
             retro: `:root { --bg-white: #f5ebe0; --bg-dark: #3a1f13; --text-light: #f5ebe0; --text-dark: #3a1f13; --text-muted: #7f5539; --accent-color: #9e2a2b; --premium-gray: rgba(58, 31, 19, 0.05); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.1); } 
             body, .hero-slogan-monument, .board-name, .player-name, .fixture-team, .kit-title { color: #3a1f13 !important; }`,
-            
             royal: `:root { --bg-white: #030a16; --bg-dark: #ffffff; --text-light: #030a16; --text-dark: #ffffff; --text-muted: #8296b3; --accent-color: #b89047; --premium-gray: rgba(184, 144, 71, 0.02); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.8); }`,
             legend: `:root { --bg-white: #060a14; --bg-dark: #ffffff; --text-light: #060a14; --text-dark: #ffffff; --text-muted: #7c8ba3; --accent-color: #d4af37; --premium-gray: rgba(212, 175, 55, 0.02); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.8); }`,
             pitch: `:root { --bg-white: #041206; --bg-dark: #ffffff; --text-light: #041206; --text-dark: #ffffff; --text-muted: #7da180; --accent-color: #2d8a4e; --premium-gray: rgba(45, 138, 78, 0.02); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.8); }`,
+            volcano: `:root { --bg-white: #1a0000; --bg-dark: #330000; --text-light: #1a0000; --text-dark: #ffffff; --text-muted: #ff6600; --accent-color: #ff3300; --premium-gray: rgba(255, 51, 0, 0.05); --card-shadow: 0 30px 60px rgba(255, 51, 0, 0.3); }`,
             
             neonPurple: `:root { --bg-white: #120321; --bg-dark: #ffffff; --text-light: #120321; --text-dark: #f0e6ff; --text-muted: #9d7bbc; --accent-color: #e825a0; --premium-gray: rgba(232, 37, 160, 0.03); --card-shadow: 0 30px 60px rgba(232, 37, 160, 0.1); }`,
             oceanDeep: `:root { --bg-white: #020c17; --bg-dark: #ffffff; --text-light: #020c17; --text-dark: #e0f2fe; --text-muted: #38bdf8; --accent-color: #0ea5e9; --premium-gray: rgba(14, 165, 233, 0.02); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.8); }`,
             desertSand: `:root { --bg-white: #1a1412; --bg-dark: #ffffff; --text-light: #1a1412; --text-dark: #fff3e0; --text-muted: #bcaaa4; --accent-color: #d84315; --premium-gray: rgba(216, 67, 21, 0.03); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.8); }`,
             forest: `:root { --bg-white: #0a110a; --bg-dark: #ffffff; --text-light: #0a110a; --text-dark: #e8f5e9; --text-muted: #81c784; --accent-color: #bf360c; --premium-gray: rgba(129, 199, 132, 0.03); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.8); }`,
-            sunset: `:root { --bg-white: #1f050c; --bg-dark: #ffffff; --text-light: #1f050c; --text-dark: #ffebee; --text-muted: #ffab91; --accent-color: #ff5722; --premium-gray: rgba(255, 87, 34, 0.03); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.8); }`
+            sunset: `:root { --bg-white: #1f050c; --bg-dark: #ffffff; --text-light: #1f050c; --text-dark: #ffebee; --text-muted: #ffab91; --accent-color: #ff5722; --premium-gray: rgba(255, 87, 34, 0.03); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.8); }`,
+            dracula: `:root { --bg-white: #282a36; --bg-dark: #44475a; --text-light: #282a36; --text-dark: #f8f8f2; --text-muted: #6272a4; --accent-color: #ff79c6; --premium-gray: rgba(255, 121, 198, 0.05); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.5); }`,
+            synthwave: `:root { --bg-white: #120422; --bg-dark: #240a44; --text-light: #120422; --text-dark: #fdfdfd; --text-muted: #ff007f; --accent-color: #00f0ff; --premium-gray: rgba(0, 240, 255, 0.05); --card-shadow: 0 30px 60px rgba(0, 240, 255, 0.2); }`,
+
+            ruby: `:root { --bg-white: #0a0002; --bg-dark: #1a0005; --text-light: #0a0002; --text-dark: #ffffff; --text-muted: #b3b3b3; --accent-color: #e0115f; --premium-gray: rgba(224, 17, 95, 0.03); --card-shadow: 0 30px 60px rgba(224, 17, 95, 0.3); }`,
+            emerald: `:root { --bg-white: #001a0d; --bg-dark: #00331a; --text-light: #001a0d; --text-dark: #ffffff; --text-muted: #80cca6; --accent-color: #50c878; --premium-gray: rgba(80, 200, 120, 0.03); --card-shadow: 0 30px 60px rgba(80, 200, 120, 0.2); }`,
+            sapphire: `:root { --bg-white: #000b1a; --bg-dark: #001633; --text-light: #000b1a; --text-dark: #ffffff; --text-muted: #80aaff; --accent-color: #0f52ba; --premium-gray: rgba(15, 82, 186, 0.05); --card-shadow: 0 30px 60px rgba(15, 82, 186, 0.3); }`,
+            amethyst: `:root { --bg-white: #1a001a; --bg-dark: #330033; --text-light: #1a001a; --text-dark: #ffffff; --text-muted: #cc99cc; --accent-color: #9966cc; --premium-gray: rgba(153, 102, 204, 0.05); --card-shadow: 0 30px 60px rgba(153, 102, 204, 0.2); }`,
+            
+            bloodMoon: `:root { --bg-white: #000000; --bg-dark: #110000; --text-light: #000000; --text-dark: #ffcccc; --text-muted: #cc0000; --accent-color: #ff0000; --premium-gray: rgba(255, 0, 0, 0.05); --card-shadow: 0 30px 60px rgba(255, 0, 0, 0.4); }`,
+            electricBlue: `:root { --bg-white: #000000; --bg-dark: #000511; --text-light: #000000; --text-dark: #ffffff; --text-muted: #0066ff; --accent-color: #00ffff; --premium-gray: rgba(0, 255, 255, 0.05); --card-shadow: 0 30px 60px rgba(0, 255, 255, 0.3); }`,
+            highContrast: `:root { --bg-white: #000000; --bg-dark: #000000; --text-light: #000000; --text-dark: #ffffff; --text-muted: #ffff00; --accent-color: #ffff00; --premium-gray: rgba(255, 255, 0, 0.05); --card-shadow: 0 30px 60px rgba(255, 255, 0, 0.2); }`,
+            toxic: `:root { --bg-white: #111111; --bg-dark: #222222; --text-light: #111111; --text-dark: #eeeeee; --text-muted: #777777; --accent-color: #39ff14; --premium-gray: rgba(57, 255, 20, 0.03); --card-shadow: 0 30px 60px rgba(57, 255, 20, 0.2); }`
         };
 
         const layouts = {
