@@ -56,7 +56,9 @@
             padding: 0;
         }
 
+        /* YAZI BOYUTU KONTROL MERKEZİ: Tüm sitenin fontunu orantılı büyütmek için 16px değerini artırın (Örn: 18px, 20px) */
         html {
+            font-size: 16px;
             scroll-behavior: smooth;
         }
 
@@ -118,9 +120,10 @@
 
         nav {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end; /* Menüleri sağa yasla (Logo absolute olduğu için) */
             align-items: center;
-            min-height: 110px;
+            height: 110px; /* DEĞİŞTİRİLDİ: Yükseklik sabitlendi, esnemesi engellendi */
+            position: relative; /* Logonun sınırlarını belirlemek için */
             gap: 2rem; 
         }
 
@@ -130,7 +133,11 @@
             display: flex;
             align-items: center;
             gap: 15px; 
-            flex-shrink: 0; 
+            position: absolute; /* EKLENDİ: Siyah alandan bağımsız olması için */
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%); /* Dikey ortalama */
+            z-index: 999;
         }
 
         .logo-img-wrapper {
@@ -1051,10 +1058,18 @@
                 flex-direction: column;
                 padding: 2rem 0;
                 gap: 1.5rem;
+                height: auto; /* Mobilde esnemeye izin ver */
             }
             .admin-content { flex-direction: column; height: 95vh; }
             .admin-sidebar { width: 100%; height: auto; }
-            .logo-container { margin-bottom: 1rem; }
+            .logo-container { 
+                position: relative; /* Mobilde absolute'u iptal et ki düzgün hizalansın */
+                transform: none; 
+                left: auto; 
+                top: auto; 
+                margin-bottom: 1rem; 
+                justify-content: center;
+            }
             .nav-links { justify-content: center; }
         }
     </style>
