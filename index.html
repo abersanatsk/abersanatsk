@@ -27,6 +27,7 @@
             --logo-size: 65px;
             --hero-slogan-size: 1.3rem;
             --header-title-size: 1.4rem;
+            --menu-link-size: 0.75rem;
 
             /* Şablon Değişkenleri */
             --card-radius: 24px;
@@ -56,7 +57,6 @@
             padding: 0;
         }
 
-        /* YAZI BOYUTU KONTROL MERKEZİ: Tüm sitenin fontunu orantılı büyütmek için 16px değerini artırın (Örn: 18px, 20px) */
         html {
             font-size: 16px;
             scroll-behavior: smooth;
@@ -120,10 +120,10 @@
 
         nav {
             display: flex;
-            justify-content: flex-end; /* Menüleri sağa yasla (Logo absolute olduğu için) */
+            justify-content: space-between; /* Logo solda, menü sağda olacak şekilde ayırır */
             align-items: center;
-            height: 110px; /* DEĞİŞTİRİLDİ: Yükseklik sabitlendi, esnemesi engellendi */
-            position: relative; /* Logonun sınırlarını belirlemek için */
+            height: 110px; 
+            position: relative; 
             gap: 2rem; 
         }
 
@@ -133,26 +133,31 @@
             display: flex;
             align-items: center;
             gap: 15px; 
-            position: absolute; /* EKLENDİ: Siyah alandan bağımsız olması için */
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%); /* Dikey ortalama */
+            position: relative; /* Dengesizliği çözen ana hamle, artık sayfa akışında */
             z-index: 999;
+            flex-shrink: 0;
         }
 
         .logo-img-wrapper {
             width: var(--logo-size, 65px);
-            height: var(--logo-size, 65px);
+            height: 0px; /* Header'ı dikeyde germemesi için 0 yükseklik */
             display: none;
+            position: relative; 
             flex-shrink: 0; 
-            transition: width 0.3s ease, height 0.3s ease;
+            align-items: center;
+            justify-content: center;
         }
 
         .logo-img-wrapper img {
-            width: 100%;
-            height: 100%;
+            position: absolute; /* Görsel bağımsızlaşır, dışa taşabilir */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: var(--logo-size, 65px);
+            height: var(--logo-size, 65px);
             object-fit: contain;
             filter: drop-shadow(0 4px 15px rgba(0,0,0,0.6));
+            transition: width 0.3s ease, height 0.3s ease;
         }
 
         .logo-text-group {
@@ -168,7 +173,7 @@
             text-transform: uppercase;
             letter-spacing: -1px;
             line-height: 1.1;
-            max-width: 320px; 
+            max-width: 350px; 
             transition: font-size 0.3s;
         }
 
@@ -195,7 +200,7 @@
             text-decoration: none;
             color: var(--text-dark);
             font-weight: 500;
-            font-size: 0.7rem; 
+            font-size: var(--menu-link-size, 0.75rem); /* Dinamik menü boyutu */
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: all 0.3s ease;
@@ -1058,17 +1063,21 @@
                 flex-direction: column;
                 padding: 2rem 0;
                 gap: 1.5rem;
-                height: auto; /* Mobilde esnemeye izin ver */
+                height: auto; 
             }
             .admin-content { flex-direction: column; height: 95vh; }
             .admin-sidebar { width: 100%; height: auto; }
             .logo-container { 
-                position: relative; /* Mobilde absolute'u iptal et ki düzgün hizalansın */
-                transform: none; 
-                left: auto; 
-                top: auto; 
-                margin-bottom: 1rem; 
                 justify-content: center;
+            }
+            .logo-img-wrapper {
+                height: var(--logo-size, 65px); /* Mobilde üst üste binmemesi için boyutu geri verir */
+            }
+            .logo-img-wrapper img {
+                position: relative; /* Mobilde normal akışa döndürür */
+                transform: none;
+                top: auto;
+                left: auto;
             }
             .nav-links { justify-content: center; }
         }
@@ -1259,7 +1268,7 @@
                         
                         <div style="margin-top:15px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px;">
                             <label style="color: #fff; font-size: 0.9rem;">Logo Boyutu (Piksel)</label>
-                            <input type="number" id="edit-logo-size" class="form-control" placeholder="Varsayılan: 65" min="30" max="250" style="margin-top:5px;">
+                            <input type="number" id="edit-logo-size" class="form-control" placeholder="Varsayılan: 65" min="30" max="400" style="margin-top:5px;">
                         </div>
                     </div>
 
@@ -1322,7 +1331,7 @@
                     
                     <div class="form-group" style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 2rem;">
                         <label style="color: var(--accent-color); font-weight: 800; margin-bottom: 1rem;">ÖZEL YAZI RENKLERİ SEÇİMİ</label>
-                        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem;">Kutucukları işaretleyerek temanın renklerini ezip kendi renklerinizi zorlayabilirsiniz. İşareti kaldırırsanız tema orijinal rengine döner.</p>
+                        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem;">Kutucukları işaretleyerek temanın renklerini ezip kendi renklerinizi zorlayabilirsiniz.</p>
                         
                         <div style="margin-bottom: 1.5rem;">
                             <label style="color: #fff; font-size: 0.9rem;">Ana Metin Rengi (Başlıklar ve Düz Yazılar)</label>
@@ -1334,7 +1343,7 @@
                         </div>
 
                         <div style="margin-bottom: 1.5rem;">
-                            <label style="color: #fff; font-size: 0.9rem;">İkincil / Sönük Metin Rengi (Alt Bilgiler ve Yaş/Boy vs.)</label>
+                            <label style="color: #fff; font-size: 0.9rem;">İkincil / Sönük Metin Rengi</label>
                             <div style="display:flex; gap:10px; align-items:center; margin-top:5px;">
                                 <input type="checkbox" id="override-text-muted" style="width: 20px; height: 20px; cursor: pointer;"> 
                                 <span style="font-size: 0.8rem;">Özel Renk Kullan</span>
@@ -1343,7 +1352,7 @@
                         </div>
 
                         <div>
-                            <label style="color: #fff; font-size: 0.9rem;">Genel Vurgu Rengi (Çizgiler, İkonlar ve Süslemeler)</label>
+                            <label style="color: #fff; font-size: 0.9rem;">Genel Vurgu Rengi (Çizgiler, İkonlar)</label>
                             <div style="display:flex; gap:10px; align-items:center; margin-top:5px;">
                                 <input type="checkbox" id="override-accent-color" style="width: 20px; height: 20px; cursor: pointer;"> 
                                 <span style="font-size: 0.8rem;">Özel Renk Kullan</span>
@@ -1364,6 +1373,7 @@
                             <option value="'Inter', sans-serif">Inter (Sade & Modern)</option>
                         </select>
                     </div>
+                    
                     <div class="form-group">
                         <label>Ana Gövde ve Slogan Yazı Tipi</label>
                         <select id="style-font-main" class="form-control">
@@ -1372,43 +1382,79 @@
                             <option value="'Space Grotesk', sans-serif">Space Grotesk (Yarı Geometrik)</option>
                         </select>
                     </div>
+
                     <div class="form-group">
-                        <label>Menü Kulüp Adı Boyutu</label>
+                        <label>Sağ Üst Menü Linkleri Boyutu (Varsayılan: 0.75rem)</label>
+                        <select id="style-menu-link-size" class="form-control">
+                            <option value="0.5rem">0.5rem</option><option value="0.55rem">0.55rem</option>
+                            <option value="0.6rem">0.6rem</option><option value="0.65rem">0.65rem</option>
+                            <option value="0.7rem">0.7rem</option><option value="0.75rem">0.75rem (Standart)</option>
+                            <option value="0.8rem">0.8rem</option><option value="0.85rem">0.85rem</option>
+                            <option value="0.9rem">0.9rem</option><option value="0.95rem">0.95rem</option>
+                            <option value="1.0rem">1.0rem</option><option value="1.1rem">1.1rem</option>
+                            <option value="1.2rem">1.2rem</option><option value="1.3rem">1.3rem</option>
+                            <option value="1.4rem">1.4rem</option><option value="1.5rem">1.5rem</option>
+                            <option value="1.7rem">1.7rem</option><option value="2.0rem">2.0rem</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sol Üst Menü Kulüp Adı Boyutu (Varsayılan: 1.4rem)</label>
                         <select id="style-header-title-size" class="form-control">
-                            <option value="1.2rem">Küçük (1.2rem)</option>
-                            <option value="1.4rem">Standart (1.4rem - Varsayılan)</option>
-                            <option value="1.7rem">Büyük (1.7rem)</option>
+                            <option value="0.8rem">0.8rem</option><option value="0.9rem">0.9rem</option>
+                            <option value="1.0rem">1.0rem</option><option value="1.1rem">1.1rem</option>
+                            <option value="1.2rem">1.2rem</option><option value="1.3rem">1.3rem</option>
+                            <option value="1.4rem">1.4rem (Standart)</option><option value="1.5rem">1.5rem</option>
+                            <option value="1.6rem">1.6rem</option><option value="1.7rem">1.7rem</option>
+                            <option value="1.8rem">1.8rem</option><option value="2.0rem">2.0rem</option>
+                            <option value="2.2rem">2.2rem</option><option value="2.5rem">2.5rem</option>
+                            <option value="3.0rem">3.0rem</option><option value="3.5rem">3.5rem</option>
                         </select>
                     </div>
+
                     <div class="form-group">
-                        <label>Ana Sayfa Dev Hero Başlık Boyutu</label>
-                        <select id="style-hero-size" class="form-control">
-                            <option value="5.5rem">Küçük (5.5rem)</option>
-                            <option value="7rem">Orta (7.0rem)</option>
-                            <option value="8.5rem">Büyük / Dev (8.5rem - Varsayılan)</option>
-                            <option value="10rem">Ultra Devasa (10rem)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Hero Alt Yazı / Slogan Boyutu</label>
+                        <label>Hero Alt Yazı / Slogan Boyutu (Varsayılan: 1.3rem)</label>
                         <select id="style-hero-slogan-size" class="form-control">
-                            <option value="1rem">Minimalist (1rem)</option>
-                            <option value="1.3rem">Standart (1.3rem - Varsayılan)</option>
-                            <option value="1.6rem">Geniş (1.6rem)</option>
+                            <option value="0.8rem">0.8rem</option><option value="0.9rem">0.9rem</option>
+                            <option value="1.0rem">1.0rem</option><option value="1.1rem">1.1rem</option>
+                            <option value="1.2rem">1.2rem</option><option value="1.3rem">1.3rem (Standart)</option>
+                            <option value="1.4rem">1.4rem</option><option value="1.5rem">1.5rem</option>
+                            <option value="1.6rem">1.6rem</option><option value="1.7rem">1.7rem</option>
+                            <option value="1.8rem">1.8rem</option><option value="2.0rem">2.0rem</option>
+                            <option value="2.5rem">2.5rem</option><option value="3.0rem">3.0rem</option>
+                            <option value="3.5rem">3.5rem</option><option value="4.0rem">4.0rem</option>
                         </select>
                     </div>
+
                     <div class="form-group">
-                        <label>Sayfa ve Bölüm Başlıkları Boyutu (Section Titles)</label>
+                        <label>Sayfa ve Bölüm Başlıkları Boyutu (Varsayılan: 3.0rem)</label>
                         <select id="style-section-size" class="form-control">
-                            <option value="2rem">En Küçük (2.0rem)</option>
-                            <option value="2.5rem">Küçük (2.5rem)</option>
-                            <option value="3rem">Standart Premium (3.0rem - Varsayılan)</option>
-                            <option value="3.5rem">Büyük (3.5rem)</option>
-                            <option value="4rem">Görkemli (4.0rem)</option>
-                            <option value="4.5rem">Ultra Görkemli (4.5rem)</option>
-                            <option value="5rem">Devasa (5.0rem)</option>
+                            <option value="1.5rem">1.5rem</option><option value="1.8rem">1.8rem</option>
+                            <option value="2.0rem">2.0rem</option><option value="2.2rem">2.2rem</option>
+                            <option value="2.5rem">2.5rem</option><option value="2.8rem">2.8rem</option>
+                            <option value="3.0rem">3.0rem (Standart)</option><option value="3.2rem">3.2rem</option>
+                            <option value="3.5rem">3.5rem</option><option value="3.8rem">3.8rem</option>
+                            <option value="4.0rem">4.0rem</option><option value="4.5rem">4.5rem</option>
+                            <option value="5.0rem">5.0rem</option><option value="6.0rem">6.0rem</option>
+                            <option value="7.0rem">7.0rem</option><option value="8.0rem">8.0rem</option>
                         </select>
                     </div>
+
+                    <div class="form-group">
+                        <label>Ana Sayfa Dev Hero Başlık Boyutu (Varsayılan: 8.5rem)</label>
+                        <select id="style-hero-size" class="form-control">
+                            <option value="2.0rem">2.0rem</option><option value="3.0rem">3.0rem</option>
+                            <option value="4.0rem">4.0rem</option><option value="4.5rem">4.5rem</option>
+                            <option value="5.0rem">5.0rem</option><option value="5.5rem">5.5rem</option>
+                            <option value="6.0rem">6.0rem</option><option value="6.5rem">6.5rem</option>
+                            <option value="7.0rem">7.0rem</option><option value="7.5rem">7.5rem</option>
+                            <option value="8.0rem">8.0rem</option><option value="8.5rem">8.5rem (Standart)</option>
+                            <option value="9.0rem">9.0rem</option><option value="9.5rem">9.5rem</option>
+                            <option value="10.0rem">10.0rem</option><option value="11.0rem">11.0rem</option>
+                            <option value="12.0rem">12.0rem</option><option value="15.0rem">15.0rem</option>
+                        </select>
+                    </div>
+
                     <button type="button" class="submit-btn" onclick="saveTypographyStyles()">Yazı & Renk Stillerini Uygula</button>
                 </div>
 
@@ -1699,7 +1745,6 @@
         window.saveAllData = window.saveAllData || function() { console.log("Firebase henüz yüklenmedi..."); };
         window.loadAllData = window.loadAllData || function() { console.log("Firebase henüz yüklenmedi..."); };
 
-        // Yeni Veri Çekme Fonksiyonu (Objeler Boş Geldiğinde Varsayılanı Kullanması İçin)
         function getSafeData(key) {
             if (typeof window.defaultData[key] === 'object' && !Array.isArray(window.defaultData[key])) {
                 return Object.assign({}, window.defaultData[key], window.activeData[key] || {});
@@ -1873,6 +1918,7 @@
                 sectionTitleSize: "3rem",
                 heroSloganSize: "1.3rem",
                 headerTitleSize: "1.4rem",
+                menuLinkSize: "0.75rem",
                 accentColor: "",
                 textColor: "", 
                 textMuted: ""
@@ -1922,6 +1968,7 @@
                     --section-title-size: ${s.sectionTitleSize || "3rem"};
                     --hero-slogan-size: ${s.heroSloganSize || "1.3rem"};
                     --header-title-size: ${s.headerTitleSize || "1.4rem"};
+                    --menu-link-size: ${s.menuLinkSize || "0.75rem"};
                     --logo-size: ${activeData.logoSize || "65"}px;
                     ${textColorOverride}
                     ${textMutedOverride}
@@ -1951,7 +1998,7 @@
             
             if (activeData.logoUrl && activeData.logoUrl.trim() !== "") {
                 headerLogoImg.src = convertDriveUrl(activeData.logoUrl);
-                headerLogoWrapper.style.display = "block";
+                headerLogoWrapper.style.display = "flex";
             } else {
                 headerLogoWrapper.style.display = "none";
             }
@@ -2268,6 +2315,7 @@
             document.getElementById('style-section-size').value = s.sectionTitleSize || "3rem";
             document.getElementById('style-header-title-size').value = s.headerTitleSize || "1.4rem";
             document.getElementById('style-hero-slogan-size').value = s.heroSloganSize || "1.3rem";
+            document.getElementById('style-menu-link-size').value = s.menuLinkSize || "0.75rem";
 
             document.getElementById('override-accent-color').checked = !!(s.accentColor && s.accentColor.trim() !== "");
             document.getElementById('style-accent-color').value = s.accentColor || "#ff2a4b";
@@ -2287,6 +2335,7 @@
             activeData.styles.sectionTitleSize = document.getElementById('style-section-size').value;
             activeData.styles.headerTitleSize = document.getElementById('style-header-title-size').value;
             activeData.styles.heroSloganSize = document.getElementById('style-hero-slogan-size').value;
+            activeData.styles.menuLinkSize = document.getElementById('style-menu-link-size').value;
             
             activeData.styles.accentColor = document.getElementById('override-accent-color').checked ? document.getElementById('style-accent-color').value : "";
             activeData.styles.textColor = document.getElementById('override-text-color').checked ? document.getElementById('style-text-color').value : "";
@@ -2481,8 +2530,6 @@
             const selTheme = document.getElementById('theme-select').value;
             const selLayout = document.getElementById('layout-select').value;
             
-            // Temayı denerken, varsa özel font boyutlarını da hesaba katarak gösteriyoruz
-            // Ancak "Özel Renk" seçimlerini, saf temayı görebilmeleri için dahil etmiyoruz.
             const s = getSafeData('styles');
             const customStyleVars = `
                 :root {
@@ -2492,6 +2539,7 @@
                     --section-title-size: ${s.sectionTitleSize || "3rem"};
                     --hero-slogan-size: ${s.heroSloganSize || "1.3rem"};
                     --header-title-size: ${s.headerTitleSize || "1.4rem"};
+                    --menu-link-size: ${s.menuLinkSize || "0.75rem"};
                     --logo-size: ${window.activeData.logoSize || "65"}px;
                 }
             `;
