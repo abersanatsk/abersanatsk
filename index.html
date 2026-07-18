@@ -154,7 +154,6 @@
             position: absolute; 
             top: 50%;
             left: 50%;
-            /* x ve y koordinatlarını admin panelinden çekmesi için güncellendi */
             transform: translate(calc(-50% + var(--logo-offset-x, 0px)), calc(-50% + var(--logo-offset-y, 0px)));
             width: var(--logo-size, 65px);
             height: var(--logo-size, 65px);
@@ -1373,9 +1372,18 @@
                     <div class="admin-section-heading">TİPOGRAFİ & YAZI STİLLERİ EDİTÖRÜ</div>
                     
                     <div class="form-group" style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 2rem;">
-                        <label style="color: var(--accent-color); font-weight: 800; margin-bottom: 1rem;">ÖZEL YAZI RENKLERİ SEÇİMİ</label>
+                        <label style="color: var(--accent-color); font-weight: 800; margin-bottom: 1rem;">ÖZEL YAZI VE ZEMİN RENKLERİ SEÇİMİ</label>
                         <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem;">Kutucukları işaretleyerek temanın renklerini ezip kendi renklerinizi zorlayabilirsiniz.</p>
                         
+                        <div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px dashed rgba(255,255,255,0.1);">
+                            <label style="color: #fff; font-size: 0.9rem;">Sitenin Zemin (Arka Plan) Rengi</label>
+                            <div style="display:flex; gap:10px; align-items:center; margin-top:5px;">
+                                <input type="checkbox" id="override-bg-color" style="width: 20px; height: 20px; cursor: pointer;"> 
+                                <span style="font-size: 0.8rem;">Özel Zemin Rengi Kullan</span>
+                                <input type="color" id="style-bg-color" class="form-control" style="height:50px; padding: 5px; flex:1;">
+                            </div>
+                        </div>
+
                         <div style="margin-bottom: 1.5rem;">
                             <label style="color: #fff; font-size: 0.9rem;">Ana Metin Rengi (Başlıklar ve Düz Yazılar)</label>
                             <div style="display:flex; gap:10px; align-items:center; margin-top:5px;">
@@ -1633,8 +1641,22 @@
                 <div id="tabSecurity" class="admin-tab-content">
                     <div class="admin-section-heading">TEMA SEÇİMİ VE GÜVENLİK</div>
                     <div class="form-group" style="margin-bottom:2rem;">
-                        <label>Sitenin Genel Renk Şablonu (Premium 30+ Tema)</label>
+                        <label>Sitenin Genel Renk Şablonu (Premium 40+ Tema)</label>
                         <select id="theme-select" class="form-control" onchange="previewTheme()">
+                            <optgroup label="Yeni Eklenen Özel Temalar">
+                                <option value="neonCity">Neon Şehri (Mor & Parlak Camgöbeği)</option>
+                                <option value="vaporwave">Vaporwave (Pembe & Turkuaz Nostalji)</option>
+                                <option value="midnightBlue">Gece Mavisi (Koyu Lacivert & Beyaz)</option>
+                                <option value="glacier">Buzul (Buz Mavisi & Kar Beyazı)</option>
+                                <option value="aurora">Kuzey Işıkları (Koyu Yeşil & Mor/Mavi)</option>
+                                <option value="hacker">Terminal (Simsiyah & Fosforlu Yeşil)</option>
+                                <option value="royalPurple">Kraliyet Moru (Derin Mor & Altın)</option>
+                                <option value="crimsonTide">Kızıl Gelgit (Koyu Kırmızı & Siyah)</option>
+                                <option value="gothic">Gotik (Simsiyah & Soluk Gri)</option>
+                                <option value="minimalLight">Aydınlık Minimal (Saf Beyaz & Siyah)</option>
+                                <option value="steampunk">Steampunk (Pirinç, Bakır & Koyu Kahve)</option>
+                                <option value="sakura">Sakura (Kiraz Çiçeği Pembe & Beyaz)</option>
+                            </optgroup>
                             <optgroup label="Klasik & Karanlık Spor">
                                 <option value="classic">Karanlık Spor Gece (Varsayılan Premium)</option>
                                 <option value="monochrome">Koyu Gri Monokrom (Sade Şıklık)</option>
@@ -1685,6 +1707,9 @@
                             <option value="asymmetric">Şablon 1: Modern Asimetrik Grid (Yumuşak Oval Kartlar)</option>
                             <option value="minimalist">Şablon 2: Minimalist İtalyan Tarzı (Sonsuz Minimalizm)</option>
                             <option value="aggressive">Şablon 3: Agresif Köşeli Spor Portalı (Sert Çizgiler)</option>
+                            <option value="glassmorphism">Şablon 4: Glassmorphism (Cam Efekti & Şeffaflık)</option>
+                            <option value="brutalism">Şablon 5: Neo-Brutalizm (Sert Siyah Çizgiler & Retro)</option>
+                            <option value="rounded">Şablon 6: Ultra Soft (Tamamen Yuvarlak Hatlar)</option>
                         </select>
                     </div>
 
@@ -1984,7 +2009,8 @@
                 menuLinkSize: "0.75rem",
                 accentColor: "",
                 textColor: "", 
-                textMuted: ""
+                textMuted: "",
+                bgColor: ""
             },
             siteTexts: {
                 menuHome: "Anasayfa", menuBoard: "Yönetim Kurulu", menuStaff: "Teknik Heyet",
@@ -2018,10 +2044,12 @@
             let textColorOverride = "";
             let textMutedOverride = "";
             let accentColorOverride = "";
+            let bgColorOverride = "";
             
             if (s.textColor && s.textColor.trim() !== "") textColorOverride = `--text-dark: ${s.textColor} !important;`;
             if (s.textMuted && s.textMuted.trim() !== "") textMutedOverride = `--text-muted: ${s.textMuted} !important;`;
             if (s.accentColor && s.accentColor.trim() !== "") accentColorOverride = `--accent-color: ${s.accentColor} !important;`;
+            if (s.bgColor && s.bgColor.trim() !== "") bgColorOverride = `--bg-white: ${s.bgColor} !important; --bg-dark: ${s.bgColor} !important; background-color: ${s.bgColor} !important;`;
 
             const customStyleVars = `
                 :root {
@@ -2038,6 +2066,7 @@
                     ${textColorOverride}
                     ${textMutedOverride}
                     ${accentColorOverride}
+                    ${bgColorOverride}
                 }
             `;
 
@@ -2193,7 +2222,6 @@
             (activeData.gallery || []).forEach(g => {
                 const box = document.createElement('div'); box.className = 'gallery-item';
                 if (g.type === 'image') {
-                    // Tıklanma olayı eklendi (Lightbox için)
                     box.innerHTML = `<img src="${convertDriveUrl(g.url)}" onerror="handleLogoFallback(this)" onclick="openLightbox(this.src)" style="cursor: zoom-in;">`;
                 } else {
                     box.innerHTML = `<iframe src="${getEmbedVideoUrl(g.url)}" allowfullscreen></iframe>`;
@@ -2390,6 +2418,9 @@
             document.getElementById('style-hero-slogan-size').value = s.heroSloganSize || "1.3rem";
             document.getElementById('style-menu-link-size').value = s.menuLinkSize || "0.75rem";
 
+            document.getElementById('override-bg-color').checked = !!(s.bgColor && s.bgColor.trim() !== "");
+            document.getElementById('style-bg-color').value = s.bgColor || "#04060a";
+
             document.getElementById('override-accent-color').checked = !!(s.accentColor && s.accentColor.trim() !== "");
             document.getElementById('style-accent-color').value = s.accentColor || "#ff2a4b";
 
@@ -2410,6 +2441,7 @@
             activeData.styles.heroSloganSize = document.getElementById('style-hero-slogan-size').value;
             activeData.styles.menuLinkSize = document.getElementById('style-menu-link-size').value;
             
+            activeData.styles.bgColor = document.getElementById('override-bg-color').checked ? document.getElementById('style-bg-color').value : "";
             activeData.styles.accentColor = document.getElementById('override-accent-color').checked ? document.getElementById('style-accent-color').value : "";
             activeData.styles.textColor = document.getElementById('override-text-color').checked ? document.getElementById('style-text-color').value : "";
             activeData.styles.textMuted = document.getElementById('override-text-muted').checked ? document.getElementById('style-text-muted').value : "";
@@ -2422,6 +2454,7 @@
 
         function resetAllColors() {
             if(!activeData.styles) activeData.styles = {};
+            activeData.styles.bgColor = "";
             activeData.styles.textColor = "";
             activeData.styles.textMuted = "";
             activeData.styles.accentColor = "";
@@ -2604,6 +2637,12 @@
             const selLayout = document.getElementById('layout-select').value;
             
             const s = getSafeData('styles');
+            
+            let bgColorOverride = "";
+            if (s.bgColor && s.bgColor.trim() !== "") {
+                bgColorOverride = `--bg-white: ${s.bgColor} !important; --bg-dark: ${s.bgColor} !important; background-color: ${s.bgColor} !important;`;
+            }
+
             const customStyleVars = `
                 :root {
                     --font-sport: ${s.fontSport || "'Space Grotesk', sans-serif"};
@@ -2616,6 +2655,7 @@
                     --logo-size: ${window.activeData.logoSize || "65"}px;
                     --logo-offset-x: ${window.activeData.logoX || "0"}px;
                     --logo-offset-y: ${window.activeData.logoY || "0"}px;
+                    ${bgColorOverride}
                 }
             `;
             
@@ -2648,6 +2688,21 @@
         }
 
         const themes = {
+            /* Yeni Eklenen Temalar */
+            neonCity: `:root { --bg-white: #0a001a; --bg-dark: #1a0033; --text-light: #0a001a; --text-dark: #e6ffff; --text-muted: #80ccff; --accent-color: #00ffff; --premium-gray: rgba(0, 255, 255, 0.05); --card-shadow: 0 30px 60px rgba(0, 255, 255, 0.2); }`,
+            vaporwave: `:root { --bg-white: #2b00ff; --bg-dark: #ff00c8; --text-light: #2b00ff; --text-dark: #ffffff; --text-muted: #ffb3ff; --accent-color: #00e5ff; --premium-gray: rgba(255, 0, 200, 0.1); --card-shadow: 0 30px 60px rgba(0, 229, 255, 0.3); }`,
+            midnightBlue: `:root { --bg-white: #000a1f; --bg-dark: #001f3f; --text-light: #000a1f; --text-dark: #ffffff; --text-muted: #80bfff; --accent-color: #0074d9; --premium-gray: rgba(0, 116, 217, 0.05); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.5); }`,
+            glacier: `:root { --bg-white: #f0f8ff; --bg-dark: #e6f2ff; --text-light: #f0f8ff; --text-dark: #001f3f; --text-muted: #0074d9; --accent-color: #39cccc; --premium-gray: rgba(57, 204, 204, 0.1); --card-shadow: 0 30px 60px rgba(0, 116, 217, 0.1); } body, .hero-slogan-monument, .board-name, .player-name, .fixture-team, .kit-title { color: #001f3f !important; }`,
+            aurora: `:root { --bg-white: #001a1a; --bg-dark: #003333; --text-light: #001a1a; --text-dark: #e6ffff; --text-muted: #66ffcc; --accent-color: #cc00ff; --premium-gray: rgba(204, 0, 255, 0.05); --card-shadow: 0 30px 60px rgba(102, 255, 204, 0.2); }`,
+            hacker: `:root { --bg-white: #050505; --bg-dark: #0a0a0a; --text-light: #050505; --text-dark: #00ff00; --text-muted: #008800; --accent-color: #00ff00; --premium-gray: rgba(0, 255, 0, 0.03); --card-shadow: 0 30px 60px rgba(0, 255, 0, 0.1); }`,
+            royalPurple: `:root { --bg-white: #1a0033; --bg-dark: #2a004d; --text-light: #1a0033; --text-dark: #ffffff; --text-muted: #d9b3ff; --accent-color: #ffd700; --premium-gray: rgba(255, 215, 0, 0.03); --card-shadow: 0 30px 60px rgba(255, 215, 0, 0.1); }`,
+            crimsonTide: `:root { --bg-white: #1a0000; --bg-dark: #330000; --text-light: #1a0000; --text-dark: #ffffff; --text-muted: #ff9999; --accent-color: #ff0000; --premium-gray: rgba(255, 0, 0, 0.05); --card-shadow: 0 30px 60px rgba(255, 0, 0, 0.3); }`,
+            gothic: `:root { --bg-white: #0d0d0d; --bg-dark: #1a1a1a; --text-light: #0d0d0d; --text-dark: #cccccc; --text-muted: #666666; --accent-color: #404040; --premium-gray: rgba(255, 255, 255, 0.02); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.9); }`,
+            minimalLight: `:root { --bg-white: #ffffff; --bg-dark: #f5f5f5; --text-light: #ffffff; --text-dark: #000000; --text-muted: #666666; --accent-color: #111111; --premium-gray: rgba(0, 0, 0, 0.03); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.05); } body, .hero-slogan-monument, .board-name, .player-name, .fixture-team, .kit-title { color: #000000 !important; }`,
+            steampunk: `:root { --bg-white: #2b1d14; --bg-dark: #3d2b1f; --text-light: #2b1d14; --text-dark: #f4e8d3; --text-muted: #c89d7c; --accent-color: #d4a373; --premium-gray: rgba(212, 163, 115, 0.05); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.6); }`,
+            sakura: `:root { --bg-white: #fff0f5; --bg-dark: #ffe4e1; --text-light: #fff0f5; --text-dark: #4a0e2e; --text-muted: #b85c8a; --accent-color: #ff69b4; --premium-gray: rgba(255, 105, 180, 0.05); --card-shadow: 0 30px 60px rgba(255, 105, 180, 0.15); } body, .hero-slogan-monument, .board-name, .player-name, .fixture-team, .kit-title { color: #4a0e2e !important; }`,
+
+            /* Orijinal Temalar */
             classic: `:root { --bg-white: #04060a; --bg-dark: #ffffff; --text-light: #04060a; --text-dark: #ffffff; --text-muted: #8892b0; --accent-color: #ff2a4b; --premium-gray: rgba(255, 255, 255, 0.02); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.8); }`,
             monochrome: `:root { --bg-white: #111111; --bg-dark: #ffffff; --text-light: #111111; --text-dark: #eeeeee; --text-muted: #666666; --accent-color: #888888; --premium-gray: rgba(255, 255, 255, 0.03); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.4); }`,
             cyberpunk: `:root { --bg-white: #05070a; --bg-dark: #ffffff; --text-light: #05070a; --text-dark: #ffffff; --text-muted: #84939c; --accent-color: #f97316; --premium-gray: rgba(249, 115, 22, 0.02); --card-shadow: 0 30px 60px rgba(0, 0, 0, 0.8); }`,
@@ -2716,6 +2771,53 @@
                 }
                 .board-card, .player-card, .transfer-card, .fixture-card, .gallery-item {
                     box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.8) !important;
+                }
+            `,
+            glassmorphism: `
+                :root {
+                    --card-radius: 30px;
+                    --border-style: 1px solid rgba(255, 255, 255, 0.15);
+                    --card-align: center;
+                }
+                .board-card, .player-card, .transfer-card, .fixture-card, .gallery-item, .hero-slogan-monument, .blog-form-wrapper {
+                    background: rgba(255, 255, 255, 0.03) !important;
+                    backdrop-filter: blur(16px);
+                    -webkit-backdrop-filter: blur(16px);
+                    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+                }
+            `,
+            brutalism: `
+                :root {
+                    --card-radius: 0px;
+                    --border-style: 3px solid var(--text-dark);
+                    --card-align: left;
+                }
+                .board-card, .player-card, .transfer-card, .fixture-card, .gallery-item, .hero-slogan-monument {
+                    box-shadow: 8px 8px 0px var(--accent-color) !important;
+                    background: transparent !important;
+                    transform: none !important;
+                }
+                .board-card:hover, .player-card:hover, .transfer-card:hover, .fixture-card:hover {
+                    box-shadow: 12px 12px 0px var(--text-dark) !important;
+                    transform: translate(-4px, -4px) !important;
+                }
+            `,
+            rounded: `
+                :root {
+                    --card-radius: 50px;
+                    --border-style: 2px dashed rgba(255, 255, 255, 0.1);
+                    --card-align: center;
+                }
+                .board-img-wrapper, .player-img-box, .transfer-img {
+                    border-radius: 50% !important;
+                    width: 200px;
+                    height: 200px;
+                    margin: 0 auto;
+                    object-fit: cover;
+                }
+                .player-img-box::after { display: none; }
+                .board-card, .player-card, .transfer-card {
+                    border-radius: 50px;
                 }
             `
         };
