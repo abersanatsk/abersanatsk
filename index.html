@@ -324,6 +324,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 0 1rem;
         }
 
         .hero-title-sculpture {
@@ -339,6 +340,7 @@
             animation: floatText 4s ease-in-out infinite alternate;
             transition: font-size 0.3s;
             text-shadow: 0 20px 50px rgba(0,0,0,0.9);
+            word-wrap: break-word;
         }
 
         .hero-title-sculpture span {
@@ -1132,43 +1134,70 @@
         
         .admin-trigger:hover { color: var(--text-muted); }
 
+        /* =========================================
+           MOBİL UYUM (RESPONSIVE) KODLARI BAŞLANGICI
+           ========================================= */
+
+        /* Tabletler ve Küçük Laptoplar İçin */
         @media (max-width: 992px) {
-            .hero-title-sculpture { font-size: 4rem; }
-            .blog-container, .contact-grid, .kits-grid {
-                grid-template-columns: 1fr;
-            }
-            nav {
-                flex-direction: column;
-                padding: 2rem 0;
-                gap: 1.5rem;
-                height: auto; 
-            }
+            .blog-container, .contact-grid, .kits-grid { grid-template-columns: 1fr; }
             .admin-content { flex-direction: column; height: 95vh; }
-            .admin-sidebar { width: 100%; height: auto; }
-            .logo-container { 
-                justify-content: center;
-                flex-direction: column;
+            .admin-sidebar { width: 100%; height: auto; max-height: 30vh; flex-direction: row; flex-wrap: wrap; padding: 1.5rem; gap: 5px; overflow-y: auto;}
+            .admin-sidebar h3 { width: 100%; margin-bottom: 1rem; }
+            .admin-sidebar-btn { flex: 1 1 calc(33% - 10px); text-align: center; padding: 10px; font-size: 0.8rem; }
+            .admin-body { padding: 1.5rem; }
+        }
+
+        /* Akıllı Telefonlar ve Dar Ekranlar İçin Tam Optimizasyon */
+        @media (max-width: 768px) {
+            /* Dinamik Font Küçültme - Ekran daraldıkça fontlar orantılı küçülür */
+            :root {
+                --hero-title-size: clamp(2.5rem, 10vw, 4rem) !important;
+                --section-title-size: clamp(1.8rem, 8vw, 2.5rem) !important;
+                --header-title-size: 1.2rem !important;
+            }
+
+            .container { padding: 0 1.2rem; }
+            section { padding: 4rem 0; min-height: auto; }
+            
+            /* Navigasyon ve Menü */
+            nav { flex-direction: column; padding: 1.5rem 0 !important; gap: 1.5rem; }
+            .logo-container { flex-direction: column; text-align: center; gap: 10px; }
+            .logo-img-wrapper img { position: relative; transform: none !important; }
+            .nav-links { justify-content: center; gap: 0.5rem; }
+            .nav-links a { font-size: 0.75rem; padding: 6px 10px; }
+
+            /* Ana Ekran (Hero) Başlığı */
+            .hero-title-sculpture { font-size: var(--hero-title-size) !important; letter-spacing: -2px; line-height: 1; }
+            
+            /* Slogan Alanını Ekrana Ortala ve Serbest Bırak */
+            .hero-slogan-monument { 
+                position: relative !important; 
+                width: 90% !important; 
+                margin: 2rem auto 0 auto !important; 
+                left: auto !important; 
+                top: auto !important; 
+                padding: 1.5rem;
                 text-align: center;
             }
-            .logo-img-wrapper {
-                height: var(--logo-size, 85px); 
-            }
-            .logo-img-wrapper img {
-                position: relative; 
-                transform: translate(var(--logo-offset-x, 0px), var(--logo-offset-y, 0px)); 
-                top: auto;
-                left: auto;
-            }
-            .nav-links { justify-content: center; }
-            .hero-slogan-monument {
-                position: relative;
-                left: 0 !important;
-                top: 0 !important;
-                transform: none !important;
-                writing-mode: horizontal-tb;
-                max-width: 100%;
-                margin-top: 2rem;
-            }
+            .slogan-embedded-img { width: 100% !important; max-width: 200px; }
+
+            /* Fikstür Kartlarını Alt Alta Diz */
+            .fixture-card { flex-direction: column; gap: 1rem; padding: 1.5rem; text-align: center; }
+            .fixture-team { width: 100%; text-align: center !important; font-size: 1.2rem; }
+            .fixture-mid { width: 100%; }
+
+            /* Grid Sistemleri Tek Kolona İner */
+            .board-grid, .players-grid, .transfers-grid, .gallery-grid { grid-template-columns: 1fr; gap: 2rem; }
+            
+            /* Formlar ve İletişim */
+            .blog-form-wrapper { padding: 1.5rem; }
+            .contact-map { height: 250px; }
+            
+            /* Admin Panel Ekstra Daralma Optimizasyonu */
+            .admin-sidebar-btn { flex: 1 1 calc(50% - 10px); }
+            .data-table th, .data-table td { padding: 10px; font-size: 0.8rem; }
+            .data-table { display: block; overflow-x: auto; white-space: nowrap; } /* Taşan tabloları yatay kaydırmalı yap */
         }
     </style>
 </head>
@@ -2926,12 +2955,14 @@
             `,
             centeredFocus: `
                 :root { --card-radius: 8px; --border-style: none; --card-align: center; }
-                .container { max-width: 900px !important; }
-                nav { flex-direction: column; padding: 2rem; }
-                .nav-links { justify-content: center; }
-                .board-grid, .players-grid, .kits-grid, .transfers-grid, .gallery-grid, .contact-grid, .blog-container { grid-template-columns: 1fr !important; }
-                .section-title { text-align: center; margin-bottom: 3rem; }
-                .section-title::after { display: none; }
+                @media (min-width: 993px) {
+                    .container { max-width: 900px !important; }
+                    nav { flex-direction: column; padding: 2rem; }
+                    .nav-links { justify-content: center; }
+                    .board-grid, .players-grid, .kits-grid, .transfers-grid, .gallery-grid, .contact-grid, .blog-container { grid-template-columns: 1fr !important; }
+                    .section-title { text-align: center; margin-bottom: 3rem; }
+                    .section-title::after { display: none; }
+                }
             `,
             bottomNav: `
                 :root { --card-radius: 20px; --border-style: 1px solid rgba(255,255,255,0.05); --card-align: left; }
@@ -2943,9 +2974,10 @@
             `,
             masonryMosaic: `
                 :root { --card-radius: 0; --border-style: none; --card-align: left; }
-                .board-grid, .players-grid, .kits-grid, .transfers-grid, .gallery-grid { display: block !important; column-count: 3; column-gap: 2rem; }
-                .board-card, .player-card, .transfer-card, .gallery-item, .kit-card { break-inside: avoid; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.1) !important; background: transparent; }
-                @media (max-width: 992px) { .board-grid, .players-grid, .kits-grid, .transfers-grid, .gallery-grid { column-count: 1; } }
+                @media (min-width: 993px) {
+                    .board-grid, .players-grid, .kits-grid, .transfers-grid, .gallery-grid { display: block !important; column-count: 3; column-gap: 2rem; }
+                    .board-card, .player-card, .transfer-card, .gallery-item, .kit-card { break-inside: avoid; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.1) !important; background: transparent; }
+                }
             `,
             cyberGrid: `
                 :root { --card-radius: 0px; --border-style: 1px solid var(--accent-color); --card-align: left; }
@@ -2955,11 +2987,13 @@
             `,
             fullscreenBlocks: `
                 :root { --card-radius: 0; --border-style: none; --card-align: center; }
-                .container { max-width: 100% !important; padding: 0 !important; }
-                section { padding: 5rem 0 !important; }
-                .board-grid, .players-grid, .transfers-grid { gap: 0 !important; }
-                .board-card, .player-card, .transfer-card { border-right: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
-                .section-title { padding-left: 2rem; text-align: center; }
+                @media (min-width: 993px) {
+                    .container { max-width: 100% !important; padding: 0 !important; }
+                    section { padding: 5rem 0 !important; }
+                    .board-grid, .players-grid, .transfers-grid { gap: 0 !important; }
+                    .board-card, .player-card, .transfer-card { border-right: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+                    .section-title { padding-left: 2rem; text-align: center; }
+                }
             `,
             splitScreen: `
                 :root { --card-radius: 12px; --border-style: none; --card-align: left; }
